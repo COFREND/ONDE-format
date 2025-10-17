@@ -6,56 +6,54 @@
 
 ## Preamble
 
-- The present document is the outcome of the work of a COFREND Working Group dedicated to NDE and Data. It stems from
-  the observation that no satisfying standardisation exists in terms of file formats for the ultrasonic NDE technique.
+  The ONDE (**Open Non Destructive Evaluation**) format results from a joint intiative by COFREND and EPRI to define a specification of open and efficient NDE
+  format in order to facilitate interoperability between softwares and to ensure ability to read the data in the long term. 
   This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can
   be a good candidate for a wide standardization effort.
 
-  The objective that was assigned by the Working Group to this file format is to store ultrasonic raw data to be
+  The objective that was assigned to this file format is to store ultrasonic raw data to be
   able to:
 
     - (re)analyse it, including ultrasonic metadata required for report generation, or
-    - (re)use it for further data processing.
+    - (re)use it for further data processing, or
     - achieve interoperability between acquisition systems and analysis software.
 
   The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
-  simulationconfiguration from the ultrasonic data file alone. We define as raw data the data which is produced by
-  theacquisition system (AScans, TFM images, ...).
+  simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
+  the acquisition system (AScans, TFM images, ...).
 
-  For this first version, it was decided to stick to the data acquired and the information that is necessary to
-  performan analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
+  At this stage, it was decided to stick to the data acquired and the information that is necessary to
+  perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
   itself (information related to the display, palette, etc...). This will be addressed in future stages (information
-  related toanalysis, reporting, ...).
+  related to analysis, reporting, ...).
 
 - The Working Group has analysed several existing contributions as a working basis to define an open and standardized
-  file format for ultrasonic testing. Formats coming from organisations (ECUF, MFMC, DICONDE) and commercial products (
+  file format for ultrasonic testing. Formats coming from organisations (ECUF, MFMC, DICONDE, ANDE) and commercial products (
   EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been studied.\
   It was decided that the format would be based on the HDF5 framework, chosen for its well-established software
-  ecosystem and its efficiency. The format proposal makes technical choices akin to those of the MFMC and ECUF formats,
+  ecosystem and its efficiency. The format proposal makes technical choices akin to those of the MFMC and ECUF format,
   and extends their possibilities in order to accommodate for a larger range of specimen geometries and types of data
-  that are commonly encountered and were absent of the MFMC and ECUF specifications.
+  that are commonly encountered and were absent of the MFMC and ECUF specifications. In order to facilitate the migration
+  from MFMC to ONDE, a compatibility with MFMC 2.0 specification has been added to the present specification.
 
-- Discussions in the working group emerged to find the best compromise between two approaches : a very generic one with
+- The format aims at finding the best compromise between two approaches : a very generic one with
   essentially raw geometric descriptions and a NDT oriented one with a representation of the objects familiar to the
   engineers. Considering that the transformation from NDT objects to the generic representation was straightforward, it
   was decided to systematically keep the generic representation and to allow to complement this representation with
-  optional fields describing the objects. This approach was essentially adopted for three objects, namely the probe, the
+  optional fields describing the objects in order to facilitate advanced analysis and visualisation. This approach was
+  essentially adopted for three objects, namely the probe, the
   trajectory and the setup of the electronic laws.
 
 - From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between hdf5
-  groups are translated into HDF5 references. Nevertheless all metadata defined within this specification must be within
-  one HDF5 group and this group must be at root of the HDF5 file. The name of this group is not imposed. This group and
-  the file specification used to write it can be identified using the mandatory TYPE and VERSION attributes of this '
-  root' group. In order to avoid name conflicts issues when the file format will evolve, no other data is allowed within
-  this group. Everything is allowed outside from this group, it will be ignored by reader but can be used for instrument
-  specific data. . In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (
+  groups are translated into HDF5 references. The location of the HDF5 groups in the file is left open to the discretion of the implementor.
+  The names of the groups is not imposed, the semantics of the group being defined by the mandatory TYPE attribute. 
+  Only TYPE and VERSION at hdf5 root level have a location that is  imposed in the file. 
+  In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (
   arrays of signals or array of images which typically represents the vast majority of the file weight) can be anywhere
   in the file structure.
 
-- SI units are used even when the ECUF definition is reused. Units are therefore expressed in meters, kilograms,
+- All quantities are defined with SI units. Units are therefore expressed in meters, kilograms,
   seconds. However, degrees are used instead of radians.
-
-- Two states are defined: Mandatory and Optional.
 
 ## Tables legend
 
@@ -106,15 +104,15 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                         |
 | N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                          |
 | N_Prob\<m\>   | Number of probes used in m-th dataset                                    |
-| N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th sequence |
+| N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th dataset  |
 | N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law              |
 | N_Points\<k\> | Number of points used to describe the k-th focal law propagation_line    |
-| N_TSig\<m\>   | Number of time-points in the emission signal in the m-th sequence        |
-| N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th sequence     |
-| N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th sequence        |
-| N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th sequence   |
-| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th sequence |
-| N_V\<m\>      | Number of acquisition positions in the V direction for the m-th sequence |
+| N_TSig\<m\>   | Number of time-points in the emission signal in the m-th dataset         |
+| N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th dataset      |
+| N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th dataset         |
+| N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
+| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  |
+| N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
 
 Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> x N_V\<m\>Data Model
 
@@ -123,7 +121,7 @@ concept.
 
 ![Relationships between the different blocks in the data model](images/media/figure1.png "Figure 1")
 
-Figure 1: Relationships between the different blocks in the data model.
+*Figure 1: Relationships between the different blocks in the data model*
 
 The diagram in Figure 1 explains the relationships between the different blocks in the data mdoel. The arrows signify
 that a block contains links towards other blocks. The number of possible blocks / links in the file is given with
@@ -148,23 +146,16 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 ### Entry points
 
 The blocks defined in the general structure are implemented as HDF5 groups, the name of which is free but which have a
-mandatory 'TYPE' attribute that defines their nature.
-
-The following constraints are applied for the location of the blocks in the HDF5 file :
-
-- HDF5 groups corresponding to Metadata blocks are located at the root of the file
-- Inside a metadata block, all blocks are located in the sub tree of the metadata HDF5 group
-- Among these blocks, the sequence blocks (which are the entry points for the discovery of data and metadata) must be
-  located one or two levels under the metadata block
+mandatory 'TYPE' attribute that defines their nature. The entry points are the xxx_DATASET groups (namely groups that have as a TYPE attribute
+ ASCAN_DATASET, TSCAN_DATASET or CSCAN_DATASET) 
 
 When discovering the content of a given file, the following procedure must therefore be applied :
 
-- Read all groups located at the root level and identify the groups corresponding to the UT metadata blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'UT'.
-- For each metadata group, read all the groups which are located one or two levels under the metadata group and identify
-  the sequence groups by checking which groups have a 'TYPE' attribute whose value is either 'ASCAN_DATASETDATASET, '
-  TSCAN_DATASETDATASET, 'CSCAN_DATASETDATASET.
-- From there follow the HDF5 links defined in the specification to retrieve the data arrays, the related datasets, the
+- Read the 'TYPE' and 'VERSION' attributes at root level and verify the compatibility of the version number with the
+  reader, and that the type is that of a UT ONDE file ('ONDE_UT')
+- Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
+  which groups have a 'TYPE' attribute whose value is 'ASCAN_DATASET', 'TSCAN_DATASET', 'CSCAN_DATASET'.
+- From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
   setup information, ...
 
 ### Rules for the HDF5 groups
@@ -193,7 +184,8 @@ The HDF5 implementation of the format follows the following rules :
   elements of the vector. For example, it is allowed to provide a vector of size 1 for the frequency, instead of
   specifying the same frequency for all elements.
 - For arrays (which are stored as HDF5 datasets), the tables give the dimensions of the array in row-major order (the
-  last dimension corresponds to contiguous data in the file). /\* compressed arrays ? \*/
+  last dimension corresponds to contiguous data in the file). Compression of arrays through the native compression schemes of the HDF5 libary
+  (gzip3, Szip).
 
 ## Definition of frames
 
@@ -209,7 +201,7 @@ The components frames are defined in the Reference Frame.
 
 ![Different frames and convention involved in the positioning systems](images/media/figure2.png "Figure 2")
 
-Figure 2: Different frames and convention involved in the positioning systems.
+*Figure 2: Different frames and convention involved in the positioning systems*
 
 In the document, it was chosen to define the transformation between two frames in the shape of a vector consisting of 7
 values: 3 for the offset in terms of x,y,z directions, 4 for the rotation defining the frame expressed in terms of
@@ -232,7 +224,7 @@ The diagram displayed in Figure 3 defines the hierarchy between these frames:
 
 ![Hierarchy of the frames used for the geometric representation of the objects](images/media/figure3.png "Figure 3")
 
-Figure 3: Hierarchy of the frames used for the geometric representation of the objects
+*Figure 3: Hierarchy of the frames used for the geometric representation of the objects*
 
 ### 2D Frames
 
@@ -241,7 +233,7 @@ between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (�
 
 ![Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames](images/media/figure4.png "Figure 4")
 
-Figure 4: Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames.
+*Figure 4: Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames*
 
 # Data structure
 
@@ -260,7 +252,7 @@ The specification of the format is provided in a dedicated csv file organized in
 - The sixth column provides information on the size or the content of the datafield. For a string with a value that is
   imposed, it will provide this value.\
   For other datafields, it will be the size of the data. The size is provided in brackets with dimensions separated by
-  commas. The dimension of a scalar data will therefore be described by[^1]. Dimensions are provided in Fortran
+  commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in Fortran
   convention (column-major order).
 
 ## MFMC Compatibility
@@ -317,7 +309,7 @@ REFERENCE_TRAJECTORY.
 
 ![Example of TFM zone positioning](images/media/figure5.png "Figure 5")
 
-Figure 5: Example of TFM zone positioning
+*Figure 5: Example of TFM zone positioning*
 
 In the example displayed in Figure 5, the trajectory frame is located at the index point and the zone is positioned
 accordingly.
@@ -433,7 +425,7 @@ thickness.
 
 ![Trajectory planar coordinate system convention](images/media/figure6.png "Figure 6")
 
-Figure 6: Trajectory planar coordinate system convention.
+*Figure 6: Trajectory planar coordinate system convention*
 
 **Conventions for cylindrical components**
 
@@ -442,7 +434,7 @@ dimensions are given by CYLINDER_DIMENSIONS, with a triplet for outer diameter, 
 
 ![Trajectory cylindrical coordinate system convention](images/media/figure7.png "Figure 7")
 
-Figure 7: Trajectory cylindrical coordinate system convention
+*Figure 7: Trajectory cylindrical coordinate system convention*
 
 **Conventions for 2D CAD components**
 
@@ -457,14 +449,14 @@ Figure 8).
 
 ![Convention for the description of a 2D CAD component with planar extrusion](images/media/figure8.png "Figure 8")
 
-Figure 8: Convention for the description of a 2D CAD component with planar extrusion
+*Figure 8: Convention for the description of a 2D CAD component with planar extrusion*
 
 For 2D CAD specimen with cylinder extrusion, the rotation is performed along the X axis of the DXF schema and the 3D
 origin corresponds to the projection on this axis of the 2D CAD sketch origin (see Figure 9)
 
 ![Convention for the description of a 2D CAD component with cylinder extrusion](images/media/figure9.png "Figure 9")
 
-Figure 9: Convention for the description of a 2D CAD component with cylinder extrusion
+*Figure 9: Convention for the description of a 2D CAD component with cylinder extrusion*
 
 **Visualization CAD**
 
@@ -478,7 +470,7 @@ Figure 10 illustrates the CAD frame positioning to the component frame for a pla
 
 ![Convention for the positioning of the visualization CAD in a planar component](images/media/figure10.png "Figure 10")
 
-Figure 10: Convention for the positioning of the visualization CAD in a planar component
+*Figure 10: Convention for the positioning of the visualization CAD in a planar component*
 
 Figure 11 illustrates the CAD frame positioning according to the component frame for a cylinder specimen. The outer
 diameter corresponds to the distance between the top left hand corner of the dxf profile and the origin of the component
@@ -486,7 +478,7 @@ frame.
 
 ![Convention for the positioning of the visualization CAD in a cylindrical component](images/media/figure11.png "Figure 11")
 
-Figure 11: Convention for the positioning of the visualization CAD in a cylindrical component
+*Figure 11: Convention for the positioning of the visualization CAD in a cylindrical component*
 
 ### Probes
 
@@ -529,7 +521,7 @@ For ELE_GEOM_ELLIPSE_PART: r_X, e_X, r_Y, e_Y, theta_min, theta_max
 
 ![Different types of element shape](images/media/figure12.png "Figure 12")
 
-Figure 12: Different types of element shape
+*Figure 12: Different types of element shape*
 
 **Element positioning**
 
@@ -553,11 +545,11 @@ symmetrical to that of the right probe according to the major axis.
 
 ![Convention for element numbering](images/media/figure13.png "Figure 13")
 
-Figure 13: Convention for element numbering
+*Figure 13: Convention for element numbering*
 
 ![Convention for dual probes element numbering](images/media/figure14.png "Figure 14")
 
-Figure 14: Convention for dual probes element numbering
+*Figure 14: Convention for dual probes element numbering*
 
 **Wedge angles conventions**
 
@@ -583,37 +575,37 @@ For dual probes, wedge angles are defined according to this order of application
 
 ![Definition of wedge parameters for contact and dual probes](images/media/figure15.png "Figure 15")
 
-Figure 15: Definition of wedge parameters for contact and dual probes
+*Figure 15: Definition of wedge parameters for contact and dual probes*
 
 The definition of the index point for contact probes with planar and cylindrical wedges along the major and minor axis
 are given in Figure 16, Figure 17, Figure 18 respectively.
 
 ![Definition of wedge parameters for contact planar probe](images/media/figure16.png "Figure 16")
 
-Figure 16: Definition of wedge parameters for contact planar probe
+*Figure 16: Definition of wedge parameters for contact planar probe*
 
 ![Definition of wedge parameters for CYLINDRICAL_MAJOR contact probe](images/media/figure17.png "Figure 17")
 
-Figure 17: Definition of wedge parameters for CYLINDRICAL_MAJOR contact probe
+*Figure 17: Definition of wedge parameters for CYLINDRICAL_MAJOR contact probe*
 
 ![Definition of wedge parameters for CYLINDRICAL_MINOR contact probe](images/media/figure18.png "Figure 18")
 
-Figure 18: Definition of wedge parameters for CYLINDRICAL_MINOR contact probe
+*Figure 18: Definition of wedge parameters for CYLINDRICAL_MINOR contact probe*
 
 The definition of the index point for dual probes with planar and cylindrical wedges along the major and minor axis are
 given in Figure 19, Figure 20 and Figure 21 respectively.
 
 ![Definition of wedge parameters for a dual planar probe](images/media/figure19.png "Figure 19")
 
-Figure 19: Definition of wedge parameters for a dual planar probe
+*Figure 19: Definition of wedge parameters for a dual planar probe*
 
 ![Definition of wedge parameters for CYLINDRICAL_MAJOR dual probe](images/media/figure20.png "Figure 20")
 
-Figure 20: Definition of wedge parameters for CYLINDRICAL_MAJOR dual probe
+*Figure 20: Definition of wedge parameters for CYLINDRICAL_MAJOR dual probe*
 
 ![Definition of wedge parameters for CYLINDRICAL_MINOR dual probe](images/media/figure21.png "Figure 21")
 
-Figure 21: Definition of wedge parameters for CYLINDRICAL_MINOR dual probe
+*Figure 21: Definition of wedge parameters for CYLINDRICAL_MINOR dual probe*
 
 **Surrounded and surrounding probes**
 
@@ -624,8 +616,6 @@ probes, a negative one for surrounded probes.
 
 As for specimens, if both velocities (Longitudinal and shear) are not available, the missing one should be replaced by a
 NaN).
-
-/\* TODO : check the Probe table to see if extra information should be added\*/
 
 ### Acquisition trajectory
 
@@ -672,7 +662,7 @@ PROBE_DIRECTION gives the orientation of the probe at each point. It is assumed 
 
 ![Obtained versus specified coder positions](images/media/figure22.png "Figure 22")
 
-Figure 22: Obtained versus specified coder positions
+*Figure 22: Obtained versus specified coder positions*
 
 ### Ultrasonic setup
 
@@ -728,7 +718,7 @@ PCF locations. If the offset is not provided, the PCF and trajectory frame are a
 
 ![Example of offset and trajectory combination in the case of a TOFD inspection](images/media/figure23.png "Figure 23")
 
-Figure 23: Example of offset and trajectory combination in the case of a TOFD inspection
+*Figure 23: Example of offset and trajectory combination in the case of a TOFD inspection*
 
 **Variable gates**
 
@@ -762,7 +752,7 @@ In this configuration (see Figure 24), a single angle is provided for the specif
 
 ![Inspection using a single angle](images/media/figure24.png "Figure 24")
 
-Figure 24: Inspection using a single angle
+*Figure 24: Inspection using a single angle*
 
 **SScan**
 
@@ -771,7 +761,7 @@ linearly varying, therefore the first and last angles and the number of shots de
 
 ![SScan configuration](images/media/figure25.png "Figure 25")
 
-Figure 25: SScan configuration
+*Figure 25: SScan configuration*
 
 **EScan**
 
@@ -781,7 +771,7 @@ on a 32 element linear transducer.
 
 ![EScan configuration](images/media/figure26.png "Figure 26")
 
-Figure 26: EScan configuration
+*Figure 26: EScan configuration*
 
 **Compound**
 
@@ -791,7 +781,7 @@ electronic scanning.
 
 ![Compound configuration](images/media/figure27.png "Figure 27")
 
-Figure 27: Compound configuration
+*Figure 27: Compound configuration*
 
 ## Limitations
 
