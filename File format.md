@@ -2,6 +2,8 @@
 
 ![COFREND Working Group on Data and NDE](images/media/cofrend_header.png "Cofrend logo")
 
+![EPRI Working Group on NDE Data](images/media/EPRI-header.jpg "EPRI logo")
+
 # Generalities
 
 ## Preamble
@@ -71,7 +73,7 @@ Definitions (derived from MFMC 2.0.0b specification)
   and orientations are fixed during the acquisition process -- note that probes that possess the ability to adapt to the
   surface during the acquisition are not handled in this version of the specification
 - Specimen -- object which is the subject of the inspection
-- Frame -- position and orientation of a component of an acquisition
+- Frame -- position and orientation of a given object related to an acquisition
 - Probe Element Combination (PEC) -- the system used within an MFMC structure to identify a specific element in a
   specific probe, comprising an HDF5 reference to the probe group and the index of an element in that probe;
 - Focal law -- a set of instructions that specify how one or more PECs are used together;
@@ -249,7 +251,8 @@ The specification of the format is provided in a dedicated csv file organized in
 - The fourth column gives the HDF5 implementation : D stands for dataset while A points to an information stored as an
   attribute.
 - The fifth column gives the HDF5 type
-- The sixth column provides information on the size or the content of the datafield. For a string with a value that is
+- The sixth column gives the number of dimensions
+- The seventh column provides information on the size or the content of the datafield. For a string with a value that is
   imposed, it will provide this value.\
   For other datafields, it will be the size of the data. The size is provided in brackets with dimensions separated by
   commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in Fortran
@@ -302,7 +305,7 @@ that the dimension of the data array depends on the zone dimension (3D array for
 The zone physical dimension is given by the ZONE_DIMENSION field, (DX,DY,DZ) being the physical dimensions of the zone,
 a zero or a NaN for one of the dimension implies a 2D zone.
 
-ZONE_SIZE gives the number of pixels of the zone.
+ZONE_SIZE is a triplet which gives the number of pixels of the zone for each dimension (NX,NY,NZ).
 
 The zone position is given by ZONE_FRAME and is expressed relatively to the trajectory frame pointed to by
 REFERENCE_TRAJECTORY.
@@ -644,8 +647,8 @@ CAD specimens, this will be addressed in future versions.
 
 **Grid origin**
 
-The origin and the orientation of the grid are provided in (x,y) coordinates in the case of a plane specimen, in (x,
-theta) coordinates in the case of a cylinder specimen. They are expressed as a 2D transform from the surface component
+The origin and the orientation of the grid (Dx,Dy,alpha) are provided in (x,y) coordinates in the case of a plane specimen, in (x,
+theta) coordinates in the case of a cylinder specimen, theta being the radial direction on the unfolded surface. They are expressed as a 2D transform from the surface component
 frame in UV_GRID_FRAME. For cylindrical components, it is necessary to specify if the inner or the outer surface is
 concerned, which is achieved by setting GRID_CYLINDER_DEFINITION to INNER or OUTER.
 
