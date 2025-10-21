@@ -1,8 +1,7 @@
 # Open NDE File Format specification - Version 0.3
 
-![COFREND Working Group on Data and NDE](images/media/cofrend_header.png "Cofrend logo")
-
-![EPRI Working Group on NDE Data](images/media/EPRI-header.jpg "EPRI logo")
+<img src="images/media/cofrend_header.png" alt="drawing" width="200"/>
+<img src="images/media/EPRI-header.jpg" alt="drawing" width="310"/>
 
 # Generalities
 
