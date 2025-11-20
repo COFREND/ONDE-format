@@ -12,16 +12,17 @@
   This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can
   be a good candidate for a wide standardization effort.
 
-  The objective that was assigned to this file format is to store ultrasonic raw data to be
+  The objective that was assigned to this file format is to store eddy current raw data to be
   able to:
 
-  * (re)analyse it, including ultrasonic metadata required for report generation, or
+  * (re)analyse it, including eddy current metadata required for report generation, or
   * (re)use it for further data processing, or
   * achieve interoperability between acquisition systems and analysis software.
 
   The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
-  simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
-  the acquisition system (AScans, TFM images, ...).
+  simulation configuration from the eddy current data file alone. We define as raw data the data which is produced by
+  the acquisition system (complex values for each frequency, encoders data for each point, filtering, CSCAN reconstructions).  
+.
 
   At this stage, it was decided to stick to the data acquired and the information that is necessary to
   perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
@@ -60,24 +61,32 @@
 
 In the following sections, the data structure is described by blocks presented in tables.
 
-Hereafter, when pointing to ECUF and MFMC, we refer to MFMC specification document 2.0.0b[^1] and ECUF 1.0[^2].
+Hereafter, when pointing to ONDE UT, ECUF and MFMC, we refer to MFMC specification document and UT ONDE 1.0[^4] 2.0.0b[^1] and ECUF 1.0[^2].
 
 **Variables used in structure definition:**
 
-Definitions (derived from MFMC 2.0.0b specification)
-
-- Ultrasonic Element -- an ultrasonic transduction device that can be excited through an electric signal externally
-  driven and/or that can reversely convert ultrasound into a signal
-- Ultrasonic Probe -- a collection of ultrasonic elements that are assembled together so that their relative positions
-  and orientations are fixed during the acquisition process -- note that probes that possess the ability to adapt to the
-  surface during the acquisition are not handled in this version of the specification
+Definitions (derived from ONDE UT 1.0.0 specification)
+- ET data point : a demodulated complex number (operating point) obtained at one frequency and for one sensor fo the probe.
+- Probe
+- Sensor group : collection of sensors (topology) which gives coherent data
 - Specimen -- object which is the subject of the inspection
+-	DataFrame -- a collection of coherent data obtained at a particular probe position consisting of at least one of the following:
+  * Demodulated data obtained using different emitters transmit and receivers combination for each excitation frequency;
+  * Encoder data and/or temporal data and/or rotation synchronization
+- As in the UT format, Encoder data (or equivalent) are stored in the trajectory block.
+-	Trajectory -- set of frames representing the different position of a device;
+-	Acquisition grid -- particular trajectory corresponding to a cartesian grid located at the surface of a plane or cylindrical component;
+-	Image zone -- 2D regular cartesian grid used to define the reconstruction points creating the images during a
+  TFM or PWI-like acquisition;
+
+Reconstructed images corresponding to specific reconstruction zones
+
+	CSCAN Scalar data (peak-related or corresponding to particular post-treatments)
+	Sequence – a collection of dataframes in which all acquisition parameters except the probe position are fixed from one dataframe to another;
+
 - Frame -- position and orientation of a given object related to an acquisition
 - Probe Element Combination (PEC) -- the system used within an MFMC structure to identify a specific element in a
   specific probe, comprising an HDF5 reference to the probe group and the index of an element in that probe;
-- Focal law -- a set of instructions that specify how one or more PECs are used together;
-- Transmit focal law -- a focal law relating to transmission of ultrasound from one or more PECs;
-- Receive focal law -- a focal law relating to reception of ultrasound from one or more PECs;
 - A-Scan -- a time-domain, ultrasonic signal (comprising amplitude measurements regularly sampled in time at a specified
   sampling frequency) that is recorded for a combination of transmit focal law and receive focal law; this can be used
   to represent both summed signals and elementary channels
@@ -90,11 +99,7 @@ Definitions (derived from MFMC 2.0.0b specification)
 - Ultrasonic time -- timescale over which an individual ultrasonic A-scan is recorded, which is assumed to be
   instantaneous compared to timescale associated with mechanical movement of probes;
 - Propagation line -- string of connected segments representing the ultrasonic propagation for a given focal law;
-- Trajectory -- set of frames representing the different position of a device;
-- Acquisition grid -- particular trajectory corresponding to a cartesian grid located at the surface of a plane or
-  cylindrical component;
-- Image zone -- 2D or 3D regular cartesian grid used to define the reconstruction points creating the images during a
-  TFM or PWI-like acquisition;
+
 
 | **Variable**  | **Description**                                                          |
 |---------------|--------------------------------------------------------------------------|
@@ -794,7 +799,7 @@ controls and represent a large share of the acquisition files produced in the in
 [^1]: P. Wilcox, MFMC Specification document 2.0.0b.
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
-                                                |
+[^4]: COFREND-EPRI, UT ONDE file format specification, https://github.com/COFREND/ONDE-format
 
 # Appendix A -- conversion from quaternions to matrices
 
