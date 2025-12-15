@@ -1,0 +1,65 @@
+
+name: "Pull Request"
+description: "Submit a PR for ONDE-format with a clear summary, changes, and related issue link."
+title: "[PR]: Modification to ONDE Specification"
+assignees: []
+labels:
+  - enhancement
+
+body:
+  - type: input
+    id: brief_summary
+    attributes:
+      label: "Brief Summary of Changes"
+      description: "Short, clear summary of what this PR does."
+      placeholder: "Add support for ONDE v2 format"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description_summary
+    attributes:
+      label: "Description Summary"
+      description: "Why is this change needed?"
+      placeholder: "Enable compatibility with the latest ONDE v2 specification, supporting updated data structures and workflows."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: changes_included
+    attributes:
+      label: "Changes Included in This Pull Request"
+      description: "Select all that apply."
+      options:
+        - label: "Structural Change"
+        - label: "Updated documentation"
+        - label: "Metadata Change"
+        - label: "Feature Addition"
+        - label: "Other (specify)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed_description
+    attributes:
+      label: "Detailed Description (Optional)"
+      description: "Add technical details: parsing/validation logic, schema modifications, tests, notes."
+      placeholder: "Introduces parsing/validation for ONDE v2 files, modifies schema for new attributes, and adds unit tests for compliance."
+    validations:
+      required: false
+
+  - type: input
+    id: related_issue
+    attributes:
+      label: "Link to Related Issue"
+      description: "Link the PR to an existing issue using auto-close syntax (e.g., Fixes #123, Closes #456)."
+      placeholder: "Fixes #123"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: premerge_checklist
+    attributes:
+      label: "Checklist Before Merge"
+      options:      
+        - label: "Documentation updated (if needed)"
