@@ -11,3 +11,5 @@ The present repository contains :
 * a description of the ONDE [UT specification](UT_specification/UT_file_format.md)
 
 It will be completed in the future by an extension to Eddy Current testing and by python tools allowing to check the compliance of a file to the specification.
+
+New proposals can be submitted by using the github *Issue* functionality. The template to be used for these issue is provided here : [Issue template] (./issue_template.md).
