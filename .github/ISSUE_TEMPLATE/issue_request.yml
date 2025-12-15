@@ -1,61 +1,57 @@
 
-name: Issue Request
-description: Use this form to request a new feature or report an issue for ONDE-format
+name: "Issue Request"
+description: "Use this form to request a new feature or report an issue for ONDE-format"
 title: "[REQUEST] "
-labels: [enhancement]
+labels:
+  - enhancement
 assignees: []
 
 body:
   - type: input
     id: brief_summary
     attributes:
-      label: Brief summary of changes
-      description: Short, clear summary of what this issue is about.
-      placeholder: Add support for ONDE v2 format
+      label: "Brief summary of changes"
+      description: "Short, clear summary of what this issue is about."
+      placeholder: "Add support for ONDE v2 format"
     validations:
       required: true
 
   - type: textarea
     id: description_summary
     attributes:
-      label: Description Summary
-      description: Why is this change needed?
-      placeholder: >
-        This change is needed to enable compatibility with the latest ONDE v2 specification,
-        ensuring that the repository supports updated data structures and workflows.
+      label: "Description Summary"
+      description: "Why is this change needed?"
+      placeholder: "This change is needed to enable compatibility with the latest ONDE v2 specification, ensuring that the repository supports updated data structures and workflows."
     validations:
       required: true
 
   - type: checkboxes
     id: changes
     attributes:
-      label: Changes
-      description: Select all that apply.
+      label: "Changes"
+      description: "Select all that apply."
       options:
-        - label: Structural Change
-        - label: Updated documentation
-        - label: Metadata Change
-        - label: Feature Addition
-        - label: Other (specify)
+        - label: "Structural Change"
+        - label: "Updated documentation"
+        - label: "Metadata Change"
+        - label: "Feature Addition"
+        - label: "Other (specify)"
     validations:
       required: true
 
   - type: textarea
     id: detailed_description
     attributes:
-      label: Detailed Description (Optional)
-      description: Add any technical details, schema updates, validation logic, or test coverage notes.
-      placeholder: >
-        The update introduces parsing and validation logic for ONDE v2 files, modifies the schema
-        to accommodate new attributes, and adds unit tests to verify compliance with the updated format.
+      label: "Detailed Description (Optional)"
+      description: "Add any technical details, schema updates, validation logic, or test coverage notes."
+      placeholder: "The update introduces parsing and validation logic for ONDE v2 files, modifies the schema to accommodate new attributes, and adds unit tests to verify compliance with the updated format."
     validations:
       required: false
 
   - type: textarea
     id: related_issues
     attributes:
-      label: Related      label: Related Issues
-      description: Link to any related issues or PRs. If none, leave as is.
-      placeholder: No related issues currently exist. This is a new feature request.
+      label: "Related Issues"
+      description: "Link to any related issues or PRs. If none, leave as is."
+      placeholder: "No related issues currently exist.      placeholder: "No related issues currently exist. This is a new feature request."
     validations:
-
