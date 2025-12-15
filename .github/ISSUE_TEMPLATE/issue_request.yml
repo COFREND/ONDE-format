@@ -53,5 +53,6 @@ body:
     attributes:
       label: "Related Issues"
       description: "Link to any related issues or PRs. If none, leave as is."
-      placeholder: "No related issues currently exist.      placeholder: "No related issues currently exist. This is a new feature request."
+      placeholder: "No related issues currently exist."
     validations:
+      required: false
