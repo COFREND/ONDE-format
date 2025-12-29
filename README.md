@@ -12,4 +12,4 @@ The present repository contains :
 
 It will be completed in the future by an extension to Eddy Current testing and by python tools allowing to check the compliance of a file to the specification.
 
-New proposals can be submitted by using the github *Issue* functionality. The template to be used for these issue is provided here : [Issue template] (./issue_template.md).
+New proposals can be submitted by using the github *Issue* functionality. The template to be used for these issue is provided here : [Issue template](./issue_template.md).
