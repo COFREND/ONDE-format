@@ -254,8 +254,8 @@ The specification of the format is provided in a [dedicated csv file](../ONDE_fi
 - The seventh column provides information on the size or the content of the datafield. For a string with a value that is
   imposed, it will provide this value.\
   For other datafields, it will be the size of the data. The size is provided in brackets with dimensions separated by
-  commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in Fortran
-  convention (column-major order).
+  commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in C
+  convention (row-major ordering).
 
 ## MFMC Compatibility
 
