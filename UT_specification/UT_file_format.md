@@ -357,7 +357,7 @@ dataframe, plane, column).
 **Gates**
 
 The gates used for the acquisition are defined through three parameters.\
-GATE_START and GATE_WIDTH define the time window and GATE_THRESHOLD defines the threshold that was used to trigger the
+GATE_START and GATE_WIDTH define the time window, GATE_THRESHOLD and GATE_DETECTION defines the threshold and detection type that was used to trigger the
 storage of the data.
 
 ### Setup
