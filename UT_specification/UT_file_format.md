@@ -1,7 +1,6 @@
-# Open NDE File Format specification - Version 0.3
+# Open NDE File Format specification - Version 0.4
 
-<img src="../images/media/cofrend_header.png" alt="drawing" width="200"/>
-<img src="../images/media/EPRI-header.jpg" alt="drawing" width="310"/>
+<img src="../images/media/COFREND_EPRI_banner.png" alt="drawing" width="400"/>
 
 # Generalities
 
@@ -104,6 +103,8 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_DF\<m\>     | Number of dataframes in m-th dataset                                     |
 | N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                         |
 | N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                          |
+| N_CS\<m\>     | Number of scalar values stored in the m-th CSscan dataset                |
+| N_Gate\<m\>   | Number of gates in the m-th CScan dataset                                |
 | N_Prob\<m\>   | Number of probes used in m-th dataset                                    |
 | N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th dataset  |
 | N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law              |
@@ -112,21 +113,65 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th dataset      |
 | N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th dataset         |
 | N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
-| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  |
+| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  | 
 | N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
 
-Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> x N_V\<m\>Data Model
+Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> x N_V\<m\>
+
+## Data Model
 
 The data model of an ONDE file is described through fields that are grouped by blocks, each block corresponding to a NDE
 concept.
 
-![Relationships between the different blocks in the data model](../images/media/figure1.png "Figure 1")
+```mermaid
+classDiagram
+  ut_dataset <|-- ascan_dataset
+  ut_dataset <|-- tscan_dataset
+  ut_dataset <|-- cscan_dataset
+  ascan_dataset "1" o--  setup 
+  tscan_dataset "0..1" o-- setup : exclusive or with ascan_dataset link
+  cscan_dataset "0..1" o-- setup : exclusive or with tscan_dataset or ascan_dataset_link
+  cscan_dataset "0..1" o-- tscan_dataset : optional link to raw data
+  cscan_dataset "0..1" o-- ascan_dataset : optional link to raw data
+  tscan_dataset "0..1" o-- ascan_dataset : optional link to elementary channels
+  setup "1" o-- geometric_setup
+  setup "0..1" o-- ultrasonic_setup
+  setup "0..1" o-- phased_array_setup : direct link to phased array setup is permitted for Tscan datasets
+  ultrasonic_setup "0..n" o-- transmit_law
+  ultrasonic_setup "0..n" o-- receive_law
+  ultrasonic_setup "0..1" o-- phased_array_setup
+  geometric_setup "1..n" o-- ut_probe
+  geometric_setup "1..n" o-- acquisition_trajectory
+  geometric_setup  "0..1" o-- component
+  component <|-- plane
+  component <|-- cylinder
+  component <|-- 2d_cad
+  component <|-- 3d_cad
+  component <|-- weld
+  ut_probe "0..1" o-- ut_elements
+  ut_probe <|-- mono_ut_probe
+  ut_probe <|-- linear_ut_probe
+  ut_probe <|-- matrix_ut_probe
+  ut_probe "1" o-- coupling
+  coupling <|-- wedge
+  coupling <|-- immersion
+  wedge <|-- single_wedge
+  wedge <|-- dual_wedge
+  acquisition_trajectory <|-- time_trajectory
+  acquisition_trajectory <|-- spatial_trajectory
+  acqusition_trajectory "0..1" o-- acquisition_grid
+  phased_array_setup <|-- angle
+  phased_array_setup <|-- sscan
+  phased_array_setup <|-- escan
+  phased_array_setup <|-- compound
+  phased_array_setup <|-- fmc
+  phased_array_setup <|-- pwi
 
+```
 *Figure 1: Relationships between the different blocks in the data model*
 
-The diagram in Figure 1 explains the relationships between the different blocks in the data mdoel. The arrows signify
-that a block contains links towards other blocks. The number of possible blocks / links in the file is given with
-minimum and maximum values separated by two dots as is common in UML description.
+The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional for a given group.
+The diagram in Figure 1 explains the relationships between the different blocks in the data model in an UML style.
 
 Three blocks type contain the data : namely, Ascan, Tscan and CScan (peak-like) blocks. Ascans can be used either to
 describe summed signals or elementary channels data. For Cscan block, it is possible to keep the track to the raw data (
@@ -146,16 +191,18 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 
 ### Entry points
 
+/* TODO : update the description with Paul's description of the link between the CSV specification and the hdf5 implementation */
+
 The blocks defined in the general structure are implemented as HDF5 groups, the name of which is free but which have a
 mandatory 'TYPE' attribute that defines their nature. The entry points are the xxx_DATASET groups (namely groups that have as a TYPE attribute
- ASCAN_DATASET, TSCAN_DATASET or CSCAN_DATASET) 
+ ONDE_UT_ASCAN_DATASET, ONDE_UT_TSCAN_DATASET or ONDE_UT_CSCAN_DATASET) 
 
 When discovering the content of a given file, the following procedure must therefore be applied :
 
 - Read the 'TYPE' and 'VERSION' attributes at root level and verify the compatibility of the version number with the
   reader, and that the type is that of a UT ONDE file ('ONDE_UT')
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ASCAN_DATASET', 'TSCAN_DATASET', 'CSCAN_DATASET'.
+  which groups have a 'TYPE' attribute whose value is 'ONDE_UT_ASCAN_DATASET', 'ONDE_UT_TSCAN_DATASET', 'ONDE_UT_CSCAN_DATASET'.
 - From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
   setup information, ...
 
@@ -165,7 +212,7 @@ The HDF5 implementation of the format follows the following rules :
 
 - The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format)
 - The block structure defined above is implemented with HDF5 groups. The name of the group is left at the discretion of
-  the user. It is the mandatory TYPE attribute that defines the group type (SPECIMEN, PROBE, ACQUISITION_TRAJECTORY,
+  the user. It is the mandatory TYPE attribute that defines the group type (ONDE_COMPONENT, ONDE_UT_PROBE, ONDE_ACQUISITION_TRAJECTORY,
   etc...).
 - Links to other HDF5 groups are specific fields stored as HDF5 references or arrays of references.
 - The following data types will be stored as attributes
@@ -240,6 +287,8 @@ between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (â
 
 ## Description of the format
 
+/* TODO : update with the modifications introduced with subclassing and accessory classes */ 
+
 The specification of the format is provided in a [dedicated csv file](../ONDE_fields/ONDE_fields.csv) organized in the following manner :
 
 - The first column gives the field label and its location in the structure. The following convention applies : the name
@@ -256,15 +305,6 @@ The specification of the format is provided in a [dedicated csv file](../ONDE_fi
   For other datafields, it will be the size of the data. The size is provided in brackets with dimensions separated by
   commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in Fortran
   convention (column-major order).
-
-## MFMC Compatibility
-
-ONDE has been inspired by some principles of the MFMC specification and can be seen in many ways as an extension
-of the MFMC file format.
-
-To facilitate the transition for the organizations having already implemented reading/writing in the MFMC
-format, mechanisms have been provided to manage MFMC files while benefiting from the extra scope provided in the ONDE
-specification. These fields are identified in the comments of the [csv file](../ONDE_fields/ONDE_fields.csv) providing the data structure.
 
 ## Explanatory notes
 
@@ -320,7 +360,7 @@ accordingly.
 
 The pixels are stored in the (X,Y,Z) order (X being the outer loop, Z the inner loop in the array)
 
-### CScan datasets
+### CScan datasets and gates
 
 **CScan data and peaks**
 
@@ -356,9 +396,11 @@ dataframe, plane, column).
 
 **Gates**
 
-The gates used for the acquisition are defined through three parameters.\
+The gates are stored as a separate group of type ONDE_UT_GATE. The gates are referenced in the ONDE_UT_CSCAN_DATASET group via the 
+ONDE_UT_CSCAN_DATASET:GATES field.
+The gates used for the acquisition are defined through four parameters.\
 GATE_START and GATE_WIDTH define the time window and GATE_THRESHOLD defines the threshold that was used to trigger the
-storage of the data.
+storage of the data. GATE_DETECTION defines the type of triggering event that was used to define the gate.
 
 ### Setup
 
@@ -394,19 +436,31 @@ This version of the format handles only isotropic materials.
 
 **Shape and dimensions**
 
-SHAPE defines the geometric shape of the inspected component as one of the following: "PLATE","CYLINDER",
-"EXTRUSION_CAD", "3D_CAD". While the format is quite generic by handling CAD files, parametric description is only
-available for plane and cylindrical specimens. Other parameterized shapes can be added in future versions.
+The geometric shape of the inspected component is defined by the subclass of ONDE_COMPONENT. It can be 
+ one of the following: "ONDE_PLANE","ONDE_CYLINDER",
+"ONDE_2DCAD", "ONDE_3DCAD", "ONDE_WELD". While the format is quite generic by handling CAD files, parametric description is 
+available for plane, cylindrical and weld specimens. Other parameterized shapes can be added in future versions.
 
 For plane components, the dimensions are give by PLATE_DIMENSIONS, with a triplet for length, width and height.
 
 For cylindrical components, the dimensions are given by CYLINDER_DIMENSIONS, with a triplet for outer diameter,
 thickness, and length.
 
-For 2D extruded components, extrusion is provided by EXTRUSION_TYPE (plane or sylindrical) and EXTRUSION_DIMENSION for
+/* TODO : update with weld descriptions */
+
+For 2D extruded components and welds, extrusion is provided by EXTRUSION_TYPE (plane or sylindrical) and EXTRUSION_DIMENSION for
 the length for plane extrusion, the diameter for cylindrical ones.
 
 The CAD field can contain a STEP or STL file for 3D CADs, a dxf file for 2D CADs.
+
+```mermaid
+classDiagram
+  component <|-- plane
+  component <|-- cylinder
+  component <|-- 2d_cad
+  component <|-- 3d_cad
+  component <|-- weld
+```
 
 **Visualisation CAD**
 
@@ -735,7 +789,7 @@ The format also allows to store an information about the corresponding ultrasoni
 
 PROPAGATION_LINE represents the ultrasonic ray along which the data is to be represented in a true visualisation. It
 contains at least two points in the Probe Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
-positions in Probe Coordinate Frame and time of flight are stored)
+positions in Probe Coordinate Frame and time of flight are stored.
 
 ### Phased Array Setup
 
@@ -747,6 +801,16 @@ in industrial controls and represent a large share of the acquisition files prod
 the specification, it encompasses only the most basic setups. The SEQUENCE_TYPE field describes the sequence with the
 following choice : ANGLE, SSCAN, ESCAN, COMPOUND, FMC, PWI, CUSTOM. The propagation mode used for the settings is given
 in SEQUENCE_ANGLE_MODE.
+
+```mermaid
+classDiagram
+  phased_array_setup <|-- angle
+  phased_array_setup <|-- sscan
+  phased_array_setup <|-- escan
+  phased_array_setup <|-- compound
+  phased_array_setup <|-- fmc
+  phased_array_setup <|-- pwi
+```
 
 **Angle**
 
