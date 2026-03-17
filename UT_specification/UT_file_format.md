@@ -215,6 +215,10 @@ The HDF5 implementation of the format follows the following rules :
   the user. It is the mandatory TYPE attribute that defines the group type (ONDE_COMPONENT, ONDE_UT_PROBE, ONDE_ACQUISITION_TRAJECTORY,
   etc...).
 - Links to other HDF5 groups are specific fields stored as HDF5 references or arrays of references.
+  **Important note**: Some files can contain an important number of datasets or groups (e.g., with dynamic laws, we can
+  have a lot of "Law" groups).
+  To avoid slowing down the reading of the file, it is important to follow the reference directly instead of
+  transforming the ref to a path and following this path.
 - The following data types will be stored as attributes
     - Integers
     - Floating points
@@ -858,7 +862,6 @@ controls and represent a large share of the acquisition files produced in the in
 [^1]: P. Wilcox, MFMC Specification document 2.0.0b.
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
-                                                |
 
 # Appendix A -- conversion from quaternions to matrices
 
