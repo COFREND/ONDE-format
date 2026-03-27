@@ -23,7 +23,7 @@ coherently.
 
 **Data positioning**
 
-The Cscan data can be positioned through a trajectory block which is defined in REFERENCE_TRAJECTORY.
+The Cscan data must be positioned through a trajectory block which is of grid type and is referenced by the CSCAN_GRID attribute.
 
 **Underlying raw data**
 
