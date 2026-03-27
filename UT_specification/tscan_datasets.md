@@ -6,6 +6,10 @@ Even though the name (Tscans coming from TFM Scans) implicitly refers to the TFM
 apply to any reconstruction method producing data on a rectangular/parallelepiped grid that moves with the sensor (be it
 obtained by TFM, Adaptive TFM, PWI, Adaptive PWI, frequency reconstruction, or any variant of these methods)
 
+**Underlying data**
+The ELEMENTARY_CHANNELS_DATASET points to the Ascan dataset that was used to create the reconstruction. 
+It is a mandatory attribute (the Ascan dataset structure can contain no data if the elementary channels were not recorded).
+
 **3D Zones**
 
 The format allows for the description of 3D zones. Taking into account the dimension related to positions, this implies
@@ -18,8 +22,7 @@ a zero or a NaN for one of the dimension implies a 2D zone.
 
 ZONE_SIZE is a triplet which gives the number of pixels of the zone for each dimension (NX,NY,NZ).
 
-The zone position is given by ZONE_FRAME and is expressed relatively to the trajectory frame pointed to by
-REFERENCE_TRAJECTORY.
+The zone position is given by ZONE_FRAME and is expressed relatively to the trajectory of the probe which is given in the associated GEOMETRIC_SETUP probe list. The index of the probe in this list is given by the REFERENCE_PROBE_INDEX attribute (defaults to 0).
 
 ![Example of TFM zone positioning](../images/media/figure5.png "Figure 5")
 
