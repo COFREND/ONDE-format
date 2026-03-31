@@ -251,13 +251,18 @@ The components frames are defined in the Reference Frame.
 
 *Figure 2: Different frames and convention involved in the positioning systems*
 
-In the document, it was chosen to define the transformation between two frames in the shape of a vector consisting of 7
+In the specification, it was chosen to define the transformation between two frames in the shape of a vector consisting of 7
 values: 3 for the offset in terms of x,y,z directions, 4 for the rotation defining the frame expressed in terms of
 quaternions. The definition of rotations through quaternions was chosen because of its compactness and the absence of
 ambiguity (as opposed to Euler angles which require defining an ordering of the directions).
 
-The Wikipedia pages related to quaternion and rotation matrices provide formulae for the transition from the quaternion
-shape to rotation matrices and the reverse operation: <https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion>.
+A transform is given in the form of an array containing 7 values : $(Dx,Dy,Dz, q0, q1, q2, q3)$
+The three first ones correspond to the translation vector $(Dx, Dy, DZ)$ while the four last ones correspond to a quaternion. 
+The appendix provides the way to transform a quaternion into a rotation matrix.
+For a given transform , let T be the translation vector obtained from the three first and R the rotation matrix.
+
+The correspondance between a point  of coordinates M(x,y,z) in frame F and of coordinates M'(x',y',z') in frame F' is the following :
+$$ M'=R^{-1}.(M-T) $$
 
 Throughout the document, a frame is provided for the following objects :
 
@@ -270,9 +275,23 @@ Throughout the document, a frame is provided for the following objects :
 
 The diagram displayed in Figure 3 defines the hierarchy between these frames:
 
-![Hierarchy of the frames used for the geometric representation of the objects](../images/media/figure3.png "Figure 3")
+```mermaid
+flowchart TB
+
+Reference Frame --> Component Frame
+Component Frame --> Visualisation CAD Frame
+Component Frame --> UV Grid Frame
+Reference Frame --> Trajectory Frame
+Trajectory Frame --> Probe coordinate Frame
+Trajectory Frame --> TFM Zone Frame
+Probe Coordinate Frame --> Element Frame
+Probe Coordinate Frame --> Index Point Frame
+```
 
 *Figure 3: Hierarchy of the frames used for the geometric representation of the objects*
+
+The convention is that the 7-uplet corresponding to a given frame corresponds to the transform between the parent frame and this particular frame. 
+For instance, the 7-uplet corresponding to the ELEMENT_FRAME attribute corresponds to the transform that is applied to PROBE_COORDINATE_FRAME. The position in the reference frame is obtained by applying the three transforms (reference frame --> trajectory  frame --> probe coordinate frame --> element frame).
 
 ### 2D Frames
 
