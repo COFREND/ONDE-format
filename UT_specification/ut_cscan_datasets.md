@@ -36,6 +36,17 @@ dataframe, plane, column).
 
 The gates are stored as a separate group of type ONDE_UT_GATE. The gates are referenced in the ONDE_UT_CSCAN_DATASET group via the 
 ONDE_UT_CSCAN_DATASET:GATES field.
-The gates used for the acquisition are defined through four parameters.\
+The gates used for the acquisition are defined through five parameters.\
 GATE_START and GATE_WIDTH define the time window and GATE_THRESHOLD defines the threshold that was used to trigger the
-storage of the data. GATE_DETECTION defines the type of triggering event that was used to define the gate.
+storage of the data. GATE_DETECTION defines the type of triggering event that was used to define the gate. 
+GATE_POLARITY defines the mode that was used for the detection (absolute, positive or negative).
+
+The following figure defines the modes that can be used for detection. The numbers on the figure correspond to the different triggering events. The correspondence between these figures and the values allowed for GATE_DETECTION is the following :  
+1 - FIRST_FLANK
+2 - FIRST_PEAK
+3 - MAX_FLANK
+4 - MAX_PEAK
+5 - LAST_PEAK
+6 - LAST_FLANK
+![Detection modes for UT gates](/images/media/gate_detection.png)
+
