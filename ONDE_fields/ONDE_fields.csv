@@ -1,37 +1,46 @@
 Class;Name; Comments                                                                                                   ; M or O; D or A; Class                                                           ; Dims       ; Size or content
 ;ONDE:TYPE;For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md; M     ;A; H5T_STRING                                                      ;1;"[""ONDE_UT""]"
 ;ONDE:VERSION;                                                                                                            ; M     ;A; H5T_STRING                                                      ;1;"""0.4.0"""
-ONDE_UT_DATASET;ONDE:TYPE;;M;A; H5T_STRING                                                      ;[1];"[""ONDE_UT_DATASET""]"
-ONDE_UT_DATASET;ONDE:LABEL              ;; O     ;A; H5T_STRING                                                      ;1;
-ONDE_UT_DATASET;ONDE_UT_DATASET:OPERATOR                        ;                                                                                                            ; O     ;A; H5T_STRING                                                      ;1;
-ONDE_UT_DATASET;ONDE_UT_DATASET:DATE_AND_TIME                   ;                                                                                                            ; O     ;A; H5T_STRING                                                      ;1;
-ONDE_UT_ASCAN_DATASET;ONDE:TYPE                            ;; M     ;A; H5T_STRING                                                      ;[2];"[""ONDE_UT_DATASET"",""ONDE_UT_ASCAN_DATASET""]"
-ONDE_UT_ASCAN_DATASET;ONDE_UT_ASCAN_DATASET:SETUP;; M     ;A; H5T_STD_REF_OBJ<ONDE_SETUP>                                          ;1;
-ONDE_UT_ASCAN_DATASET;ONDE_UT_ASCAN_DATASET:DATA                            ;Data can be either a reference to an array or an array. Omitting this field is possible, in the event when Tscan or Cscan data is recorded but the underlying Ascan data is not.;O;A or D; H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT               ; 1 or [N_DF<m>,N_Ascan<m>,Ntime<m>];
-ONDE_UT_TSCAN_DATASET;ONDE:TYPE                            ;                                                                                                            ; M     ;A; H5T_STRING                                                      ;[2];"[""ONDE_UT_DATASET"",""ONDE_UT_TSCAN_DATASET""]"
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:DATA    ;can be either an array or a reference to an array; M     ;A; H5T_STD_REF_OBJ or HT5_INTEGER                                  ; 1 or [N_DF<m>,N_ROW<m>,N_COL<m>] or [N_DF<m>,NROW<m>,NCOL<m>,N_PLANE<m>];
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:ZONE_FRAME                      ;frame associated with the center of the image zone; M     ;A; H5T_FLOAT                                                       ; [7];
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:ZONE_DIMENSION                  ;physical dimension of the zone; M     ;A; H5T_FLOAT                                                       ; [3];
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:ZONE_SIZE                       ;number of pixels of the zone; M     ;A; H5T_INTEGER                                                     ; [3];
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:RECONSTRUCTION_MODE             ;                                                                                                            ; O     ;A; H5T_STRING                                                      ;1;
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:REFERENCE_PROBE_INDEX;Points the the index of the reference probe in the Geometric setup probe list. Defaults to 0.;O;A;H5T_INTEGER;1;
-ONDE_UT_TSCAN_DATASET;ONDE_UT_TSCAN_DATASET:SOURCE_ASCAN_DATASET     ;reference to the elementary channels Ascans that were used for the reconstruction;M;A; H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>                                  ;1;
-ONDE_UT_CSCAN_DATASET;ONDE:TYPE;                                                                                                            ; M     ;A; H5T_STRING                                                      ;[2];"[""ONDE_UT_DATASET"",""ONDE_UT_CSCAN_DATASET""]"
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:DATA                            ;references to arrays containing the different values stored in the dataset; M     ;D     ; H5T_STD_REF_OBJ or HT5_INTEGER                                  ; [N_CS<m>] |[N_CS<m>,N_Gate<m>];
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:DATATYPE                        ;string defining the stored data - the name can be either custom  (MY_MATERIAL_PROPERTY for instance) or a standardized name : THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX                                                                                                            ; M     ;D     ; H5T_STRING                                                      ; [N_CS<m>];
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:UNDERLYING_DATA                 ;reference to the dataset containing the underlying data; O     ; A     ; H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>;1;
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:UNDERLYING_DATA_REFERENCE       ;Correspondancy between the C-Scan scalar data and the scan originating. For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be (dataframe, plane, column)                                                                                                            ;M; D     ; H5T_INTEGER                                                     ; [N_DF<m>,2] or [N_DF<m>,3];
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:CSCAN_GRID    ;;M;A; H5T_STD_REF_OBJ<ONDE_ACQUSITION_GRID>;1;
-ONDE_UT_CSCAN_DATASET;ONDE_UT_CSCAN_DATASET:GATES;;O;D     ;H5T_STD_REF_OBJ<ONDE_UT_GATE>;[N_Gate<m>];
+ONDE_DATASET;ONDE:TYPE;Represents a generic dataset;M;A;H5T_STRING;[1];"[""ONDE_DATASET""]"
+ONDE_DATASET;ONDE:LABEL;A name for this dataset;O;A;H5T_STRING;1;
+ONDE_DATASET;ONDE_DATASET:SETUP;;M;A;H5T_STD_REF_OBJ<ONDE_SETUP>;1;
+ONDE_DATASET;ONDE_DATASET:OPERATOR;;O;A;H5T_STRING;1;
+ONDE_DATASET;ONDE_DATASET:DATE_AND_TIME;;O;A;H5T_STRING;1;
+ONDE_DATASET;ONDE_DATASET:DATA;Data can be either an array or a reference to an array. Omitting this field is possible, in the event when Tscan or Cscan data is recorded but the underlying Ascan data is not. The dimensions of the dataset are application dependent, subclasses can override and specify the dimensions.;O;A or D; H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT;;
+ONDE_DATASET;ONDE_DATASET:AMPLITUDE_DIMENSION;If absent, treated as coordinate “Amplitude”, units “Arbitrary”, offset 0.0, scale 1.0;O;A;H5T_STD_REF_OBJ<ONDE_DIMENSION>;1;
+ONDE_DATASET;ONDE_DATASET:INDEX_DIMENSIONS;One entry per dimension of ONDE_DATASET:DATA. Any that are absent are treated as coordinate “Time”, units “seconds”, offset 0.0, scale 1.0;O;A;H5T_STD_REF_OBJ<ONDE_DIMENSION>;[n_data_dims];
+ONDE_DATASET_UT;ONDE:TYPE;;M;A;H5T_STRING;[2];"[""ONDE_DATASET"",""ONDE_DATASET_UT""]"
+ONDE_DATASET_UT_ASCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];"[""ONDE_DATASET"",""ONDE_DATASET_UT"",""ONDE_DATASET_UT_ASCAN""]"
+ONDE_DATASET_UT_ASCAN;ONDE_DATASET:DATA;Data can be either an array or a reference to an array. Omitting this field is possible, in the event when Tscan or Cscan data is recorded but the underlying Ascan data is not.;O;A or D; H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT;1 or [N_DF<m>,N_Ascan<m>,Ntime<m>];
+ONDE_DATASET_UT_TSCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];"[""ONDE_DATASET"",""ONDE_DATASET_UT"",""ONDE_DATASET_UT_TSCAN""]"
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET:DATA;can be either an array or a reference to an array; M;A; H5T_STD_REF_OBJ or HT5_INTEGER;1 or [N_DF<m>,N_ROW<m>,N_COL<m>] or [N_DF<m>,NROW<m>,NCOL<m>,N_PLANE<m>];
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_FRAME;frame associated with the center of the image zone;M;A;H5T_FLOAT;[7];
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_DIMENSION;physical dimension of the zone;M;A;H5T_FLOAT;[3];
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_SIZE;number of pixels of the zone;M;A;H5T_INTEGER;[3];
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_MODE;;O;A;H5T_STRING;1;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX;Points the the index of the reference probe in the Geometric setup probe list. Defaults to 0.;O;A;H5T_INTEGER;1;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET;reference to the elementary channels ascans that were used for the reconstruction;M;A; H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>;1;
+ONDE_DATASET_UT_CSCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];"[""ONDE_DATASET"",""ONDE_DATASET_UT"",""ONDE_DATASET_UT_CSCAN""]"
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET:DATA;references to arrays containing the different values stored in the dataset;M;A or D;H5T_STD_REF_OBJ or HT5_INTEGER;[N_CS<m>] |[N_CS<m>,N_Gate<m>];
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA;reference to the dataset containing the underlying data;O;A;H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>;1;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA_REFERENCE;Correspondancy between the C-Scan scalar data and the scan originating. For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be (dataframe, plane, column);M;D;H5T_INTEGER;[N_DF<m>,2] or [N_DF<m>,3];
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:CSCAN_GRID;;M;A;H5T_STD_REF_OBJ<ONDE_ACQUSITION_GRID>;1;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:GATES;;O;D;H5T_STD_REF_OBJ<ONDE_UT_GATE>;[N_Gate<m>];
+ONDE_DIMENSION;ONDE:TYPE;Represents a dataset dimension;M;A;H5T_STRING;1;[“ONDE_DIMENSION”]
+ONDE_DIMENSION;ONDE_DIMENSION:COORDINATE;String defining the stored data - the name can be either custom  (MY_MATERIAL_PROPERTY for instance) or a standardized name : Time, Voltage, Pressure, Thickness, Time of flight, Depth, Amax, etc. The default interpretation if this value is unspecified depends on context (default coordinate is Amplitude for AMPLITUDE_DIMENSION or Time for INDEX_DIMENSIONs) ;O;A;H5T_STRING;1;
+ONDE_DIMENSION;ONDE_DIMENSION:UNITS;Units for the stored data such as “meters”, “seconds”, “arbitrary”, etc. All units must be MKS base units if applicable. The default interpretation if this value is unspecified depends on context (default units are arbitrary for AMPLITUDE_DIMENSION or seconds for INDEX_DIMENSIONS);O;A;H5T_STRING;1;
+ONDE_DIMENSION;ONDE_DIMENSION:OFFSET;Offset to be added to scaled stored data. Calibrated value in given units = data*SCALE + OFFSET. Default value of 0.0 if unspecified;O;A;H5T_FLOAT;1;
+ONDE_DIMENSION;ONDE_DIMENSION:SCALE;Scale to be applied to stored data. Calibrated value in given units = data*SCALE + OFFSET. Default value of 1.0 if unspecified;O;A;H5T_FLOAT;1;
 ONDE_UT_GATE;ONDE:TYPE;; M     ;A; H5T_STRING                                                      ;[1];"[""ONDE_UT_GATE""]"
 ONDE_UT_GATE;ONDE_UT_GATE:START                      ;For scalar data relying on Ascan data, defines the start time for the gate. Mandatory for data related to Ascans.; O     ; A     ; H5T_FLOAT                                                       ;1;
 ONDE_UT_GATE;ONDE_UT_GATE:WIDTH                      ;For Cscans scalar data relying on Ascan data, defines the width of the gate. Mandatory for data related to Ascans                                                                                                            ; O     ; A     ; H5T_FLOAT                                                       ;1;
 ONDE_UT_GATE;ONDE_UT_GATE:THRESHOLD                  ;Defines the threshold of the gate for data to be stored; O     ; A     ; H5T_FLOAT                                                       ;1;
 ONDE_UT_GATE;ONDE_UT_GATE:DETECTION;;O;A;H5T_STRING;1;""" FIRST_PEAK""|""LAST_PEAK""|"" MAX_PEAK""|"" FIRST_FLANK""|""LAST_FLANK""|""MAX_FLANK"""
 ONDE_UT_GATE;ONDE_UT_GATE:POLARITY;;O;A;H5T_STRING;1;"""ABSOLUTE""|""POSITIVE""|""NEGATIVE"""
-ONDE_SETUP                                  ;ONDE:TYPE                                    ;                                                                                                            ; M     ; A     ; H5T_STRING                                                      ;;" [""ONDE_SETUP""]"
-ONDE_SETUP                                  ;ONDE_SETUP:ULTRASONIC_SETUP                        ;Mandatory for Ascan sequences;O; A     ; H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>                               ; [1];
-ONDE_SETUP                                  ;ONDE_SETUP:GEOMETRIC_SETUP                         ;                                                                                                            ; M     ; A     ; H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>                                ; [1];
+ONDE_SETUP;ONDE_SETUP:TYPE;;M;A;H5T_STRING;[1];"[""ONDE_SETUP""]"
+ONDE_SETUP;ONDE_SETUP:GEOMETRIC_SETUP;;M;A;H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>;[1];
+ONDE_SETUP_UT;ONDE_SETUP_UT:TYPE;;M;A;H5T_STRING;[2];"[""ONDE_SETUP"",""ONDE_SETUP_UT""]"
+ONDE_SETUP_UT;ONDE_SETUP_UT:ULTRASONIC_SETUP;Mandatory for Ascan sequences;O;A;H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>;[1];
 ONDE_GEOMETRIC_SETUP;ONDE:TYPE                          ;                                                                                                            ; M     ; A     ; H5T_STRING                                                      ;;"[""ONDE_GEOMETRIC_SETUP""]"
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:COMPONENT                     ;Reference to the inspected component. If missing, semi-infinite half plane is assumed, with interface at z=0 and material for z>0;O; D     ; H5T_STD_REF_OBJ<ONDE_COMPONENT>                                      ; [1];
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:PROBE_LIST                    ;List all probes used in the acquisition of the dataset; M     ; D     ; H5T_STD_REF_OBJ<ONDE_UT_PROBE>                                          ; [N_Prob<M>];
