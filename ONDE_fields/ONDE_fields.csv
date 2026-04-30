@@ -37,9 +37,9 @@ ONDE_UT_GATE;ONDE_UT_GATE:WIDTH                      ;For Cscans scalar data rel
 ONDE_UT_GATE;ONDE_UT_GATE:THRESHOLD                  ;Defines the threshold of the gate for data to be stored; O     ; A     ; H5T_FLOAT                                                       ;1;
 ONDE_UT_GATE;ONDE_UT_GATE:DETECTION;;O;A;H5T_STRING;1;""" FIRST_PEAK""|""LAST_PEAK""|"" MAX_PEAK""|"" FIRST_FLANK""|""LAST_FLANK""|""MAX_FLANK"""
 ONDE_UT_GATE;ONDE_UT_GATE:POLARITY;;O;A;H5T_STRING;1;"""ABSOLUTE""|""POSITIVE""|""NEGATIVE"""
-ONDE_SETUP;ONDE_SETUP:TYPE;;M;A;H5T_STRING;[1];"[""ONDE_SETUP""]"
+ONDE_SETUP;ONDE:TYPE;;M;A;H5T_STRING;[1];"[""ONDE_SETUP""]"
 ONDE_SETUP;ONDE_SETUP:GEOMETRIC_SETUP;;M;A;H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>;[1];
-ONDE_SETUP_UT;ONDE_SETUP_UT:TYPE;;M;A;H5T_STRING;[2];"[""ONDE_SETUP"",""ONDE_SETUP_UT""]"
+ONDE_SETUP_UT;ONDE:TYPE;;M;A;H5T_STRING;[2];"[""ONDE_SETUP"",""ONDE_SETUP_UT""]"
 ONDE_SETUP_UT;ONDE_SETUP_UT:ULTRASONIC_SETUP;Mandatory for Ascan sequences;O;A;H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>;[1];
 ONDE_GEOMETRIC_SETUP;ONDE:TYPE                          ;                                                                                                            ; M     ; A     ; H5T_STRING                                                      ;;"[""ONDE_GEOMETRIC_SETUP""]"
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:COMPONENT                     ;Reference to the inspected component. If missing, semi-infinite half plane is assumed, with interface at z=0 and material for z>0;O; D     ; H5T_STD_REF_OBJ<ONDE_COMPONENT>                                      ; [1];
