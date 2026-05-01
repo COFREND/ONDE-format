@@ -6,25 +6,42 @@ The ONDE Data Model is defined by classes, which group together named fields. Wh
 - the transcription of this data model in the reference csv file (see https://github.com/COFREND/ONDE-format/blob/main/ONDE_fields/ONDE_fields.csv),
 - the way in which this data model translates into an HDF5 implementation in the ONDE file.
 
+
+
 ## Classes and subclasses
 
 The ONDE Data model defines the notions of classes, subclasses. 
 
 The attribute of a class can be :
 - a elementary type (integer, float, string),
-- a link to another class, 
+- a link to an object of another class, 
 - a multidimensional array of the previous types
 
-### HDF5 implementation
-In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The name of the group is left free for the implementation decision.
+## HDF5 implementation
+
+### File type
+The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
+The HDF5 root group must contain an attribute called `ÒNDE:FILETYPE` and a `ONDE:VERSION` attribute.
+
+### HDF5 implementation of classes
+In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.
 
 The strings contained in the TYPE attribute describe the hierarchy of classes to which the object belongs, starting with the base class.
 
 **Example** 
 
-The ONDE format contains a `COMPONENT` class describing the inspected component. It has a `PLANE_COMPONENT` subclass. The HDF5 file will contain a group with n HDF5 attribute ONDE:TYPE that will contain  : `['COMPONENT', 'PLANAR_COMPONENT']`.
+The ONDE format contains a `ONDE_COMPONENT` class describing the inspected component. It has a `ONDE_PLANE` subclass. The HDF5 file will contain a group with n HDF5 attribute ONDE:TYPE that will contain  : `['ONDE_COMPONENT', 'ONDE_PLANE']`.
 
-In the HDF5 implementation, the fields of a class can translate either into HDF5 attributes or in HDF5 datasets. This is defined for each field in the specification. Attrbutes will typically be used for fields that have a small size (scalar, string or small arrays), while datasets will be used for  arrays with a significant size.
+### HDF5 implementation of class fields
+
+In the HDF5 implementation, the fields of a class can translate either into HDF5 attributes or in HDF5 datasets. This is defined for each field in the specification. Attrbutes will typically be used for fields that have a small size (scalar, string or small arrays), while datasets will be used for  arrays with a significant size. Their optional or mandatory natrure is also defined, as well as the constraints on their dimensions and the range of accessible values (minimum and maximum for scalar values or allowed values for some strings).
+
+For the fields corresponding to integer and floats, the specification generally points to HDF5 generic types H5T_FLOAT and H5T_INTEGER. That implies that the freedom is given to the data producer to choose the actual implementation type (8, 16, 32, 64 bits, signed/unsigned, etc) for the corresponding field. 
+
+For arrays (which are stored as HDF5 datasets), the specification give the dimensions of the array in row-major order (the
+  last dimension corresponds to contiguous data in the file). Compression of arrays through the native compression schemes of the HDF5 libary
+  (gzip3, Szip).
+
 
 ### Accessory classes
 
@@ -57,7 +74,7 @@ The previous examples introduce the naming conventions used in ONDE :
 
 ## Data model representation in the csv specification
 
-### General notes on the csv tables
+### General notes on the csv table
 The specification of the format is provided in a [dedicated csv file](/ONDE_fields/ONDE_fields.csv) organized with the following columns :
 
 •	*Class* – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)
@@ -98,8 +115,27 @@ The csv table will look like this :
 |ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]|||
 |ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1||
 |ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]|||
-|ONDE_MYCLASS:ONDE_MYSUBCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]||||
-|ONDE_MYCLASS:ONDE_MYSUBCLASS:MY_VALUE|M|A|H5T_FLOAT||1|||
+|ONDE_MYSUBCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]||||
+|ONDE_MYSUBCLASS:MY_VALUE|M|A|H5T_FLOAT||1|||
 
 The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing ["ONDE_MYCLASS","ONDE_MYSUBCLASS"]), and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MYCLASS:ONDE_MYSUBCLASS:MY_VALUE` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE` 
 
+### Representation of an accessory class in the csv table
+
+In the csv file, an accessory class is defined in the same way as any other class.
+Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes.
+
+Let `ONDE_MY_ACCESSORY_CLASS` bet an accessory class having a string attribute `MY_STRING` aggregated in `ÒNDE_MYCLASS`.
+The csv table will look like this :
+
+|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|
+|---|---|---|---|---|---|---|---|---|
+|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]||||
+|ONDE_MYCLASS|ONDE:TYPE_TAGS|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]|||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]|||
+|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING|M|A|H5T_STRING||1|||
+
+The HDF5 file will contain an HDF group with attribute `ONDE_TYPE` (containing ['ONDE_MYCLASS'])   and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MY_ACCESSORY_CLASS:MY_STRING` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`. 
