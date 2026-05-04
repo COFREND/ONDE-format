@@ -12,8 +12,8 @@ The ONDE Data Model is defined by classes, which group together named fields. Wh
 
 The ONDE Data model defines the notions of classes, subclasses. 
 
-The attribute of a class can be :
-- a elementary type (integer, float, string),
+Classes define fields that can be :
+- an elementary type (integer, float, string),
 - a link to an object of another class, 
 - a multidimensional array of the previous types
 
@@ -21,7 +21,7 @@ The attribute of a class can be :
 
 ### File type
 The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
-The HDF5 root group must contain an attribute called `ÒNDE:FILETYPE` and a `ONDE:VERSION` attribute.
+The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute.
 
 ### HDF5 implementation of classes
 In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.
@@ -78,13 +78,17 @@ The previous examples introduce the naming conventions used in ONDE :
 The specification of the format is provided in a [dedicated csv file](/ONDE_fields/ONDE_fields.csv) organized with the following columns :
 
 •	*Class* – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)
-•	*Name* – the physical name of the dataset or attribute in the HDF5 group
+•	*Name* – the physical name of the filed (dataset or attribute in the HDF5 group)
 •	*M/O* – Mandatory or Optional
-•	*D/A* – Dataset of Attribute
+•	*D/A* – Dataset or Attribute
 •	*Type* – The HDF5 class type including H5T_INTEGER and H5T_FLOAT which are generic
 •	*Content* – Required content if relevant (essential for TYPE, potential useful for string enumerations to give list of allowed possibilities)
 •	*Dimensions* – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class
 •	*Min, Max* – Minimum and maximum values of numeric quantities if relevant.
+
+The csv separator that is used in the file is a semicolon.
+
+In some cases, several values are admissible for a given column (D or A in the Dataset/Attribute coloum, several possible values for a string). The specification uses either "or" or "|" to specify this.
 
 ### Representation of a class in the csv table
 
@@ -122,10 +126,10 @@ The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing 
 
 ### Representation of an accessory class in the csv table
 
-In the csv file, an accessory class is defined in the same way as any other class.
+In the csv file, an accessory class is defined in the same way as any other class, with the exception that it has a `ONDE:TYPE_TAGS` attribute refering to its own name.
 Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes.
 
-Let `ONDE_MY_ACCESSORY_CLASS` bet an accessory class having a string attribute `MY_STRING` aggregated in `ÒNDE_MYCLASS`.
+Let `ONDE_MY_ACCESSORY_CLASS` bet an accessory class having a string attribute `MY_STRING` aggregated in `ONDE_MYCLASS`.
 The csv table will look like this :
 
 |Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|
@@ -136,6 +140,7 @@ The csv table will look like this :
 |ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1||
 |ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]|||
 |ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE_TAGS|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]||||
 |ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING|M|A|H5T_STRING||1|||
 
 The HDF5 file will contain an HDF group with attribute `ONDE_TYPE` (containing ['ONDE_MYCLASS'])   and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MY_ACCESSORY_CLASS:MY_STRING` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`. 
