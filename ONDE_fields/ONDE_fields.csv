@@ -22,6 +22,7 @@ ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX;Points the the
 ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET;reference to the elementary channels ascans that were used for the reconstruction;M;A; H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>;1;
 ONDE_DATASET_UT_CSCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];"[""ONDE_DATASET"",""ONDE_DATASET_UT"",""ONDE_DATASET_UT_CSCAN""]"
 ONDE_DATASET_UT_CSCAN;ONDE_DATASET:DATA;references to arrays containing the different values stored in the dataset;M;A or D;H5T_STD_REF_OBJ or HT5_INTEGER;[N_CS<m>] |[N_CS<m>,N_Gate<m>];
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:DATATYPE;string defining the stored data - the name can be either custom  (MY_MATERIAL_PROPERTY for instance) or a standardized name : THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX;M;D;H5T_STRING; [N_CS<m>];
 ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA;reference to the dataset containing the underlying data;O;A;H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>;1;
 ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA_REFERENCE;Correspondancy between the C-Scan scalar data and the scan originating. For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be (dataframe, plane, column);M;D;H5T_INTEGER;[N_DF<m>,2] or [N_DF<m>,3];
 ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:CSCAN_GRID;;M;A;H5T_STD_REF_OBJ<ONDE_ACQUSITION_GRID>;1;
