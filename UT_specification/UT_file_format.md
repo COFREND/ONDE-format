@@ -1,4 +1,4 @@
-# Open NDE File Format specification - Version 0.4
+# Open NDE File Format specification - Version 0.9.0
 
 <img src="../images/media/COFREND_EPRI_banner.png" alt="drawing" width="400"/>
 
