@@ -1,5 +1,5 @@
 Class;Name; Comments                                                                                                   ; M or O; D or A; Class                                                           ; Dims       ; Size or content;Min;Max;Accessory Class
-;ONDE:TYPE;For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md; M     ;A; H5T_STRING                                                      ;1;"[""ONDE_UT""]";;;
+;ONDE:FILETYPE;For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md; M     ;A; H5T_STRING                                                      ;1;"[""ONDE_UT""]";;;
 ;ONDE:VERSION;                                                                                                            ; M     ;A; H5T_STRING                                                      ;1;"""0.4.0""";;;
 ONDE_DATASET;ONDE:TYPE;Represents a generic dataset;M;A;H5T_STRING;[1];"[""ONDE_DATASET""]";;;
 ONDE_DATASET;ONDE:LABEL;A name for this dataset;O;A;H5T_STRING;1;;;;
