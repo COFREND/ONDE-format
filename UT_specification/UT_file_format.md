@@ -44,10 +44,10 @@
   essentially adopted for three objects, namely the probe, the
   trajectory and the setup of the electronic laws.
 
-- From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between hdf5
+- From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between HDF5
   groups are translated into HDF5 references. The location of the HDF5 groups in the file is left open to the discretion of the implementor.
-  The names of the groups is not imposed, the semantics of the group being defined by the mandatory TYPE attribute. 
-  Only TYPE and VERSION at hdf5 root level have a location that is  imposed in the file. 
+  The names of the groups is not imposed, the semantics of the group being defined by the mandatory ONDE:TYPE attribute. 
+  Only ONDE:FILETYPE and ONDE:VERSION at hdf5 root level have a location that is  imposed in the file. 
   In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (
   arrays of signals or array of images which typically represents the vast majority of the file weight) can be anywhere
   in the file structure.
@@ -189,51 +189,25 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 
 ## HDF5 implementation
 
-### Entry points
+### Relationship between the HDF5 implementation and the data model
 
-/* TODO : update the description with Paul's description of the link between the CSV specification and the hdf5 implementation */
+The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are described in 
+[ONDE Data Model and HDF5 implementation](/UT_specification/data_model.md)
+
+### Entry points for navigating files in the UT implementation
 
 The blocks defined in the general structure are implemented as HDF5 groups, the name of which is free but which have a
-mandatory 'TYPE' attribute that defines their nature. The entry points are the xxx_DATASET groups (namely groups that have as a TYPE attribute
- ONDE_UT_ASCAN_DATASET, ONDE_UT_TSCAN_DATASET or ONDE_UT_CSCAN_DATASET) 
+mandatory 'ONDE:TYPE' attribute that defines their nature. The entry points are the xxx_DATASET_yyy groups (namely groups that have as a ONDE:TYPE attribute
+ ONDE_DATASET_UT_ASCAN, ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN) 
 
 When discovering the content of a given file, the following procedure must therefore be applied :
 
-- Read the 'TYPE' and 'VERSION' attributes at root level and verify the compatibility of the version number with the
+- Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
   reader, and that the type is that of a UT ONDE file ('ONDE_UT')
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ONDE_UT_ASCAN_DATASET', 'ONDE_UT_TSCAN_DATASET', 'ONDE_UT_CSCAN_DATASET'.
+  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.
 - From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
   setup information, ...
-
-### Rules for the HDF5 groups
-
-The HDF5 implementation of the format follows the following rules :
-
-- The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format)
-- The block structure defined above is implemented with HDF5 groups. The name of the group is left at the discretion of
-  the user. It is the mandatory TYPE attribute that defines the group type (ONDE_COMPONENT, ONDE_UT_PROBE, ONDE_ACQUISITION_TRAJECTORY,
-  etc...).
-- Links to other HDF5 groups are specific fields stored as HDF5 references or arrays of references.
-- The following data types will be stored as attributes
-    - Integers
-    - Floating points
-    - Strings
-    - Vectors of dimension 2 or 3
-- The following data types will be stored as datasets
-    - Int arrays
-    - Float arrays
-- HDF5 polymorphism mechanism is used, so that the data can be stored with arbitrary precision (for instance, integers
-  can be stored as INT16, INT32 or any user-defined integer length). The range of accessible data is implicitly defined
-  by the HDF5 type. In the document, INT and FLOAT refer to this polymorphism. For instance, in the tables, an INT array
-  should be interpreted as array pointing to any HDF5 integer type.
-- The tables below specify the cardinality of the different HDF5 objects. For some of the table entries, we have given
-  the liberty to specify one float instead of a complete vector. In this case, the same value implicitly applies to all
-  elements of the vector. For example, it is allowed to provide a vector of size 1 for the frequency, instead of
-  specifying the same frequency for all elements.
-- For arrays (which are stored as HDF5 datasets), the tables give the dimensions of the array in row-major order (the
-  last dimension corresponds to contiguous data in the file). Compression of arrays through the native compression schemes of the HDF5 libary
-  (gzip3, Szip).
 
 ## Definition of frames
 
