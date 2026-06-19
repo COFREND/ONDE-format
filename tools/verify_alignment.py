@@ -38,51 +38,249 @@ def parse_type_string(t_str):
                 parts.append(sub_p)
     return set(parts)
 
+GROUND_TRUTH_CSV = """Class;Name;Comments;M or O;D or A;Class;Dims;Size or content;Min;Max;Accessory Class
+;ONDE:FILETYPE;For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md;M;A;H5T_STRING;1;"ONDE_UT";;;
+;ONDE:VERSION;;M;A;H5T_STRING;1;"0.9.0";;;
+ONDE_DATASET;ONDE:TYPE;Represents a generic dataset;M;A;H5T_STRING;[1];["ONDE_DATASET"];;;
+ONDE_DATASET;ONDE:LABEL;A name for this dataset;O;A;H5T_STRING;1;;;;
+ONDE_DATASET;ONDE_DATASET:SETUP;;M;A;H5T_STD_REF_OBJ<ONDE_SETUP>;1;;;;
+ONDE_DATASET;ONDE_DATASET:OPERATOR;;O;A;H5T_STRING;1;;;;
+ONDE_DATASET;ONDE_DATASET:DATE_AND_TIME;;O;A;H5T_STRING;1;;;;
+ONDE_DATASET;ONDE_DATASET:DATA;Data can be either an array or a reference to an array. Omitting this field is possible, in the event when Tscan or Cscan data is recorded but the underlying Ascan data is not. The dimensions of the dataset are application dependent, subclasses can override and specify the dimensions.;O;A or D;H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT;;;;;
+ONDE_DATASET;ONDE_DATASET:AMPLITUDE_DIMENSION;If absent, treated as coordinate "Amplitude", units "Arbitrary", offset 0.0, scale 1.0;O;A;H5T_STD_REF_OBJ<ONDE_DIMENSION>;1;;;;
+ONDE_DATASET;ONDE_DATASET:INDEX_DIMENSIONS;One entry per dimension of ONDE_DATASET:DATA. Any that are absent are treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0;O;A;H5T_STD_REF_OBJ<ONDE_DIMENSION>;[n_data_dims];;;;
+ONDE_DATASET_UT;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_DATASET","ONDE_DATASET_UT"];;;
+ONDE_DATASET_UT_ASCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_DATASET","ONDE_DATASET_UT","ONDE_DATASET_UT_ASCAN"];;;
+ONDE_DATASET_UT_ASCAN;ONDE_DATASET:DATA;Data can be either an array or a reference to an array. Omitting this field is possible, in the event when Tscan or Cscan data is recorded but the underlying Ascan data is not.;O;A or D;H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT;1 or [N_DF<m>,N_Ascan<m>,Ntime<m>];;;;
+ONDE_DATASET_UT_TSCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_DATASET","ONDE_DATASET_UT","ONDE_DATASET_UT_TSCAN"];;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET:DATA;can be either an array or a reference to an array;M;A or D;H5T_STD_REF_OBJ or HT5_INTEGER;1 or [N_DF<m>,N_ROW<m>,N_COL<m>] or [N_DF<m>,NROW<m>,NCOL<m>,N_PLANE<m>];;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_FRAME;frame associated with the center of the image zone;M;A;H5T_FLOAT;[7];;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_DIMENSION;physical dimension of the zone;M;A;H5T_FLOAT;[3];;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:ZONE_SIZE;number of pixels of the zone;M;A;H5T_INTEGER;[3];;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_MODE;;O;A;H5T_STRING;1;;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX;Points the the index of the reference probe in the Geometric setup probe list. Defaults to 0.;O;A;H5T_INTEGER;1;;;;
+ONDE_DATASET_UT_TSCAN;ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET;reference to the elementary channels ascans that were used for the reconstruction;M;A;H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>;1;;;;
+ONDE_DATASET_UT_CSCAN;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_DATASET","ONDE_DATASET_UT","ONDE_DATASET_UT_CSCAN"];;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET:DATA;references to arrays containing the different values stored in the dataset;M;A or D;H5T_STD_REF_OBJ or HT5_INTEGER;[N_CS<m>] |[N_CS<m>,N_Gate<m>];;;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:DATATYPE;string defining the stored data - the name can be either custom (MY_MATERIAL_PROPERTY for instance) or a standardized name : THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX;M;D;H5T_STRING;[N_CS<m>];;;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA;reference to the dataset containing the underlying data;O;A;H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>;1;;;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA_REFERENCE;Correspondancy between the C-Scan scalar data and the scan originating. For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be (dataframe, plane, column);M;D;H5T_INTEGER;[N_DF<m>,2] or [N_DF<m>,3];;;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:CSCAN_GRID;;M;A;H5T_STD_REF_OBJ<ONDE_ACQUSITION_GRID>;1;;;;
+ONDE_DATASET_UT_CSCAN;ONDE_DATASET_UT_CSCAN:GATES;;O;D;H5T_STD_REF_OBJ<ONDE_UT_GATE>;[N_Gate<m>];;;;
+ONDE_DIMENSION;ONDE:TYPE;Represents a dataset dimension;M;A;H5T_STRING;1;["ONDE_DIMENSION"];;;
+ONDE_DIMENSION;ONDE_DIMENSION:COORDINATE;String defining the stored data (for the AMPLITUDE_DIMENSION) or the indexed coordinates (for INDEX_DIMENSIONS). The name can be either custom (MY_MATERIAL_PROPERTY for instance) or a standardized name : Time, Voltage, Pressure, Thickness, Time of flight, Depth, Amax, etc. The default interpretation if this value is unspecified depends on context (default coordinate is Amplitude for AMPLITUDE_DIMENSION or Time for INDEX_DIMENSIONs);O;A;H5T_STRING;1;;;;
+ONDE_DIMENSION;ONDE_DIMENSION:UNITS;Units for the stored data (for the AMPLITUDE_DIMENSION) or for the indexed coordinates (for INDEX_DIMENSIONS). Units are strings such as "meters", "seconds", "arbitrary", etc. and should generally be spelled out for clarity. All units must be MKS base units if applicable, except for angles, which should be in degrees rather than radians. The default interpretation if this value is unspecified depends on context (default units are arbitrary for AMPLITUDE_DIMENSION or seconds for INDEX_DIMENSIONS);O;A;H5T_STRING;1;;;;
+ONDE_DIMENSION;ONDE_DIMENSION:OFFSET;Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION) or scaled zero-based integer indices (for INDEX_DIMENSIONS). Calibrated value in given units = (data or index)*SCALE + OFFSET. Default value of 0.0 if unspecified;O;A;H5T_FLOAT;1;;;;
+ONDE_DIMENSION;ONDE_DIMENSION:SCALE;Scale to be applied to stored data (for the AMPLITUDE_DIMENSION) or integer indices (for INDEX_DIMENSIONS). Calibrated value in given units = (data or index)*SCALE + OFFSET. Default value of 1.0 if unspecified;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_GATE;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_UT_GATE"];;;
+ONDE_UT_GATE;ONDE_UT_GATE:START;For scalar data relying on Ascan data, defines the start time for the gate. Mandatory for data related to Ascans.;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_GATE;ONDE_UT_GATE:WIDTH;For Cscans scalar data relying on Ascan data, defines the width of the gate. Mandatory for data related to Ascans;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_GATE;ONDE_UT_GATE:THRESHOLD;Defines the threshold of the gate for data to be stored;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_GATE;ONDE_UT_GATE:DETECTION;;O;A;H5T_STRING;1;"FIRST_PEAK"|"LAST_PEAK"|"MAX_PEAK"|"FIRST_FLANK"|"LAST_FLANK"|"MAX_FLANK";;;
+ONDE_UT_GATE;ONDE_UT_GATE:POLARITY;;O;A;H5T_STRING;1;"ABSOLUTE"|"POSITIVE"|"NEGATIVE";;;
+ONDE_SETUP;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_SETUP"];;;
+ONDE_SETUP;ONDE_SETUP:GEOMETRIC_SETUP;;M;A;H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>;[1];;;;
+ONDE_SETUP_UT;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_SETUP","ONDE_SETUP_UT"];;;
+ONDE_SETUP_UT;ONDE_SETUP_UT:ULTRASONIC_SETUP;Mandatory for Ascan sequences;O;A;H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>;[1];;;;
+ONDE_GEOMETRIC_SETUP;ONDE:TYPE;;M;A;H5T_STRING;;["ONDE_GEOMETRIC_SETUP"];;;
+ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:COMPONENT;Reference to the inspected component. If missing, semi-infinite half plane is assumed, with interface at z=0 and material for z>0;O;D;H5T_STD_REF_OBJ<ONDE_COMPONENT>;[1];;;;
+ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:PROBE_LIST;List all probes used in the acquisition of the dataset;M;D;H5T_STD_REF_OBJ<ONDE_UT_PROBE>;[N_Prob<M>];;;;
+ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY;References to the block describing the trajectory, references have the same order as PROBE_LIST;M;D;H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>;[N_Prob<M>];;;;
+ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:PROBE_COORDINATE_FRAME;Offset and direction of the probe w.r.t the trajectory frame- identity is assumed if not provided;O;D;H5T_FLOAT;[N_Prob<M>,7];;;;
+ONDE_COMPONENT;ONDE:TYPE;;M;A;H5T_STRING;;["ONDE_COMPONENT"];;;
+ONDE_COMPONENT;ONDE:LABEL;;O;A;H5T_STRING;;;;;
+ONDE_COMPONENT;ONDE_COMPONENT:VELOCITIES;;M;A;H5T_FLOAT;[2];;;;
+ONDE_COMPONENT;ONDE_COMPONENT:DENSITY;;O;A;H5T_FLOAT;1;;;;
+ONDE_COMPONENT;ONDE_COMPONENT:VISUALIZATION_CAD;Optional CAD used for visualisation purposes;O;A;H5T_STRING;1;;;;
+ONDE_COMPONENT;ONDE_COMPONENT:VISUALIZATION_CAD_FRAME;Definition of the frame defining the visualisation CAD with offset and quaternions in the specimen frame- Identity is used if absent;O;A;H5T_FLOAT;[7];;;;
+ONDE_COMPONENT;ONDE_COMPONENT:COMPONENT_FRAME;Definition of the specimen frame in the reference frame. If not provided, default value is identity with the reference frame.;O;A;H5T_FLOAT;[7];;;;
+ONDE_COMPONENT;ONDE_COMPONENT:COMMENT;;O;A;H5T_STRING;1;;;;
+ONDE_COMPONENT;ONDE_COMPONENT:IMAGE;;O;A;H5T_FLOAT;[3];;;;
+ONDE_PLANE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_COMPONENT","ONDE_PLANE"];;;
+ONDE_PLANE;ONDE_PLANE:PLATE_DIMENSIONS;;M;A;H5T_FLOAT;[3];;;;
+ONDE_CYLINDER;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_COMPONENT","ONDE_CYLINDER"];;;
+ONDE_CYLINDER;ONDE_CYLINDER:DIMENSIONS;;M;A;H5T_FLOAT;[3];;;;
+ONDE_2DCAD;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_COMPONENT","ONDE_2DCAD"];;;
+ONDE_2DCAD;ONDE_2DCAD:EXTRUSION_TYPE;;M;A;H5T_STRING;1;"PLANE"|"CYLINDER";;;
+ONDE_2DCAD;ONDE_2DCAD:EXTRUSION_DIMENSION;;M;A;H5T_FLOAT;1;;;;
+ONDE_2DCAD;ONDE_2DCAD:CAD;;M;A;H5T_STRING;1;;;;
+ONDE_3DCAD;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_COMPONENT","ONDE_3DCAD"];;;
+ONDE_3DCAD;ONDE_3DCAD:CAD;;M;A;H5T_STRING;1;;;;
+ONDE_WELD;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_COMPONENT","ONDE_WELD"];;;
+ONDE_WELD;ONDE_WELD:EXTRUSION_TYPE;;M;A;H5T_STRING;1;"PLANE"|"CYLINDER";;;
+ONDE_WELD;ONDE_WELD:EXTRUSION_DIMENSION;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_TYPE;;M;A;H5T_STRING;1;"V"|"U";;;
+ONDE_WELD;ONDE_WELD:WELD_SYMMETRY;;M;A;H5T_STRING;1;"SYMMETRIC"|"STRAIGHT_LEFT"|"STRAIGHT_RIGHT";;;
+ONDE_WELD;ONDE_WELD:WELD_UPPER_CAP_WIDTH;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_UPPER_CAP_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_FILL_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_FILL_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_HOT_PASS_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_HOT_PASS_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_LAND_OFFSET;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_LAND_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_ROOT_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_ROOT_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_LOWER_CAP_HEIGHT;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_LOWER_CAP_WIDTH;;M;A;H5T_FLOAT;1;;;;
+ONDE_WELD;ONDE_WELD:WELD_HAZ_WIDTH;;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_PROBE;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_UT_PROBE"];;;
+ONDE_UT_PROBE;ONDE:TYPE_TAGS;;M;A;H5T_STRING;[1];["ONDE_UT_ELEMENTS"];;;
+ONDE_UT_PROBE;ONDE:LABEL;;O;A;H5T_STRING;1;;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:MANUFACTURER;;O;A;H5T_STRING;1;;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:SERIAL_NUMBER;;O;A;H5T_STRING;1;;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:FREQUENCY;;M;A;H5T_FLOAT;1;;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:BANDWIDTH;;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:INDEX_POINT_FRAME;If absent, identity is assumed;O;D;H5T_FLOAT;[7];;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:FOCUSING_SURFACE;Defines the shape of the surface on which the elements are arranged - if absent, FLAT is assumed;O;A;H5T_STRING;;"FLAT"|"CYLINDRICAL_INC"|"CYLINDRICAL_PERP"|"SPHERICAL"|"BIFOCAL"|"TRIFOCAL";;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:FOCUSING_SURFACE_PARAMETERS;Multi values : value in mm - FLAT : no value - CYLINDRICAL_INC, CYLINDRICAL_PER : Surface radius - SPHERICAL : Surface radius - BIFOCAL : Surface radius in the incidence plane, surface radius in the plane perpendicular to the incidence plane - TRIFOCAL : Surface radius in the incidence plane (bottom), Surface radius in the incidence plane (top), surface radius in the plane perpendicular to the incidence plane.;O;A;H5T_FLOAT;[3];;;;
+ONDE_UT_PROBE;ONDE_UT_PROBE:COUPLING;Reference to the coupling system (wedge, immersion, direct);M;A;H5T_STD_REF_OBJ<ONDE_UT_COUPLING>;1;;;;
+ONDE_UT_ELEMENTS;ONDE:TYPE;Defines the ONDE_UT_ELEMENTS accessory class;M;A;H5T_STRING;[1];["ONDE_UT_ELEMENTS"];;;True
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:FRAME;Array defining the location of the elements of the probe;M;D;H5T_FLOAT;[N_Elem<p>,7];;;;
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:SHAPE;The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),;M;D;H5T_INTEGER;[N_Elem<p>];;;;
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:SIZE;;M;D;H5T_FLOAT;[N_Elem<p>,6];;;;
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:RADIUS_OF_CURVATURE;If absent, flat elements are assumed;O;D;H5T_FLOAT;[N_Elem<p>];;;;
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:AXIS_OF_CURVATURE;If absent, flat elements are assumed;O;D;H5T_FLOAT;[N_Elem<p>,3];;;;
+ONDE_UT_ELEMENTS;ONDE_UT_ELEMENTS:DEAD_ELEMENT;"Datafield of logical values (0 = false, 1 = true) used to flag non-functioning elements in an array probe (if not present, assumption should be that all elements are performing correctly);";O;D;H5T_INTEGER;[N_Elem<p>];;;;
+ONDE_MONO_UT_PROBE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_UT_PROBE","ONDE_MONO_UT_PROBE"];;;
+ONDE_LINEAR_UT_PROBE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_UT_PROBE","ONDE_LINEAR_UT_PROBE"];;;
+ONDE_LINEAR_UT_PROBE;ONDE_LINEAR_UT_PROBE:TOTAL_NUMBER_OF_ELEMENTS;;M;A;H5T_INTEGER;1;;;;
+ONDE_LINEAR_UT_PROBE;ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MAJOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_LINEAR_UT_PROBE;ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MINOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_LINEAR_UT_PROBE;ONDE_LINEAR_UT_PROBE:ELEMENT_PITCH_DIM_MAJOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_LINEAR_UT_PROBE;ONDE_LINEAR_UT_PROBE:ELEMENT_NUMBERING;Defines the element numbering relating the numbering implicitly defined by the probe description and the order defined in the element tables (ELEMENT_POSITION, ELEMENT_GEOMETRY, etc);O;D;H5T_INTEGER;[N_Elem<p>];;;;
+ONDE_MATRIX_UT_PROBE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_UT_PROBE","ONDE_MATRIX_UT_PROBE"];;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:TOTAL_NUMBER_OF_ELEMENTS;;M;A;H5T_INTEGER;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:NUMBER_OF_ELEMENTS_DIM_MINOR;;M;A;H5T_INTEGER;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:ELEMENT_DIM_MAJOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:ELEMENT_DIM_MINOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:ELEMENT_PITCH_DIM_MAJOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:ELEMENT_PITCH_DIM_MINOR;;M;A;H5T_FLOAT;1;;;;
+ONDE_MATRIX_UT_PROBE;ONDE_MATRIX_UT_PROBE:ELEMENT_NUMBERING;Defines the element numbering relating the numbering implicitly defined by the probe description and the order defined in the element tables (ELEMENT_POSITION, ELEMENT_GEOMETRY, etc);O;D;H5T_INTEGER;[N_Elem<p>];;;;
+ONDE_UT_COUPLING;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_UT_COUPLING"];;;
+ONDE_UT_COUPLING;ONDE_UT_COUPLING:MEDIUM_VELOCITY;;M;A;H5T_FLOAT;[2];;;;
+ONDE_UT_COUPLING;ONDE_UT_COUPLING:MEDIUM_DENSITY;;O;A;H5T_FLOAT;1;;;;
+ONDE_UT_COUPLING;ONDE_UT_COUPLING:INCIDENCE_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_IMMERSION;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_UT_COUPLING","ONDE_IMMERSION"];;;
+ONDE_IMMERSION;ONDE_IMMERSION:WATER_PATH;;M;A;H5T_FLOAT;1;;;;
+ONDE_WEDGE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_UT_COUPLING","ONDE_WEDGE"];;;
+ONDE_WEDGE;ONDE:LABEL;;O;A;H5T_STRING;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:MANUFACTURER;;O;A;H5T_STRING;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:SERIAL_NUMBER;;O;A;H5T_STRING;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:CONTACT_SURFACE;Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR, CYLINDRICAL_MINOR - If missing PLANAR assumed;M;A;H5T_STRING;;"PLANAR"|"SPHERICAL"|"CYLINDRICAL_MAJOR"|"CYLINDRICAL_MINOR";;;
+ONDE_WEDGE;ONDE_WEDGE:CURVATURE_RADIUS;Wedge curvature radius - Concave : positive - Convex : negative - 0 in the case of a planar wedge - If missing 0 assumed.;O;A;H5T_FLOAT;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:CONTACT_AREA;Equivalent to L1, L2 and L3 (See Figure 15);M;A;H5T_FLOAT;[3];;;;
+ONDE_WEDGE;ONDE_WEDGE:HEIGHT;For a wedge, distance of the ultrasonic beam between the probe center and the index point (See Figure 15);M;A;H5T_FLOAT;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:SKEW_ANGLE;wedge /skew angle (B) (See Figure 15);O;A;H5T_FLOAT;1;;;;
+ONDE_WEDGE;ONDE_WEDGE:DISORIENTATION_ANGLE;wedge /disorientation angle (D) (See Figure 15);O;A;H5T_FLOAT;1;;;;
+ONDE_SINGLE_WEDGE;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_UT_COUPLING","ONDE_WEDGE","ONDE_SINGLE_WEDGE"];;;
+ONDE_DUAL_WEDGE;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_UT_COUPLING","ONDE_WEDGE","ONDE_DUAL_WEDGE"];;;
+ONDE_DUAL_WEDGE;ONDE_DUAL_WEDGE:PROBE_SEPARATION;For dual probes, inter-probes distance (L6) (See Figure 15);M;A;H5T_FLOAT;1;;;;
+ONDE_DUAL_WEDGE;ONDE_DUAL_WEDGE:ROOF_ANGLE;For dual probes and only for dual probes defines the roof angle (See Figure 15);M;A;H5T_FLOAT;1;;;;
+ONDE_DUAL_WEDGE;ONDE_DUAL_WEDGE:SQUINT_ANGLE;For dual probes, squint angle (A2) (See Figure 15);M;A;H5T_FLOAT;1;;;;
+ONDE_ACQUISITION_TRAJECTORY;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_ACQUISITION_TRAJECTORY"];;;
+ONDE_TIME_TRAJECTORY;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_ACQUISITION_TRAJECTORY","ONDE_TIME_TRAJECTORY"];;;
+ONDE_TIME_TRAJECTORY;ONDE_TIME_TRAJECTORY:ACQUISITION_RATE;For time encoded trajectories, defines the acquisition rate;O;A;H5T_FLOAT;1;;;;
+ONDE_SPATIAL_TRAJECTORY;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_ACQUISITION_TRAJECTORY","ONDE_SPATIAL_TRAJECTORY"];;;
+ONDE_SPATIAL_TRAJECTORY;ONDE_SPATIAL_TRAJECTORY:TRAJECTORY;List of positions and quaternions giving the positions and orientations of the trajectory frame at the different positions;O;D;H5T_FLOAT;[N_Pos<m>,7];;;;
+ONDE_ACQUISITION_GRID;ONDE:TYPE;;M;A;H5T_STRING;[3];["ONDE_ACQUISITION_TRAJECTORY","ONDE_SPATIAL_TRAJECTORY","ONDE_ACQUISITION_GRID"];;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:REFERENCE_SPECIMEN;When defining an acquisition grid, it is necessary to define a reference specimen that is either a cylinder or a plane.;M;A;H5T_STD_REF_OBJ;1;;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:CYLINDER_DEFINITION;Defines whether the grid is expressed in the inner surface of the cylinder or on the outer surface;O;A;H5T_STRING;;"INNER"|"OUTER";;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:UV_GRID_FRAME;2D Frame defining the U_GRID and V_GRID directions of the encoding in the surface representation of the specimen (X,Y) for planar specimens, (X,THETA) for cylindrical specimens. (1,0,) is assumed if missing;O;A;H5T_FLOAT;[3];;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:U_GRID_DATA;The specified values of the first coder at the different positions;M;D;H5T_FLOAT;[N_U<m>];;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:V_GRID_DATA;The specified values of the second coder at the different positions. If missing while U_GRID_DATA is present, 1D array of data is assumed.;O;D;H5T_FLOAT;[N_V<m>];;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:SCAN_TYPE;Defines whether the data is ordered in the same direction for each scan (COMB) or is inversed every second scan (RASTER);M;A;H5T_STRING;1;"COMB"|"RASTER";;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:U_ENCODER;Obtained encoder values on the u axis;O;D;H5T_FLOAT;[N_V<m>,N_U<m>];;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:V_ENCODER;Obtained encoder values on the v axis;O;D;H5T_FLOAT;[N_V<m>,N_U<m>];;;;
+ONDE_ACQUISITION_GRID;ONDE_ACQUISITION_GRID:PROBE_DIRECTION;For grid data, direction of the probe in the (u,v,w) coordinate system. Defaults to identity matrix.;O;D;H5T_FLOAT;[3,3];;;;
+ONDE_ULTRASONIC_SETUP;ONDE:TYPE;;M;A;H5T_STRING;[1];["ONDE_ULTRASONIC_SETUP"];;;
+ONDE_ULTRASONIC_SETUP;ONDE:LABEL;;O;A;H5T_STRING;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:RECTIFICATION;Defines if the data are FULL_WAVE or RECTIFIED_POSITIVE, RECTIFIED_NEGATIVE, RECTIFIED_FULL;M;A;H5T_STRING;;"FULL_WAVE","RECTIFIED_POSITIVE","RECTIFIED_NEGATIVE","RECTIFIED_FULL";;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:FILTER_TYPE;Defines the type of filtering applied to the signals : NO_FILTER, LOW_PASS, HIGH_PASS, BAND_PASS, OTHER;O;A;H5T_STRING;;"NO_FILTER","LOW_PASS","HIGH_PASS","BAND_PASS","OTHER";;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:FILTER_PARAMETERS;Optional datafield providing analogue filter parameters - see notes for detailed explanation;O;A;H5T_FLOAT;1 or [N_Ascan<m>] or [ N_DF<m>,N_Ascan<m>];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:FILTER_DESCRIPTION;Description of the filtering applied;O;A;H5T_STRING;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ASCAN_SAMPLE_RATE;This indicates the sampling frequency of A-scan data points. It is assumed that a uniform sampling rate is used throughout A-scan data collection.;M;A;H5T_FLOAT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ASCAN_START;This indicates the starting time for data acquisition. If dimension is 1, the same start time is used for all A-Scans, else a different start time is specified for each A-Scan.;M;D;H5T_FLOAT;1 or [N_Ascan<m>] or [ N_Ascan<m>,N_DF<m>];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:SIGNAL;Digitization of the emission signal (can be used to store arbitrary signals). If missing impulse emission at time 0.0 is assumed. 2D Array with one row for time and one for amplitude.;O;D;H5T_FLOAT;[N_TSig<m>,2];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:GAIN;This indicates the total gain for each A-scan during reception. Multiplying factor that was applied at acquisition.;M;D;H5T_FLOAT;[ N_Ascan<m> ];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:PRF;Pulse Repetition Frequency;O;D;H5T_FLOAT;[N_Ascan<m>] or [2];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:TCG_CURVE;TCG curve applied to the received signals. The amplitude correction is given for each time sample as a multiplying factor.;O;D;H5T_FLOAT;[N_Ascan<m>,N_TCG<m> ];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:PHASED_ARRAY_SETUP;;O;A;H5T_STD_REF_OBJ;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:TRANSMIT_LAW;Each A-scan in a dataframe must be associated with both a transmit and a receive focal law through the datafields. These contain HDF5 references to the groups which provide the detailed description of each focal laws (the same structure is used for both transmit and receive focal laws). Mandatory for phased array setups.;M;D;H5T_STD_REF_OBJ;[N_Ascan<m>] or [N_DF<m>,N_Ascan<m>];;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:RECEIVE_LAW;Each A-scan in a dataframe must be associated with both a transmit and a receive focal law through the datafields. These contain HDF5 references to the groups which provide the detailed description of each focal laws (the same structure is used for both transmit and receive focal laws).Mandatory for phased array setups.;O;D;H5T_STD_REF_OBJ;[N_Ascan<m>] or [N_DF<m>,N_Ascan<m>];;;;
+ONDE_UT_LAW;ONDE:TYPE;;M;A;H5T_STRING;;["ONDE_UT_LAW"];;;
+ONDE_UT_LAW;ONDE_UT_LAW:PROBE;;M;D;H5T_STD_REF_OBJ;[N_C<k>];;;;
+ONDE_UT_LAW;ONDE_UT_LAW:ELEMENT;;M;D;H5T_INTEGER;[N_C<k>];;;;
+ONDE_UT_LAW;ONDE_UT_LAW:DELAY;Specifies the relative delay (in ultrasonic time) between the different Probe Element Combinations in the focal law. The default value is zero delay for all Probe Element Combinations.;O;D;H5T_FLOAT;[N_C<k>];;;;
+ONDE_UT_LAW;ONDE_UT_LAW:WEIGHTING;Specifies the weighting between the different Probe Element Combinations in the focal law. The default is one for all Probe Element Combinations.;O;D;H5T_FLOAT;[N_C<k>];;;;
+ONDE_UT_LAW;ONDE_UT_LAW:PROPAGATION_LINE;Represents the ultrasonic ray along which the data is to be represented in a true visualisation. It contains at least two points in the Probe Coordinates Frame corresponding to the start and end of the ray. (x,y,z) positions in Probe Coordinate Frame and time of flight are stored).;O;D;H5T_FLOAT;[N_Points<k>,4];;;;
+ONDE_PHASED_ARRAY_SETUP;ONDE:TYPE;;M;A;H5T_STRING;;["ONDE_PHASED_ARRAY_SETUP"];;;
+ONDE_PHASED_ARRAY_SETUP;ONDE_PHASED_ARRAY_SETUP:EMITTER_PROBE;;M;A;H5T_STD_REF_OBJ;1;;;;
+ONDE_PHASED_ARRAY_SETUP;ONDE_PHASED_ARRAY_SETUP:RECEIVING_PROBE;;M;A;H5T_STD_REF_OBJ;1;;;;
+ONDE_PHASED_ARRAY_SETUP;ONDE_PHASED_ARRAY_SETUP:SEQUENCE_ANGLE_MODE;;M;A;H5T_STRING;;"L"|"T";;;
+ONDE_PHASED_ARRAY_ANGLE;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_ANGLE"];;;
+ONDE_PHASED_ARRAY_ANGLE;ONDE_PHASED_ARRAY_ANGLE:BSCAN_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_SSCAN;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_SSCAN"];;;
+ONDE_PHASED_ARRAY_SSCAN;ONDE_PHASED_ARRAY_SSCAN:STARTING_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_SSCAN;ONDE_PHASED_ARRAY_SSCAN:FINISHING_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_SSCAN;ONDE_PHASED_ARRAY_SSCAN:NUMBER_OF_ANGLES;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_ESCAN;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_ESCAN"];;;
+ONDE_PHASED_ARRAY_ESCAN;ONDE_PHASED_ARRAY_ESCAN:NUMBER_OF_ELEMENTS;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_ESCAN;ONDE_PHASED_ARRAY_ESCAN:STEP;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_ESCAN;ONDE_PHASED_ARRAY_ESCAN:ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_PWI;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_PWI"];;;
+ONDE_PHASED_ARRAY_PWI;ONDE_PHASED_ARRAY_PWI:STARTING_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_PWI;ONDE_PHASED_ARRAY_PWI:FINISHING_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_PWI;ONDE_PHASED_ARRAY_PWI:NUMBER_OF_ANGLES;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_COMPOUND;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_COMPOUND"];;;
+ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:INITIAL_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:FINAL_ANGLE;;M;A;H5T_FLOAT;1;;;;
+ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ANGLES;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ELEMENTS;;M;A;H5T_INTEGER;1;;;;
+ONDE_PHASED_ARRAY_FMC;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","ONDE_PHASED_ARRAY_FMC"];;;
+"""
+
 def main():
-    csv_path = 'build/ONDE_fields_ground_truth.csv'
     schema_dir = 'schema'
     
-    if not os.path.exists(csv_path):
-        print(f"Error: Ground truth CSV not found at {csv_path}", file=sys.stderr)
-        sys.exit(1)
-        
     # 1. Parse CSV ground truth
     csv_data = {}
     csv_classes = set()
     
-    with open(csv_path, newline='', encoding='utf-8-sig') as f:
-        reader = csv.reader(f, delimiter=';')
-        header = next(reader)
-        # Columns: Class;Name;Comments;M or O;D or A;Class;Dims;Size or content;Min;Max;Accessory Class
-        for i, row in enumerate(reader):
-            if not row or len(row) < 2:
-                continue
-            cls_name = row[0].strip()
-            if not cls_name:
-                cls_name = "ROOT"
+    import io
+    f = io.StringIO(GROUND_TRUTH_CSV)
+    reader = csv.reader(f, delimiter=';')
+    header = next(reader)
+    # Columns: Class;Name;Comments;M or O;D or A;Class;Dims;Size or content;Min;Max;Accessory Class
+    for i, row in enumerate(reader):
+        if not row or len(row) < 2:
+            continue
+        cls_name = row[0].strip()
+        if not cls_name or cls_name == "ROOT":
+            continue
+        
+        field_name = row[1].strip()
+        if not field_name:
+            continue
             
-            field_name = row[1].strip()
-            if not field_name:
-                continue
-                
-            csv_classes.add(cls_name)
+        csv_classes.add(cls_name)
+        
+        # Short name is the part after colon
+        if ':' in field_name:
+            short_name = field_name.split(':', 1)[1].strip()
+        else:
+            short_name = field_name
             
-            # Short name is the part after colon
-            if ':' in field_name:
-                short_name = field_name.split(':', 1)[1].strip()
-            else:
-                short_name = field_name
-                
-            csv_data.setdefault(cls_name, {})[short_name] = {
-                'line_num': i + 2,
-                'full_name': field_name,
-                'comments': row[2].strip(),
-                'required': row[3].strip(), # 'M' or 'O'
-                'storage': row[4].strip(),  # 'A', 'D', 'A or D', etc.
-                'type': row[5].strip(),     # e.g. H5T_STRING, H5T_STD_REF_OBJ<ONDE_SETUP>
-                'dims': row[6].strip(),     # dimensions
-                'allowed': row[7].strip(),  # allowed values
-            }
+        csv_data.setdefault(cls_name, {})[short_name] = {
+            'line_num': i + 2,
+            'full_name': field_name,
+            'comments': row[2].strip(),
+            'required': row[3].strip(), # 'M' or 'O'
+            'storage': row[4].strip(),  # 'A', 'D', 'A or D', etc.
+            'type': row[5].strip(),     # e.g. H5T_STRING, H5T_STD_REF_OBJ<ONDE_SETUP>
+            'dims': row[6].strip(),     # dimensions
+            'allowed': row[7].strip(),  # allowed values
+        }
 
     # 2. Parse YAML files
     yaml_files = glob.glob(os.path.join(schema_dir, '*.yaml'))
@@ -120,6 +318,8 @@ def main():
         yaml_fields = yaml_cls.get('fields', {})
         
         for short_name, csv_f in csv_fields.items():
+            if short_name == 'TYPE':
+                continue
             if short_name not in yaml_fields:
                 failures.append(f"Class '{cls_name}': Field '{csv_f['full_name']}' (short: '{short_name}') from CSV is missing in YAML.")
                 continue

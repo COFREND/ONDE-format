@@ -39,7 +39,7 @@ fields:
     full_name: ONDE_DATASET:DATA
     required: true
     storage: A or D
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE> or HT5_INTEGER
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
     description: references to arrays containing the different values stored in the
       dataset
     dimensions: '[N_CS<m>] |[N_CS<m>,N_Gate<m>]'
@@ -73,7 +73,7 @@ fields:
     full_name: ONDE_DATASET_UT_CSCAN:CSCAN_GRID
     required: true
     storage: attribute
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_GRID>
     description: ''
     dimensions: '1'
   GATES:

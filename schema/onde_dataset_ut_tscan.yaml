@@ -30,7 +30,7 @@ fields:
     full_name: ONDE_DATASET:DATA
     required: true
     storage: A or D
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or HT5_INTEGER
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_INTEGER
     description: can be either an array or a reference to an array
     dimensions: 1 or [N_DF<m>,N_ROW<m>,N_COL<m>] or [N_DF<m>,NROW<m>,NCOL<m>,N_PLANE<m>]
   ZONE_FRAME:

@@ -45,7 +45,7 @@ fields:
     full_name: ONDE_DATASET:SETUP
     required: true
     storage: attribute
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_SETUP>
     description: ''
     dimensions: '1'
   OPERATOR:
@@ -66,7 +66,7 @@ fields:
     full_name: ONDE_DATASET:DATA
     required: false
     storage: A or D
-    hdf5_type: H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
     description: Data can be either an array or a reference to an array. Omitting
       this field is possible, in the event when Tscan or Cscan data is recorded but
       the underlying Ascan data is not. The dimensions of the dataset are application
