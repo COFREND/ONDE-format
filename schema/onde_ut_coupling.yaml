@@ -1,0 +1,25 @@
+onde_class: ONDE_UT_COUPLING
+inherits: []
+description: ''
+fields:
+  MEDIUM_VELOCITY:
+    full_name: ONDE_UT_COUPLING:MEDIUM_VELOCITY
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '[2]'
+  MEDIUM_DENSITY:
+    full_name: ONDE_UT_COUPLING:MEDIUM_DENSITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  INCIDENCE_ANGLE:
+    full_name: ONDE_UT_COUPLING:INCIDENCE_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'

@@ -1,0 +1,64 @@
+onde_class: ONDE_UT_LAW
+inherits: []
+description: '### Law
+
+
+  For multielements, these groups describe the settings of a given transmit or receive
+  law. PROBE and ELEMENT give the
+
+  probe and element number to which the DELAY and WEIGHTING apply.
+
+
+  The format also allows to store an information about the corresponding ultrasonic
+  path.
+
+
+  PROPAGATION_LINE represents the ultrasonic ray along which the data is to be represented
+  in a true visualisation. It
+
+  contains at least two points in the Probe Coordinates Frame corresponding to the
+  start and end of the ray. (x,y,z)
+
+  positions in Probe Coordinate Frame and time of flight are stored.'
+fields:
+  PROBE:
+    full_name: ONDE_UT_LAW:PROBE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    description: ''
+    dimensions: '[N_C<k>]'
+  ELEMENT:
+    full_name: ONDE_UT_LAW:ELEMENT
+    required: true
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: ''
+    dimensions: '[N_C<k>]'
+  DELAY:
+    full_name: ONDE_UT_LAW:DELAY
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Specifies the relative delay (in ultrasonic time) between the different
+      Probe Element Combinations in the focal law. The default value is zero delay
+      for all Probe Element Combinations.
+    dimensions: '[N_C<k>]'
+  WEIGHTING:
+    full_name: ONDE_UT_LAW:WEIGHTING
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Specifies the weighting between the different Probe Element Combinations
+      in the focal law. The default is one for all Probe Element Combinations.
+    dimensions: '[N_C<k>]'
+  PROPAGATION_LINE:
+    full_name: ONDE_UT_LAW:PROPAGATION_LINE
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Represents the ultrasonic ray along which the data is to be represented
+      in a true visualisation. It contains at least two points in the Probe Coordinates
+      Frame corresponding to the start and end of the ray. (x,y,z) positions in Probe
+      Coordinate Frame and time of flight are stored).
+    dimensions: '[N_Points<k>,4]'

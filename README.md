@@ -3,32 +3,44 @@
 ## Generalities
 Specification of the ONDE (**Open Non Destructive Evaluation**) Format
 
-
-This specification of the ONDE format results from a joint intiative by COFREND and EPRI to define a specification of open and efficient NDE formats in order to facilitate interoperability between softwares and to ensure ability to read the data in the long term. 
+This specification of the ONDE format results from a joint initiative by COFREND and EPRI to define a specification of open and efficient NDE formats in order to facilitate interoperability between software and to ensure the ability to read data in the long term. 
 
 In order to achieve these objectives, it is based on the HDF5 library.
 
-The present repository contains : 
-* a [csv file](ONDE_fields/ONDE_fields.csv) describing the fields of the hdf5 structure
-* a description of the ONDE [UT specification](UT_specification/UT_file_format.md)
+The present repository contains the Single Source of Truth (SSOT) for the data model in the `schema/` directory. The specification is defined through a series of YAML files. Each YAML file contains both the machine-readable metadata defining the HDF5 structure as well as the human-readable Markdown narrative explaining the concepts.
 
 It will be completed in the future by an extension to Eddy Current testing and by python tools allowing to check the compliance of a file to the specification.
 
+## Local Documentation Rendering
+
+The documentation is built using MkDocs. You can render it locally using the provided generation script:
+
+1. Install the required dependencies:
+   ```bash
+   pip install pydantic pyyaml mkdocs-material
+   ```
+
+2. Run the generation script:
+   ```bash
+   python tools/generate_docs.py
+   ```
+
+The generated documentation site will be available in the `build/docs/site/` directory.
 
 ## Instructions for contributors
 
-New proposals can be submitted by using the github *Issue* functionality. The template to be used for these issue is provided here : [Issue template](./issue_template.md).
+New proposals can be submitted by using the github *Issue* functionality. Note that when modifying the specification, you should edit the corresponding `.yaml` files in the `schema/` directory.
 
-The git branches are created with the following conventions :
-*	*main* is the branch containing the latest version of the specification
-*	*next_minor* is the branch containing bug corrections or minor evolutions that are intended to become the next version of the specification
-*	*next_major* is a working branch containing major evolutions
+The git branches are created with the following conventions:
+* `main` is the branch containing the latest version of the specification
+* `next_minor` is the branch containing bug corrections or minor evolutions that are intended to become the next version of the specification
+* `next_major` is a working branch containing major evolutions
  
-When a minor version is created, changes are merged from next_minor into main and from main into next_major
-When a major version is created, changes are merged from next_major into main and from main into next_minor
+When a minor version is created, changes are merged from `next_minor` into `main` and from `main` into `next_major`.
+When a major version is created, changes are merged from `next_major` into `main` and from `main` into `next_minor`.
  
-Branches related to an issue are named in one of the following manners :
-*	[Issue_short_title]_[issue_number]
-*	[Common theme] (for multiple issues)
+Branches related to an issue are named in one of the following manners:
+* `[Issue_short_title]_[issue_number]`
+* `[Common theme]` (for multiple issues)
 
-They are based on *next_minor* or *next_major* according to the type of issue.
+They are based on `next_minor` or `next_major` according to the type of issue.

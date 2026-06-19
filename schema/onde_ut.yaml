@@ -1,0 +1,62 @@
+modality: ONDE_UT
+description: |
+  ### ONDE UT File
+  
+  This class specifies the UT file type and provides a place for including top level fields. It explicitly references all of the classes that are allowed in this file type.
+allowed_classes:
+  - ONDE_DATASET
+  - ONDE_DATASET_UT
+  - ONDE_DATASET_UT_ASCAN
+  - ONDE_DATASET_UT_TSCAN
+  - ONDE_DATASET_UT_CSCAN
+  - ONDE_DIMENSION
+  - ONDE_UT_GATE
+  - ONDE_SETUP
+  - ONDE_SETUP_UT
+  - ONDE_GEOMETRIC_SETUP
+  - ONDE_COMPONENT
+  - ONDE_PLANE
+  - ONDE_CYLINDER
+  - ONDE_2DCAD
+  - ONDE_3DCAD
+  - ONDE_WELD
+  - ONDE_UT_PROBE
+  - ONDE_UT_ELEMENTS
+  - ONDE_MONO_UT_PROBE
+  - ONDE_LINEAR_UT_PROBE
+  - ONDE_MATRIX_UT_PROBE
+  - ONDE_UT_COUPLING
+  - ONDE_IMMERSION
+  - ONDE_WEDGE
+  - ONDE_SINGLE_WEDGE
+  - ONDE_DUAL_WEDGE
+  - ONDE_ACQUISITION_TRAJECTORY
+  - ONDE_TIME_TRAJECTORY
+  - ONDE_SPATIAL_TRAJECTORY
+  - ONDE_ACQUISITION_GRID
+  - ONDE_ULTRASONIC_SETUP
+  - ONDE_UT_LAW
+  - ONDE_PHASED_ARRAY_SETUP
+  - ONDE_PHASED_ARRAY_ANGLE
+  - ONDE_PHASED_ARRAY_SSCAN
+  - ONDE_PHASED_ARRAY_ESCAN
+  - ONDE_PHASED_ARRAY_PWI
+  - ONDE_PHASED_ARRAY_COMPOUND
+  - ONDE_PHASED_ARRAY_FMC
+fields:
+  FILETYPE:
+    full_name: ONDE:FILETYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
+    dimensions: '1'
+    allowed_values: '"ONDE_UT"'
+  VERSION:
+    full_name: ONDE:VERSION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+    allowed_values: '"0.9.0"'

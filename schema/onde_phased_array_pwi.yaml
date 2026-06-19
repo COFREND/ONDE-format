@@ -1,0 +1,26 @@
+onde_class: ONDE_PHASED_ARRAY_PWI
+inherits:
+- ONDE_PHASED_ARRAY_SETUP
+description: ''
+fields:
+  STARTING_ANGLE:
+    full_name: ONDE_PHASED_ARRAY_PWI:STARTING_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  FINISHING_ANGLE:
+    full_name: ONDE_PHASED_ARRAY_PWI:FINISHING_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  NUMBER_OF_ANGLES:
+    full_name: ONDE_PHASED_ARRAY_PWI:NUMBER_OF_ANGLES
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: ''
+    dimensions: '1'

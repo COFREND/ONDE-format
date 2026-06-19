@@ -1,0 +1,27 @@
+onde_class: ONDE_DUAL_WEDGE
+inherits:
+- ONDE_WEDGE
+description: ''
+fields:
+  PROBE_SEPARATION:
+    full_name: ONDE_DUAL_WEDGE:PROBE_SEPARATION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: For dual probes, inter-probes distance (L6) (See Figure 15)
+    dimensions: '1'
+  ROOF_ANGLE:
+    full_name: ONDE_DUAL_WEDGE:ROOF_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: For dual probes and only for dual probes defines the roof angle (See
+      Figure 15)
+    dimensions: '1'
+  SQUINT_ANGLE:
+    full_name: ONDE_DUAL_WEDGE:SQUINT_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: For dual probes, squint angle (A2) (See Figure 15)
+    dimensions: '1'

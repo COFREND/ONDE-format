@@ -1,0 +1,26 @@
+onde_class: ONDE_DATASET_UT_ASCAN
+inherits:
+- ONDE_DATASET_UT
+description: '### Ascan datasets
+
+
+  Ascan datasets are the entry points for the description of data that is stored as
+  time signals. The MFMC equivalent is ''
+
+  SEQUENCE'', and both names are allowed to ensure compatibility.
+
+
+  To allow continuity with existing HDF5 formats, the DATA field can be either a HDF5
+  dataset or a reference to a
+
+  dataset located in another part of the HDF5 structure.'
+fields:
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: false
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT
+    description: Data can be either an array or a reference to an array. Omitting
+      this field is possible, in the event when Tscan or Cscan data is recorded but
+      the underlying Ascan data is not.
+    dimensions: 1 or [N_DF<m>,N_Ascan<m>,Ntime<m>]

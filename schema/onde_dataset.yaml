@@ -1,0 +1,89 @@
+onde_class: ONDE_DATASET
+inherits: []
+description: |
+  ## Explanatory notes
+
+  ### Generic remarks on datasets
+
+  The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. For DATE_AND_TIME the
+  ISO 8601 extended format: 'yyyy-mm-dd HH:MM:SS' (e.g. '2019-01-16 17:05:06') must be used.
+
+  ### Notes on groups
+
+    The following links provide explanatory notes for the ONDE groups that are described in the [YAML schemas](https://github.com/COFREND/ONDE-format/tree/main/schema).
+    
+  [Ascan datasets](onde_dataset_ut_ascan.md)
+
+  [Tscan datasets](onde_dataset_ut_tscan.md)
+
+  [Cscan datasets](onde_dataset_ut_cscan.md)
+
+  [Setup](onde_setup.md)
+
+  [Geometric setup](onde_geometric_setup.md)
+
+  [Components](onde_component.md)
+
+  [Probes](onde_ut_probe.md)
+
+  [Trajectory](onde_acquisition_trajectory.md)
+
+  [Ultrasonic setup](onde_ultrasonic_setup.md)
+
+  [Electronic Law](onde_ut_law.md)
+
+  [Phased array setup](onde_phased_array_setup.md)
+fields:
+  LABEL:
+    full_name: ONDE:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: A name for this dataset
+    dimensions: '1'
+  SETUP:
+    full_name: ONDE_DATASET:SETUP
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    description: ''
+    dimensions: '1'
+  OPERATOR:
+    full_name: ONDE_DATASET:OPERATOR
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  DATE_AND_TIME:
+    full_name: ONDE_DATASET:DATE_AND_TIME
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: false
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<data> or HT5_INTEGER or H5T_FLOAT
+    description: Data can be either an array or a reference to an array. Omitting
+      this field is possible, in the event when Tscan or Cscan data is recorded but
+      the underlying Ascan data is not. The dimensions of the dataset are application
+      dependent, subclasses can override and specify the dimensions.
+  AMPLITUDE_DIMENSION:
+    full_name: ONDE_DATASET:AMPLITUDE_DIMENSION
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    description: If absent, treated as coordinate "Amplitude", units "Arbitrary",
+      offset 0.0, scale 1.0
+    dimensions: '1'
+  INDEX_DIMENSIONS:
+    full_name: ONDE_DATASET:INDEX_DIMENSIONS
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    description: One entry per dimension of ONDE_DATASET:DATA. Any that are absent
+      are treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
+    dimensions: '[n_data_dims]'
