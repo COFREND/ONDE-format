@@ -1,5 +1,6 @@
 onde_class: ONDE_UT_GATE
-inherits: []
+inherits:
+- ONDE_UT_COMPUTATION
 description: ''
 fields:
   START:
@@ -33,11 +34,10 @@ fields:
     description: ''
     dimensions: '1'
     allowed_values: '"FIRST_PEAK"|"LAST_PEAK"|"MAX_PEAK"|"FIRST_FLANK"|"LAST_FLANK"|"MAX_FLANK"'
-  POLARITY:
-    full_name: ONDE_UT_GATE:POLARITY
+  START_REFERENCE:
+    full_name: ONDE_UT_GATE:START_REFERENCE
     required: false
     storage: attribute
-    hdf5_type: H5T_STRING
-    description: ''
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    description: 'Specifies a gate from which ONDE_UT_GATE:START is measured. If omitted then ONDE_UT_GATE:START is relative to the starting trigger.'
     dimensions: '1'
-    allowed_values: '"ABSOLUTE"|"POSITIVE"|"NEGATIVE"'

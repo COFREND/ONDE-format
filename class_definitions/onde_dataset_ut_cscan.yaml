@@ -21,7 +21,7 @@ description: "### CScan datasets and gates\n\n**CScan data and peaks**\n\nWhile 
   \ data and the originating scan. For a A-Scan, the correspondence to the scan\n\
   is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe,\
   \ column), for a 3D Tscan, it will be (\ndataframe, plane, column).\n\n**Gates**\n\
-  \nThe gates are stored as a separate group of type ONDE_UT_GATE. The gates are referenced\
+  \nThe gates are stored as a separate group of type ONDE_UT_COMPUTATION. The gates are referenced\
   \ in the ONDE_DATASET_UT_CSCAN group via the \nONDE_DATASET_UT_CSCAN:GATES field.\n\
   The gates used for the acquisition are defined through five parameters.\\\nGATE_START\
   \ and GATE_WIDTH define the time window and GATE_THRESHOLD defines the threshold\
@@ -76,10 +76,10 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_GRID>
     description: ''
     dimensions: '1'
-  GATES:
-    full_name: ONDE_DATASET_UT_CSCAN:GATES
+  COMPUTATIONS:
+    full_name: ONDE_DATASET_UT_CSCAN:COMPUTATIONS
     required: false
     storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_COMPUTATION>
     description: ''
-    dimensions: '[N_Gate<m>]'
+    dimensions: '[N_Computation<m>]'
