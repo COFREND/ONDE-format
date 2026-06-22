@@ -1,0 +1,127 @@
+onde_class: ONDE_WELD
+inherits:
+- ONDE_COMPONENT
+description: ''
+fields:
+  EXTRUSION_TYPE:
+    full_name: ONDE_WELD:EXTRUSION_TYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+    allowed_values: '"PLANE"|"CYLINDER"'
+  EXTRUSION_DIMENSION:
+    full_name: ONDE_WELD:EXTRUSION_DIMENSION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_TYPE:
+    full_name: ONDE_WELD:WELD_TYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+    allowed_values: '"V"|"U"'
+  WELD_SYMMETRY:
+    full_name: ONDE_WELD:WELD_SYMMETRY
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+    allowed_values: '"SYMMETRIC"|"STRAIGHT_LEFT"|"STRAIGHT_RIGHT"'
+  WELD_UPPER_CAP_WIDTH:
+    full_name: ONDE_WELD:WELD_UPPER_CAP_WIDTH
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_UPPER_CAP_HEIGHT:
+    full_name: ONDE_WELD:WELD_UPPER_CAP_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_FILL_ANGLE:
+    full_name: ONDE_WELD:WELD_FILL_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_FILL_HEIGHT:
+    full_name: ONDE_WELD:WELD_FILL_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_HOT_PASS_ANGLE:
+    full_name: ONDE_WELD:WELD_HOT_PASS_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_HOT_PASS_HEIGHT:
+    full_name: ONDE_WELD:WELD_HOT_PASS_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_LAND_OFFSET:
+    full_name: ONDE_WELD:WELD_LAND_OFFSET
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_LAND_HEIGHT:
+    full_name: ONDE_WELD:WELD_LAND_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_ROOT_ANGLE:
+    full_name: ONDE_WELD:WELD_ROOT_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_ROOT_HEIGHT:
+    full_name: ONDE_WELD:WELD_ROOT_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_LOWER_CAP_HEIGHT:
+    full_name: ONDE_WELD:WELD_LOWER_CAP_HEIGHT
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_LOWER_CAP_WIDTH:
+    full_name: ONDE_WELD:WELD_LOWER_CAP_WIDTH
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  WELD_HAZ_WIDTH:
+    full_name: ONDE_WELD:WELD_HAZ_WIDTH
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'

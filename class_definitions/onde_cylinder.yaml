@@ -1,0 +1,26 @@
+onde_class: ONDE_CYLINDER
+inherits:
+- ONDE_COMPONENT
+description: '**Conventions for cylindrical components**
+
+
+  In the cylindrical coordinate system, the x direction is the one corresponding to
+  the cylinder axis (see [Figure 7](onde_cylinder.md)). The
+
+  dimensions are given by CYLINDER_DIMENSIONS, with a triplet for outer diameter,
+  thickness, and length .
+
+
+  ![Trajectory cylindrical coordinate system convention](../images/media/trajectory_cylindrical_coords.png
+  "Figure 7")
+
+
+  *[Figure 7](onde_cylinder.md): Trajectory cylindrical coordinate system convention*'
+fields:
+  DIMENSIONS:
+    full_name: ONDE_CYLINDER:DIMENSIONS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '[3]'

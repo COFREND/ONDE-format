@@ -191,8 +191,7 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 
 ### Relationship between the HDF5 implementation and the data model
 
-The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are described in 
-[ONDE Data Model and HDF5 implementation](/UT_specification/data_model.md)
+The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are described above.
 
 ### Entry points for navigating files in the UT implementation
 
@@ -221,7 +220,7 @@ relation to the Reference Frame. The list of these positions are defined in an A
 
 The components frames are defined in the Reference Frame.
 
-![Different frames and convention involved in the positioning systems](../images/media/figure2.png "Figure 2")
+![Different frames and convention involved in the positioning systems](../images/media/frames_conventions.png "Figure 2")
 
 *Figure 2: Different frames and convention involved in the positioning systems*
 
@@ -244,7 +243,7 @@ Throughout the document, a frame is provided for the following objects :
 
 The diagram displayed in Figure 3 defines the hierarchy between these frames:
 
-![Hierarchy of the frames used for the geometric representation of the objects](../images/media/figure3.png "Figure 3")
+![Hierarchy of the frames used for the geometric representation of the objects](../images/media/frames_hierarchy.png "Figure 3")
 
 *Figure 3: Hierarchy of the frames used for the geometric representation of the objects*
 
@@ -253,76 +252,13 @@ The diagram displayed in Figure 3 defines the hierarchy between these frames:
 In order to refer to frames on unfolded 2D surfaces, we introduce the following transformation : the transformation
 between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (∆a,∆b,α) triplet.
 
-![Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames](../images/media/figure4.png "Figure 4")
+![Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames](../images/media/2d_frames_transformation.png "Figure 4")
 
 *Figure 4: Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames*
-
-# Data structure
-
-## Description of the format
-
-/* TODO : update with the modifications introduced with subclassing and accessory classes */ 
-
-The specification of the format is provided in a [dedicated csv file](/ONDE_fields/ONDE_fields.csv) organized in the following manner :
-
-- The first column gives the field label and its location in the structure. The following convention applies : the name
-  in bracket points to a group corresponding to a block of the data model. For example, {ascan_dataset} indicates an
-  HDF5 group corresponding to an Ascan dataset.
-- The second column contains comments explaining the constraints imposed on the datafield
-- The third column gives a Mandatory/Optional status
-- The fourth column gives the HDF5 implementation : D stands for dataset while A points to an information stored as an
-  attribute.
-- The fifth column gives the HDF5 type
-- The sixth column gives the number of dimensions
-- The seventh column provides information on the size or the content of the datafield. For a string with a value that is
-  imposed, it will provide this value.\
-  For other datafields, it will be the size of the data. The size is provided in brackets with dimensions separated by
-  commas. The dimension of a scalar data will therefore be described by [^1]. Dimensions are provided in Fortran
-  convention (column-major order).
-
-## Explanatory notes
-
-### Version
-
-The file is identified as a UT ONDE file because of the TYPE datafield which is given at the root of the structure. The
-version of the file points to the version of the present specification.
-
-### Generic remarks on datasets
-
-The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. For DATE_AND_TIME the
-ISO 8601 extended format: 'yyyy-mm-dd HH:MM:SS' (e.g. '2019-01-16 17:05:06') must be used.
-
-### Notes on groups
-
-The following links provide explanatory notes for the ONDE groups that are described in the [cvs reference](/ONDE_fields/ONDE_fields.csv).
-
-[Ascan datasets](/UT_specification/ascan_datasets.md)
-
-[Tscan datasets](/UT_specification/tscan_datasets.md)
-
-[Cscan datasets](/UT_specification/ut_cscan_datasets.md)
-
-[Setup](/UT_specification/setup.md)
-
-[Geometric setup](/UT_specification/ut_geometric_setup.md)
-
-[Components](/UT_specification/component.md)
-
-[Probes](/UT_specification/UT_probes.md)
-
-[Trajectory](/UT_specification/trajectory.md)
-
-[Ultrasonic setup](/UT_specification/UT_ultrasonic_setup.md)
-
-[Electronic Law](/UT_specification/UT_law.md)
-
-[Phased array setup](/UT_specification/UT_phased_array_setup.md)
-
 
 [^1]: P. Wilcox, MFMC Specification document 2.0.0b.
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
-                                                |
 
 # Appendix A -- conversion from quaternions to matrices
 

@@ -1,0 +1,23 @@
+onde_class: ONDE_PHASED_ARRAY_ANGLE
+inherits:
+- ONDE_PHASED_ARRAY_SETUP
+description: '**Angle**
+
+
+  In this configuration (see [Figure 24](onde_phased_array_angle.md)), a single angle
+  is provided for the specification of the ultrasonic ray direction.
+
+
+  ![Inspection using a single angle](../images/media/single_angle_inspection.png "Figure
+  24")
+
+
+  *[Figure 24](onde_phased_array_angle.md): Inspection using a single angle*'
+fields:
+  BSCAN_ANGLE:
+    full_name: ONDE_PHASED_ARRAY_ANGLE:BSCAN_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'

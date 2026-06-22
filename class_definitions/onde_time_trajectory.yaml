@@ -1,0 +1,19 @@
+onde_class: ONDE_TIME_TRAJECTORY
+inherits:
+- ONDE_ACQUISITION_TRAJECTORY
+description: '**Time encoding**
+
+
+  For acquisition having no spatial encoding, the format allows to describe time encoding.
+  This is achieved by setting the
+
+  TRAJECTORY_TYPE field. In the case of time encoding, the ACQUISITION_RATE must be
+  specified.'
+fields:
+  ACQUISITION_RATE:
+    full_name: ONDE_TIME_TRAJECTORY:ACQUISITION_RATE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: For time encoded trajectories, defines the acquisition rate
+    dimensions: '1'

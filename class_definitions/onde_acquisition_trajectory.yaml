@@ -1,0 +1,19 @@
+onde_class: ONDE_ACQUISITION_TRAJECTORY
+inherits: []
+description: '### Acquisition trajectory
+
+
+  **Frame used for trajectory definition**
+
+
+  The trajectory is given in the global reference frame.
+
+
+  **Generic description**
+
+
+  A generic description of the trajectory is given in the TRAJECTORY field. It describes
+  successive positions under the
+
+  shape of frames, each giving a position and an orientation.'
+fields: {}

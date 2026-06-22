@@ -1,0 +1,28 @@
+onde_class: ONDE_PLANE
+inherits:
+- ONDE_COMPONENT
+description: '**Conventions for planar specimens**
+
+
+  In the planar coordinate system, the z direction is defined as the one corresponding
+  to the thickness of the inspected
+
+  specimen (see [Figure 6](onde_plane.md)). The dimensions are given by PLATE_DIMENSIONS,
+  as a triplet with values for length, width, and
+
+  thickness.
+
+
+  ![Trajectory planar coordinate system convention](../images/media/trajectory_planar_coords.png
+  "Figure 6")
+
+
+  *[Figure 6](onde_plane.md): Trajectory planar coordinate system convention*'
+fields:
+  PLATE_DIMENSIONS:
+    full_name: ONDE_PLANE:PLATE_DIMENSIONS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '[3]'
