@@ -10,7 +10,7 @@ description: |
 
   ### Notes on groups
 
-    The following links provide explanatory notes for the ONDE groups that are described in the [YAML schemas](https://github.com/COFREND/ONDE-format/tree/main/schema).
+    The following links provide explanatory notes for the ONDE groups that are described in the [YAML schemas](https://github.com/COFREND/ONDE-format/tree/main/class_definitions).
     
   [Ascan datasets](onde_dataset_ut_ascan.md)
 

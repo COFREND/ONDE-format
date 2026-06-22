@@ -10,7 +10,7 @@ def parse_yaml(filepath):
         return yaml.safe_load(f)
 
 def generate_csv():
-    input_dir = 'schema'
+    input_dir = 'class_definitions'
     output_csv = 'build/ONDE_fields.csv'
     
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)

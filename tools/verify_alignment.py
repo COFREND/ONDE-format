@@ -241,7 +241,7 @@ ONDE_PHASED_ARRAY_FMC;ONDE:TYPE;;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP","
 """
 
 def main():
-    schema_dir = 'schema'
+    schema_dir = 'class_definitions'
     
     # 1. Parse CSV ground truth
     csv_data = {}

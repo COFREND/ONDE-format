@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from schema_classes import OndeClass, OndeModality
 
 def validate_all():
-    schema_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'schema')
+    schema_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'class_definitions')
     if not os.path.isdir(schema_dir):
         print(f"Directory {schema_dir} not found.")
         return False

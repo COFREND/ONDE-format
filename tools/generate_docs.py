@@ -131,11 +131,12 @@ extra_css:
   - stylesheets/extra.css
 nav:
   - Overview: index.md
+  - Data Model: data_model.md
 {{ nav_yaml }}
 """
 
 def main():
-    input_dir = 'schema'
+    input_dir = 'class_definitions'
     output_dir = 'build/docs'
     
     docs_dir = os.path.join(output_dir, 'docs')
@@ -516,8 +517,8 @@ details.field-details .field-content hr {
         with open(out_filepath, 'w', encoding='utf-8') as f:
             f.write(md_content)
             
-    # Write Overview
-    overview_src = os.path.join(input_dir, 'overview.md')
+    # Copy overview.md to docs/index.md
+    overview_src = 'specification/overview.md'
     if os.path.isfile(overview_src):
         # Generate master diagram
         master_lines = []
@@ -549,6 +550,14 @@ details.field-details .field-content hr {
         
         with open(os.path.join(docs_dir, 'index.md'), 'w', encoding='utf-8') as f:
             f.write(overview_content)
+            
+    # Copy data_model.md
+    data_model_src = 'specification/data_model.md'
+    if os.path.isfile(data_model_src):
+        with open(data_model_src, 'r', encoding='utf-8') as f:
+            dm_content = f.read()
+        with open(os.path.join(docs_dir, 'data_model.md'), 'w', encoding='utf-8') as f:
+            f.write(dm_content)
             
     # Calculate all incoming relationships to find true roots
     has_incoming = {c: False for c in parsed_classes}

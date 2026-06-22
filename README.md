@@ -7,7 +7,7 @@ This specification of the ONDE format results from a joint initiative by COFREND
 
 In order to achieve these objectives, it is based on the HDF5 library.
 
-The present repository contains the Single Source of Truth (SSOT) for the data model in the `schema/` directory. The specification is defined through a series of YAML files. Each YAML file contains both the machine-readable metadata defining the HDF5 structure as well as the human-readable Markdown narrative explaining the concepts.
+The present repository contains the Single Source of Truth (SSOT) for the data model in the `class_definitions/` directory. The specification is defined through a series of YAML files. Each YAML file contains both the machine-readable metadata defining the HDF5 structure as well as the human-readable Markdown narrative explaining the concepts.
 
 It will be completed in the future by an extension to Eddy Current testing and by python tools allowing to check the compliance of a file to the specification.
 
@@ -27,9 +27,20 @@ The documentation is built using MkDocs. You can render it locally using the pro
 
 The generated documentation site will be available in the `build/docs/site/` directory.
 
+## Legacy CSV Generation
+
+While the Single Source of Truth is defined using the YAML schemas in `class_definitions/`, you may occasionally need the legacy CSV format for compatibility with older tooling. 
+
+You can generate the CSV file at any time by running:
+```bash
+python tools/generate_csv.py
+```
+
+The generated CSV file will be available at `build/ONDE_fields.csv`.
+
 ## Instructions for contributors
 
-New proposals can be submitted by using the github *Issue* functionality. Note that when modifying the specification, you should edit the corresponding `.yaml` files in the `schema/` directory.
+New proposals can be submitted by using the github *Issue* functionality. Note that when modifying the specification, you should edit the corresponding `.yaml` files in the `class_definitions/` directory.
 
 The git branches are created with the following conventions:
 * `main` is the branch containing the latest version of the specification
