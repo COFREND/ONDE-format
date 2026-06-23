@@ -1,0 +1,12 @@
+onde_class: ONDE_3DCAD
+inherits:
+- ONDE_COMPONENT
+description: ''
+fields:
+  CAD:
+    full_name: ONDE_3DCAD:CAD
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'

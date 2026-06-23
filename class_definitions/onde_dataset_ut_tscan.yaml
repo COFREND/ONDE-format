@@ -1,0 +1,79 @@
+onde_class: ONDE_DATASET_UT_TSCAN
+inherits:
+- ONDE_DATASET_UT
+description: "### Tscan datasets\n\n**General**\n\nEven though the name (Tscans coming\
+  \ from TFM Scans) implicitly refers to the TFM reconstruction images, the block\
+  \ can\napply to any reconstruction method producing data on a rectangular/parallelepiped\
+  \ grid that moves with the sensor (be it\nobtained by TFM, Adaptive TFM, PWI, Adaptive\
+  \ PWI, frequency reconstruction, or any variant of these methods)\n\n**Underlying\
+  \ data**\nThe ELEMENTARY_CHANNELS_DATASET points to the Ascan dataset that was used\
+  \ to create the reconstruction. \nIt is a mandatory attribute (the Ascan dataset\
+  \ structure can contain no data if the elementary channels were not recorded).\n\
+  \n**3D Zones**\n\nThe format allows for the description of 3D zones. Taking into\
+  \ account the dimension related to positions, this implies\nthat the dimension of\
+  \ the data array depends on the zone dimension (3D array for 2D zones 4D array for\
+  \ 3D zones),\n\n**Zone dimension and position**\n\nThe zone physical dimension is\
+  \ given by the ZONE_DIMENSION field, (DX,DY,DZ) being the physical dimensions of\
+  \ the zone,\na zero or a NaN for one of the dimension implies a 2D zone.\n\nZONE_SIZE\
+  \ is a triplet which gives the number of pixels of the zone for each dimension (NX,NY,NZ).\n\
+  \nThe zone position is given by ZONE_FRAME and is expressed relatively to the trajectory\
+  \ of the probe which is given in the associated GEOMETRIC_SETUP probe list. The\
+  \ index of the probe in this list is given by the REFERENCE_PROBE_INDEX attribute\
+  \ (defaults to 0).\n\n![Example of TFM zone positioning](../images/media/tfm_zone_positioning.png\
+  \ \"Figure 5\")\n\n*[Figure 5](onde_dataset_ut_tscan.md): Example of TFM zone positioning*\n\
+  \nIn the example displayed in [Figure 5](onde_dataset_ut_tscan.md), the trajectory\
+  \ frame is located at the index point and the zone is positioned\naccordingly.\n\
+  \n**Pixel ordering**\n\nThe pixels are stored in the (X,Y,Z) order (X being the\
+  \ outer loop, Z the inner loop in the array)"
+fields:
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: true
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_INTEGER
+    description: can be either an array or a reference to an array
+    dimensions: 1 or [N_DF<m>,N_ROW<m>,N_COL<m>] or [N_DF<m>,NROW<m>,NCOL<m>,N_PLANE<m>]
+  ZONE_FRAME:
+    full_name: ONDE_DATASET_UT_TSCAN:ZONE_FRAME
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: frame associated with the center of the image zone
+    dimensions: '[7]'
+  ZONE_DIMENSION:
+    full_name: ONDE_DATASET_UT_TSCAN:ZONE_DIMENSION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: physical dimension of the zone
+    dimensions: '[3]'
+  ZONE_SIZE:
+    full_name: ONDE_DATASET_UT_TSCAN:ZONE_SIZE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: number of pixels of the zone
+    dimensions: '[3]'
+  RECONSTRUCTION_MODE:
+    full_name: ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_MODE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  REFERENCE_PROBE_INDEX:
+    full_name: ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX
+    required: false
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: Points the the index of the reference probe in the Geometric setup
+      probe list. Defaults to 0.
+    dimensions: '1'
+  SOURCE_ASCAN_DATASET:
+    full_name: ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>
+    description: reference to the elementary channels ascans that were used for the
+      reconstruction
+    dimensions: '1'

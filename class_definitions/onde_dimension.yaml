@@ -1,0 +1,47 @@
+onde_class: ONDE_DIMENSION
+inherits: []
+description: ''
+fields:
+  COORDINATE:
+    full_name: ONDE_DIMENSION:COORDINATE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: 'String defining the stored data (for the AMPLITUDE_DIMENSION) or
+      the indexed coordinates (for INDEX_DIMENSIONS). The name can be either custom
+      (MY_MATERIAL_PROPERTY for instance) or a standardized name : Time, Voltage,
+      Pressure, Thickness, Time of flight, Depth, Amax, etc. The default interpretation
+      if this value is unspecified depends on context (default coordinate is Amplitude
+      for AMPLITUDE_DIMENSION or Time for INDEX_DIMENSIONs)'
+    dimensions: '1'
+  UNITS:
+    full_name: ONDE_DIMENSION:UNITS
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: Units for the stored data (for the AMPLITUDE_DIMENSION) or for the
+      indexed coordinates (for INDEX_DIMENSIONS). Units are strings such as "meters",
+      "seconds", "arbitrary", etc. and should generally be spelled out for clarity.
+      All units must be MKS base units if applicable, except for angles, which should
+      be in degrees rather than radians. The default interpretation if this value
+      is unspecified depends on context (default units are arbitrary for AMPLITUDE_DIMENSION
+      or seconds for INDEX_DIMENSIONS)
+    dimensions: '1'
+  OFFSET:
+    full_name: ONDE_DIMENSION:OFFSET
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION)
+      or scaled zero-based integer indices (for INDEX_DIMENSIONS). Calibrated value
+      in given units = (data or index)*SCALE + OFFSET. Default value of 0.0 if unspecified
+    dimensions: '1'
+  SCALE:
+    full_name: ONDE_DIMENSION:SCALE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: Scale to be applied to stored data (for the AMPLITUDE_DIMENSION)
+      or integer indices (for INDEX_DIMENSIONS). Calibrated value in given units =
+      (data or index)*SCALE + OFFSET. Default value of 1.0 if unspecified
+    dimensions: '1'

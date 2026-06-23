@@ -1,0 +1,36 @@
+onde_class: ONDE_PHASED_ARRAY_SETUP
+inherits: []
+description: "### Phased Array Setup\n\n**Type of inspection**\n\nThis optional group\
+  \ has no vocation to be exhaustive in terms of electronic configurations (unlike\
+  \ the law block that\npermits any description and is fully generic). However, it\
+  \ is intended to cover most of the situations that are common\nin industrial controls\
+  \ and represent a large share of the acquisition files produced in the industry.\
+  \ In this version of\nthe specification, it encompasses only the most basic setups.\
+  \ The SEQUENCE_TYPE field describes the sequence with the\nfollowing choice : ANGLE,\
+  \ SSCAN, ESCAN, COMPOUND, FMC, PWI, CUSTOM. The propagation mode used for the settings\
+  \ is given\nin SEQUENCE_ANGLE_MODE.\n\n```mermaid\nclassDiagram\n  phased_array_setup\
+  \ <|-- angle\n  phased_array_setup <|-- sscan\n  phased_array_setup <|-- escan\n\
+  \  phased_array_setup <|-- compound\n  phased_array_setup <|-- fmc\n  phased_array_setup\
+  \ <|-- pwi\n```"
+fields:
+  EMITTER_PROBE:
+    full_name: ONDE_PHASED_ARRAY_SETUP:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_PHASED_ARRAY_SETUP:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    description: ''
+    dimensions: '1'
+  SEQUENCE_ANGLE_MODE:
+    full_name: ONDE_PHASED_ARRAY_SETUP:SEQUENCE_ANGLE_MODE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    allowed_values: '"L"|"T"'

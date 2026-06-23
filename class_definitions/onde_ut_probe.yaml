@@ -1,0 +1,139 @@
+onde_class: ONDE_UT_PROBE
+inherits: []
+accessories:
+- ONDE_UT_ELEMENTS
+description: '### Probes
+
+
+  **Probe representation**
+
+
+  The probe block of the data model accommodates two distinct levels of representation:
+  a very generic one that describes
+
+  the exact positions and shapes of the elements forming the transducer and another
+  one that more closely follows ordinary
+
+  technical specifications of the transducer in terms of transducer dimension, pitch,
+  shape, wedge dimensions, etc...
+
+
+  As indicated in the preamble, as for other matters, we have imposed the generic
+  representations and provide optionally
+
+  the possibility to have a more NDE-oriented description.
+
+
+  **Dual probes**
+
+
+  In the file format, when using the NDE-oriented description, dual probes are handled
+  as one PROBE block. When using only
+
+  the generic description, the freedom to define one or two blocks remains, as in
+  MFMC and ECUF formats.
+
+
+  **Frequencies**
+
+
+  In order to accommodate for advanced setups, we have chosen to give the possibility
+  to define one frequency per element.
+
+  A common usage will however be to have one frequency for all elements, and in this
+  case, it is possible to define an
+
+  array of size one with the frequency applied to all elements. The same possibility
+  to provide one value applied to all
+
+  elements is also provided for other fields related to elements except ELEMENT_POSITION.
+  The cardinality can thus either
+
+  be 1 or N.
+
+
+  **Surrounded and surrounding probes**
+
+
+  These can be defined by using the cylindrical FOCALISATION_SURFACE. A positive radius
+  will be used for surrounding
+
+  probes, a negative one for surrounded probes.'
+fields:
+  TYPE_TAGS:
+    full_name: ONDE:TYPE_TAGS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '[1]'
+    allowed_values: '["ONDE_UT_ELEMENTS"]'
+  LABEL:
+    full_name: ONDE:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  MANUFACTURER:
+    full_name: ONDE_UT_PROBE:MANUFACTURER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  SERIAL_NUMBER:
+    full_name: ONDE_UT_PROBE:SERIAL_NUMBER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  FREQUENCY:
+    full_name: ONDE_UT_PROBE:FREQUENCY
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  BANDWIDTH:
+    full_name: ONDE_UT_PROBE:BANDWIDTH
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  INDEX_POINT_FRAME:
+    full_name: ONDE_UT_PROBE:INDEX_POINT_FRAME
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: If absent, identity is assumed
+    dimensions: '[7]'
+  FOCUSING_SURFACE:
+    full_name: ONDE_UT_PROBE:FOCUSING_SURFACE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: Defines the shape of the surface on which the elements are arranged
+      - if absent, FLAT is assumed
+    allowed_values: '"FLAT"|"CYLINDRICAL_INC"|"CYLINDRICAL_PERP"|"SPHERICAL"|"BIFOCAL"|"TRIFOCAL"'
+  FOCUSING_SURFACE_PARAMETERS:
+    full_name: ONDE_UT_PROBE:FOCUSING_SURFACE_PARAMETERS
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'Multi values : value in mm - FLAT : no value - CYLINDRICAL_INC,
+      CYLINDRICAL_PER : Surface radius - SPHERICAL : Surface radius - BIFOCAL : Surface
+      radius in the incidence plane, surface radius in the plane perpendicular to
+      the incidence plane - TRIFOCAL : Surface radius in the incidence plane (bottom),
+      Surface radius in the incidence plane (top), surface radius in the plane perpendicular
+      to the incidence plane.'
+    dimensions: '[3]'
+  COUPLING:
+    full_name: ONDE_UT_PROBE:COUPLING
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_COUPLING>
+    description: Reference to the coupling system (wedge, immersion, direct)
+    dimensions: '1'
