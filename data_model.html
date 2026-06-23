@@ -1,0 +1,2922 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="implementations/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Data Model - ONDE Format Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#onde-data-model-and-hdf5-transcription" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="ONDE Format Specification" class="md-header__button md-logo" aria-label="ONDE Format Specification" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ONDE Format Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="ONDE Format Specification" class="md-nav__button md-logo" aria-label="ONDE Format Specification" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ONDE Format Specification
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="data_model.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes-and-subclasses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes and subclasses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdf5-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HDF5 implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hdf5-implementation-of-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation of classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hdf5-implementation-of-class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation of class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessory-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessory classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model-representation-in-the-yaml-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data model representation in the YAML specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data model representation in the YAML specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-notes-on-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General notes on the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-class-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a class in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-subclass-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a subclass in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-an-accessory-class-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of an accessory class in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-csv-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legacy CSV Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Legacy CSV Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-notes-on-the-legacy-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General notes on the legacy csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-class-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a class in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-subclass-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a subclass in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-an-accessory-class-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of an accessory class in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="implementations/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Implementations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="implementations/onde_ut.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_acquisition_trajectory/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_ACQUISITION_TRAJECTORY
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_ACQUISITION_TRAJECTORY
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_acquisition_trajectory/onde_spatial_trajectory/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_SPATIAL_TRAJECTORY
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_SPATIAL_TRAJECTORY
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_acquisition_trajectory/onde_spatial_trajectory/onde_acquisition_grid/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_ACQUISITION_GRID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_acquisition_trajectory/onde_time_trajectory/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_TIME_TRAJECTORY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_component/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_COMPONENT
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_COMPONENT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_component/onde_2dcad/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_2DCAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_component/onde_3dcad/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_3DCAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_component/onde_cylinder/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_CYLINDER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_component/onde_plane/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PLANE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_component/onde_weld/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_WELD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_dataset/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DATASET
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_DATASET
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_dataset/onde_dataset_ut/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DATASET_UT
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_DATASET_UT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_dataset/onde_dataset_ut/onde_dataset_ut_ascan/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DATASET_UT_ASCAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_dataset/onde_dataset_ut/onde_dataset_ut_cscan/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DATASET_UT_CSCAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_dataset/onde_dataset_ut/onde_dataset_ut_tscan/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DATASET_UT_TSCAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_dimension/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DIMENSION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_geometric_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_GEOMETRIC_SETUP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_phased_array_setup/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_SETUP
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_PHASED_ARRAY_SETUP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_angle/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_ANGLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_compound/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_COMPOUND
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_escan/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_ESCAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_fmc/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_FMC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_pwi/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_PWI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_phased_array_setup/onde_phased_array_sscan/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_PHASED_ARRAY_SSCAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_setup/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_SETUP
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_SETUP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_setup/onde_setup_ut/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_SETUP_UT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ultrasonic_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_ULTRASONIC_SETUP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_ut_coupling/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_COUPLING
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_12" id="__nav_12_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_UT_COUPLING
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_coupling/onde_immersion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_IMMERSION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_ut_coupling/onde_wedge/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_WEDGE
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_WEDGE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_coupling/onde_wedge/onde_dual_wedge/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DUAL_WEDGE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_coupling/onde_wedge/onde_single_wedge/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_SINGLE_WEDGE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_elements/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_ELEMENTS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_gate/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_GATE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_law/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_LAW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="onde_ut_probe/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_PROBE
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_16" id="__nav_16_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_UT_PROBE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_probe/onde_linear_ut_probe/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_LINEAR_UT_PROBE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_probe/onde_matrix_ut_probe/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_MATRIX_UT_PROBE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_probe/onde_mono_ut_probe/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_MONO_UT_PROBE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes-and-subclasses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes and subclasses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdf5-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HDF5 implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hdf5-implementation-of-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation of classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hdf5-implementation-of-class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDF5 implementation of class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessory-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessory classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Naming convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model-representation-in-the-yaml-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data model representation in the YAML specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data model representation in the YAML specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-notes-on-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General notes on the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-class-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a class in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-subclass-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a subclass in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-an-accessory-class-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of an accessory class in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-csv-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legacy CSV Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Legacy CSV Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-notes-on-the-legacy-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General notes on the legacy csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-class-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a class in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-a-subclass-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a subclass in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representation-of-an-accessory-class-in-the-csv-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of an accessory class in the csv table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="onde-data-model-and-hdf5-transcription">ONDE Data Model and HDF5 transcription</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The ONDE Data Model is defined by classes, which group together named fields. When implemented in the ONDE file, these classes translate into HDF5 groups. This section of the documentation describes:</p>
+<ul>
+<li>the principles used to define the classes (including subclasses and accessory classes) and the fields in the data model,</li>
+<li>the transcription of this data model in the reference csv file (see https://github.com/COFREND/ONDE-format/blob/main/ONDE_fields/ONDE_fields.csv),</li>
+<li>the way in which this data model translates into an HDF5 implementation in the ONDE file.</li>
+</ul>
+<h2 id="classes-and-subclasses">Classes and subclasses</h2>
+<p>The ONDE Data model defines the notions of classes, subclasses. </p>
+<p>Classes define fields that can be:</p>
+<ul>
+<li>an elementary type (integer, float, string),</li>
+<li>a link to an object of another class, </li>
+<li>a multidimensional array of the previous types</li>
+</ul>
+<h2 id="hdf5-implementation">HDF5 implementation</h2>
+<h3 id="file-type">File type</h3>
+<p>The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
+The HDF5 root group must contain an attribute called <code>ONDE:FILETYPE</code> and a <code>ONDE:VERSION</code> attribute. The file is identified as a UT ONDE file because of the <code>ONDE:FILETYPE</code> attribute which is given at the root of the structure. The version of the file points to the version of the present specification.</p>
+<h3 id="hdf5-implementation-of-classes">HDF5 implementation of classes</h3>
+<p>In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named <code>ONDE:TYPE</code> and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.</p>
+<p>The strings contained in the TYPE attribute describe the hierarchy of classes to which the object belongs, starting with the base class.</p>
+<p><strong>Example</strong> </p>
+<p>The ONDE format contains a <code>ONDE_COMPONENT</code> class describing the inspected component. It has a <code>ONDE_PLANE</code> subclass. The HDF5 file will contain a group with n HDF5 attribute ONDE:TYPE that will contain: <code>['ONDE_COMPONENT', 'ONDE_PLANE']</code>.</p>
+<h3 id="hdf5-implementation-of-class-fields">HDF5 implementation of class fields</h3>
+<p>In the HDF5 implementation, the fields of a class can translate either into HDF5 attributes or in HDF5 datasets. This is defined for each field in the specification. Attrbutes will typically be used for fields that have a small size (scalar, string or small arrays), while datasets will be used for  arrays with a significant size. Their optional or mandatory natrure is also defined, as well as the constraints on their dimensions and the range of accessible values (minimum and maximum for scalar values or allowed values for some strings).</p>
+<p>For the fields corresponding to integer and floats, the specification generally points to HDF5 generic types H5T_FLOAT and H5T_INTEGER. That implies that the freedom is given to the data producer to choose the actual implementation type (8, 16, 32, 64 bits, signed/unsigned, etc) for the corresponding field. </p>
+<p>For arrays (which are stored as HDF5 datasets), the specification give the dimensions of the array in row-major order (the
+  last dimension corresponds to contiguous data in the file). Compression of arrays through the native compression schemes of the HDF5 libary
+  (gzip3, Szip).</p>
+<p>Readers should be robust to mandatory fields being missing, as the specification is likely to evolve in the future with current mandatory fields possibly being deprecated and replaced, or being made non-mandatory because of use cases where correct values cannot be determined.</p>
+<h3 id="accessory-classes">Accessory classes</h3>
+<p>Accessory classes make up for a flexible way to reuse frequently used patterns in the data model or to regroup fields that are linked together, so that the mandatory/optional nature of these fields appears clearly. These accessory classes are always referenced inside another class (referencing class). </p>
+<p>In the HDF5 implementation, these accessory classes result in HDF5 attributes and datasets that are contained in the group of the object of the referencing class.</p>
+<p>In the referencing class, a specific <code>ONDE:TYPE_TAGS</code> attribute will contain a string that gives the name of the accessory class.</p>
+<p><strong>Example</strong></p>
+<p>Let class <code>A</code> contain an accessory class <code>Z</code>, <code>Z</code> containing fields <code>FIELD_Z_1</code> and <code>FIELD_Z_2</code>. Let us also suppose that <code>A</code> contains another field <code>FIELD_A_1</code>.
+A single HDF5 group will have the following attributes:</p>
+<pre><code>ONDE:TYPE: ['A']
+ONDE:TYPE_TAGS: ['Z']
+A:FIELD_A_1: ...
+Z:FIELD_Z_1: ...
+Z:FIELD_Z_2: ...
+</code></pre>
+<h3 id="naming-convention">Naming convention</h3>
+<p>The previous examples introduce the naming conventions used in ONDE:</p>
+<ul>
+<li>the name of the group used for the HDF5 implementation is free</li>
+<li>each class contains a mandatory attribute <code>ONDE:TYPE</code></li>
+<li>accessory classes are defined through an attribute <code>ONDE:TYPE_TAGS</code>. If declared present in the specification, it is mandatory. The actual presence of accessory classes pointed by this attribute can however be optional</li>
+<li>except for the specific <code>ONDE:TYPE</code> and <code>ONDE:TYPE_TAGS</code> attributes, the fields of a class named <code>A</code> are prefixed with <code>A:</code></li>
+<li>ONDE classes have names starting with 'ONDE_' prefix. This allows to separate clearly ONDE classes from vendor-specific extensions.</li>
+</ul>
+<h2 id="data-model-representation-in-the-yaml-specification">Data model representation in the YAML specification</h2>
+<h3 id="general-notes-on-the-yaml-schemas">General notes on the YAML schemas</h3>
+<p>The specification of the format is defined by a Single Source of Truth located in the <code>class_definitions/</code> directory. This directory contains a series of YAML files. Each YAML file defines a single class and contains both the human-readable description and the machine-readable metadata. </p>
+<p>For each class, the YAML schema defines:</p>
+<ul>
+<li><strong>inherits</strong>: The parent class this class inherits from, if any.</li>
+<li><strong>allowed_classes</strong>: If this is a root class, the permissible subclasses that can be instantiated.</li>
+<li><strong>fields</strong>: The individual data fields (attributes or datasets) belonging to this class.</li>
+</ul>
+<p>Each field is defined with the following properties:</p>
+<ul>
+<li><code>full_name</code> – The physical name of the field (dataset or attribute) in the HDF5 group</li>
+<li><code>required</code> – A boolean indicating whether the field is mandatory (<code>true</code>) or optional (<code>false</code>)</li>
+<li><code>storage</code> – Specifies whether it is stored as a <code>dataset</code> or <code>attribute</code></li>
+<li><code>hdf5_type</code> – The HDF5 class type, including <code>H5T_INTEGER</code> and <code>H5T_FLOAT</code></li>
+<li><code>description</code> / <code>short_description</code> – Human-readable explanations of the field</li>
+<li><code>dimensions</code> – Can be actual values or symbols to indicate variable sizes</li>
+<li><code>allowed_values</code> – A list of permissible string values, if applicable</li>
+<li><code>min_value</code> / <code>max_value</code> – Minimum and maximum values for numeric quantities, if relevant</li>
+</ul>
+<h3 id="representation-of-a-class-in-the-yaml-schemas">Representation of a class in the YAML schemas</h3>
+<p>The following example indicates how a simple class is represented in YAML.</p>
+<p><em>Example</em></p>
+<p>Let <code>ONDE_MYCLASS</code> be a class with an optional field <code>COORDINATES</code> (an XYZ triplet), a mandatory field <code>DIMENSION</code>, and a mandatory dataset <code>TABLE</code> (of size <code>[DIMENSION, 3]</code>).
+The YAML file (<code>onde_myclass.yaml</code>) will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A custom ONDE class.</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">COORDINATES</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS:COORDINATES</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[3]&#39;</span>
+<span class="w">  </span><span class="nt">DIMENSION</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS:DIMENSION</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_INTEGER</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">min_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">TABLE</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS:TABLE</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataset</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[ONDE_MYCLASS:DIMENSION,3]&#39;</span>
+</code></pre></div>
+<h3 id="representation-of-a-subclass-in-the-yaml-schemas">Representation of a subclass in the YAML schemas</h3>
+<p>Class inheritance is defined using the <code>inherits</code> array. The <code>ONDE:TYPE</code> attribute in the generated HDF5 file will automatically contain the class hierarchy starting from the base class.</p>
+<p>Let <code>ONDE_MYSUBCLASS</code> be a subclass of <code>ONDE_MYCLASS</code>, adding an extra attribute <code>MY_VALUE</code>.
+The YAML file (<code>onde_mysubclass.yaml</code>) will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYSUBCLASS</span>
+<span class="nt">inherits</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A subclass extending ONDE_MYCLASS.</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">MY_VALUE</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYSUBCLASS:MY_VALUE</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+</code></pre></div>
+<p>The HDF5 file will contain an HDF5 group with the attribute <code>ONDE_TYPE</code> containing <code>["ONDE_MYCLASS", "ONDE_MYSUBCLASS"]</code>, attributes <code>ONDE_MYCLASS:COORDINATES</code>, <code>ONDE_MYCLASS:DIMENSION</code>, <code>ONDE_MYSUBCLASS:MY_VALUE</code>, and an HDF5 dataset named <code>ONDE_MYCLASS:TABLE</code>.</p>
+<h3 id="representation-of-an-accessory-class-in-the-yaml-schemas">Representation of an accessory class in the YAML schemas</h3>
+<p>An accessory class is defined like any other class, but it includes an <code>is_accessory: true</code> boolean. 
+Another class will refer to this accessory class to aggregate its content through an <code>ONDE:TYPE_TAGS</code> attribute that contains a list of accessory classes.</p>
+<p>Let <code>ONDE_MY_ACCESSORY_CLASS</code> be an accessory class having a string attribute <code>MY_STRING</code>. The YAML will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MY_ACCESSORY_CLASS</span>
+<span class="nt">is_accessory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A custom accessory class.</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">MY_STRING</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MY_ACCESSORY_CLASS:MY_STRING</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_STRING</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+</code></pre></div>
+<p>When this accessory is aggregated in an <code>ONDE_MYCLASS</code> group, the HDF5 group will contain an <code>ONDE:TYPE_TAGS</code> attribute listing <code>["ONDE_MY_ACCESSORY_CLASS"]</code>, and the fields of the accessory class will be present alongside the fields of the base class.</p>
+<h3 id="legacy-csv-specification">Legacy CSV Specification</h3>
+<p>While the Single Source of Truth for the data model is defined in the YAML schemas, a legacy CSV representation can still be generated for compatibility or external tooling.</p>
+<p>To generate the legacy CSV format, users can run the provided Python script:
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>tools/generate_csv.py
+</code></pre></div>
+This will parse the YAML files in the <code>class_definitions/</code> directory and output a <code>ONDE_fields.csv</code> file in the <code>build/</code> directory, formatted according to the legacy table structure.</p>
+<h4 id="general-notes-on-the-legacy-csv-table">General notes on the legacy csv table</h4>
+<p>The generated csv file is organized with the following columns:</p>
+<ul>
+<li><em>Class</em> – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)</li>
+<li><em>Name</em> – the physical name of the field (dataset or attribute in the HDF5 group)</li>
+<li><em>M/O</em> – Mandatory or Optional</li>
+<li><em>D/A</em> – Dataset or Attribute</li>
+<li><em>Type</em> – The HDF5 class type including H5T_INTEGER and H5T_FLOAT which are generic</li>
+<li><em>Content</em> – Required content if relevant (essential for TYPE, potential useful for string enumerations to give list of allowed possibilities)</li>
+<li><em>Dimensions</em> – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class</li>
+<li><em>Min, Max</em> – Minimum and maximum values of numeric quantities if relevant.</li>
+<li><em>Accessory Class</em> - Specifies wether a class is an accessory class</li>
+</ul>
+<p>The csv separator that is used in the file is a semicolon.</p>
+<p>In some cases, several values are admissible for a given column (D or A in the Dataset/Attribute column, several possible values for a string). The specification uses either "or" or "|" to specify this.</p>
+<h4 id="representation-of-a-class-in-the-csv-table">Representation of a class in the csv table</h4>
+<p>The following example indicates how a simple class is represented in the csv table.</p>
+<p><em>Example</em></p>
+<p>Let <code>ONDE_MYCLASS</code> be a class with optional field <code>COORDINATES</code> (an XYZ triplet), a field <code>DIMENSION</code> and a field <code>TABLE</code> (of size <code>[DIMENSION, 3]</code>).
+The csv table will look like this:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Name</th>
+<th>M/O</th>
+<th>D/A</th>
+<th>Type</th>
+<th>Content</th>
+<th>Dimensions</th>
+<th>Min</th>
+<th>Max</th>
+<th>Accessory Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE:TYPE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MYCLASS"]</td>
+<td>[1]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:COORDINATES</td>
+<td>O</td>
+<td>A</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:DIMENSION</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_INTEGER</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:TABLE</td>
+<td>M</td>
+<td>D</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[ONDE_MYCLASS:DIMENSION,3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="representation-of-a-subclass-in-the-csv-table">Representation of a subclass in the csv table</h4>
+<p>In the csv file, the class hierarchy is described in the Class column. The class and its ancestor classes are separated by colons, starting from the base class. As indicated above, the ONDE:TYPE attribute will contain the class hierarchy.</p>
+<p>Let <code>ONDE_MYSUBCLASS</code> be a subclass of <code>ONDE_MYCLASS</code>, adding the extra attribute <code>MY_VALUE</code>.
+The csv table will look like this:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Name</th>
+<th>M/O</th>
+<th>D/A</th>
+<th>Type</th>
+<th>Content</th>
+<th>Dimensions</th>
+<th>Min</th>
+<th>Max</th>
+<th>Accessory Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE:TYPE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MYCLASS"]</td>
+<td>[1]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:COORDINATES</td>
+<td>O</td>
+<td>A</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:DIMENSION</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_INTEGER</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:TABLE</td>
+<td>M</td>
+<td>D</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[ONDE_MYCLASS:DIMENSION,3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYSUBCLASS</td>
+<td>ONDE:TYPE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MYCLASS","ONDE_MYSUBCLASS"]</td>
+<td>[2]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYSUBCLASS:MY_VALUE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The HDF5 file will contain an HDF5 group with attribute <code>ONDE_TYPE</code> (containing <code>["ONDE_MYCLASS","ONDE_MYSUBCLASS"]</code>), and with attributes <code>ONDE_MYCLASS:COORDINATES</code>, <code>ONDE_MYCLASS:DIMENSION</code>, <code>ONDE_MYCLASS:ONDE_MYSUBCLASS:MY_VALUE</code> and with an HDF5 dataset named <code>ONDE_MYCLASS:TABLE</code>.</p>
+<h4 id="representation-of-an-accessory-class-in-the-csv-table">Representation of an accessory class in the csv table</h4>
+<p>In the csv file, an accessory class is defined in the same way as any other class, with the exception that it has a <code>ONDE:ACCESSORY_CLASS</code> attribute refering to its own name.
+Another class will refer to this accessory class to aggregate its content through an <code>ONDE:TYPE_TAGS</code> attribute that contains a list of accessory classes.</p>
+<p>Let <code>ONDE_MY_ACCESSORY_CLASS</code> be an accessory class having a string attribute <code>MY_STRING</code> aggregated in <code>ONDE_MYCLASS</code>.
+The csv table will look like this:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Name</th>
+<th>M/O</th>
+<th>D/A</th>
+<th>Type</th>
+<th>Content</th>
+<th>Dimensions</th>
+<th>Min</th>
+<th>Max</th>
+<th>Accessory Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE:TYPE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MYCLASS"]</td>
+<td>[1]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE:TYPE_TAGS</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
+<td>[1]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:COORDINATES</td>
+<td>O</td>
+<td>A</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:DIMENSION</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_INTEGER</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MYCLASS</td>
+<td>ONDE_MYCLASS:TABLE</td>
+<td>M</td>
+<td>D</td>
+<td>H5T_FLOAT</td>
+<td></td>
+<td>[ONDE_MYCLASS:DIMENSION,3]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MY_ACCESSORY_CLASS</td>
+<td>ONDE:TYPE</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
+<td>[1]</td>
+<td></td>
+<td></td>
+<td>True</td>
+</tr>
+<tr>
+<td>ONDE_MY_ACCESSORY_CLASS</td>
+<td>ONDE:ACCESSORY_CLASS</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td>"ONDE_MY_ACCESSORY_CLASS"</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ONDE_MY_ACCESSORY_CLASS</td>
+<td>ONDE_MY_ACCESSORY_CLASS:MY_STRING</td>
+<td>M</td>
+<td>A</td>
+<td>H5T_STRING</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The HDF5 file will contain an HDF group with attribute <code>ONDE_TYPE</code> (containing <code>['ONDE_MYCLASS']</code>) and with attributes <code>ONDE_MYCLASS:COORDINATES</code>, <code>ONDE_MYCLASS:DIMENSION</code>, <code>ONDE_MY_ACCESSORY_CLASS:MY_STRING</code> and with an HDF5 dataset named <code>ONDE_MYCLASS:TABLE</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.indexes"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
