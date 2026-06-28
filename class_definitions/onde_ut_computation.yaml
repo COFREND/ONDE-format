@@ -1,4 +1,4 @@
 onde_class: ONDE_UT_COMPUTATION
 inherits: []
 description: 'Abstract base class for computations on UT datasets that lead to C-Scans. The only such computations defined so far come from gates: [ONDE_UT_GATE](onde_ut_gate.md).'
-fields: []
+fields: {}
