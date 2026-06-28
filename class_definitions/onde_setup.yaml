@@ -1,0 +1,16 @@
+onde_class: ONDE_SETUP
+inherits: []
+description: '### Setup
+
+
+  The setup block contains references to the ultrasonic setup and the geometric setup.
+
+  '
+fields:
+  GEOMETRIC_SETUP:
+    full_name: ONDE_SETUP:GEOMETRIC_SETUP
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>
+    description: ''
+    dimensions: '[1]'

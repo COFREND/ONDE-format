@@ -1,0 +1,12 @@
+onde_class: ONDE_IMMERSION
+inherits:
+- ONDE_UT_COUPLING
+description: ''
+fields:
+  WATER_PATH:
+    full_name: ONDE_IMMERSION:WATER_PATH
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'

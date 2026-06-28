@@ -1,0 +1,57 @@
+onde_class: ONDE_GEOMETRIC_SETUP
+inherits: []
+description: '### Geometric setup
+
+
+  **Description**
+
+
+  The geometric setup contains references to the inspected component, the probes and
+  the trajectory. If the specimen
+
+  description is missing, a semi-infinite half-plane is assumed, with interface at
+  z=0 and material for z>0.
+
+
+  **Trajectories**
+
+
+  ACQUISITION_TRAJECTORY gives references to the groups describing the trajectory
+  -- references have the same order as
+
+  PROBE_LIST. PROBE_COORDINATE_FRAME can be used to define an offset between a referenced
+  trajectory and the probe -
+
+  identity is assumed if not provided.'
+fields:
+  COMPONENT:
+    full_name: ONDE_GEOMETRIC_SETUP:COMPONENT
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_COMPONENT>
+    description: Reference to the inspected component. If missing, semi-infinite half
+      plane is assumed, with interface at z=0 and material for z>0
+    dimensions: '[1]'
+  PROBE_LIST:
+    full_name: ONDE_GEOMETRIC_SETUP:PROBE_LIST
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    description: List all probes used in the acquisition of the dataset
+    dimensions: '[N_Prob<M>]'
+  ACQUISITION_TRAJECTORY:
+    full_name: ONDE_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>
+    description: References to the block describing the trajectory, references have
+      the same order as PROBE_LIST
+    dimensions: '[N_Prob<M>]'
+  PROBE_COORDINATE_FRAME:
+    full_name: ONDE_GEOMETRIC_SETUP:PROBE_COORDINATE_FRAME
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Offset and direction of the probe w.r.t the trajectory frame- identity
+      is assumed if not provided
+    dimensions: '[N_Prob<M>,7]'

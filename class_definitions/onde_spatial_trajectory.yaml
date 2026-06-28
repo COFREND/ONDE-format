@@ -1,0 +1,13 @@
+onde_class: ONDE_SPATIAL_TRAJECTORY
+inherits:
+- ONDE_ACQUISITION_TRAJECTORY
+description: ''
+fields:
+  TRAJECTORY:
+    full_name: ONDE_SPATIAL_TRAJECTORY:TRAJECTORY
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: List of positions and quaternions giving the positions and orientations
+      of the trajectory frame at the different positions
+    dimensions: '[N_Pos<m>,7]'

@@ -1,0 +1,5 @@
+onde_class: ONDE_MONO_UT_PROBE
+inherits:
+- ONDE_UT_PROBE
+description: ''
+fields: {}

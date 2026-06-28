@@ -1,0 +1,60 @@
+onde_class: ONDE_PHASED_ARRAY_COMPOUND
+inherits:
+- ONDE_PHASED_ARRAY_SETUP
+description: '**Compound**
+
+
+  The compound type mixes Escan and Sscan behavior (see [Figure 27](onde_phased_array_compound.md)).
+  COMPOUND_INITIAL_ANGLE, COMPOUND_FINAL_ANGLE and
+
+  COMPOUND_NUMBER_OF_ANGLES give the angle scope, while COMPOUND_NUMBER_OF_ELEMENTS
+  gives the number of elements in the
+
+  electronic scanning.
+
+
+  ![Compound configuration](../images/media/compound_config.png "Figure 27")
+
+
+  *[Figure 27](onde_phased_array_compound.md): Compound configuration*
+
+
+  ## Limitations
+
+
+  This block has no vocation to be exhaustive in terms of electronic configurations
+  (unlike the law block that permits any
+
+  description and is fully generic). However, it is intended to cover most of the
+  situations that are common in industrial
+
+  controls and represent a large share of the acquisition files produced in the industry.'
+fields:
+  INITIAL_ANGLE:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:INITIAL_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  FINAL_ANGLE:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:FINAL_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  NUMBER_OF_ANGLES:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ANGLES
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: ''
+    dimensions: '1'
+  NUMBER_OF_ELEMENTS:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ELEMENTS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: ''
+    dimensions: '1'

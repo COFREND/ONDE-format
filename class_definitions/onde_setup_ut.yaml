@@ -1,0 +1,12 @@
+onde_class: ONDE_SETUP_UT
+inherits:
+- ONDE_SETUP
+description: ''
+fields:
+  ULTRASONIC_SETUP:
+    full_name: ONDE_SETUP_UT:ULTRASONIC_SETUP
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>
+    description: Mandatory for Ascan sequences
+    dimensions: '[1]'

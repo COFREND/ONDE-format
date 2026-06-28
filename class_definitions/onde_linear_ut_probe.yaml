@@ -1,0 +1,42 @@
+onde_class: ONDE_LINEAR_UT_PROBE
+inherits:
+- ONDE_UT_PROBE
+description: ''
+fields:
+  TOTAL_NUMBER_OF_ELEMENTS:
+    full_name: ONDE_LINEAR_UT_PROBE:TOTAL_NUMBER_OF_ELEMENTS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: ''
+    dimensions: '1'
+  ELEMENT_DIM_MAJOR:
+    full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MAJOR
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  ELEMENT_DIM_MINOR:
+    full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MINOR
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  ELEMENT_PITCH_DIM_MAJOR:
+    full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_PITCH_DIM_MAJOR
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '1'
+  ELEMENT_NUMBERING:
+    full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_NUMBERING
+    required: false
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: Defines the element numbering relating the numbering implicitly defined
+      by the probe description and the order defined in the element tables (ELEMENT_POSITION,
+      ELEMENT_GEOMETRY, etc)
+    dimensions: '[N_Elem<p>]'
