@@ -15,14 +15,8 @@ concurrency:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
-    # Enforce execution only on successful builds to prevent broken deployments
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout Base Repository (Git Initialization Only)
-        uses: actions/checkout@v4
-        with:
-          ref: main 
-
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -36,9 +30,18 @@ jobs:
           PR_NUMBER=$(cat pr-metadata/pr-number)
           echo "pr_num=$PR_NUMBER" >> $GITHUB_OUTPUT
           
-      - name: Execute Preview Deployment
-        uses: rossjrw/pr-preview-action@v1
+      - name: Deploy to GitHub Pages PR Preview
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          source-dir: build/docs/site
-          pr-number: ${{ steps.pr-info.outputs.pr_num }}
-          action: auto
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/docs/site
+          destination_dir: pr-preview/pr-${{ steps.pr-info.outputs.pr_num }}
+          keep_files: true
+          commit_message: "Deploy preview for PR ${{ steps.pr-info.outputs.pr_num }}"
+
+      - name: Leave a comment on the PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ steps.pr-info.outputs.pr_num }}
+          header: pr-preview
+          message: "🚀 PR Preview successfully deployed to: https://lesthaeghet.github.io/ONDE-format/pr-preview/pr-${{ steps.pr-info.outputs.pr_num }}/"

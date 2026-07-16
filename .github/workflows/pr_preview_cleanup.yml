@@ -11,11 +11,15 @@ jobs:
   cleanup-preview:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Base
+      - name: Checkout gh-pages
         uses: actions/checkout@v4
-        
-      - name: Remove Preview Artifacts
-        uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: build/docs/site
-          action: remove
+          ref: gh-pages
+          
+      - name: Remove Preview Directory
+        run: |
+          git rm -rf pr-preview/pr-${{ github.event.pull_request.number }} || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove preview for PR ${{ github.event.pull_request.number }}" || echo "No changes to commit"
+          git push
