@@ -44,4 +44,4 @@ jobs:
         with:
           number: ${{ steps.pr-info.outputs.pr_num }}
           header: pr-preview
-          message: "🚀 PR Preview successfully deployed to: https://lesthaeghet.github.io/ONDE-format/pr-preview/pr-${{ steps.pr-info.outputs.pr_num }}/"
+          message: "🚀 PR Preview successfully deployed to: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/pr-${{ steps.pr-info.outputs.pr_num }}/"
