@@ -1,3 +1,13 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "pydantic",
+#   "pyyaml",
+#   "jinja2",
+#   "mkdocs-material",
+# ]
+# ///
+
 """
 Generate Documentation for ONDE Format using YAML Single Source of Truth.
 This script uses Pydantic for validation, Jinja2 for templating, and MkDocs for rendering.
@@ -124,6 +134,7 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - footnotes
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -282,7 +293,7 @@ details.field-details .field-content hr {
             shutil.rmtree(dest_images)
         shutil.copytree(src_images, dest_images)
     
-    files = glob.glob(os.path.join(input_dir, '*.yaml'))
+    files = sorted(glob.glob(os.path.join(input_dir, '*.yaml')))
     
     parsed_classes = {}
     parsed_modalities = {}
@@ -334,7 +345,7 @@ details.field-details .field-content hr {
         down = "/".join(c.lower() for c in to_chain) + "/index.html" if to_chain else "index.html"
         return ups + down
 
-    for cls_name, cls_obj in parsed_classes.items():
+    for cls_name, cls_obj in sorted(parsed_classes.items()):
         if cls_name == 'ONDE_UT': continue
         chain = get_inheritance_chain(cls_name)
         allowed_str = '["' + '", "'.join(chain) + '"]'
@@ -360,7 +371,7 @@ details.field-details .field-content hr {
     
     template = Template(CLASS_TEMPLATE)
     
-    for cls_name, cls_obj in parsed_classes.items():
+    for cls_name, cls_obj in sorted(parsed_classes.items()):
         parents = cls_obj.inherits
         children = children_map.get(cls_name, [])
         
@@ -389,7 +400,7 @@ details.field-details .field-content hr {
             unique_classes.add(acc)
                 
         # Find incoming references
-        for other_name, other_obj in parsed_classes.items():
+        for other_name, other_obj in sorted(parsed_classes.items()):
             if other_name == cls_name: continue
             for fname, field in other_obj.fields.items():
                 if cls_name in get_ref_targets(field.hdf5_type):
@@ -404,7 +415,7 @@ details.field-details .field-content hr {
         if not mermaid_lines:
             mermaid_lines.append(f"  {cls_name}")
                 
-        for c in unique_classes:
+        for c in sorted(unique_classes):
             mermaid_lines.append(f'  click {c} href "{get_relative_html_link(cls_name, c)}"')
             
         mermaid_lines.append(f'  style {cls_name} stroke:#3f51b5,stroke-width:3px')
@@ -523,7 +534,7 @@ details.field-details .field-content hr {
         # Generate master diagram
         master_lines = []
         unique_classes = set()
-        for cls_name, cls_obj in parsed_classes.items():
+        for cls_name, cls_obj in sorted(parsed_classes.items()):
             unique_classes.add(cls_name)
             for parent in cls_obj.inherits:
                 master_lines.append(f"  {parent} <|-- {cls_name}")
@@ -535,7 +546,7 @@ details.field-details .field-content hr {
                         master_lines.append(f"  {cls_name} o-- {ref} : {fname}")
                         unique_classes.add(ref)
                     
-        for c in unique_classes:
+        for c in sorted(unique_classes):
             master_lines.append(f'  click {c} href "{get_relative_html_link(None, c)}"')
             
         master_mermaid = "classDiagram\n" + "\n".join(master_lines)
@@ -599,7 +610,7 @@ details.field-details .field-content hr {
         nav_lines.append("  - Implementations:")
         nav_lines.append("    - implementations/index.md")
         
-        for mod_name, mod_obj in parsed_modalities.items():
+        for mod_name, mod_obj in sorted(parsed_modalities.items()):
             mod_filename = f"{mod_name.lower()}.md"
             with open(os.path.join(impl_dir, mod_filename), 'w', encoding='utf-8') as f:
                 fields_meta = []

@@ -1,10 +1,9 @@
 name: Validate Schema
 
 on:
-  pull_request:
-    branches: [ main ]
+  workflow_call:
   push:
-    branches: [ main ]
+    branches-ignore: [ gh-pages ]
 
 jobs:
   validate:
