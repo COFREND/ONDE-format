@@ -4,27 +4,15 @@ inherits:
 description: |+
     ### CScan datasets and gates
 
-    #### CScan data and peaks
+    #### CScan data 
 
-    While this Cscan dataset is mostly meant for the storage of peak-like data
-    (amplitude, time of flight, etc…) it is more generic and can accommodate
-    different values. DATA contains a vector of references to datasets containing scalar raw
-    data. The size of the data can be either N_DF<m> × N_Ascan<m> arrays
-    (for data resulting from analysis of signals) or N_DF<m> arrays (for encoder
+    CScan datasets are the entry points for the description of data that is
+    stored as scalar values. The data can come either from Ascan or Tscan data
+    through an extraction process. The extraction process is described in the 
+    ONDE_UT_EXTRACTION block. 
+    The size of the data can be either N_U<m> × N_V<m> x N_Ascan<m> arrays
+    (for data resulting from analysis of signals) or N_U<m> x N_V<m> arrays (for encoder
     data or data resulting from Tscan or monoelement scans).
-
-    #### Data description
-
-    The DATATYPE field contains a name defining the nature of the data —the name
-    can be either custom (MY_MATERIAL_PROPERTY for instance) or a standardized
-    name: THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX.
-
-    #### Data numbering
-
-    To be efficient for relatively small amounts of data, as opposed to other
-    blocks, the Cscan block allows for the handling of several data inside the
-    block. The DATA, DATA_TYPE vectors must have the same length and be ordered
-    coherently.
 
     #### Data positioning
 
@@ -40,29 +28,15 @@ description: |+
     2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
     (dataframe, plane, column).
 
-    #### Gates
+    #### Gates and extractions
 
-    The gates are stored as a separate group of type ONDE_UT_GATE. The gates are
-    referenced in the ONDE_DATASET_UT_CSCAN group via the
-    ONDE_DATASET_UT_CSCAN:GATES field.  The gates used for the acquisition are
-    defined through five parameters. GATE_START and GATE_WIDTH define the time
-    window and GATE_THRESHOLD defines the threshold that was used to trigger the
-    storage of the data. GATE_DETECTION defines the type of triggering event
-    that was used to define the gate. GATE_POLARITY defines the mode that was
-    used for the detection (absolute, positive or negative). The following
-    figure defines the modes that can be used for detection. The numbers on the
-    figure correspond to the different triggering events. The correspondence
-    between these figures and the values allowed for GATE_DETECTION is the
-    following:
+    The gates are stored as a separate group of type ONDE_UT_GATE. 
+    The extraction process explaining how the Cscan data is obtained from the underlying data is described in the
+    ONDE_UT_EXTRACTION block. The extraction can be either a scalar value or an enumeration. The extraction relates to list of *ONDE_UT_GATE*, called
+    GATE_LIST which can be of size 1 or 2 : 1. If the list is of size 1,  the gate defines the time window for 
+    the extraction. 2. If the list is of size 2,  the extracted value is the difference between the two extractions, each defined by a gate. The nature of  
+    the extraction  can be either *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*. 
 
-    1. FIRST_FLANK
-    2. FIRST_PEAK
-    3. MAX_FLANK
-    4. MAX_PEAK
-    5. LAST_PEAK
-    6. LAST_FLANK
-
-    ![Detection modes for UT gates](../images/media/gate_detection.png)
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
@@ -71,17 +45,7 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
     description: references to arrays containing the different values stored in the
       dataset
-    dimensions: '[N_CS<m>] |[N_CS<m>,N_Gate<m>]'
-  DATATYPE:
-    full_name: ONDE_DATASET_UT_CSCAN:DATATYPE
-    required: true
-    storage: dataset
-    hdf5_type: H5T_STRING
-    description: |-
-      string defining the stored data - the name can be either custom
-      (MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS,
-      TIME_OF_FLIGHT, DEPTH, AMAX
-    dimensions: '[N_CS<m>]'
+    dimensions: '1 or [N_U<m>,N_V<m>] or [N_U<m>,N_V<m>,N_A<m>]'
   UNDERLYING_DATA:
     full_name: ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA
     required: false
@@ -107,10 +71,12 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_GRID>
     description: ''
     dimensions: '1'
-  GATES:
-    full_name: ONDE_DATASET_UT_CSCAN:GATES
+  EXTRACTION:
+    full_name: ONDE_DATASET_UT_CSCAN:ONDE_UT_EXTRACTION
     required: false
-    storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
-    description: ''
-    dimensions: '[N_Gate<m>]'
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_EXTRACTION>
+    description: |- 
+      The referenced object describes the extraction process that was used 
+      to obtain the Cscan data from the underlying data.
+    dimensions: '1'
