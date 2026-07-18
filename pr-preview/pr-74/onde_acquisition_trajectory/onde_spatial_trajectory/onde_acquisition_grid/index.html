@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2111,9 +2111,24 @@ acquisitions, V_GRID_DATA and V_ENCODER are not to be used.</p>
 <div class="field-list">
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-cylinder_definition"><code>CYLINDER_DEFINITION</code></strong> &mdash; Defines whether the grid is expressed in the inner surface of the cylinder or on the outer surface</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-cylinder_definition"><code>CYLINDER_DEFINITION</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> -</span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span><span markdown="span"><strong>Allowed:</strong> <code>"INNER"|"OUTER"</code></span></div>
+</div>
+
+<div class="field-summary-desc">Defines whether the grid is expressed in the inner surface of the cylinder or on the outer surface</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+
+    <tr><td>Allowed:</td><td><code>&#34;INNER&#34;|&#34;OUTER&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Defines whether the grid is expressed in the inner surface of the cylinder or on the outer surface</p>
@@ -2121,9 +2136,24 @@ acquisitions, V_GRID_DATA and V_ENCODER are not to be used.</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-probe_direction"><code>PROBE_DIRECTION</code></strong> &mdash; For grid data, direction of the probe in the (u, v, w) coordinate system.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-probe_direction"><code>PROBE_DIRECTION</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[3,3]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+</div>
+
+<div class="field-summary-desc">For grid data, direction of the probe in the (u, v, w) coordinate system.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3,3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>For grid data, direction of the probe in the (u, v, w) coordinate system.
@@ -2132,9 +2162,24 @@ Defaults to identity matrix.</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-reference_specimen"><code>REFERENCE_SPECIMEN</code></strong> &mdash; When defining an acquisition grid, it is necessary to define a reference specimen that is either a cylinder or a plane.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-reference_specimen"><code>REFERENCE_SPECIMEN</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_component/index.html">ONDE_COMPONENT</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STD_REF_OBJ&lt;<a href="../../../onde_component/index.html">ONDE_COMPONENT</a>&gt;</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+</div>
+
+<div class="field-summary-desc">When defining an acquisition grid, it is necessary to define a reference specimen that is either a cylinder or a plane.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>When defining an acquisition grid, it is necessary to define a reference specimen that is either a cylinder or a plane.</p>
@@ -2142,9 +2187,24 @@ Defaults to identity matrix.</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-scan_type"><code>SCAN_TYPE</code></strong> &mdash; Defines whether the data is ordered in the same direction for each scan<br>(COMB) or is inversed every second scan (RASTER)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-scan_type"><code>SCAN_TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span><span markdown="span"><strong>Allowed:</strong> <code>"COMB"|"RASTER"</code></span></div>
+</div>
+
+<div class="field-summary-desc">Defines whether the data is ordered in the same direction for each scan<br>(COMB) or is inversed every second scan (RASTER)</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;COMB&#34;|&#34;RASTER&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Defines whether the data is ordered in the same direction for each scan
@@ -2153,9 +2213,26 @@ Defaults to identity matrix.</p>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-trajectory"><code>TRAJECTORY</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_SPATIAL_TRAJECTORY</a></span> &mdash; List of positions and quaternions giving the positions and orientations of<br>the trajectory frame at the different positions</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-trajectory"><code>TRAJECTORY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[N_U&lt;m&gt;,N_V&lt;m&gt;,7]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_SPATIAL_TRAJECTORY</a></span>
+
+</div>
+
+<div class="field-summary-desc">List of positions and quaternions giving the positions and orientations of<br>the trajectory frame at the different positions</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_U&lt;m&gt;,N_V&lt;m&gt;,7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>List of positions and quaternions giving the positions and orientations of
@@ -2164,16 +2241,44 @@ the trajectory frame at the different positions</p>
 </details>
 <details class="field-details empty-details">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_acquisition_grid-type"><code>TYPE</code></strong></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>[3]</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span><span markdown="span"><strong>Allowed:</strong> <code>["ONDE_ACQUISITION_TRAJECTORY", "ONDE_SPATIAL_TRAJECTORY", "ONDE_ACQUISITION_GRID"]</code></span></div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_ACQUISITION_TRAJECTORY&#34;, &#34;ONDE_SPATIAL_TRAJECTORY&#34;, &#34;ONDE_ACQUISITION_GRID&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-uv_grid_frame"><code>UV_GRID_FRAME</code></strong> &mdash; 2D Frame defining the U_GRID and V_GRID directions of the encoding in the surface representation of the specimen (X,Y) for planar specimens, (X,THETA) for cylindrical specimens.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-uv_grid_frame"><code>UV_GRID_FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[3]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+</div>
+
+<div class="field-summary-desc">2D Frame defining the U_GRID and V_GRID directions of the encoding in the surface representation of the specimen (X,Y) for planar specimens, (X,THETA) for cylindrical specimens.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>2D Frame defining the U_GRID and V_GRID directions of the encoding in the surface representation of the specimen (X,Y) for planar specimens, (X,THETA) for cylindrical specimens. (1,0,) is assumed if missing</p>
@@ -2181,9 +2286,24 @@ the trajectory frame at the different positions</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-u_encoder"><code>U_ENCODER</code></strong> &mdash; Obtained encoder values on the u axis</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-u_encoder"><code>U_ENCODER</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[N_V&lt;m&gt;,N_U&lt;m&gt;]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+</div>
+
+<div class="field-summary-desc">Obtained encoder values on the u axis</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_V&lt;m&gt;,N_U&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Obtained encoder values on the u axis</p>
@@ -2191,9 +2311,24 @@ the trajectory frame at the different positions</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-u_grid_data"><code>U_GRID_DATA</code></strong> &mdash; The specified values of the first coder at the different positions</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-u_grid_data"><code>U_GRID_DATA</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[N_U&lt;m&gt;]</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+</div>
+
+<div class="field-summary-desc">The specified values of the first coder at the different positions</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_U&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>The specified values of the first coder at the different positions</p>
@@ -2201,9 +2336,24 @@ the trajectory frame at the different positions</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-v_encoder"><code>V_ENCODER</code></strong> &mdash; Obtained encoder values on the v axis</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-v_encoder"><code>V_ENCODER</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[N_V&lt;m&gt;,N_U&lt;m&gt;]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+</div>
+
+<div class="field-summary-desc">Obtained encoder values on the v axis</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_V&lt;m&gt;,N_U&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Obtained encoder values on the v axis</p>
@@ -2211,9 +2361,24 @@ the trajectory frame at the different positions</p>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_acquisition_grid-v_grid_data"><code>V_GRID_DATA</code></strong> &mdash; The specified values of the second coder at the different positions.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_acquisition_grid-v_grid_data"><code>V_GRID_DATA</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[N_V&lt;m&gt;]</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> dataset</span></div>
+</div>
+
+<div class="field-summary-desc">The specified values of the second coder at the different positions.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_V&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>The specified values of the second coder at the different positions. If missing while U_GRID_DATA is present, 1D array of data is assumed.</p>
@@ -2272,7 +2437,7 @@ the trajectory frame at the different positions</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../javascripts/mathjax.js"></script>
       

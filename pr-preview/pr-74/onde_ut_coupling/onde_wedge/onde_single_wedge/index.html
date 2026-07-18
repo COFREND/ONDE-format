@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -2021,9 +2021,26 @@
 <div class="field-list">
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-contact_area"><code>CONTACT_AREA</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; Equivalent to L1, L2 and L3 (See Figure 15)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-contact_area"><code>CONTACT_AREA</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[3]</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">Equivalent to L1, L2 and L3 (See Figure 15)</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Equivalent to L1, L2 and L3 (See Figure 15)</p>
@@ -2031,9 +2048,26 @@
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-contact_surface"><code>CONTACT_SURFACE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,<br>CYLINDRICAL_MINOR - If missing PLANAR assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-contact_surface"><code>CONTACT_SURFACE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> -</span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span><span markdown="span"><strong>Allowed:</strong> <code>"PLANAR"|"SPHERICAL"|"CYLINDRICAL_MAJOR"|"CYLINDRICAL_MINOR"</code></span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,<br>CYLINDRICAL_MINOR - If missing PLANAR assumed</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+
+    <tr><td>Allowed:</td><td><code>&#34;PLANAR&#34;|&#34;SPHERICAL&#34;|&#34;CYLINDRICAL_MAJOR&#34;|&#34;CYLINDRICAL_MINOR&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,
@@ -2042,9 +2076,26 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-curvature_radius"><code>CURVATURE_RADIUS</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; Wedge curvature radius (0 assumed if missing)<br><br>- Concave: positive<br>- Convex: negative<br>- Planar wedge: 0</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-curvature_radius"><code>CURVATURE_RADIUS</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">Wedge curvature radius (0 assumed if missing)<br><br>- Concave: positive<br>- Convex: negative<br>- Planar wedge: 0</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Wedge curvature radius (0 assumed if missing)</p>
@@ -2057,9 +2108,26 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-disorientation_angle"><code>DISORIENTATION_ANGLE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; wedge /disorientation angle (D) (See Figure 15)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-disorientation_angle"><code>DISORIENTATION_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">wedge /disorientation angle (D) (See Figure 15)</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>wedge /disorientation angle (D) (See Figure 15)</p>
@@ -2067,9 +2135,26 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-height"><code>HEIGHT</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; For a wedge, distance of the ultrasonic beam between the probe center and<br>the index point (See Figure 15)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-height"><code>HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">For a wedge, distance of the ultrasonic beam between the probe center and<br>the index point (See Figure 15)</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>For a wedge, distance of the ultrasonic beam between the probe center and
@@ -2078,51 +2163,158 @@ the index point (See Figure 15)</p>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-incidence_angle"><code>INCIDENCE_ANGLE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-incidence_angle"><code>INCIDENCE_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-label"><code>LABEL</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-label"><code>LABEL</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-manufacturer"><code>MANUFACTURER</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-manufacturer"><code>MANUFACTURER</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-medium_density"><code>MEDIUM_DENSITY</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-medium_density"><code>MEDIUM_DENSITY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-medium_velocity"><code>MEDIUM_VELOCITY</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-medium_velocity"><code>MEDIUM_VELOCITY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>[2]</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_UT_COUPLING</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-serial_number"><code>SERIAL_NUMBER</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-serial_number"><code>SERIAL_NUMBER</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_single_wedge-skew_angle"><code>SKEW_ANGLE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span> &mdash; wedge /skew angle (B) (See Figure 15)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-skew_angle"><code>SKEW_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_FLOAT</span><span markdown="span"><strong>Dimensions:</strong> <code>1</code></span><span markdown="span"><strong>Required:</strong> No</span><span markdown="span"><strong>Storage:</strong> attribute</span></div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_WEDGE</a></span>
+
+</div>
+
+<div class="field-summary-desc">wedge /skew angle (B) (See Figure 15)</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>wedge /skew angle (B) (See Figure 15)</p>
@@ -2130,9 +2322,22 @@ the index point (See Figure 15)</p>
 </details>
 <details class="field-details empty-details">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-top"><strong id="onde_single_wedge-type"><code>TYPE</code></strong></div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_single_wedge-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom"><span markdown="span"><strong>Type:</strong> H5T_STRING</span><span markdown="span"><strong>Dimensions:</strong> <code>[3]</code></span><span markdown="span"><strong>Required:</strong> Yes</span><span markdown="span"><strong>Storage:</strong> attribute</span><span markdown="span"><strong>Allowed:</strong> <code>["ONDE_UT_COUPLING", "ONDE_WEDGE", "ONDE_SINGLE_WEDGE"]</code></span></div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_COUPLING&#34;, &#34;ONDE_WEDGE&#34;, &#34;ONDE_SINGLE_WEDGE&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 </details>
 </div>
@@ -2188,7 +2393,7 @@ the index point (See Figure 15)</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../javascripts/mathjax.js"></script>
       
