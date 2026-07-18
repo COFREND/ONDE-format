@@ -235,7 +235,7 @@ The csv table will look like this:
 |ONDE_MYSUBCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]|||||
 |ONDE_MYSUBCLASS:MY_VALUE|M|A|H5T_FLOAT||1||||
 
-The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing `["ONDE_MYCLASS","ONDE_MYSUBCLASS"]`), and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MYCLASS:ONDE_MYSUBCLASS:MY_VALUE` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
+The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing `["ONDE_MYCLASS","ONDE_MYSUBCLASS"]`), and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MYSUBCLASS:MY_VALUE` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
 
 #### Representation of an accessory class in the csv table
 
