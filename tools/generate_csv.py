@@ -31,6 +31,7 @@ def generate_csv():
             
     # Inject TYPE fields dynamically based on inheritance for classes
     def get_inheritance_chain_dict(c_name, visited=None):
+        """returns inheritance list with base class last"""
         if visited is None: visited = set()
         if c_name in visited or not c_name: return []
         visited.add(c_name)
@@ -48,9 +49,10 @@ def generate_csv():
     for c_data in classes_data:
         cls_name = c_data.get('onde_class', '')
         
-        chain = get_inheritance_chain_dict(cls_name)
-        allowed_str = '["' + '", "'.join(chain) + '"]'
-        dim_str = f'[{len(chain)}]' if len(chain) > 1 else '1'
+        # Obtain inheritance list with base class first
+        chain_fwd = get_inheritance_chain_dict(cls_name)[::-1]
+        allowed_str = '["' + '", "'.join(chain_fwd) + '"]'
+        dim_str = f'[{len(chain_fwd)}]' if len(chain_fwd) > 1 else '1'
         
         type_field = {
             'full_name': 'ONDE:TYPE',
