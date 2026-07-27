@@ -1,6 +1,5 @@
 onde_class: ONDE_MATRIX_UT_PROBE
 inherits:
-- ONDE_SENSOR
 - ONDE_UT_PROBE
 description: ''
 fields:
