@@ -1,5 +1,6 @@
 onde_class: ONDE_LINEAR_UT_PROBE
 inherits:
+- ONDE_SENSOR
 - ONDE_UT_PROBE
 description: ''
 fields:
