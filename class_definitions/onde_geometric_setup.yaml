@@ -18,7 +18,7 @@ fields:
   COMPONENT:
     full_name: ONDE_GEOMETRIC_SETUP:COMPONENT
     required: false
-    storage: dataset
+    storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_COMPONENT>
     description: |-
       Reference to the inspected component. If missing, semi-infinite half plane
