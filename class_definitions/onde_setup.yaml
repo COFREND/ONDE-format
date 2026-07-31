@@ -11,4 +11,4 @@ fields:
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>
     description: ''
-    dimensions: '[1]'
+    dimensions: '1'

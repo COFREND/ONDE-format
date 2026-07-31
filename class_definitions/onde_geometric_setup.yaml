@@ -23,7 +23,7 @@ fields:
     description: |-
       Reference to the inspected component. If missing, semi-infinite half plane
       is assumed, with interface at z=0 and material for z>0
-    dimensions: '[1]'
+    dimensions: '1'
   PROBE_LIST:
     full_name: ONDE_GEOMETRIC_SETUP:PROBE_LIST
     required: true
