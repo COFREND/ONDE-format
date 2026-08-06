@@ -23,7 +23,7 @@ Classes define fields that can be:
 
 ### File type
 The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
-The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute. The file is identified as a UT ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The version of the file points to the version of the present specification.
+The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute. The file is identified as an ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The `ONDE:FILETYPE` attribute is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only a single tag is defined, 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in [the ONDE overview](overview.md). The `ONDE:VERSION` attribute is a string that identifies the version number of the present specification.
 
 ### HDF5 implementation of classes
 In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.
