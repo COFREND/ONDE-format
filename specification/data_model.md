@@ -19,6 +19,8 @@ Classes define fields that can be:
 - a link to an object of another class, 
 - a multidimensional array of the previous types
 
+The linkage between ONDE objects can be represented in the form of a graph of interconnections. This graph is directed and acyclic, meaning that the linkage from one object to another has a direction, and that loops of linkages are not allowed.
+
 ## HDF5 implementation
 
 ### File type
