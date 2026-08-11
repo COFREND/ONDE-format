@@ -2,8 +2,8 @@ modality: ONDE_UT
 description: |
   ### ONDE UT File
 
-  This class specifies the UT file type and provides a place for including top level fields. It explicitly references all of the classes that are allowed in this file type.
-allowed_classes:
+  This class specifies the UT file type and provides a place for including top level fields. It explicitly references all of the classes that are expected in this file type.
+expected_classes:
   - ONDE_DATASET
   - ONDE_DATASET_UT
   - ONDE_DATASET_UT_ASCAN
