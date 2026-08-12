@@ -37,5 +37,5 @@ fields:
        2. Capture triggered by hardware gates where each scan point can have a different start time.
        3. Capture with multiple receivers that have different gain settings for different portions of the waveform.
       Note that ASCAN_START does not affect the interpretation of the last of the ONDE_DATASET:INDEX_DIMENSIONS, which also describes the time dimension of the data. When there are multiple different values for ASCAN_START, the ONDE_DIMENSION:COORDINATE for that last dimension should be clear about the interpretation based on the ONDE_DIMENSION:OFFSET (which is limited to scalar values), e.g. "Time after channel acquistion start"
-    dimensions: [ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions.
+    dimensions: "[ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions."
     
