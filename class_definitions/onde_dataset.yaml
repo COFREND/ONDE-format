@@ -60,7 +60,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_STRING
     description: |-
-    The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.g. '2019-01-16T17:05:06') must be used with a capital T separating the date and the time. Optionally, a decimal point ('.') and a fractional portion of a second may be appended. In addition, time zone information is usually appended:
+      The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.g. '2019-01-16T17:05:06') must be used with a capital T separating the date and the time. Optionally, a decimal point ('.') and a fractional portion of a second may be appended. In addition, time zone information is usually appended:
       * "Z", indicating a timestamp in UTC
       * "±hh:mm", indicating a timezone with the specified offset from UTC
       * (no timezone information), indicating an unknown timezone; software will usually interpret this as local time or UTC. 
