@@ -60,14 +60,6 @@ description: |-
 
     #### Visualization CAD
 
-    When a dxf is provided for the Visualization CAD, the extrusion of the CAD
-    is implied from the specimen shape: it is of linear nature if the specimen
-    is a plate or a 2D CAD with linear extrusion, it is cylindrical if the
-    specimen is a cylinder or a 2D CAD with cylindrical extrusion. A typical use
-    case for this feature is the ability to superimpose a weld profile to a
-    plate or cylindrical specimen in order to facilitate the interpretation of
-    the indications.
-
     The CAD profiles that are used for visualization are expressed in the (X,Z)
     plane as specified in the specimen frame. [Figure 10](onde_component.md)
     illustrates the CAD frame positioning to the component frame for a planar
@@ -110,8 +102,22 @@ fields:
     full_name: ONDE_COMPONENT:VISUALIZATION_CAD
     required: false
     storage: attribute
-    hdf5_type: H5T_STRING
-    description: Optional CAD used for visualisation purposes
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    description: |
+      Optional CAD used for visualisation purposes. Contains the CAD file itself. The recommended formats are:
+       * STEP with a CONTENT_TYPE of "model/step", "model/step+xml", "model/step+zip", or "model/step-xml+zip". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant. The step file should contain application protocols AP203, AP214, or AP242.
+       * IGES with a CONTENT_TYPE of "application/iges"
+       * STL with a CONTENT_TYPE of "model/stl", "model/x.stl-ascii", "model/x.stl-binary". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant.
+       * DXF with a CONTENT_TYPE of "image/vnd.dxf".
+      Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
+
+      When a dxf is provided for the Visualization CAD, the extrusion of the CAD
+      is implied from the specimen shape: it is of linear nature if the specimen
+      is a plate or a 2D CAD with linear extrusion, it is cylindrical if the
+      specimen is a cylinder or a 2D CAD with cylindrical extrusion. A typical use
+      case for this feature is the ability to superimpose a weld profile to a
+      plate or cylindrical specimen in order to facilitate the interpretation of
+      the indications.
     dimensions: '1'
   VISUALIZATION_CAD_FRAME:
     full_name: ONDE_COMPONENT:VISUALIZATION_CAD_FRAME
@@ -142,6 +148,11 @@ fields:
     full_name: ONDE_COMPONENT:IMAGE
     required: false
     storage: attribute
-    hdf5_type: H5T_FLOAT
-    description: ''
-    dimensions: '[3]'
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    description: |
+      Photograph or other image of the component.
+      Recommended formats are:
+       * PNG with a CONTENT_TYPE of "image/png"
+       * JPEG with a CONTENT_TYPE of "image/jpeg"      
+      Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
+    dimensions: '1'

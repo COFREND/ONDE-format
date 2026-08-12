@@ -119,6 +119,7 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
 | N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  | 
 | N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
+| N_bytes       | Number of bytes |
 
 Note: N_DF\<m\> = N_U\<m\> x N_V\<m\>
 

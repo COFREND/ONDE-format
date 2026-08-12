@@ -43,6 +43,7 @@ fields:
     full_name: ONDE_2DCAD:CAD
     required: true
     storage: attribute
-    hdf5_type: H5T_STRING
-    description: ''
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    description: |
+      Contains the CAD file itself. The recommended format is DXF with a CONTENT_TYPE of "image/vnd.dxf". Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
     dimensions: '1'

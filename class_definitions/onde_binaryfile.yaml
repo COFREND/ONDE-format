@@ -1,0 +1,25 @@
+onde_class: ONDE_BINARYFILE
+inherits: []
+description: |
+  ## The ONDE_BINARYFILE is a container for arbitrary file content with a specified MIME type
+fields:
+  CONTENT:
+    full_name: ONDE_BINARYFILE:CONTENT
+    required: true
+    storage: dataset
+    hdf5_type: H5T_NATIVE_OPAQUE
+    description: The bytes of the binary file
+    dimensions: '[N_bytes]'
+  CONTENT_TYPE:
+    full_name: ONDE_BINARYFILE:CONTENT_TYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: The MIME type of the file provided. May be "application/octet-string" for unknown binary data.
+  NAME:
+    full_name: ONDE_BINARYFILE:NAME
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: An optional file name identifying the contained information.
+  
