@@ -12,9 +12,9 @@ description: |-
     - the sampling frequency
     - the dimension of data N_Time<m>
 
-    t0 : ASCAN_ASTART
+    t0 : ONDE_DATASET_UT_ASCAN:ASCAN_ASTART
 
-    tend : ASCAN_ASTART + (N_Time<m> - 1) / ASCAN_SAMPLE_RATE
+    tend : ONDE_DATASET_UT_ASCAN:ASCAN_ASTART + (N_Time<m> - 1) / ASCAN_SAMPLE_RATE
 
     #### Gain
 
@@ -129,16 +129,6 @@ fields:
       This indicates the sampling frequency of A-scan data points. It is assumed
       that a uniform sampling rate is used throughout A-scan data collection.
     dimensions: '1'
-  ASCAN_START:
-    full_name: ONDE_ULTRASONIC_SETUP:ASCAN_START
-    required: true
-    storage: dataset
-    hdf5_type: H5T_FLOAT
-    description: |-
-      This indicates the starting time for data acquisition. If dimension is 1,
-      the same start time is used for all A-Scans, else a different start time
-      is specified for each A-Scan.
-    dimensions: 1 or [N_Ascan<m>] or [ N_Ascan<m>,N_U<m>, N_V<m>]
   SIGNAL:
     full_name: ONDE_ULTRASONIC_SETUP:SIGNAL
     required: false
