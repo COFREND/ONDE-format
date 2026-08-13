@@ -12,7 +12,7 @@
         <link rel="prev" href="../onde_acquisition_trajectory/onde_time_trajectory/index.html">
       
       
-        <link rel="next" href="../onde_component/index.html">
+        <link rel="next" href="onde_binaryfile_embedded/index.html">
       
       
         
@@ -553,16 +553,29 @@
   
   
   
-    <li class="md-nav__item md-nav__item--active">
+    
+    
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
+        
+          
+        
       
         
       
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
           
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link md-nav__link--active">
+              
   
   
   <span class="md-ellipsis">
@@ -576,17 +589,43 @@
   
   
 
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ONDE_BINARYFILE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_binaryfile_embedded/index.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ONDE_BINARYFILE
+    ONDE_BINARYFILE_EMBEDDED
   
 
     
@@ -595,47 +634,13 @@
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-onde_binaryfile-is-a-container-for-arbitrary-file-content-with-a-specified-mime-type" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The ONDE_BINARYFILE is a container for arbitrary file content with a specified MIME type
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fields
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -2018,10 +2023,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-onde_binaryfile-is-a-container-for-arbitrary-file-content-with-a-specified-mime-type" class="md-nav__link">
+  <a href="#the-onde_binaryfile-is-an-abstract-base-class-for-containers-for-arbitrary-file-content-it-is-assumed-that-the-content-is-accessible-by-some-means-and-will-have-a-specified-mime-type" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The ONDE_BINARYFILE is a container for arbitrary file content with a specified MIME type
+        The ONDE_BINARYFILE is an abstract base class for containers for arbitrary file content. It is assumed that the content is accessible by some means, and will have a specified MIME type
       
     </span>
   </a>
@@ -2058,6 +2063,7 @@
 
 <h1 id="onde_binaryfile">ONDE_BINARYFILE</h1>
 <pre class="mermaid"><code>classDiagram
+  ONDE_BINARYFILE &lt;|-- ONDE_BINARYFILE_EMBEDDED
   ONDE_2DCAD o-- ONDE_BINARYFILE : CAD
   ONDE_3DCAD o-- ONDE_BINARYFILE : CAD
   ONDE_COMPONENT o-- ONDE_BINARYFILE : VISUALIZATION_CAD
@@ -2065,47 +2071,12 @@
   click ONDE_2DCAD href "../onde_component/onde_2dcad/index.html"
   click ONDE_3DCAD href "../onde_component/onde_3dcad/index.html"
   click ONDE_BINARYFILE href "../onde_binaryfile/index.html"
+  click ONDE_BINARYFILE_EMBEDDED href "../onde_binaryfile/onde_binaryfile_embedded/index.html"
   click ONDE_COMPONENT href "../onde_component/index.html"
   style ONDE_BINARYFILE stroke:#3f51b5,stroke-width:3px</code></pre>
-<h2 id="the-onde_binaryfile-is-a-container-for-arbitrary-file-content-with-a-specified-mime-type">The ONDE_BINARYFILE is a container for arbitrary file content with a specified MIME type</h2>
+<h2 id="the-onde_binaryfile-is-an-abstract-base-class-for-containers-for-arbitrary-file-content-it-is-assumed-that-the-content-is-accessible-by-some-means-and-will-have-a-specified-mime-type">The ONDE_BINARYFILE is an abstract base class for containers for arbitrary file content. It is assumed that the content is accessible by some means, and will have a specified MIME type</h2>
 <h2 id="fields">Fields</h2>
 <div class="field-list">
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_binaryfile-content"><code>CONTENT</code></strong> &mdash; The bytes of the binary file</div>
-
-<div class="field-summary-bottom">H5T_NATIVE_OPAQUE</div>
-</summary>
-<div class="field-content">
-<p>The bytes of the binary file</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_NATIVE_OPAQUE</span> | <strong>Dimensions:</strong> <code>[N_bytes]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_binaryfile-content_type"><code>CONTENT_TYPE</code></strong> &mdash; The MIME type of the file provided.</div>
-
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>The MIME type of the file provided. May be "application/octet-string" for unknown binary data.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> - | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_binaryfile-name"><code>NAME</code></strong> &mdash; An optional file name identifying the contained information.</div>
-
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>An optional file name identifying the contained information.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> - | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
-</div>
-</details>
 <details class="field-details">
 <summary>
 <div class="field-summary-top"><strong id="onde_binaryfile-type"><code>TYPE</code></strong> &mdash; </div>
