@@ -1,5 +1,6 @@
 onde_class: ONDE_BINARYFILE_EMBEDDED
-inherits: ONDE_BINARYFILE 
+inherits:
+- ONDE_BINARYFILE 
 description: |
   ## The ONDE_BINARYFILE_EMBEDDED is a container for arbitrary file content that is embedded within the ONDE file and that has a specified MIME type
 fields:
