@@ -2,4 +2,5 @@ onde_class: ONDE_BINARYFILE
 inherits: []
 description: |
   ## The ONDE_BINARYFILE is an abstract base class for containers for arbitrary file content. It is assumed that the content is accessible by some means, and will have a specified MIME type
-fields:
+fields: {}
+
