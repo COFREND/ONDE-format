@@ -32,9 +32,13 @@ The strings contained in the TYPE attribute describe the hierarchy of classes to
 
 **Example** 
 
-The ONDE format contains a `ONDE_COMPONENT` class describing the inspected component. It has a `ONDE_PLANE` subclass. The HDF5 file will contain a group with n HDF5 attribute ONDE:TYPE that will contain: `['ONDE_COMPONENT', 'ONDE_PLANE']`.
+The ONDE format contains a `ONDE_COMPONENT` class describing the inspected component. It has a `ONDE_PLANE` subclass. The HDF5 file will contain a group with an HDF5 attribute ONDE:TYPE that will contain: `['ONDE_COMPONENT', 'ONDE_PLANE']`. In general, when reading an object, you should interpret the object as an instance of the rightmost class in the ONDE:TYPE list that you understand.
 
-### HDF5 implementation of class fields
+The HDF5 group that represents an ONDE object contains HDF5 subgroups, attributes, and datasets that correspond to the fields of the object class and any accessory classes. All of these names should contain colons (":") that separate the name of the defining class (or ONDE) from the remainder of the field name.
+
+It is permitted to embed other HDF5 subgroups within an ONDE object, so long as the subgroup name of these other subgroups does not contain a colon.
+
+    ### HDF5 implementation of class fields
 
 For each field, the specification defines the storage as either attribute/group (usually shortened as just attribute) or dataset. If the storage is specified as attribute/group then the field is normally stored as an HDF5 attribute. However, if the field either references an ONDE object or contains an array of such references, then it may alternatively be stored as an HDF5 group. If the storage is specified as dataset, the field contents should be an array of data or references and the field is instead stored as an HDF5 dataset. Attributes will typically be used for fields that have a small size (scalar, string or small arrays), while datasets will be used for  arrays with a significant size. The specification also defines whether a field is optional or mandatory, as well as the constraints on their dimensions and the range of accessible values (minimum and maximum for scalar values or allowed values for some strings).
 
