@@ -341,17 +341,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hdf5-implementation-of-class-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HDF5 implementation of class fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#accessory-classes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2241,17 +2230,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hdf5-implementation-of-class-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HDF5 implementation of class fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#accessory-classes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2441,8 +2419,11 @@ The HDF5 root group must contain an attribute called <code>ONDE:FILETYPE</code> 
 <p>In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named <code>ONDE:TYPE</code> and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.</p>
 <p>The strings contained in the TYPE attribute describe the hierarchy of classes to which the object belongs, starting with the base class.</p>
 <p><strong>Example</strong> </p>
-<p>The ONDE format contains a <code>ONDE_COMPONENT</code> class describing the inspected component. It has a <code>ONDE_PLANE</code> subclass. The HDF5 file will contain a group with n HDF5 attribute ONDE:TYPE that will contain: <code>['ONDE_COMPONENT', 'ONDE_PLANE']</code>.</p>
-<h3 id="hdf5-implementation-of-class-fields">HDF5 implementation of class fields</h3>
+<p>The ONDE format contains a <code>ONDE_COMPONENT</code> class describing the inspected component. It has a <code>ONDE_PLANE</code> subclass. The HDF5 file will contain a group with an HDF5 attribute ONDE:TYPE that will contain: <code>['ONDE_COMPONENT', 'ONDE_PLANE']</code>. In general, when reading an object, you should interpret the object as an instance of the rightmost class in the ONDE:TYPE list that you understand.</p>
+<p>The HDF5 group that represents an ONDE object contains HDF5 subgroups, attributes, and datasets that correspond to the fields of the object class and any accessory classes. All of these names should contain colons (":") that separate the name of the defining class (or ONDE) from the remainder of the field name.</p>
+<p>It is permitted to embed other HDF5 subgroups within an ONDE object, so long as the subgroup name of these other subgroups does not contain a colon.</p>
+<pre><code>### HDF5 implementation of class fields
+</code></pre>
 <p>For each field, the specification defines the storage as either attribute/group (usually shortened as just attribute) or dataset. If the storage is specified as attribute/group then the field is normally stored as an HDF5 attribute. However, if the field either references an ONDE object or contains an array of such references, then it may alternatively be stored as an HDF5 group. If the storage is specified as dataset, the field contents should be an array of data or references and the field is instead stored as an HDF5 dataset. Attributes will typically be used for fields that have a small size (scalar, string or small arrays), while datasets will be used for  arrays with a significant size. The specification also defines whether a field is optional or mandatory, as well as the constraints on their dimensions and the range of accessible values (minimum and maximum for scalar values or allowed values for some strings).</p>
 <p>Storing fields as HDF5 groups allows a hierarchical layout of the ONDE file where objects are contained within other objects. Such containment confers no special status within the ONDE data model and is conceptually no different from any other reference to the object. In general, an object shouldn't be duplicated for the purpose of placing it within another object. Rather, the object should be placed in a single location and should be referenced when needed elsewhere.</p>
 <p>A field that contains an array of objects or object references and is specified as attribute/group storage may indeed be stored in the form of an HDF5 group, even though HDF5 groups do not support array access. In this case, the HDF5 group should contain an attribute named "ONDE:SHAPE" with an integer array defining the dimensions of the field. The elements of the array are stored in precisely named HDF5 attributes or subgroups, according to whether they are references or entire objects. The attribute or subgroup names are the array indexes, starting with zero, with each index at least five digits but otherwise as short as possible, separated with commas and with surrounding parentheses, for example "(00001,00005)".</p>
