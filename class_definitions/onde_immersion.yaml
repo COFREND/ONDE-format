@@ -8,5 +8,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The designated path length through the water couplant during immersion."
     description: ''
     dimensions: '1'

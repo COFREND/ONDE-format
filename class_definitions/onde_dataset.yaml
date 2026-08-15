@@ -39,6 +39,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: A name or label representing this dataset.
     description: A name for this dataset
     dimensions: '1'
   SETUP:
@@ -46,6 +47,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_SETUP>
+    short_description: Reference to the setup configuration used for this dataset.
     description: ''
     dimensions: '1'
   OPERATOR:
@@ -53,6 +55,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: The name or identifier of the operator conducting the acquisition.
     description: ''
     dimensions: '1'
   DATE_AND_TIME:
@@ -60,6 +63,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: The date and time of the data acquisition.
     description: ''
     dimensions: '1'
   DATA:
@@ -67,6 +71,7 @@ fields:
     required: false
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
+    short_description: The core data array or a reference to the array.
     description: |-
       Data can be either an array or a reference to an array. Omitting this
       field is possible, in the event when Tscan or Cscan data is recorded but
@@ -77,6 +82,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    short_description: Reference to the dimension defining the amplitude characteristics.
     description: |-
       If absent, treated as coordinate "Amplitude", units "Arbitrary", offset
       0.0, scale 1.0
@@ -86,6 +92,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
+    short_description: Array of references to the index dimensions of the dataset.
     description: |-
       One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
       treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0

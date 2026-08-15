@@ -9,6 +9,7 @@ fields:
     full_name: ONDE_SETUP:GEOMETRIC_SETUP
     required: true
     storage: attribute
+    short_description: "Reference to the geometric setup configuration."
     hdf5_type: H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>
     description: ''
     dimensions: '[1]'

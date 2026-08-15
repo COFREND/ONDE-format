@@ -74,6 +74,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Label or identifier for the wedge.'
     description: ''
     dimensions: '1'
   MANUFACTURER:
@@ -81,6 +82,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Manufacturer of the wedge.'
     description: ''
     dimensions: '1'
   SERIAL_NUMBER:
@@ -88,6 +90,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Serial number of the wedge.'
     description: ''
     dimensions: '1'
   CONTACT_SURFACE:
@@ -95,6 +98,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Type of the wedge contact surface.'
     description: |-
       Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,
       CYLINDRICAL_MINOR - If missing PLANAR assumed
@@ -104,6 +108,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Radius of curvature for the wedge contact surface.'
     description: |-
       Wedge curvature radius (0 assumed if missing)
 
@@ -117,6 +122,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Dimensions defining the equivalent contact area of the wedge.'
     description: Equivalent to L1, L2 and L3 (See Figure 15)
     dimensions: '[3]'
   HEIGHT:
@@ -124,6 +130,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Distance of the ultrasonic beam between the probe center and the index point.'
     description: |-
       For a wedge, distance of the ultrasonic beam between the probe center and
       the index point (See Figure 15)
@@ -133,6 +140,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Skew angle of the wedge.'
     description: wedge /skew angle (B) (See Figure 15)
     dimensions: '1'
   DISORIENTATION_ANGLE:
@@ -140,5 +148,6 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Disorientation angle of the wedge.'
     description: wedge /disorientation angle (D) (See Figure 15)
     dimensions: '1'

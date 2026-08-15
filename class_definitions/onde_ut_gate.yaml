@@ -7,6 +7,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "Defines the start time for the ultrasonic gate."
     description: |-
       For scalar data relying on Ascan data, defines the start time for the
       gate. Mandatory for data related to Ascans.
@@ -16,6 +17,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "Defines the width of the ultrasonic gate."
     description: |-
       For Cscans scalar data relying on Ascan data, defines the width of the
       gate. Mandatory for data related to Ascans
@@ -25,6 +27,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "Defines the threshold of the gate for data storage."
     description: Defines the threshold of the gate for data to be stored
     dimensions: '1'
   DETECTION:
@@ -32,6 +35,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "Specifies the peak or flank detection mode for the gate."
     description: ''
     dimensions: '1'
     allowed_values: '"FIRST_PEAK"|"LAST_PEAK"|"MAX_PEAK"|"FIRST_FLANK"|"LAST_FLANK"|"MAX_FLANK"'
@@ -40,6 +44,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "Specifies the polarity used for gate detection."
     description: ''
     dimensions: '1'
     allowed_values: '"ABSOLUTE"|"POSITIVE"|"NEGATIVE"'

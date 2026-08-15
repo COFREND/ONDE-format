@@ -9,6 +9,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_INTEGER
     description: ''
+    short_description: 'The total number of individual ultrasonic elements in this linear array probe.'
     dimensions: '1'
   ELEMENT_DIM_MAJOR:
     full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MAJOR
@@ -16,6 +17,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: 'The dimension of a single element along the primary axis of the linear array.'
     dimensions: '1'
   ELEMENT_DIM_MINOR:
     full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_DIM_MINOR
@@ -23,6 +25,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: 'The dimension of a single element along the secondary axis (transverse to the array).'
     dimensions: '1'
   ELEMENT_PITCH_DIM_MAJOR:
     full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_PITCH_DIM_MAJOR
@@ -30,6 +33,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: 'The center-to-center spacing between adjacent elements along the primary axis of the linear array.'
     dimensions: '1'
   ELEMENT_NUMBERING:
     full_name: ONDE_LINEAR_UT_PROBE:ELEMENT_NUMBERING
@@ -40,4 +44,5 @@ fields:
       Defines the element numbering relating the numbering implicitly defined by
       the probe description and the order defined in the element tables
       (ELEMENT_POSITION, ELEMENT_GEOMETRY, etc)
+    short_description: 'Mapping between the probe''s physical element order and the indices used in the data tables.'
     dimensions: '[N_Elem<p>]'

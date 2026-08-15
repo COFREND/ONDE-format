@@ -29,6 +29,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Specifies the type of 2D extrusion, either PLANE or CYLINDER.'
     description: ''
     dimensions: '1'
     allowed_values: '"PLANE"|"CYLINDER"'
@@ -37,6 +38,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Defines the extrusion length for planar extrusions or the diameter for cylindrical extrusions.'
     description: ''
     dimensions: '1'
   CAD:
@@ -44,5 +46,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Contains the 2D CAD representation of the component, formatted as a DXF file.'
     description: ''
     dimensions: '1'

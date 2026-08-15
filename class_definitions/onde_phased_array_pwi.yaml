@@ -8,6 +8,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The starting angle for the plane wave imaging (PWI) sweep.'
     description: ''
     dimensions: '1'
   FINISHING_ANGLE:
@@ -15,6 +16,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The finishing angle for the plane wave imaging (PWI) sweep.'
     description: ''
     dimensions: '1'
   NUMBER_OF_ANGLES:
@@ -22,5 +24,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The total number of discrete angles used in the plane wave imaging (PWI) sweep.'
     description: ''
     dimensions: '1'

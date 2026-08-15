@@ -8,5 +8,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "A 3D CAD representation of the component."
     description: ''
     dimensions: '1'

@@ -8,5 +8,6 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ULTRASONIC_SETUP>
+    short_description: Defines the ultrasonic setup configuration for the sequence.
     description: Mandatory for Ascan sequences
     dimensions: '[1]'

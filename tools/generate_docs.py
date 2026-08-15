@@ -505,7 +505,8 @@ details.field-details[open] > summary {
             required=True,
             storage="attribute",
             hdf5_type="H5T_STRING",
-            description="",
+            short_description="Specifies the ONDE class and its inheritance hierarchy.",
+            description="The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.",
             dimensions=dim_str,
             allowed_values=allowed_str
         )
