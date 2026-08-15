@@ -2208,7 +2208,7 @@ inner loop in the array).</p>
 
 </div>
 
-<div class="field-summary-desc">Reference to the dimension defining the amplitude characteristics.</div>
+<div class="field-summary-desc">If absent, treated as coordinate "Amplitude", units "Arbitrary", offset<br>0.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2234,7 +2234,7 @@ inner loop in the array).</p>
 
 </div>
 
-<div class="field-summary-desc">Contains the reconstructed T-scan data values.</div>
+<div class="field-summary-desc">can be either an array or a reference to an array</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2261,8 +2261,6 @@ inner loop in the array).</p>
 
 </div>
 
-<div class="field-summary-desc">The date and time of the data acquisition.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2285,7 +2283,7 @@ inner loop in the array).</p>
 
 </div>
 
-<div class="field-summary-desc">Array of references to the index dimensions of the dataset.</div>
+<div class="field-summary-desc">One entry per dimension of ONDE_DATASET:DATA.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2313,7 +2311,7 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
 
 </div>
 
-<div class="field-summary-desc">A name or label representing this dataset.</div>
+<div class="field-summary-desc">A name for this dataset</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2340,8 +2338,6 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
 
 </div>
 
-<div class="field-summary-desc">The name or identifier of the operator conducting the acquisition.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2361,8 +2357,6 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
   <span class="req-badge req-no">Optional</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the mode or algorithm used for the reconstruction.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2384,7 +2378,7 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
 
 </div>
 
-<div class="field-summary-desc">Indicates the index of the reference probe used for trajectory alignment.</div>
+<div class="field-summary-desc">Points the the index of the reference probe in the Geometric setup probe<br>list.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2412,8 +2406,6 @@ list. Defaults to 0.</p>
 
 </div>
 
-<div class="field-summary-desc">Reference to the setup configuration used for this dataset.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2434,7 +2426,7 @@ list. Defaults to 0.</p>
 
 </div>
 
-<div class="field-summary-desc">Points to the elementary channel A-scans dataset used for this reconstruction.</div>
+<div class="field-summary-desc">reference to the elementary channels ascans that were used for the<br>reconstruction</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2451,16 +2443,14 @@ list. Defaults to 0.</p>
 reconstruction</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_dataset_ut_tscan-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2472,9 +2462,6 @@ reconstruction</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
@@ -2485,7 +2472,7 @@ reconstruction</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the physical dimensions of the reconstruction zone.</div>
+<div class="field-summary-desc">physical dimension of the zone</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2510,7 +2497,7 @@ reconstruction</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the coordinate frame associated with the center of the image zone.</div>
+<div class="field-summary-desc">frame associated with the center of the image zone</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2535,7 +2522,7 @@ reconstruction</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the number of pixels along each axis of the reconstruction zone.</div>
+<div class="field-summary-desc">number of pixels of the zone</div>
 
 <table class="field-meta-table">
 <tbody>

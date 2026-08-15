@@ -2296,7 +2296,7 @@ zero-padding the data block.</p>
 
 </div>
 
-<div class="field-summary-desc">The sampling frequency of the A-scan data points.</div>
+<div class="field-summary-desc">This indicates the sampling frequency of A-scan data points.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2322,7 +2322,7 @@ that a uniform sampling rate is used throughout A-scan data collection.</p>
 
 </div>
 
-<div class="field-summary-desc">The starting time for data acquisition.</div>
+<div class="field-summary-desc">This indicates the starting time for data acquisition.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2349,7 +2349,7 @@ is specified for each A-Scan.</p>
 
 </div>
 
-<div class="field-summary-desc">A textual description of the filtering applied.</div>
+<div class="field-summary-desc">Description of the filtering applied</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2374,7 +2374,7 @@ is specified for each A-Scan.</p>
 
 </div>
 
-<div class="field-summary-desc">Provides the parameters for the analogue filter.</div>
+<div class="field-summary-desc">Optional datafield providing analogue filter parameters - see notes for<br>detailed explanation</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2400,7 +2400,7 @@ detailed explanation</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the type of filtering applied to the signals.</div>
+<div class="field-summary-desc">Defines the type of filtering applied to the signals: NO_FILTER,<br>LOW_PASS, HIGH_PASS, BAND_PASS, OTHER</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2426,7 +2426,7 @@ LOW_PASS, HIGH_PASS, BAND_PASS, OTHER</p>
 
 </div>
 
-<div class="field-summary-desc">The total gain applied for each A-scan during reception.</div>
+<div class="field-summary-desc">This indicates the total gain for each A-scan during<br>reception.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2452,8 +2452,6 @@ reception. Multiplying factor that was applied at acquisition.</p>
 
 </div>
 
-<div class="field-summary-desc">Label for the ultrasonic setup.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2473,8 +2471,6 @@ reception. Multiplying factor that was applied at acquisition.</p>
   <span class="req-badge req-no">Optional</span>
 
 </div>
-
-<div class="field-summary-desc">Reference to the associated phased array setup.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2496,7 +2492,7 @@ reception. Multiplying factor that was applied at acquisition.</p>
 
 </div>
 
-<div class="field-summary-desc">The Pulse Repetition Frequency (PRF) for the signals.</div>
+<div class="field-summary-desc">Pulse Repetition Frequency</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2521,7 +2517,7 @@ reception. Multiplying factor that was applied at acquisition.</p>
 
 </div>
 
-<div class="field-summary-desc">HDF5 reference to the receive focal law group.</div>
+<div class="field-summary-desc">Each A-scan in a dataframe must be associated with both a transmit and a<br>receive focal law through the datafields.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2550,7 +2546,7 @@ for phased array setups.</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the rectification mode applied to the ultrasonic data.</div>
+<div class="field-summary-desc">Defines if the data are FULL_WAVE or RECTIFIED_POSITIVE,<br>RECTIFIED_NEGATIVE, RECTIFIED_FULL</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2576,7 +2572,7 @@ RECTIFIED_NEGATIVE, RECTIFIED_FULL</p>
 
 </div>
 
-<div class="field-summary-desc">Digitization of the emission signal.</div>
+<div class="field-summary-desc">Digitization of the emission signal (can be used to store arbitrary<br>signals).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2603,7 +2599,7 @@ with one row for time and one for amplitude.</p>
 
 </div>
 
-<div class="field-summary-desc">The Time Corrected Gain (TCG) curve applied to the received signals.</div>
+<div class="field-summary-desc">TCG curve applied to the received signals.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2629,7 +2625,7 @@ given for each time sample as a multiplying factor.</p>
 
 </div>
 
-<div class="field-summary-desc">HDF5 reference to the transmit focal law group.</div>
+<div class="field-summary-desc">Each A-scan in a dataframe must be associated with both a transmit and a<br>receive focal law through the datafields.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2649,16 +2645,14 @@ same structure is used for both transmit and receive focal
 laws). Mandatory for phased array setups.</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_ultrasonic_setup-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2670,9 +2664,6 @@ laws). Mandatory for phased array setups.</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
 </div>
 

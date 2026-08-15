@@ -2025,7 +2025,7 @@
 
 </div>
 
-<div class="field-summary-desc">Name of the stored data or indexed coordinates.</div>
+<div class="field-summary-desc">String defining the stored data (for the AMPLITUDE_DIMENSION) or the<br>indexed coordinates (for INDEX_DIMENSIONS).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2056,7 +2056,7 @@ INDEX_DIMENSIONs)</p>
 
 </div>
 
-<div class="field-summary-desc">Offset value to be added to the scaled stored data or zero-based indices.</div>
+<div class="field-summary-desc">Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION) or<br>scaled zero-based integer indices (for INDEX_DIMENSIONS).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2084,7 +2084,7 @@ unspecified</p>
 
 </div>
 
-<div class="field-summary-desc">Scaling factor applied to the stored data or integer indices.</div>
+<div class="field-summary-desc">Scale to be applied to stored data (for the AMPLITUDE_DIMENSION) or<br>integer indices (for INDEX_DIMENSIONS).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2102,16 +2102,14 @@ integer indices (for INDEX_DIMENSIONS). Calibrated value in given units =
 (data or index)*SCALE + OFFSET. Default value of 1.0 if unspecified</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_dimension-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2123,9 +2121,6 @@ integer indices (for INDEX_DIMENSIONS). Calibrated value in given units =
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
@@ -2136,7 +2131,7 @@ integer indices (for INDEX_DIMENSIONS). Calibrated value in given units =
 
 </div>
 
-<div class="field-summary-desc">Units for the stored data or indexed coordinates, preferably spelled-out MKS base units.</div>
+<div class="field-summary-desc">Units for the stored data (for the AMPLITUDE_DIMENSION) or for the indexed<br>coordinates (for INDEX_DIMENSIONS).</div>
 
 <table class="field-meta-table">
 <tbody>

@@ -2024,8 +2024,6 @@
 
 </div>
 
-<div class="field-summary-desc">Specifies the peak or flank detection mode for the gate.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2045,8 +2043,6 @@
   <span class="req-badge req-no">Optional</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the polarity used for gate detection.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2068,7 +2064,7 @@
 
 </div>
 
-<div class="field-summary-desc">Defines the start time for the ultrasonic gate.</div>
+<div class="field-summary-desc">For scalar data relying on Ascan data, defines the start time for the<br>gate.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2094,7 +2090,7 @@ gate. Mandatory for data related to Ascans.</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the threshold of the gate for data storage.</div>
+<div class="field-summary-desc">Defines the threshold of the gate for data to be stored</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2110,16 +2106,14 @@ gate. Mandatory for data related to Ascans.</p>
 <p>Defines the threshold of the gate for data to be stored</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_ut_gate-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2131,9 +2125,6 @@ gate. Mandatory for data related to Ascans.</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
@@ -2144,7 +2135,7 @@ gate. Mandatory for data related to Ascans.</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the width of the ultrasonic gate.</div>
+<div class="field-summary-desc">For Cscans scalar data relying on Ascan data, defines the width of the<br>gate.</div>
 
 <table class="field-meta-table">
 <tbody>

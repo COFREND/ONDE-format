@@ -2028,8 +2028,6 @@
 
 </div>
 
-<div class="field-summary-desc">Additional text comment regarding the component.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2052,7 +2050,7 @@
 
 </div>
 
-<div class="field-summary-desc">Transformation defining the component's frame relative to the global reference.</div>
+<div class="field-summary-desc">Definition of the specimen frame in the reference frame.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2080,8 +2078,6 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">Density of the component material.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2102,8 +2098,6 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">The physical dimension used for the weld extrusion process.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2123,8 +2117,6 @@ default value is identity with the reference frame.</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the type of extrusion for the weld geometry.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2148,8 +2140,6 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">Image parameters or data associated with the component.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2172,8 +2162,6 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">A human-readable label or name for the component.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2185,16 +2173,14 @@ default value is identity with the reference frame.</p>
 </table>
 </summary>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_weld-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2206,12 +2192,9 @@ default value is identity with the reference frame.</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
-<details class="field-details inherited-field">
-<summary>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_weld-velocities"><code>VELOCITIES</code></strong>
   <span class="field-type" markdown="span">H5T_FLOAT</span>
@@ -2220,8 +2203,6 @@ default value is identity with the reference frame.</p>
     <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
 
 </div>
-
-<div class="field-summary-desc">Longitudinal and shear wave velocities of the component.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2233,9 +2214,6 @@ default value is identity with the reference frame.</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.</p>
-</div>
 </details>
 <details class="field-details inherited-field">
 <summary>
@@ -2248,7 +2226,7 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">Optional CAD file used for visualization purposes.</div>
+<div class="field-summary-desc">Optional CAD used for visualisation purposes</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2275,7 +2253,7 @@ default value is identity with the reference frame.</p>
 
 </div>
 
-<div class="field-summary-desc">Transformation frame for the visualization CAD.</div>
+<div class="field-summary-desc">Definition of the frame defining the visualisation CAD with offset and<br>quaternions in the specimen frame- Identity is used if absent</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2301,8 +2279,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The angle of the fill pass for the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2322,8 +2298,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The height of the fill pass for the weld.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2345,8 +2319,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The width of the heat-affected zone (HAZ) of the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2366,8 +2338,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The angle of the hot pass layer in the weld.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2389,8 +2359,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The height of the hot pass layer in the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2410,8 +2378,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The height of the root land of the weld.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2433,8 +2399,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The offset measurement for the root land of the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2454,8 +2418,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The height of the lower cap of the weld.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2477,8 +2439,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The width of the lower cap of the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2498,8 +2458,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The angle of the root pass for the weld.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2521,8 +2479,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The height of the root pass for the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2542,8 +2498,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Describes the symmetry configuration of the weld geometry.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2565,8 +2519,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the shape type of the weld groove (e.g., V or U).</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2587,8 +2539,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
 
 </div>
 
-<div class="field-summary-desc">The height of the upper cap of the weld.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2608,8 +2558,6 @@ quaternions in the specimen frame- Identity is used if absent</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">The width of the upper cap of the weld.</div>
 
 <table class="field-meta-table">
 <tbody>

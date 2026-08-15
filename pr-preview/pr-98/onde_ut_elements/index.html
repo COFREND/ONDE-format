@@ -2129,7 +2129,7 @@ according to the major axis.</p>
 
 </div>
 
-<div class="field-summary-desc">The vector defining the axis of curvature for non-flat elements.</div>
+<div class="field-summary-desc">If absent, flat elements are assumed</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2154,7 +2154,7 @@ according to the major axis.</p>
 
 </div>
 
-<div class="field-summary-desc">Logical flags indicating non-functioning elements in a probe.</div>
+<div class="field-summary-desc">Datafield of logical values (0 = false, 1 = true) used to flag<br>non-functioning elements in an array probe (if not present, assumption<br>should be that all elements are performing correctly);</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2181,7 +2181,7 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the position and orientation of each probe element.</div>
+<div class="field-summary-desc">Array defining the location of the elements of the probe</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2206,7 +2206,7 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
-<div class="field-summary-desc">The radius of curvature for elements that are not flat.</div>
+<div class="field-summary-desc">If absent, flat elements are assumed</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2231,7 +2231,7 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the geometric shape of each probe element.</div>
+<div class="field-summary-desc">The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2256,8 +2256,6 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
-<div class="field-summary-desc">Provides six parameters that specify the dimensions of each element.</div>
-
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
@@ -2269,16 +2267,14 @@ should be that all elements are performing correctly);</p>
 </table>
 </summary>
 </details>
-<details class="field-details">
-<summary>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
   <strong class="field-name" id="onde_ut_elements-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
-
-<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2290,9 +2286,6 @@ should be that all elements are performing correctly);</p>
   </tbody>
 </table>
 </summary>
-<div class="field-content">
-<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
-</div>
 </details>
 </div>
 
