@@ -62,19 +62,47 @@ classDiagram
 
 <div class="field-list" markdown="1">
 {% for name, f in fields_meta %}
+{% set summary_content %}
+<div class="field-summary-header" markdown="span">
+  <strong class="field-name" id="{{ cls.onde_class | lower }}-{{ name | lower | replace(' ', '-') }}"><code>{{ name }}</code></strong>
+  <span class="field-type" markdown="span">{{ f.html_type }}</span>
+  {% if f.req_str == 'Yes' %}<span class="req-badge req-yes">Required</span>{% else %}<span class="req-badge req-no">Optional</span>{% endif %}
+  {% if f.is_inherited %}
+    <span class="inherited-badge" markdown="span">Inherited from [{{ f.source }}]({{ f.source | lower }}.md)</span>
+  {% elif f.is_accessory %}
+    <span class="accessory-badge" markdown="span">From accessory class [{{ f.source }}]({{ f.source | lower }}.md)</span>
+  {% endif %}
+</div>
+{% if f.short_desc %}
+<div class="field-summary-desc" markdown="span">{{ f.short_desc }}</div>
+{% endif %}
+<table class="field-meta-table">
+  <tbody>
+    <tr><td>Storage:</td><td><span markdown="span">{{ f.storage }}</span></td></tr>
+    {% if f.dimensions %}<tr><td>Dimensions:</td><td><code>{{ f.dimensions | e }}</code></td></tr>{% endif %}
+    {% if f.allowed %}<tr><td>Allowed:</td><td><code>{{ f.allowed | e }}</code></td></tr>{% endif %}
+    {% if f.min_value %}<tr><td>Min:</td><td><code>{{ f.min_value | e }}</code></td></tr>{% endif %}
+    {% if f.max_value %}<tr><td>Max:</td><td><code>{{ f.max_value | e }}</code></td></tr>{% endif %}
+  </tbody>
+</table>
+{% endset %}
+
+{% if f.description %}
 <details class="field-details{% if f.is_inherited %} inherited-field{% elif f.is_accessory %} accessory-field{% endif %}" markdown="1">
-<summary markdown="1"><div class="field-summary-top" markdown="span"><strong id="{{ cls.onde_class | lower }}-{{ name | lower | replace(' ', '-') }}"><code>{{ name }}</code></strong>{% if f.is_inherited %} <span class="inherited-badge" markdown="span">Inherited from [{{ f.source }}]({{ f.source | lower }}.md)</span>{% elif f.is_accessory %} <span class="accessory-badge" markdown="span">From accessory class [{{ f.source }}]({{ f.source | lower }}.md)</span>{% endif %} &mdash; {{ f.short_desc }}</div><div class="field-summary-bottom" markdown="span">{{ f.html_type }}</div></summary>
-
+<summary markdown="1">
+{{ summary_content }}
+</summary>
 <div class="field-content" markdown="1">
-
-{{ f.description if f.description else "No detailed description provided." }}
-
----
-
-**Type:** <span markdown="span">{{ f.html_type }}</span> | **Dimensions:** {% if f.dimensions %}`{{ f.dimensions }}`{% else %}-{% endif %} | **Required:** {{ f.req_str }} | **Storage:** {{ f.storage }}{% if f.allowed %} | **Allowed:** `{{ f.allowed }}`{% endif %}{% if f.min_value %} | **Min:** `{{ f.min_value }}`{% endif %}{% if f.max_value %} | **Max:** `{{ f.max_value }}`{% endif %}
-
+{{ f.description }}
 </div>
 </details>
+{% else %}
+<details class="field-details empty-details{% if f.is_inherited %} inherited-field{% elif f.is_accessory %} accessory-field{% endif %}" markdown="1">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1" markdown="1">
+{{ summary_content }}
+</summary>
+</details>
+{% endif %}
 {% endfor %}
 </div>
 {% endif %}
@@ -89,19 +117,42 @@ MODALITY_TEMPLATE = """\
 
 <div class="field-list" markdown="1">
 {% for name, f in fields_meta %}
+{% set summary_content %}
+<div class="field-summary-header" markdown="span">
+  <strong class="field-name" id="{{ mod.modality | lower }}-{{ name | lower | replace(' ', '-') }}"><code>{{ name }}</code></strong>
+  <span class="field-type" markdown="span">{{ f.html_type }}</span>
+  {% if f.req_str == 'Yes' %}<span class="req-badge req-yes">Required</span>{% else %}<span class="req-badge req-no">Optional</span>{% endif %}
+</div>
+{% if f.short_desc %}
+<div class="field-summary-desc" markdown="span">{{ f.short_desc }}</div>
+{% endif %}
+<table class="field-meta-table">
+  <tbody>
+    <tr><td>Storage:</td><td><span markdown="span">{{ f.storage }}</span></td></tr>
+    {% if f.dimensions %}<tr><td>Dimensions:</td><td><code>{{ f.dimensions | e }}</code></td></tr>{% endif %}
+    {% if f.allowed %}<tr><td>Allowed:</td><td><code>{{ f.allowed | e }}</code></td></tr>{% endif %}
+    {% if f.min_value %}<tr><td>Min:</td><td><code>{{ f.min_value | e }}</code></td></tr>{% endif %}
+    {% if f.max_value %}<tr><td>Max:</td><td><code>{{ f.max_value | e }}</code></td></tr>{% endif %}
+  </tbody>
+</table>
+{% endset %}
+
+{% if f.description %}
 <details class="field-details" markdown="1">
-<summary markdown="1"><div class="field-summary-top" markdown="span"><strong id="{{ mod.modality | lower }}-{{ name | lower | replace(' ', '-') }}"><code>{{ name }}</code></strong> &mdash; {{ f.short_desc }}</div><div class="field-summary-bottom" markdown="span">{{ f.html_type }}</div></summary>
-
+<summary markdown="1">
+{{ summary_content }}
+</summary>
 <div class="field-content" markdown="1">
-
-{{ f.description if f.description else "No detailed description provided." }}
-
----
-
-**Type:** <span markdown="span">{{ f.html_type }}</span> | **Dimensions:** {% if f.dimensions %}`{{ f.dimensions }}`{% else %}-{% endif %} | **Required:** {{ f.req_str }} | **Storage:** {{ f.storage }}{% if f.allowed %} | **Allowed:** `{{ f.allowed }}`{% endif %}{% if f.min_value %} | **Min:** `{{ f.min_value }}`{% endif %}{% if f.max_value %} | **Max:** `{{ f.max_value }}`{% endif %}
-
+{{ f.description }}
 </div>
 </details>
+{% else %}
+<details class="field-details empty-details" markdown="1">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1" markdown="1">
+{{ summary_content }}
+</summary>
+</details>
+{% endif %}
 {% endfor %}
 </div>
 {% endif %}
@@ -194,7 +245,7 @@ def main():
     line-height: 1.3;
 }
 
-details.inherited-field > summary {
+.inherited-field > summary, .inherited-field > .field-summary-empty {
     background-color: var(--md-default-bg-color--light);
     opacity: 0.85;
 }
@@ -212,7 +263,7 @@ details.inherited-field > summary {
     text-decoration: underline;
 }
 
-details.accessory-field > summary {
+.accessory-field > summary, .accessory-field > .field-summary-empty {
     background-color: var(--md-code-bg-color);
     opacity: 0.95;
 }
@@ -231,13 +282,16 @@ details.accessory-field > summary {
 }
 
 details.field-details {
+    display: block;
     border: 1px solid var(--md-default-fg-color--lightest, rgba(0,0,0,0.12));
     border-radius: 0.2rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     background-color: var(--md-default-bg-color);
     box-shadow: 0 2px 2px rgba(0,0,0,0.05);
 }
 details.field-details > summary {
+    display: block !important;
     padding: 0.8rem 1rem;
     cursor: pointer;
     list-style: none;
@@ -265,31 +319,117 @@ details.field-details[open] > summary::before {
     transform: rotate(45deg);
     top: 1rem;
 }
+details.empty-details > summary::after {
+    display: none !important;
+}
 details.field-details > summary:hover {
     background-color: rgba(128, 128, 128, 0.05);
 }
-details.field-details > summary .field-summary-top {
-    font-weight: 500;
-    margin-bottom: 0.2rem;
-    color: var(--md-default-fg-color);
+details.field-details > summary .field-summary-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.3rem;
 }
-details.field-details > summary .field-summary-bottom {
+details.field-details > summary .field-summary-header .field-name code {
+    font-size: 1.05em;
+    color: var(--md-default-fg-color);
+    font-family: var(--md-text-font-family, inherit);
+    background: transparent;
+    padding: 0;
+    font-weight: 700;
+}
+details.field-details > summary .field-summary-header .field-type {
     font-family: var(--md-code-font-family);
+    font-size: 0.7em;
+    font-weight: 600;
+    background-color: var(--md-primary-fg-color--lightest, rgba(64, 81, 181, 0.1));
+    color: var(--md-primary-fg-color);
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--md-primary-fg-color--light, rgba(64, 81, 181, 0.2));
+}
+details.field-details > summary .field-summary-header .field-type a {
+    color: inherit;
+    text-decoration: underline;
+}
+details.field-details > summary .field-summary-header .field-type code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    box-shadow: none;
+}
+details.field-details > summary .field-summary-header .req-badge {
+    font-size: 0.7em;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+details.field-details > summary .field-summary-header .req-yes {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #d32f2f;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+details.field-details > summary .field-summary-header .req-no {
+    background-color: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.2);
+}
+details.field-details > summary .field-summary-desc {
+    font-size: 0.95em;
+    color: var(--md-default-fg-color);
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+    font-weight: normal;
+}
+details.field-details > summary .field-meta-table {
+    display: table !important;
+    table-layout: auto !important;
     font-size: 0.85em;
     color: var(--md-default-fg-color--light);
-    word-break: break-word;
+    margin-top: 0.4rem;
+    border-collapse: collapse;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    font-weight: normal;
+}
+details.field-details > summary .field-meta-table td {
+    display: table-cell !important;
+    padding: 0 0.75rem 0 0 !important;
+    line-height: 1.2;
+    border: none;
+    vertical-align: top;
+    background: transparent;
+}
+details.field-details > summary .field-meta-table td:nth-child(2) {
+    width: 99%;
+}
+details.field-details > summary .field-meta-table tr:hover td {
+    background: transparent;
+}
+details.field-details > summary .field-meta-table td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+    width: 1%;
+    color: var(--md-default-fg-color);
+}
+details.field-details > summary .field-meta-table code {
+    font-size: 0.9em;
 }
 details.field-details[open] > summary {
     border-bottom: 1px solid var(--md-default-fg-color--lightest, rgba(0,0,0,0.12));
 }
-details.field-details .field-content {
+.field-details .field-content {
     padding: 1rem;
 }
-details.field-details .field-content hr {
+.field-details .field-content hr {
     margin: 1rem 0;
 }
 ''')
-    
     # Fix the src_images path since it's one level up (ONDE-format/images)
     src_images = os.path.normpath(os.path.join(input_dir, '..', 'images'))
     dest_images = os.path.join(docs_dir, 'images')
