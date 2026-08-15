@@ -18,6 +18,7 @@ import yaml
 import glob
 import shutil
 import subprocess
+import generate_csv
 
 try:
     from pydantic import BaseModel, ValidationError
@@ -152,6 +153,10 @@ def main():
     
     docs_dir = os.path.join(output_dir, 'docs')
     os.makedirs(docs_dir, exist_ok=True)
+    
+    # Generate CSV to the root of the site
+    csv_output = os.path.join(docs_dir, 'ONDE_fields.csv')
+    generate_csv.generate_csv(csv_output)
     
     # Enable Math rendering via MathJax
     js_dir = os.path.join(docs_dir, 'javascripts')

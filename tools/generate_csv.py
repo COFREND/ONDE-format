@@ -9,9 +9,8 @@ def parse_yaml(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         return yaml.safe_load(f)
 
-def generate_csv():
+def generate_csv(output_csv='build/ONDE_fields.csv'):
     input_dir = 'class_definitions'
-    output_csv = 'build/ONDE_fields.csv'
     
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     
