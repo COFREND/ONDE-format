@@ -2049,80 +2049,143 @@ positions in Probe Coordinate Frame and time of flight are stored.</p>
 <div class="field-list">
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_law-delay"><code>DELAY</code></strong> &mdash; Specifies the relative delay (in ultrasonic time) between the different<br>Probe Element Combinations in the focal law.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-delay"><code>DELAY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Specifies the relative delay (in ultrasonic time) between the different<br>Probe Element Combinations in the focal law.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_C&lt;k&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Specifies the relative delay (in ultrasonic time) between the different
 Probe Element Combinations in the focal law. The default value is zero
 delay for all Probe Element Combinations.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_C&lt;k&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_law-element"><code>ELEMENT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-element"><code>ELEMENT</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_C&lt;k&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_C&lt;k&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
-</div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_law-probe"><code>PROBE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-probe"><code>PROBE</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_C&lt;k&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span> | <strong>Dimensions:</strong> <code>[N_C&lt;k&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_law-propagation_line"><code>PROPAGATION_LINE</code></strong> &mdash; Represents the ultrasonic ray along which the data is to be represented in<br>a true visualisation.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-propagation_line"><code>PROPAGATION_LINE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Represents the ultrasonic ray along which the data is to be represented in<br>a true visualisation.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Points&lt;k&gt;,4]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Represents the ultrasonic ray along which the data is to be represented in
 a true visualisation. It contains at least two points in the Probe
 Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
 positions in Probe Coordinate Frame and time of flight are stored).</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Points&lt;k&gt;,4]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_law-type"><code>TYPE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_LAW&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_LAW"]</code></p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_law-weighting"><code>WEIGHTING</code></strong> &mdash; Specifies the weighting between the different Probe Element Combinations<br>in the focal law.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_law-weighting"><code>WEIGHTING</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Specifies the weighting between the different Probe Element Combinations<br>in the focal law.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_C&lt;k&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Specifies the weighting between the different Probe Element Combinations
 in the focal law. The default is one for all Probe Element Combinations.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_C&lt;k&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 </div>

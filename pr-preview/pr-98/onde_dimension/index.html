@@ -2018,9 +2018,24 @@
 <div class="field-list">
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dimension-coordinate"><code>COORDINATE</code></strong> &mdash; String defining the stored data (for the AMPLITUDE_DIMENSION) or the<br>indexed coordinates (for INDEX_DIMENSIONS).</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dimension-coordinate"><code>COORDINATE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">String defining the stored data (for the AMPLITUDE_DIMENSION) or the<br>indexed coordinates (for INDEX_DIMENSIONS).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>String defining the stored data (for the AMPLITUDE_DIMENSION) or the
@@ -2030,56 +2045,103 @@ Voltage, Pressure, Thickness, Time of flight, Depth, Amax, etc. The
 default interpretation if this value is unspecified depends on context
 (default coordinate is Amplitude for AMPLITUDE_DIMENSION or Time for
 INDEX_DIMENSIONs)</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dimension-offset"><code>OFFSET</code></strong> &mdash; Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION) or<br>scaled zero-based integer indices (for INDEX_DIMENSIONS).</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dimension-offset"><code>OFFSET</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION) or<br>scaled zero-based integer indices (for INDEX_DIMENSIONS).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Offset to be added to scaled stored data (for the AMPLITUDE_DIMENSION) or
 scaled zero-based integer indices (for INDEX_DIMENSIONS). Calibrated value
 in given units = (data or index)*SCALE + OFFSET. Default value of 0.0 if
 unspecified</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dimension-scale"><code>SCALE</code></strong> &mdash; Scale to be applied to stored data (for the AMPLITUDE_DIMENSION) or<br>integer indices (for INDEX_DIMENSIONS).</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dimension-scale"><code>SCALE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Scale to be applied to stored data (for the AMPLITUDE_DIMENSION) or<br>integer indices (for INDEX_DIMENSIONS).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Scale to be applied to stored data (for the AMPLITUDE_DIMENSION) or
 integer indices (for INDEX_DIMENSIONS). Calibrated value in given units =
 (data or index)*SCALE + OFFSET. Default value of 1.0 if unspecified</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_dimension-type"><code>TYPE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dimension-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_DIMENSION&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_DIMENSION"]</code></p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dimension-units"><code>UNITS</code></strong> &mdash; Units for the stored data (for the AMPLITUDE_DIMENSION) or for the indexed<br>coordinates (for INDEX_DIMENSIONS).</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dimension-units"><code>UNITS</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Units for the stored data (for the AMPLITUDE_DIMENSION) or for the indexed<br>coordinates (for INDEX_DIMENSIONS).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Units for the stored data (for the AMPLITUDE_DIMENSION) or for the indexed
@@ -2090,8 +2152,6 @@ angles, which should be in degrees rather than radians. The default
 interpretation if this value is unspecified depends on context (default
 units are arbitrary for AMPLITUDE_DIMENSION or seconds for
 INDEX_DIMENSIONS)</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 </div>
