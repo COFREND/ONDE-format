@@ -225,7 +225,11 @@ def main():
     processHtmlClass: "arithmatex"
   }
 };''')
-    
+
+    # Add robots.txt to prevent indexing of PR previews
+    with open(os.path.join(docs_dir, 'robots.txt'), 'w') as f:
+        f.write("User-agent: *\nDisallow: /pr-preview/\n")
+
     # Custom CSS for tighter tables
     css_dir = os.path.join(docs_dir, 'stylesheets')
     os.makedirs(css_dir, exist_ok=True)
