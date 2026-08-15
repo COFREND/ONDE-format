@@ -2028,6 +2028,8 @@
 
 </div>
 
+<div class="field-summary-desc">The angle of incidence of the acoustic wave as it travels into the coupling medium.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2049,6 +2051,8 @@
     <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_UT_COUPLING</a></span>
 
 </div>
+
+<div class="field-summary-desc">The density of the coupling medium.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2072,6 +2076,8 @@
 
 </div>
 
+<div class="field-summary-desc">The velocity of the acoustic waves propagating within the coupling medium.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2083,14 +2089,16 @@
 </table>
 </summary>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_immersion-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2102,6 +2110,9 @@
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 <details class="field-details empty-details">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
@@ -2111,6 +2122,8 @@
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">The designated path length through the water couplant during immersion.</div>
 
 <table class="field-meta-table">
 <tbody>

@@ -2118,7 +2118,7 @@ acquisitions, V_GRID_DATA and V_ENCODER are not to be used.</p>
 
 </div>
 
-<div class="field-summary-desc">Defines whether the grid is expressed in the inner surface of the cylinder or on the outer surface</div>
+<div class="field-summary-desc">Specifies whether the grid is on the inner or outer surface.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2143,7 +2143,7 @@ acquisitions, V_GRID_DATA and V_ENCODER are not to be used.</p>
 
 </div>
 
-<div class="field-summary-desc">For grid data, direction of the probe in the (u, v, w) coordinate system.</div>
+<div class="field-summary-desc">The orientation of the probe within the grid's local coordinate system.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2169,7 +2169,7 @@ Defaults to identity matrix.</p>
 
 </div>
 
-<div class="field-summary-desc">When defining an acquisition grid, it is necessary to define a reference specimen that is either a cylinder or a plane.</div>
+<div class="field-summary-desc">The reference specimen associated with the acquisition grid.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2194,7 +2194,7 @@ Defaults to identity matrix.</p>
 
 </div>
 
-<div class="field-summary-desc">Defines whether the data is ordered in the same direction for each scan<br>(COMB) or is inversed every second scan (RASTER)</div>
+<div class="field-summary-desc">Indicates the scanning pattern used for the acquisition grid.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2222,7 +2222,7 @@ Defaults to identity matrix.</p>
 
 </div>
 
-<div class="field-summary-desc">List of positions and quaternions giving the positions and orientations of<br>the trajectory frame at the different positions</div>
+<div class="field-summary-desc">A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2239,14 +2239,16 @@ Defaults to identity matrix.</p>
 the trajectory frame at the different positions</p>
 </div>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_acquisition_grid-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2258,6 +2260,9 @@ the trajectory frame at the different positions</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 <details class="field-details">
 <summary>
@@ -2268,7 +2273,7 @@ the trajectory frame at the different positions</p>
 
 </div>
 
-<div class="field-summary-desc">2D Frame defining the U_GRID and V_GRID directions of the encoding in the surface representation of the specimen (X,Y) for planar specimens, (X,THETA) for cylindrical specimens.</div>
+<div class="field-summary-desc">The 2D coordinate frame defining the encoding directions on the surface.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2293,7 +2298,7 @@ the trajectory frame at the different positions</p>
 
 </div>
 
-<div class="field-summary-desc">Obtained encoder values on the u axis</div>
+<div class="field-summary-desc">The actual measured encoder values along the U axis.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2318,7 +2323,7 @@ the trajectory frame at the different positions</p>
 
 </div>
 
-<div class="field-summary-desc">The specified values of the first coder at the different positions</div>
+<div class="field-summary-desc">The targeted grid positions along the first axis (U).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2343,7 +2348,7 @@ the trajectory frame at the different positions</p>
 
 </div>
 
-<div class="field-summary-desc">Obtained encoder values on the v axis</div>
+<div class="field-summary-desc">The actual measured encoder values along the V axis.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2368,7 +2373,7 @@ the trajectory frame at the different positions</p>
 
 </div>
 
-<div class="field-summary-desc">The specified values of the second coder at the different positions.</div>
+<div class="field-summary-desc">The targeted grid positions along the second axis (V).</div>
 
 <table class="field-meta-table">
 <tbody>

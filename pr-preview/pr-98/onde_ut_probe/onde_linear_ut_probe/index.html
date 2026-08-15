@@ -2028,7 +2028,7 @@
 
 </div>
 
-<div class="field-summary-desc">If absent, flat elements are assumed</div>
+<div class="field-summary-desc">The vector defining the axis of curvature for non-flat elements.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2055,6 +2055,8 @@
 
 </div>
 
+<div class="field-summary-desc">The frequency bandwidth of the probe.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2077,7 +2079,7 @@
 
 </div>
 
-<div class="field-summary-desc">Reference to the coupling system (wedge, immersion, direct)</div>
+<div class="field-summary-desc">Reference to the coupling system used with the probe.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2104,7 +2106,7 @@
 
 </div>
 
-<div class="field-summary-desc">Datafield of logical values (0 = false, 1 = true) used to flag<br>non-functioning elements in an array probe (if not present, assumption<br>should be that all elements are performing correctly);</div>
+<div class="field-summary-desc">Logical flags indicating non-functioning elements in a probe.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2131,6 +2133,8 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
+<div class="field-summary-desc">The dimension of a single element along the primary axis of the linear array.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2150,6 +2154,8 @@ should be that all elements are performing correctly);</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">The dimension of a single element along the secondary axis (transverse to the array).</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2171,7 +2177,7 @@ should be that all elements are performing correctly);</p>
 
 </div>
 
-<div class="field-summary-desc">Defines the element numbering relating the numbering implicitly defined by<br>the probe description and the order defined in the element tables<br>(ELEMENT_POSITION, ELEMENT_GEOMETRY, etc)</div>
+<div class="field-summary-desc">Mapping between the probe's physical element order and the indices used in the data tables.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2198,6 +2204,8 @@ the probe description and the order defined in the element tables
 
 </div>
 
+<div class="field-summary-desc">The center-to-center spacing between adjacent elements along the primary axis of the linear array.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2220,7 +2228,7 @@ the probe description and the order defined in the element tables
 
 </div>
 
-<div class="field-summary-desc">Defines the shape of the surface on which the elements are arranged —if<br>absent, FLAT is assumed</div>
+<div class="field-summary-desc">Shape of the surface on which the elements are arranged.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2248,7 +2256,7 @@ absent, FLAT is assumed</p>
 
 </div>
 
-<div class="field-summary-desc">Multi values: value in mm<br><br>- FLAT: no value<br>- CYLINDRICAL_INC, CYLINDRICAL_PER: Surface radius<br>- SPHERICAL: Surface radius<br>- BIFOCAL: Surface radius in the incidence plane, surface radius in the plane<br>  perpendicular to the incidence plane<br>- TRIFOCAL: Surface radius in the incidence plane (bottom), Surface radius in<br>  the incidence plane (top), surface radius in the plane perpendicular to the<br>  incidence plane.</div>
+<div class="field-summary-desc">Geometric parameters defining the focusing surface.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2285,7 +2293,7 @@ absent, FLAT is assumed</p>
 
 </div>
 
-<div class="field-summary-desc">Array defining the location of the elements of the probe</div>
+<div class="field-summary-desc">Defines the position and orientation of each probe element.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2312,6 +2320,8 @@ absent, FLAT is assumed</p>
 
 </div>
 
+<div class="field-summary-desc">The operating frequency of the probe.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2334,7 +2344,7 @@ absent, FLAT is assumed</p>
 
 </div>
 
-<div class="field-summary-desc">If absent, identity is assumed</div>
+<div class="field-summary-desc">Frame of reference for the index point of the probe.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2361,6 +2371,8 @@ absent, FLAT is assumed</p>
 
 </div>
 
+<div class="field-summary-desc">Human-readable label for the probe.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2382,6 +2394,8 @@ absent, FLAT is assumed</p>
     <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_UT_PROBE</a></span>
 
 </div>
+
+<div class="field-summary-desc">The manufacturer of the probe.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2405,7 +2419,7 @@ absent, FLAT is assumed</p>
 
 </div>
 
-<div class="field-summary-desc">If absent, flat elements are assumed</div>
+<div class="field-summary-desc">The radius of curvature for elements that are not flat.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2432,6 +2446,8 @@ absent, FLAT is assumed</p>
 
 </div>
 
+<div class="field-summary-desc">The serial number of the probe.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2454,7 +2470,7 @@ absent, FLAT is assumed</p>
 
 </div>
 
-<div class="field-summary-desc">The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</div>
+<div class="field-summary-desc">Specifies the geometric shape of each probe element.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2481,6 +2497,8 @@ absent, FLAT is assumed</p>
 
 </div>
 
+<div class="field-summary-desc">Provides six parameters that specify the dimensions of each element.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
@@ -2501,6 +2519,8 @@ absent, FLAT is assumed</p>
 
 </div>
 
+<div class="field-summary-desc">The total number of individual ultrasonic elements in this linear array probe.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2512,14 +2532,16 @@ absent, FLAT is assumed</p>
 </table>
 </summary>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_linear_ut_probe-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2531,6 +2553,9 @@ absent, FLAT is assumed</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 <details class="field-details empty-details inherited-field">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
@@ -2542,6 +2567,8 @@ absent, FLAT is assumed</p>
     <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_UT_PROBE</a></span>
 
 </div>
+
+<div class="field-summary-desc">Type tags for the UT probe.</div>
 
 <table class="field-meta-table">
 <tbody>

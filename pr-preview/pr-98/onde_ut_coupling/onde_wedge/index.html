@@ -2055,7 +2055,7 @@ available, the missing one should be replaced by a NaN).</p>
 
 </div>
 
-<div class="field-summary-desc">Equivalent to L1, L2 and L3 (See Figure 15)</div>
+<div class="field-summary-desc">Dimensions defining the equivalent contact area of the wedge.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2080,7 +2080,7 @@ available, the missing one should be replaced by a NaN).</p>
 
 </div>
 
-<div class="field-summary-desc">Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,<br>CYLINDRICAL_MINOR - If missing PLANAR assumed</div>
+<div class="field-summary-desc">Type of the wedge contact surface.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2106,7 +2106,7 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 
 </div>
 
-<div class="field-summary-desc">Wedge curvature radius (0 assumed if missing)<br><br>- Concave: positive<br>- Convex: negative<br>- Planar wedge: 0</div>
+<div class="field-summary-desc">Radius of curvature for the wedge contact surface.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2136,7 +2136,7 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 
 </div>
 
-<div class="field-summary-desc">wedge /disorientation angle (D) (See Figure 15)</div>
+<div class="field-summary-desc">Disorientation angle of the wedge.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2161,7 +2161,7 @@ CYLINDRICAL_MINOR - If missing PLANAR assumed</p>
 
 </div>
 
-<div class="field-summary-desc">For a wedge, distance of the ultrasonic beam between the probe center and<br>the index point (See Figure 15)</div>
+<div class="field-summary-desc">Distance of the ultrasonic beam between the probe center and the index point.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2189,6 +2189,8 @@ the index point (See Figure 15)</p>
 
 </div>
 
+<div class="field-summary-desc">The angle of incidence of the acoustic wave as it travels into the coupling medium.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2209,6 +2211,8 @@ the index point (See Figure 15)</p>
 
 </div>
 
+<div class="field-summary-desc">Label or identifier for the wedge.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2228,6 +2232,8 @@ the index point (See Figure 15)</p>
   <span class="req-badge req-no">Optional</span>
 
 </div>
+
+<div class="field-summary-desc">Manufacturer of the wedge.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2251,6 +2257,8 @@ the index point (See Figure 15)</p>
 
 </div>
 
+<div class="field-summary-desc">The density of the coupling medium.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2273,6 +2281,8 @@ the index point (See Figure 15)</p>
 
 </div>
 
+<div class="field-summary-desc">The velocity of the acoustic waves propagating within the coupling medium.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2292,6 +2302,8 @@ the index point (See Figure 15)</p>
   <span class="req-badge req-no">Optional</span>
 
 </div>
+
+<div class="field-summary-desc">Serial number of the wedge.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2313,7 +2325,7 @@ the index point (See Figure 15)</p>
 
 </div>
 
-<div class="field-summary-desc">wedge /skew angle (B) (See Figure 15)</div>
+<div class="field-summary-desc">Skew angle of the wedge.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2329,14 +2341,16 @@ the index point (See Figure 15)</p>
 <p>wedge /skew angle (B) (See Figure 15)</p>
 </div>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_wedge-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2348,6 +2362,9 @@ the index point (See Figure 15)</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 </div>
 

@@ -2117,7 +2117,7 @@ referenced trajectory and the probe —identity is assumed if not provided.</p>
 
 </div>
 
-<div class="field-summary-desc">References to the block describing the trajectory, references have the<br>same order as PROBE_LIST</div>
+<div class="field-summary-desc">References to the block describing the trajectory.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2169,7 +2169,7 @@ is assumed, with interface at z=0 and material for z&gt;0</p>
 
 </div>
 
-<div class="field-summary-desc">Offset and direction of the probe w.</div>
+<div class="field-summary-desc">Offset and direction of the probe with respect to the trajectory frame.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2195,7 +2195,7 @@ assumed if not provided</p>
 
 </div>
 
-<div class="field-summary-desc">List all probes used in the acquisition of the dataset</div>
+<div class="field-summary-desc">List of all probes used in the acquisition of the dataset.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2211,14 +2211,16 @@ assumed if not provided</p>
 <p>List all probes used in the acquisition of the dataset</p>
 </div>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_geometric_setup-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2230,6 +2232,9 @@ assumed if not provided</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 </div>
 

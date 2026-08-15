@@ -2056,6 +2056,8 @@ transducer.</p>
 
 </div>
 
+<div class="field-summary-desc">The specific angle at which the beam is formed during the scan.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2078,6 +2080,8 @@ transducer.</p>
 
 </div>
 
+<div class="field-summary-desc">Reference to the emitting phased array probe used in this setup.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2097,6 +2101,8 @@ transducer.</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">The number of consecutive elements used to form a beam.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2120,6 +2126,8 @@ transducer.</p>
 
 </div>
 
+<div class="field-summary-desc">Reference to the receiving phased array probe used in this setup.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2142,6 +2150,8 @@ transducer.</p>
 
 </div>
 
+<div class="field-summary-desc">Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T).</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2162,6 +2172,8 @@ transducer.</p>
 
 </div>
 
+<div class="field-summary-desc">The number of elements by which the subset is shifted for each successive beam.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
@@ -2173,14 +2185,16 @@ transducer.</p>
 </table>
 </summary>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_phased_array_escan-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2192,6 +2206,9 @@ transducer.</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 </div>
 
