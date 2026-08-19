@@ -1,0 +1,12 @@
+onde_class: ONDE_PROCESS
+inherits: []
+description: '##Process'
+
+fields:
+  PLATE_DIMENSIONS:
+    full_name: ONDE_PLANE:PLATE_DIMENSIONS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'a triplet with values for length, width, and thickness.'
+    dimensions: '[3]'

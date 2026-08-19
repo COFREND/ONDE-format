@@ -1,0 +1,68 @@
+onde_class: ONDE_ET_ACQUISITION_GROUP
+inherits: []
+accessories: []
+description: '### Acquisition group
+  This object contains the electronic setup. There is one acquisition group per frequency/sensor group.
+
+
+
+'
+
+
+fields:
+  LABEL:
+    full_name: ONDE_ET_ACQUISITION_GROUP:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: 'A name for the acquisition group.'
+    dimensions: '1'
+  FREQUENCY:
+    full_name: ONDE_ET_ACQUISITION_GROUP:FREQUENCY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'Frequency in Hz'
+    dimensions: '1'
+  SENSOR_GROUP:
+    full_name: ONDE_ET_ACQUISITION_GROUP:SENSOR_GROUP
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ET_SENSOR_GROUP>
+    description: 'Link to sensor group'
+    dimensions: '1'
+  PROBE DRIVE TYPE:
+    full_name: ONDE_ET_ACQUISITION_GROUP:PROBE DRIVE TYPE
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STRING
+    description: “CURRENT” or “TENSION” driving of the probe
+    allowed values: "[CURRENT]|[TENSION]"
+  PROBE_DRIVE:
+    full_name: ONDE_ET_ACQUISITION_GROUP:PROBE_DRIVE
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'Probe drive in Ampere if PROBE DRIVE TYPE is current or Volts if PROBE DRIVE TYPE is TENSION'
+    dimensions: '[SENSOR_NUMBER<p>]'
+  GAIN_HARD:
+    full_name: ONDE_ET_ACQUISITION_GROUP:GAIN_HARD
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'Total gain with which data are collected, in dB. Only amplifiers known by the instrument will be reported.'
+    dimensions: '[SENSOR_NUMBER<p>]'
+  MEASUREMENT_RATE:
+    full_name: ONDE_ET_ACQUISITION_GROUP:MEASUREMENT_RATE
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'Number of data frame per unit of time (s)'
+    dimensions: '1'
+  PROCESS:
+    full_name: ONDE_ET_ACQUISITION_GROUP:PROCESS
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_PROCESS>
+    description: ''
+    dimensions: '[N_Process<m>]'

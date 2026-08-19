@@ -5,9 +5,9 @@ description: '**Conventions for cylindrical components**
 
 
   In the cylindrical coordinate system, the x direction is the one corresponding to
-  the cylinder axis (see [Figure 7](onde_cylinder.md)). The
-
-  dimensions are given by CYLINDER_DIMENSIONS, with a triplet for outer diameter,
+  the cylinder axis (see [Figure 7](onde_cylinder.md)).
+  
+  The dimensions are given by CYLINDER_DIMENSIONS, with a triplet for outer diameter,
   thickness, and length .
 
 
@@ -22,5 +22,5 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: ''
+    description: 'a triplet for outer diameter, thickness, and length .'
     dimensions: '[3]'

@@ -1,0 +1,48 @@
+onde_class: ONDE_ET_PROBE
+inherits: []
+accessories: []
+description: '### Probes'
+
+fields:
+  LABEL:
+    full_name: ONDE_ET_PROBE:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: 'A name for the probe. Suggestion: part number'
+    dimensions: '1'
+  MANUFACTURER:
+    full_name: ONDE_ET_PROBE:MANUFACTURER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  SERIAL_NUMBER:
+    full_name: ONDE_ET_PROBE:SERIAL_NUMBER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+  INDEX_POINT_FRAME:
+    full_name: ONDE_ET_PROBE:INDEX_POINT_FRAME
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: If absent, identity is assumed
+    dimensions: '[7]'
+#  N_SENSOR_GROUP:
+#    full_name: ONDE_ET_PROBE:N_SENSOR_GROUP
+#    required: false
+#    storage: attribute
+#    hdf5_type: H5T_INTEGER
+#    description: The number of sensor groups to read.
+#    dimensions: '[N_SENSOR_GROUP<p>]'
+#  SENSOR_GROUP:
+#    full_name: ONDE_ET_PROBE:SENSOR_GROUP
+#    required: false
+#    storage: dataset
+#    hdf5_type: H5T_STD_REF_OBJ<ONDE_ET_SENSOR_GROUP>
+#    description: A list of [N_SENSOR_GROUP] hdf5 references to the sensor groups of the probe.
+#    dimensions: '[N_SENSOR_GROUP]'

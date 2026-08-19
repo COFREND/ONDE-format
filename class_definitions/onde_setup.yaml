@@ -3,7 +3,7 @@ inherits: []
 description: '### Setup
 
 
-  The setup block contains references to the ultrasonic setup and the geometric setup.
+  The setup block contains references to the setup and the geometric setup.
 
   '
 fields:

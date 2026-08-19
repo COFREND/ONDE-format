@@ -6,115 +6,63 @@
 
 ## Preamble
 
-  The ONDE (**Open Non Destructive Evaluation**) format results from a joint intiative by COFREND and EPRI to define a specification of open and efficient NDE
-  format in order to facilitate interoperability between softwares and to ensure ability to read the data in the long term. 
-  This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can
-  be a good candidate for a wide standardization effort.
+The present document is the outcome of the work of a COFREND Working Group dedicated to NDE and Data. It stems from the observation that no satisfying standardisation exists in terms of file formats for the eddy current NDE technique. This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can be a good candidate for a wide standardization effort.
+The objective that was assigned by the Working Group to this file format is to store eddy current raw data to be able to:
+-	(re)analyse it, including eddy current metadata required for report generation, or
+-	(re)use it for further data processing.
+-	achieve interoperability between acquisition systems and analysis software.
 
-  The objective that was assigned to this file format is to store ultrasonic raw data to be
-  able to:
+The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a simulation configuration from the eddy current data file alone. We define as raw data the data which is produced by the acquisition system (complex values for each frequency, encoders data for each point, filtering, CSCAN reconstructions). 
 
-  * (re)analyse it, including ultrasonic metadata required for report generation, or
-  * (re)use it for further data processing, or
-  * achieve interoperability between acquisition systems and analysis software.
+For this first version, it was decided to stick to the data acquired and the information that is necessary to perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure itself (information related to the display, palette, etc…). This will be addressed in future stages (information related to analysis, reporting, ...). 
 
-  The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
-  simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
-  the acquisition system (AScans, TFM images, ...).
+The Working Group has analysed several existing contributions as a working basis to define an open and standardized file format for ultrasonic testing. Formats coming from organisations (ECUF, MFMC, DICONDE) and commercial products (EVIDENT, EDDYFI, CIVA) have been studied. 
+It was decided that the format would be based on the HDF5 framework, chosen for its well-established software ecosystem and its efficiency. The Eddy current format derives from the ultrasonic file format proposed by the same working group. The ultrasonic proposal makes technical choices akin to those of the MFMC and ECUF formats, and extends their possibilities in order to accommodate for a larger range of specimen geometries and types of data that are commonly encountered and were absent of the MFMC and ECUF specifications.
 
-  At this stage, it was decided to stick to the data acquired and the information that is necessary to
-  perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
-  itself (information related to the display, palette, etc...). This will be addressed in future stages (information
-  related to analysis, reporting, ...).
+Discussions in the working group emerged to find the best compromise between two approaches : a very generic one with essentially raw geometric descriptions and a NDT oriented one with a representation of the objects familiar to the engineers. Considering that the transformation from NDT objects to the generic representation was straightforward, it was decided to systematically keep the generic representation and to allow to complement this representation with optional fields describing the objects. This approach was essentially adopted for three objects, namely the probe, the trajectory and the setup of the electronic laws.
 
-- The Working Group has analysed several existing contributions as a working basis to define an open and standardized
-  file format for ultrasonic testing. Formats coming from organisations (ECUF, MFMC, DICONDE, ANDE) and commercial products (
-  EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been studied.\
-  It was decided that the format would be based on the HDF5 framework, chosen for its well-established software
-  ecosystem and its efficiency. The format proposal makes technical choices akin to those of the MFMC and ECUF format,
-  and extends their possibilities in order to accommodate for a larger range of specimen geometries and types of data
-  that are commonly encountered and were absent of the MFMC and ECUF specifications. In order to facilitate the migration
-  from MFMC to ONDE, a compatibility with MFMC 2.0 specification has been added to the present specification.
+From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The nature of the blocks is identified by the TYPE attribute, a VERSION attribute being provided for revisions. Where data from another structure in the file is necessary, its location is given through a HDF5 link. In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (arrays of signals or array of images which typically represents the vast majority of the file weight) can be anywhere in the file structure. In order to avoid name conflicts issues when the file format will evolve, no other data is allowed within this group. Everything is allowed outside from this group, it will be ignored by reader but can be used for instrument specific data.
 
-- The format aims at finding the best compromise between two approaches : a very generic one with
-  essentially raw geometric descriptions and a NDT oriented one with a representation of the objects familiar to the
-  engineers. Considering that the transformation from NDT objects to the generic representation was straightforward, it
-  was decided to systematically keep the generic representation and to allow to complement this representation with
-  optional fields describing the objects in order to facilitate advanced analysis and visualisation. This approach was
-  essentially adopted for three objects, namely the probe, the
-  trajectory and the setup of the electronic laws.
+SI units are used.
 
-- From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between HDF5
-  groups are translated into HDF5 references. The location of the HDF5 groups in the file is left open to the discretion of the implementor.
-  The names of the groups is not imposed, the semantics of the group being defined by the mandatory ONDE:TYPE attribute. 
-  Only ONDE:FILETYPE and ONDE:VERSION at hdf5 root level have a location that is  imposed in the file. 
-  In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (
-  arrays of signals or array of images which typically represents the vast majority of the file weight) can be anywhere
-  in the file structure.
+The eddy current values themselves are agnostic in terms of units. All operations on eddy current data are supposing binary unit. Ex : add an offset will be done with offset specified in bits.
 
-- All quantities are defined with SI units. Units are therefore expressed in meters, kilograms,
-  seconds. However, degrees are used instead of radians.
+Three states are defined: Mandatory, Optional and Implicit (implicit means that value can be derived from other mandatory data). For implicit field, one reasonable rule to make such derivation is given either in the description column or in the notes subsection following each table. 
+
+Data types will be converted to HDF5 classes, the data will be given one of the three states above and be defined as Dataset or Attribute.
+
+
 
 ## Tables legend
 
-In the following sections, the data structure is described by blocks presented in tables.
+Hereafter, when pointing to ultrasonic HDF5 file format, we refer to specification document xxxx [yyy].
 
-Hereafter, when pointing to ECUF and MFMC, we refer to MFMC specification document 2.0.0b[^1] and ECUF 1.0[^2].
 
 **Variables used in structure definition:**
 
-Definitions (derived from MFMC 2.0.0b specification)
+Definitions 
 
-- Ultrasonic Element -- an ultrasonic transduction device that can be excited through an electric signal externally
-  driven and/or that can reversely convert ultrasound into a signal
-- Ultrasonic Probe -- a collection of ultrasonic elements that are assembled together so that their relative positions
-  and orientations are fixed during the acquisition process -- note that probes that possess the ability to adapt to the
-  surface during the acquisition are not handled in this version of the specification
-- Specimen -- object which is the subject of the inspection
-- Frame -- position and orientation of a given object related to an acquisition
-- Probe Element Combination (PEC) -- the system used within an MFMC structure to identify a specific element in a
-  specific probe, comprising an HDF5 reference to the probe group and the index of an element in that probe;
-- Focal law -- a set of instructions that specify how one or more PECs are used together;
-- Transmit focal law -- a focal law relating to transmission of ultrasound from one or more PECs;
-- Receive focal law -- a focal law relating to reception of ultrasound from one or more PECs;
-- A-Scan -- a time-domain, ultrasonic signal (comprising amplitude measurements regularly sampled in time at a specified
-  sampling frequency) that is recorded for a combination of transmit focal law and receive focal law; this can be used
-  to represent both summed signals and elementary channels
-- DataFrame -- a collection of coherent data obtained for a particular triggering event consisting of one of the
-  following:
-    - A-scans obtained using different transmit and receive focal laws for each A-scan;
-    - Reconstructed images corresponding to specific reconstruction zones
-    - Scalar data (peak-related or corresponding to particular post-treatments)
-- Dataset -- a collection of dataframes in which all acquisition parameters are fixed from one dataframe to another;
-- Ultrasonic time -- timescale over which an individual ultrasonic A-scan is recorded, which is assumed to be
-  instantaneous compared to timescale associated with mechanical movement of probes;
-- Propagation line -- string of connected segments representing the ultrasonic propagation for a given focal law;
-- Trajectory -- set of frames representing the different position of a device;
-- Acquisition grid -- particular trajectory corresponding to a cartesian grid located at the surface of a plane or
-  cylindrical component;
-- Image zone -- 2D or 3D regular cartesian grid used to define the reconstruction points creating the images during a
-  TFM or PWI-like acquisition;
+- ET data point : a demodulated complex number (operating point) obtained at one frequency.
+-	Probe
+-	Sensor group : collection of sensors (topology) which gives coherent data 
+-	Dataset : a collection of coherent data obtained at a particular probe position consisting of at least one of the following:
+     - Demodulated data obtained using different emitters and receivers combination for each excitation frequency; 
+     - Encoder data and/or temporal data and/or rotation synchronization
 
-| **Variable**  | **Description**                                                          |
-|---------------|--------------------------------------------------------------------------|
-| N_Probes      | Number of probes                                                         |
-| N_Dataset     | Number of datasets                                                       |
-| N_Elem\<p\>   | Number of elements of p-th probe                                         |
-| N_DF\<m\>     | Number of dataframes in m-th dataset                                     |
-| N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                         |
-| N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                          |
-| N_CS\<m\>     | Number of scalar values stored in the m-th CSscan dataset                |
-| N_Gate\<m\>   | Number of gates in the m-th CScan dataset                                |
-| N_Prob\<m\>   | Number of probes used in m-th dataset                                    |
-| N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th dataset  |
-| N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law              |
-| N_Points\<k\> | Number of points used to describe the k-th focal law propagation_line    |
-| N_TSig\<m\>   | Number of time-points in the emission signal in the m-th dataset         |
-| N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th dataset      |
-| N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th dataset         |
-| N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
-| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  | 
-| N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
+As in the UT format, Encoder data (or equivalent) are stored in the trajectory block.
+-	CSCAN Sequence – a collection of dataframes in which all acquisition parameters except the probe position are fixed from one dataframe to another;
+
+| **Variable**              | **Description**                                                         |
+|---------------------------|-------------------------------------------------------------------------|
+| N_Probes                  | Number of probes                                                        |
+| N_Dataset                 | Number of datasets                                                      |
+| N_SENSOR_GROUP\<p\>       | Number of sensor groups of p-th probe                                   |
+| N_SENSOR\<p\>             | Number of sensors in the p-th sensor group                              |
+| N_DF\<m\>                 | Number of points in m-th dataset                                        |
+| N_Time\<m\>               | Number of time-points per  in m-th dataset                              |
+| N_Acquisition_Group\<M\>  | Number of Acquisition group for the m-th                                |
+| N_U\<m\>                  | Number of acquisition positions in the U direction for the m-th dataset | 
+| N_V\<m\>                  | Number of acquisition positions in the V direction for the m-th dataset |
 
 Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> x N_V\<m\>
 
@@ -123,65 +71,21 @@ Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> 
 The data model of an ONDE file is described through fields that are grouped by blocks, each block corresponding to a NDE
 concept.
 
-```mermaid
-classDiagram
-  ut_dataset <|-- ascan_dataset
-  ut_dataset <|-- tscan_dataset
-  ut_dataset <|-- cscan_dataset
-  ascan_dataset "1" o--  setup 
-  tscan_dataset "0..1" o-- setup : exclusive or with ascan_dataset link
-  cscan_dataset "0..1" o-- setup : exclusive or with tscan_dataset or ascan_dataset_link
-  cscan_dataset "0..1" o-- tscan_dataset : optional link to raw data
-  cscan_dataset "0..1" o-- ascan_dataset : optional link to raw data
-  tscan_dataset "0..1" o-- ascan_dataset : optional link to elementary channels
-  setup "1" o-- geometric_setup
-  setup "0..1" o-- ultrasonic_setup
-  setup "0..1" o-- phased_array_setup : direct link to phased array setup is permitted for Tscan datasets
-  ultrasonic_setup "0..n" o-- transmit_law
-  ultrasonic_setup "0..n" o-- receive_law
-  ultrasonic_setup "0..1" o-- phased_array_setup
-  geometric_setup "1..n" o-- ut_probe
-  geometric_setup "1..n" o-- acquisition_trajectory
-  geometric_setup  "0..1" o-- component
-  component <|-- plane
-  component <|-- cylinder
-  component <|-- 2d_cad
-  component <|-- 3d_cad
-  component <|-- weld
-  ut_probe "0..1" o-- ut_elements
-  ut_probe <|-- mono_ut_probe
-  ut_probe <|-- linear_ut_probe
-  ut_probe <|-- matrix_ut_probe
-  ut_probe "1" o-- coupling
-  coupling <|-- wedge
-  coupling <|-- immersion
-  wedge <|-- single_wedge
-  wedge <|-- dual_wedge
-  acquisition_trajectory <|-- time_trajectory
-  acquisition_trajectory <|-- spatial_trajectory
-  acqusition_trajectory "0..1" o-- acquisition_grid
-  phased_array_setup <|-- angle
-  phased_array_setup <|-- sscan
-  phased_array_setup <|-- escan
-  phased_array_setup <|-- compound
-  phased_array_setup <|-- fmc
-  phased_array_setup <|-- pwi
+<!-- AUTO_GENERATED_DATA_MODEL -->
 
-```
 *Figure 1: Relationships between the different blocks in the data model*
 
 The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional for a given group.
 The diagram in Figure 1 explains the relationships between the different blocks in the data model in an UML style.
 
-Three blocks type contain the data : namely, Ascan, Tscan and CScan (peak-like) blocks. Ascans can be used either to
-describe summed signals or elementary channels data. For Cscan block, it is possible to keep the track to the raw data (
-either Tscan or Ascan) from which the Cscan data originates. For Tscan blocks, it is possible to keep the track to the
-elementary channels. A link to the setup can be specified : it is attached to the raw data if it is available, to the
-post-processed data (Cscan or Tscan) otherwise.
+Two blocks type contain the data : namely, CSCAN and RAW blocks. RAW can be used either to describe time dependent signals
+or elementary channels data. For Cscan block, it is possible to keep the track to the raw data from which the Cscan data
+originates. A link to the setup can be specified : it is attached to the raw data if it is available, to the 
+post-processed data (Cscan) otherwise.
 
-The setup description is organized in two blocks defining the ultrasonic setup and the geometric setup. In the
-ultrasonic setup we find the description of the electronic settings, with blocks describing the emitter and receive laws
-and the phased array setup for acquisition with multielement transducers.
+The setup description is organized in two blocks defining the eddy current setup and the geometric setup. In the
+eddy current setup we find the description of the electronic settings, with blocks describing the reference to an array
+of sensors (sensor group).
 
 The geometric setup contains the dynamic description of the scene : inspected component, probes and acquisition
 trajectories. It is possible to define different trajectories for different probes or to have probes sharing the same
@@ -191,20 +95,21 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 
 ### Relationship between the HDF5 implementation and the data model
 
-The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are described above.
+The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are 
+described above.
 
 ### Entry points for navigating files in the UT implementation
 
 The blocks defined in the general structure are implemented as HDF5 groups, the name of which is free but which have a
-mandatory 'ONDE:TYPE' attribute that defines their nature. The entry points are the xxx_DATASET_yyy groups (namely groups that have as a ONDE:TYPE attribute
- ONDE_DATASET_UT_ASCAN, ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN) 
+mandatory 'ONDE:TYPE' attribute that defines their nature. The entry points are the Dataset groups (namely groups that have as a ONDE:TYPE attribute
+ ONDE_DATASET_ET_CSCAN or ONDE_DATASET_ET_RAW) 
 
 When discovering the content of a given file, the following procedure must therefore be applied :
 
 - Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
-  reader, and that the type is that of a UT ONDE file ('ONDE_UT')
+  reader, and that the type is that of a ET ONDE file ('ONDE_ET')
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.
+  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_ET_RAW', 'ONDE_DATASET_ET_CSCAN'.
 - From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
   setup information, ...
 
@@ -214,7 +119,7 @@ When discovering the content of a given file, the following procedure must there
 
 Figure 2 displays the different frames and convention involved in the positioning systems. The PCF (Probe Coordinate
 Frame) is the frame that is related to a specific probe or set of probes. It can be arbitrarily chosen to be centered
-along the piezoelectric cell, the index point, the carrier system, the Probe Center Separation for TOFD systems, etc...
+along one of the sensor center, the index point, the carrier system etc...
 Through a rigid-body offset, it is related to the Trajectory Frame (TF), which for a given position is defined in
 relation to the Reference Frame. The list of these positions are defined in an Acquisition Trajectory block.
 
@@ -237,13 +142,12 @@ Throughout the document, a frame is provided for the following objects :
 - The specimen frame,
 - The trajectory frames (a frame for each position in the trajectory)
 - The probe coordinate frames
-- The elements
-- The TFM Zones
+- The sensors groups
 - The index points
 
 The diagram displayed in Figure 3 defines the hierarchy between these frames:
 
-![Hierarchy of the frames used for the geometric representation of the objects](../images/media/frames_hierarchy.png "Figure 3")
+![Hierarchy of the frames used for the geometric representation of the objects](../images/media/frames_hierarchy.svg "Figure 3")
 
 *Figure 3: Hierarchy of the frames used for the geometric representation of the objects*
 

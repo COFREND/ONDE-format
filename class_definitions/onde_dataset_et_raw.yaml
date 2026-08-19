@@ -1,0 +1,23 @@
+onde_class: ONDE_DATASET_ET_RAW
+inherits:
+- ONDE_DATASET_ET
+description: '### RAW datasets
+
+
+  RAW datasets are the entry points for the description of data that is stored as
+  time signals. 
+
+  To allow continuity with existing HDF5 formats, the DATA field can be either a HDF5
+  dataset or a reference to a dataset located in another part of the HDF5 structure.'
+fields:
+
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: false
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_COMPLEX or H5T_COMPOUND or H5T_FLOAT or H5T_INTEGER
+    description: Data can be either an array or a reference to an array. Omitting
+      this field is possible, in the event when Cscan data is recorded but the underlying RAW data is not.
+      The Eddy current data are stored as complex data or by a compound of data with a real part and an imaginary part 
+      of a basic type ( H5T_FLOAT or H5T_INTEGER).
+    dimensions: 1 or [NTime<m>]

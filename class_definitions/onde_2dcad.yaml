@@ -5,22 +5,18 @@ description: '**Conventions for 2D CAD components**
 
 
   The dxf file gives, in the (X, Z) frame, the 2D CAD description of the component,
-  either for a planar or a cylindrical
-
-  extrusion. For 2D extruded components, extrusion is provided by EXTRUSION_TYPE (plane
-  or sylindrical) and
-
-  EXTRUSION_DIMENSION for the length for plane extrusion, the diameter for cylindrical
-  ones.
+  either for a planar or a cylindrical extrusion.
+   
+  For 2D extruded components, extrusion is provided by EXTRUSION_TYPE (plane
+  or sylindrical) and EXTRUSION_DIMENSION for the length for plane extrusion, 
+  the diameter for cylindrical ones.
 
 
   The CAD field contains a dxf file for 2D CADs.
 
 
   For 2D CAD specimen with planar extrusion, the origin is implicitly defined as the
-  (0,0) point in the 2D CAD sketch (see
-
-  [Figure 8](onde_2dcad.md)).
+  (0,0) point in the 2D CAD sketch (see [Figure 8](onde_2dcad.md)).
 
 
   ![Convention for the description of a 2D CAD component with planar extrusion](../images/media/2dcad_planar_extrusion.png
@@ -50,7 +46,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: ''
+    description: 'Type of extrusion. Can be "PLANE" or "CYLINDER"'
     dimensions: '1'
     allowed_values: '"PLANE"|"CYLINDER"'
   EXTRUSION_DIMENSION:
@@ -58,12 +54,12 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: ''
+    description: 'For extrusion a length in m. For cylindrical extrusion, an angle in °.'
     dimensions: '1'
   CAD:
     full_name: ONDE_2DCAD:CAD
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: ''
+    description: 'CAD file in ".dxf" format'
     dimensions: '1'

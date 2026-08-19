@@ -1,0 +1,146 @@
+onde_class: ONDE_ET_SENSOR_GROUP
+inherits: []
+accessories: []
+description: '### Sensor group
+**Element shapes**
+
+
+ A name that describes what kind of frame will be used. If omitted and the probe is of type PLANAR then the sensor group
+is supposed to be Cartesian and if the probe is "tube" then the sensor group FRAME_TYPE is supposed to be CYLINDRICAL.
+RANDOM means 3D, thus quaternions should be used
+
+
+  The geometry of the elements is defined by the ELEMENT_SHAPE field. The shape of each element will be defined as one 
+  of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART).
+
+
+  The size is provided through 6 parameters in ELEMENT_SIZE. These 6 parameters indicate the dimensions of each element 
+  according to their geometry, see [Figure 12](onde_et_sensor_group.md).
+
+
+  For ELE_GEOM_REC : DIM_X1, DIM_Y, 0.0, 0.0, 0.0, 0.0.
+
+
+  For ELE_GEOM_RING_PART: r, e, theta_min, theta_max, 0.0, 0.0
+
+
+  For ELE_GEOM_ELLIPSE_PART: r_X, e_X, r_Y, e_Y, theta_min, theta_max
+
+
+  ![Different types of element shape](../images/media/element_shapes.png "Figure 12")
+
+
+  *[Figure 12](onde_et_sensor_group.md): Different types of element shape*
+
+
+  **sensor positioning**
+
+
+  The ELEMENT_FRAME array defines the position and orientation of the probe elements
+  defined by their frames in the PCF.
+
+  For rectangular elements, x and y must be aligned with the main axes of the rectangle.
+  For elliptical elements, x and y
+
+  must be aligned with the major and the minor axes of the ellipse. For circular rings,
+  x and y simply must be coplanar
+
+  with the element. The frame should be orientated such that z is in the direction
+  of ultrasonic emission (see [definition of frames](index.md#definition-of-frames)).
+
+
+  **Element ordering convention**
+
+
+  For linear and matrix probes (see [Figure 13](onde_et_sensor_group.md)), the chosen
+  convention is as follows : numbering according to the minor
+
+  axis then according to the major axis, both in ascending order.
+
+
+  For annular, elliptical and bi-elliptical probes (see [Figure 13](onde_et_sensor_group.md)),
+  the chosen convention is as follows : numbering from
+
+  internal rings to external rings. On each ring, the numbering is done in ascending
+  order in the direct direction around
+
+  the Z axis of the probe, the origin being taken on the major axis.
+
+
+  For dual probes (see [Figure 14](onde_et_sensor_group.md)), the two probes have a symmetrical
+  cutout. The right probe has elements from 1 to N
+
+  following the numbering convention established previously. The left probe has elements
+  from N+1 to 2N with a numbering
+
+  symmetrical to that of the right probe according to the major axis.
+
+
+  ![Convention for element numbering](../images/media/element_numbering.png "Figure
+  13")
+
+
+  *[Figure 13](onde_et_sensor_group.md): Convention for element numbering*
+
+
+  ![Convention for dual probes element numbering](../images/media/dual_probes_element_numbering.png
+  "Figure 14")
+
+
+  *[Figure 14](onde_et_sensor_group.md): Convention for dual probes element numbering*'
+fields:
+  LABEL:
+    full_name: ONDE_ET_SENSOR_GROUP:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: 'A name that describes the sensor group'
+    dimensions: '1'
+  SENSOR_NUMBER:
+    full_name: ONDE_ET_SENSOR_GROUP:SENSOR_NUMBER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: 'A name that describes the sensor group'
+    dimensions: '1'
+  DEAD_ELEMENT:
+    full_name: ONDE_ET_SENSOR_GROUP:DEAD_ELEMENT
+    required: false
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: Datafield of logical values (0 = false, 1 = true) used to flag non-functioning
+      elements in an array probe (if not present, assumption should be that all elements
+      are performing correctly);
+    dimensions: '[N_SENSOR<p>]'
+  CENTRAL_FREQUENCY:
+    full_name: ONDE_ET_SENSOR_GROUP:CENTRAL_FREQUENCY
+    required: false
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: ;
+    allowed_values: '[N_SENSOR<p>]'
+  FREQUENCY_RANGE:
+    full_name: ONDE_ET_SENSOR_GROUP:FREQUENCY_RANGE
+    required: false
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: Datafield of logical values (0 = false, 1 = true) used to flag non-functioning
+      elements in an array probe (if not present, assumption should be that all elements
+      are performing correctly);
+    dimensions: '[N_SENSOR<p>]'
+  SENSOR_POLARITY:
+    full_name: ONDE_ET_SENSOR_GROUP:SENSOR_POLARITY
+    required: false
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    description: Datafield of logical values (0 = false, 1 = true) used to flag non-functioning
+      elements in an array probe (if not present, assumption should be that all elements
+      are performing correctly);
+    dimensions: '[N_SENSOR<p>]'
+  PROBE:
+    full_name: ONDE_ET_SENSOR_GROUP:PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ET_PROBE>
+    description: The reference to the probe which contains the sensor group.
+    dimensions: '1'
