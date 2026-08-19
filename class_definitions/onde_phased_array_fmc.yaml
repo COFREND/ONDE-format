@@ -1,5 +1,0 @@
-onde_class: ONDE_PHASED_ARRAY_FMC
-inherits:
-- ONDE_PHASED_ARRAY_SETUP
-description: ''
-fields: {}
