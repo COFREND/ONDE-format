@@ -45,7 +45,7 @@
   engineers. Considering that the transformation from NDT objects to the generic representation was straightforward, it
   was decided to systematically keep the generic representation and to allow to complement this representation with
   optional fields describing the objects in order to facilitate advanced analysis and visualisation. This approach was
-  essentially adopted for three objects, namely the probe, the
+  essentially adopted for three objects, namely the sensor, the
   trajectory and the setup of the electronic laws.
 
 - From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between HDF5
@@ -71,7 +71,8 @@ Definitions (derived from MFMC 2.0.0b specification)
 
 - Ultrasonic Element -- an ultrasonic transduction device that can be excited through an electric signal externally
   driven and/or that can reversely convert ultrasound into a signal
-- Ultrasonic Probe -- a collection of ultrasonic elements that are assembled together so that their relative positions
+- Sensor -- The NDE system component that does the measurement
+- Ultrasonic Probe -- A sensor that is a collection of ultrasonic elements that are assembled together so that their relative positions
   and orientations are fixed during the acquisition process -- note that probes that possess the ability to adapt to the
   surface during the acquisition are not handled in this version of the specification
 - Specimen -- object which is the subject of the inspection
@@ -101,15 +102,14 @@ Definitions (derived from MFMC 2.0.0b specification)
 
 | **Variable**  | **Description**                                                          |
 |---------------|--------------------------------------------------------------------------|
-| N_Probes      | Number of probes                                                         |
 | N_Dataset     | Number of datasets                                                       |
-| N_Elem\<p\>   | Number of elements of p-th probe                                         |
+| N_Elem\<p\>   | Number of elements of p-th probe or sensor                                        |
 | N_DF\<m\>     | Number of dataframes in m-th dataset                                     |
 | N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                         |
 | N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                          |
 | N_CS\<m\>     | Number of scalar values stored in the m-th CSscan dataset                |
 | N_Gate\<m\>   | Number of gates in the m-th CScan dataset                                |
-| N_Prob\<m\>   | Number of probes used in m-th dataset                                    |
+| N_Sens\<m\>   | Number of sensors used in m-th dataset                                    |
 | N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th dataset  |
 | N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law              |
 | N_Points\<k\> | Number of points used to describe the k-th focal law propagation_line    |
@@ -187,9 +187,9 @@ The setup description is organized in two blocks defining the ultrasonic setup a
 ultrasonic setup we find the description of the electronic settings, with blocks describing the emitter and receive laws
 and the phased array setup for acquisition with multielement transducers.
 
-The geometric setup contains the dynamic description of the scene: inspected component, probes and acquisition
-trajectories. It is possible to define different trajectories for different probes or to have probes sharing the same
-trajectory, offsets retrieving the set of different probe positions from the trajectory.
+The geometric setup contains the dynamic description of the scene: inspected component, sensors and acquisition
+trajectories. It is possible to define different trajectories for different sensors or to have sensors sharing the same
+trajectory, offsets retrieving the set of different sensor positions from the trajectory.
 
 ## HDF5 implementation
 
@@ -218,9 +218,9 @@ When discovering the content of a given file, the following procedure must there
 
 ### 3D Frames
 
-Figure 2 displays the different frames and convention involved in the positioning systems. The PCF (Probe Coordinate
-Frame) is the frame that is related to a specific probe or set of probes. It can be arbitrarily chosen to be centered
-along the piezoelectric cell, the index point, the carrier system, the Probe Center Separation for TOFD systems, etc.
+Figure 2 displays the different frames and convention involved in the positioning systems. The SCF (Sensor Coordinate
+Frame) is the frame that is related to a specific sensor or set of sensors. It can be arbitrarily chosen to be centered
+along the piezoelectric cell, the index point, the carrier system, the Sensor Center Separation for TOFD systems, etc.
 Through a rigid-body offset, it is related to the Trajectory Frame (TF), which for a given position is defined in
 relation to the Reference Frame. The list of these positions are defined in an Acquisition Trajectory block.
 
@@ -242,7 +242,7 @@ Throughout the document, a frame is provided for the following objects:
 
 - The specimen frame,
 - The trajectory frames (a frame for each position in the trajectory)
-- The probe coordinate frames
+- The sensor coordinate frames
 - The elements
 - The TFM Zones
 - The index points
