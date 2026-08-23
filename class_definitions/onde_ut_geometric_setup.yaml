@@ -1,11 +1,11 @@
-onde_class: ONDE_GEOMETRIC_SETUP
+onde_class: ONDE_UT_GEOMETRIC_SETUP
 inherits: []
 description: |-
-    ### Geometric setup
+    ### Ultrasound inspection geometric setup
 
     #### Description
 
-    The geometric setup contains references to the inspected component, the probes and the trajectory. If the specimen
+    The geometric setup contains references to the inspected component, the ultrasonic probes and the trajectory. If the specimen
     description is missing, a semi-infinite half-plane is assumed, with interface at z=0 and material for z>0.
 
     #### Trajectories
@@ -14,9 +14,10 @@ description: |-
     trajectory —references have the same order as
     PROBE_LIST. PROBE_COORDINATE_FRAME can be used to define an offset between a
     referenced trajectory and the probe —identity is assumed if not provided.
+
 fields:
   COMPONENT:
-    full_name: ONDE_GEOMETRIC_SETUP:COMPONENT
+    full_name: ONDE_UT_GEOMETRIC_SETUP:COMPONENT
     required: false
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_COMPONENT>
@@ -25,27 +26,27 @@ fields:
       is assumed, with interface at z=0 and material for z>0
     dimensions: '[1]'
   PROBE_LIST:
-    full_name: ONDE_GEOMETRIC_SETUP:SENSOR_LIST
+    full_name: ONDE_UT_GEOMETRIC_SETUP:PROBE_LIST
     required: true
     storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_SENSOR>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
     description: List all probes used in the acquisition of the dataset
     dimensions: '[N_Prob<M>]'
   ACQUISITION_TRAJECTORY:
-    full_name: ONDE_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY
+    full_name: ONDE_UT_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>
     description: |-
       References to the block describing the trajectory, references have the
-      same order as SENSOR_LIST
+      same order as PROBE_LIST
     dimensions: '[N_Prob<M>]'
-  SENSOR_COORDINATE_FRAME:
-    full_name: ONDE_GEOMETRIC_SETUP:SENSOR_COORDINATE_FRAME
+  PROBE_COORDINATE_FRAME:
+    full_name: ONDE_UT_GEOMETRIC_SETUP:PROBE_COORDINATE_FRAME
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
     description: |-
-      Offset and direction of the sensor w.r.t the trajectory frame- identity is
+      Offset and direction of the probe w.r.t the trajectory frame- identity is
       assumed if not provided
     dimensions: '[N_Prob<M>,7]'
