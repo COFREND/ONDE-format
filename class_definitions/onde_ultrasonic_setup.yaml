@@ -20,7 +20,12 @@ description: |-
 
     GAIN indicates the total gain for each A-scan during reception. It is a
     multiplying factor that was applied at acquisition.
-
+    
+    #### Digitizer Information
+    Each acquisition must have an associated  MIN_ASCAN_VALUE, MAX_ASCAN_VALUE, and ADC_BIT_DEPTH.
+    The ADC_BIT_DEPTH is the number of bits used by the Analog-to-Digital Converter  to digitize the A-scan signal. 
+    MAX_ASCAN_VALUE and MIN_ASCAN_VALUE represent the highest and lowest raw A-scan values respectively. 
+    
     #### TCG curves
 
     The curve is specified in the TCG_CURVE field. It is provided for the entire
@@ -167,6 +172,33 @@ fields:
       This indicates the total gain for each A-scan during
       reception. Multiplying factor that was applied at acquisition.
     dimensions: '[ N_Ascan<m> ]'
+  ADC_BIT_DEPTH:
+    full_name: ONDE_ULTRASONIC_SETUP:ADC_BIT_DEPTH
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The amount of bits used in ADC of A-scan'
+    description: |-
+      This value represents the amount of bits used in the ADC during the digitizing of the A-scan in the acquistion.
+    dimensions: '1'
+ MAX_ASCAN_VALUE:
+    full_name: ONDE_ULTRASONIC_SETUP:MAX_ASCAN_VALUE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The maximum possible A-scan value in the acquistion.'
+    description: |-
+      This value represents the maximum possible raw A-scan value within the acquistion.
+    dimensions: '1'
+  MIN_ASCAN_VALUE:
+    full_name: ONDE_ULTRASONIC_SETUP:MIN_ASCAN_VALUE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The minimum possible A-scan value in the acquistion.'
+    description: |-
+      This value represents the minimum possible raw A-scan value within the acquistion.
+    dimensions: '1'
   PRF:
     full_name: ONDE_ULTRASONIC_SETUP:PRF
     required: false
