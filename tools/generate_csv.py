@@ -50,7 +50,7 @@ def generate_csv():
         
         chain = get_inheritance_chain_dict(cls_name)
         allowed_str = '["' + '", "'.join(chain) + '"]'
-        dim_str = f'[{len(chain)}]' if len(chain) > 1 else '1'
+        dim_str = f'[{len(chain)}]' 
         
         type_field = {
             'full_name': 'ONDE:TYPE',
