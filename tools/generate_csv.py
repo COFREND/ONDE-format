@@ -9,9 +9,8 @@ def parse_yaml(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         return yaml.safe_load(f)
 
-def generate_csv():
+def generate_csv(output_csv='build/ONDE_fields.csv'):
     input_dir = 'class_definitions'
-    output_csv = 'build/ONDE_fields.csv'
     
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     
@@ -31,6 +30,7 @@ def generate_csv():
             
     # Inject TYPE fields dynamically based on inheritance for classes
     def get_inheritance_chain_dict(c_name, visited=None):
+        """returns inheritance list with base class first"""
         if visited is None: visited = set()
         if c_name in visited or not c_name: return []
         visited.add(c_name)
@@ -41,13 +41,14 @@ def generate_csv():
         inherits = c_data.get('inherits', [])
         chain = [c_name]
         for parent in inherits:
-            chain.extend(get_inheritance_chain_dict(parent, visited))
+            chain = get_inheritance_chain_dict(parent, visited) + chain # list concatenation
         
         return chain
 
     for c_data in classes_data:
         cls_name = c_data.get('onde_class', '')
         
+        # Obtain inheritance list with base class first
         chain = get_inheritance_chain_dict(cls_name)
         allowed_str = '["' + '", "'.join(chain) + '"]'
         dim_str = f'[{len(chain)}]' if len(chain) > 1 else '1'
@@ -57,7 +58,8 @@ def generate_csv():
             'required': True,
             'storage': 'attribute',
             'hdf5_type': 'H5T_STRING',
-            'description': '',
+            'short_description': 'Specifies the ONDE class and its inheritance hierarchy.',
+            'description': 'The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.',
             'dimensions': dim_str,
             'allowed_values': allowed_str
         }

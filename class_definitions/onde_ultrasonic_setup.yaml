@@ -84,6 +84,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Label for the ultrasonic setup.'
     description: ''
     dimensions: '1'
   RECTIFICATION:
@@ -91,6 +92,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Defines the rectification mode applied to the ultrasonic data.'
     description: |-
       Defines if the data are FULL_WAVE or RECTIFIED_POSITIVE,
       RECTIFIED_NEGATIVE, RECTIFIED_FULL
@@ -100,6 +102,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Specifies the type of filtering applied to the signals.'
     description: |-
       Defines the type of filtering applied to the signals: NO_FILTER,
       LOW_PASS, HIGH_PASS, BAND_PASS, OTHER
@@ -109,6 +112,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Provides the parameters for the analogue filter.'
     description: |-
       Optional datafield providing analogue filter parameters - see notes for
       detailed explanation
@@ -118,6 +122,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'A textual description of the filtering applied.'
     description: Description of the filtering applied
     dimensions: '1'
   ASCAN_SAMPLE_RATE:
@@ -125,6 +130,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The sampling frequency of the A-scan data points.'
     description: |-
       This indicates the sampling frequency of A-scan data points. It is assumed
       that a uniform sampling rate is used throughout A-scan data collection.
@@ -134,6 +140,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The starting time for data acquisition.'
     description: |-
       This indicates the starting time for data acquisition. If dimension is 1,
       the same start time is used for all A-Scans, else a different start time
@@ -144,6 +151,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'Digitization of the emission signal.'
     description: |-
       Digitization of the emission signal (can be used to store arbitrary
       signals). If missing impulse emission at time 0.0 is assumed. 2D Array
@@ -154,6 +162,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The total gain applied for each A-scan during reception.'
     description: |-
       This indicates the total gain for each A-scan during
       reception. Multiplying factor that was applied at acquisition.
@@ -163,6 +172,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The Pulse Repetition Frequency (PRF) for the signals.'
     description: Pulse Repetition Frequency
     dimensions: '[N_Ascan<m>] or [2]'
   TCG_CURVE:
@@ -170,6 +180,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The Time Corrected Gain (TCG) curve applied to the received signals.'
     description: |-
       TCG curve applied to the received signals. The amplitude correction is
       given for each time sample as a multiplying factor.
@@ -179,6 +190,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_PHASED_ARRAY_SETUP>
+    short_description: 'Reference to the associated phased array setup.'
     description: ''
     dimensions: '1'
   TRANSMIT_LAW:
@@ -186,6 +198,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_LAW>
+    short_description: 'HDF5 reference to the transmit focal law group.'
     description: |-
       Each A-scan in a dataframe must be associated with both a transmit and a
       receive focal law through the datafields. These contain HDF5 references to
@@ -198,6 +211,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_LAW>
+    short_description: 'HDF5 reference to the receive focal law group.'
     description: |-
       Each A-scan in a dataframe must be associated with both a transmit and a
       receive focal law through the datafields. These contain HDF5 references to

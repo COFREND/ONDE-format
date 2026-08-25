@@ -37,6 +37,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Type tags for the UT probe.'
     description: ''
     dimensions: '[1]'
     allowed_values: '["ONDE_UT_ELEMENTS"]'
@@ -45,6 +46,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Human-readable label for the probe.'
     description: ''
     dimensions: '1'
   MANUFACTURER:
@@ -52,6 +54,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'The manufacturer of the probe.'
     description: ''
     dimensions: '1'
   SERIAL_NUMBER:
@@ -59,6 +62,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'The serial number of the probe.'
     description: ''
     dimensions: '1'
   FREQUENCY:
@@ -66,6 +70,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The operating frequency of the probe.'
     description: ''
     dimensions: '1'
   BANDWIDTH:
@@ -73,6 +78,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The frequency bandwidth of the probe.'
     description: ''
     dimensions: '1'
   INDEX_POINT_FRAME:
@@ -80,6 +86,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'Frame of reference for the index point of the probe.'
     description: If absent, identity is assumed
     dimensions: '[7]'
   FOCUSING_SURFACE:
@@ -87,6 +94,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Shape of the surface on which the elements are arranged.'
     description: |-
       Defines the shape of the surface on which the elements are arranged —if
       absent, FLAT is assumed
@@ -96,6 +104,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Geometric parameters defining the focusing surface.'
     description: |-
       Multi values: value in mm
 
@@ -113,5 +122,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_COUPLING>
+    short_description: 'Reference to the coupling system used with the probe.'
     description: Reference to the coupling system (wedge, immersion, direct)
     dimensions: '1'

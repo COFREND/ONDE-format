@@ -17,5 +17,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The dimensions of the planar specimen, represented as a triplet of length, width, and thickness."
     description: ''
     dimensions: '[3]'

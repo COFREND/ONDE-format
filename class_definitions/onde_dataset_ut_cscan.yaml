@@ -69,6 +69,7 @@ fields:
     required: true
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
+    short_description: References to arrays containing scalar raw data or data resulting from analysis of signals.
     description: references to arrays containing the different values stored in the
       dataset
     dimensions: '[N_CS<m>] |[N_CS<m>,N_Gate<m>]'
@@ -77,6 +78,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_STRING
+    short_description: A string defining the nature of the stored data, such as a custom property or a standardized name.
     description: |-
       string defining the stored data - the name can be either custom
       (MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS,
@@ -87,6 +89,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>
+    short_description: A reference to the dataset containing the originating underlying raw data.
     description: reference to the dataset containing the underlying data
     dimensions: '1'
   UNDERLYING_DATA_REFERENCE:
@@ -94,6 +97,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_INTEGER
+    short_description: A mapping that provides the correspondence between the C-scan scalar data and its originating scan.
     description: |-
       Correspondancy between the C-Scan scalar data and the scan originating.
       For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D
@@ -105,6 +109,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_GRID>
+    short_description: A reference to a grid-type trajectory block used to position the C-scan data.
     description: ''
     dimensions: '1'
   GATES:
@@ -112,5 +117,6 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    short_description: References to separate gate groups that define the time windows and thresholds used for data acquisition.
     description: ''
     dimensions: '[N_Gate<m>]'

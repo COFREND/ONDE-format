@@ -91,19 +91,22 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: A human-readable label or name for the component.
     description: ''
   VELOCITIES:
     full_name: ONDE_COMPONENT:VELOCITIES
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: ''
+    short_description: Longitudinal and shear wave velocities of the component.
+    description: 'The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.'
     dimensions: '[2]'
   DENSITY:
     full_name: ONDE_COMPONENT:DENSITY
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Density of the component material.
     description: ''
     dimensions: '1'
   VISUALIZATION_CAD:
@@ -111,6 +114,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: Optional CAD file used for visualization purposes.
     description: Optional CAD used for visualisation purposes
     dimensions: '1'
   VISUALIZATION_CAD_FRAME:
@@ -118,6 +122,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Transformation frame for the visualization CAD.
     description: |-
       Definition of the frame defining the visualisation CAD with offset and
       quaternions in the specimen frame- Identity is used if absent
@@ -127,6 +132,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Transformation defining the component's frame relative to the global reference.
     description: |-
       Definition of the specimen frame in the reference frame. If not provided,
       default value is identity with the reference frame.
@@ -136,6 +142,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: Additional text comment regarding the component.
     description: ''
     dimensions: '1'
   IMAGE:
@@ -143,5 +150,6 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Image parameters or data associated with the component.
     description: ''
     dimensions: '[3]'
