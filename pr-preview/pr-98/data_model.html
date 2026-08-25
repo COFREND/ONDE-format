@@ -2504,20 +2504,20 @@ The YAML file (<code>onde_myclass.yaml</code>) will look like this:</p>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
 <span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
-<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[3]&#39;</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'[3]'</span>
 <span class="w">  </span><span class="nt">DIMENSION</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS:DIMENSION</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
 <span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_INTEGER</span>
-<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'1'</span>
 <span class="w">    </span><span class="nt">min_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">  </span><span class="nt">TABLE</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS:TABLE</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataset</span>
 <span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
-<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[ONDE_MYCLASS:DIMENSION,3]&#39;</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'[ONDE_MYCLASS:DIMENSION,3]'</span>
 </code></pre></div>
 <h3 id="representation-of-a-subclass-in-the-yaml-schemas">Representation of a subclass in the YAML schemas</h3>
 <p>Class inheritance is defined using the <code>inherits</code> array. The <code>ONDE:TYPE</code> attribute in the generated HDF5 file will automatically contain the class hierarchy starting from the base class.</p>
@@ -2533,7 +2533,7 @@ The YAML file (<code>onde_mysubclass.yaml</code>) will look like this:</p>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
 <span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_FLOAT</span>
-<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'1'</span>
 </code></pre></div>
 <p>The HDF5 file will contain an HDF5 group with the attribute <code>ONDE_TYPE</code> containing <code>["ONDE_MYCLASS", "ONDE_MYSUBCLASS"]</code>, attributes <code>ONDE_MYCLASS:COORDINATES</code>, <code>ONDE_MYCLASS:DIMENSION</code>, <code>ONDE_MYSUBCLASS:MY_VALUE</code>, and an HDF5 dataset named <code>ONDE_MYCLASS:TABLE</code>.</p>
 <h3 id="representation-of-an-accessory-class-in-the-yaml-schemas">Representation of an accessory class in the YAML schemas</h3>
@@ -2549,7 +2549,7 @@ Another class will refer to this accessory class to aggregate its content throug
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
 <span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_STRING</span>
-<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'1'</span>
 </code></pre></div>
 <p>When this accessory is aggregated in an <code>ONDE_MYCLASS</code> group, the HDF5 group will contain an <code>ONDE:TYPE_TAGS</code> attribute listing <code>["ONDE_MY_ACCESSORY_CLASS"]</code>, and the fields of the accessory class will be present alongside the fields of the base class.</p>
 <h3 id="legacy-csv-specification">Legacy CSV Specification</h3>

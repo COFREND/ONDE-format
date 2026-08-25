@@ -2016,7 +2016,7 @@ time trajectories).</p>
 
 </div>
 
-<div class="field-summary-desc">List of positions and quaternions giving the positions and orientations of<br>the trajectory frame at the different positions</div>
+<div class="field-summary-desc">A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2033,14 +2033,16 @@ time trajectories).</p>
 the trajectory frame at the different positions</p>
 </div>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_spatial_trajectory-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2052,6 +2054,9 @@ the trajectory frame at the different positions</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 </div>
 

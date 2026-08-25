@@ -2056,7 +2056,7 @@ positions in Probe Coordinate Frame and time of flight are stored.</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the relative delay (in ultrasonic time) between the different<br>Probe Element Combinations in the focal law.</div>
+<div class="field-summary-desc">The relative delay applied to each probe element combination.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2083,6 +2083,8 @@ delay for all Probe Element Combinations.</p>
 
 </div>
 
+<div class="field-summary-desc">The index or identifier of the probe element used in this focal law.</div>
+
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
@@ -2102,6 +2104,8 @@ delay for all Probe Element Combinations.</p>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">A reference to the ultrasonic probe used in this focal law.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2123,7 +2127,7 @@ delay for all Probe Element Combinations.</p>
 
 </div>
 
-<div class="field-summary-desc">Represents the ultrasonic ray along which the data is to be represented in<br>a true visualisation.</div>
+<div class="field-summary-desc">The ultrasonic ray along which the data is to be represented.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2142,14 +2146,16 @@ Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
 positions in Probe Coordinate Frame and time of flight are stored).</p>
 </div>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_ut_law-type"><code>TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
   <span class="req-badge req-yes">Required</span>
 
 </div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2161,6 +2167,9 @@ positions in Probe Coordinate Frame and time of flight are stored).</p>
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
+</div>
 </details>
 <details class="field-details">
 <summary>
@@ -2171,7 +2180,7 @@ positions in Probe Coordinate Frame and time of flight are stored).</p>
 
 </div>
 
-<div class="field-summary-desc">Specifies the weighting between the different Probe Element Combinations<br>in the focal law.</div>
+<div class="field-summary-desc">The weighting factor applied to each probe element combination.</div>
 
 <table class="field-meta-table">
 <tbody>
