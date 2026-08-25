@@ -53,9 +53,9 @@ description: |-
     The filtering parameters take different values following the filter type.
 
     - For FILTER_TYPE HIGH_PASS or LOW_PASS this is a single value giving the
-      -3 dB cut-off frequency
+      -3 dB cut-off frequency
     - For FILTER_TYPE BAND_PASS this should contain two values for the lower and
-      upper -3 dB cut-off frequencies
+      upper -3 dB cut-off frequencies
     - For FILTER_TYPE OTHER, this should be an [3, N_U<m>, N_V<m>] matrix where
       the first row is frequency and the second and third rows provide the real
       and imaginary parts of the filter's transfer function at that frequency.
@@ -69,7 +69,7 @@ description: |-
     the offsets/rotation between the trajectory and the probe PCF describe the
     relative positions of the different probes with respect to the trajectory
     frame. A typical example is illustrated in
-    [Figure 23](onde_ultrasonic_setup.md), with a trajectory frame given at the
+    [Figure 23](onde_ultrasonic_setup.md), with a trajectory frame given at the
     Probe Center Separation and offsets used to define the PCF locations. If the
     offset is not provided, the PCF and trajectory frame are assumed to be the
     same.
@@ -182,7 +182,7 @@ fields:
       This value represents the amount of bits used in the ADC 
       during the digitizing of the A-scan in the acquistion.
     dimensions: '1'
- MAX_ASCAN_VALUE:
+  MAX_ASCAN_VALUE:
     full_name: ONDE_ULTRASONIC_SETUP:MAX_ASCAN_VALUE
     required: true
     storage: attribute
@@ -251,6 +251,6 @@ fields:
       Each A-scan in a dataframe must be associated with both a transmit and a
       receive focal law through the datafields. These contain HDF5 references to
       the groups which provide the detailed description of each focal laws (the
-      same structure is used for both transmit and receive focal laws).Mandatory
+      same structure is used for both transmit and receive focal laws). Mandatory
       for phased array setups.
     dimensions: '[N_Ascan<m>] or [N_U<m>, N_V<m>, N_Ascan<m>]'
