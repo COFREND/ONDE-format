@@ -2009,27 +2009,53 @@ time trajectories).</p>
 <div class="field-list">
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_spatial_trajectory-trajectory"><code>TRAJECTORY</code></strong> &mdash; List of positions and quaternions giving the positions and orientations of<br>the trajectory frame at the different positions</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_spatial_trajectory-trajectory"><code>TRAJECTORY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_U&lt;m&gt;,N_V&lt;m&gt;,7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>List of positions and quaternions giving the positions and orientations of
 the trajectory frame at the different positions</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_U&lt;m&gt;,N_V&lt;m&gt;,7]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_spatial_trajectory-type"><code>TYPE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_spatial_trajectory-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_ACQUISITION_TRAJECTORY&#34;, &#34;ONDE_SPATIAL_TRAJECTORY&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[2]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_ACQUISITION_TRAJECTORY", "ONDE_SPATIAL_TRAJECTORY"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 </div>

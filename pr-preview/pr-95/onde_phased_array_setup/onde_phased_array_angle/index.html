@@ -2043,64 +2043,123 @@
 <p><em><a href="index.html">Figure 24</a>: Inspection using a single angle</em></p>
 <h2 id="fields">Fields</h2>
 <div class="field-list">
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_phased_array_angle-bscan_angle"><code>BSCAN_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">The specified angle for the ultrasonic ray direction.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_phased_array_angle-emitter_probe"><code>EMITTER_PROBE</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span>
+
+</div>
+
+<div class="field-summary-desc">Reference to the emitting phased array probe used in this setup.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_phased_array_angle-receiving_probe"><code>RECEIVING_PROBE</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span>
+
+</div>
+
+<div class="field-summary-desc">Reference to the receiving phased array probe used in this setup.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_phased_array_angle-sequence_angle_mode"><code>SEQUENCE_ANGLE_MODE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span>
+
+</div>
+
+<div class="field-summary-desc">Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+
+    <tr><td>Allowed:</td><td><code>&#34;L&#34;|&#34;T&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
+</details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_phased_array_angle-bscan_angle"><code>BSCAN_ANGLE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_phased_array_angle-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_phased_array_angle-emitter_probe"><code>EMITTER_PROBE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</div>
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_PHASED_ARRAY_SETUP&#34;, &#34;ONDE_PHASED_ARRAY_ANGLE&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_phased_array_angle-receiving_probe"><code>RECEIVING_PROBE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../onde_ut_probe/index.html">ONDE_UT_PROBE</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_phased_array_angle-sequence_angle_mode"><code>SEQUENCE_ANGLE_MODE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_PHASED_ARRAY_SETUP</a></span> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> - | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"L"|"T"</code></p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_phased_array_angle-type"><code>TYPE</code></strong> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[2]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_PHASED_ARRAY_SETUP", "ONDE_PHASED_ARRAY_ANGLE"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 </div>

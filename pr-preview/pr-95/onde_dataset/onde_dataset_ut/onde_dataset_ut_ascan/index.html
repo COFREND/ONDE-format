@@ -2049,105 +2049,215 @@ HDF5 structure.</p>
 <div class="field-list">
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-amplitude_dimension"><code>AMPLITUDE_DIMENSION</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; If absent, treated as coordinate "Amplitude", units "Arbitrary", offset<br>0.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-amplitude_dimension"><code>AMPLITUDE_DIMENSION</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">Reference to the dimension defining the amplitude characteristics.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, treated as coordinate "Amplitude", units "Arbitrary", offset
 0.0, scale 1.0</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-data"><code>DATA</code></strong> &mdash; Data can be either an array or a reference to an array.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-data"><code>DATA</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Contains the time signal data array or a reference to it.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">A or D</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1 or [N_U&lt;m&gt;,N_V&lt;m&gt;,N_Ascan&lt;m&gt;,Ntime&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Data can be either an array or a reference to an array. Omitting this
 field is possible, in the event when Tscan or Cscan data is recorded but
 the underlying Ascan data is not.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1 or [N_U&lt;m&gt;,N_V&lt;m&gt;,N_Ascan&lt;m&gt;,Ntime&lt;m&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> A or D</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-date_and_time"><code>DATE_AND_TIME</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-date_and_time"><code>DATE_AND_TIME</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.g. '2019-01-16T17:05:06') must be used with a capital T separating the date and the time. Optionally, a decimal point ('.') and a fractional portion of a second may be appended. In addition, time zone information is usually appended:
 * "Z", indicating a timestamp in UTC
 * "±hh:mm", indicating a timezone with the specified offset from UTC
 * (no timezone information), indicating an unknown timezone; software will usually interpret this as local time or UTC. </p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-index_dimensions"><code>INDEX_DIMENSIONS</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; One entry per dimension of ONDE_DATASET:DATA.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-index_dimensions"><code>INDEX_DIMENSIONS</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">Array of references to the index dimensions of the dataset.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[n_data_dims]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
 treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span> | <strong>Dimensions:</strong> <code>[n_data_dims]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-label"><code>LABEL</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; A name for this dataset</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-label"><code>LABEL</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">A name or label representing this dataset.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>A name for this dataset</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-operator"><code>OPERATOR</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; </div>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-operator"><code>OPERATOR</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
 </div>
+
+<div class="field-summary-desc">The name or identifier of the operator conducting the acquisition.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-setup"><code>SETUP</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; </div>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-setup"><code>SETUP</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
 </div>
+
+<div class="field-summary-desc">Reference to the setup configuration used for this dataset.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_ascan-type"><code>TYPE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_ascan-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_DATASET&#34;, &#34;ONDE_DATASET_UT&#34;, &#34;ONDE_DATASET_UT_ASCAN&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[3]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_DATASET", "ONDE_DATASET_UT", "ONDE_DATASET_UT_ASCAN"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 </div>

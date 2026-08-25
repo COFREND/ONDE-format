@@ -2122,88 +2122,176 @@ according to the major axis.</p>
 <div class="field-list">
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-axis_of_curvature"><code>AXIS_OF_CURVATURE</code></strong> &mdash; If absent, flat elements are assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-axis_of_curvature"><code>AXIS_OF_CURVATURE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">The vector defining the axis of curvature for non-flat elements.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, flat elements are assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,3]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-dead_element"><code>DEAD_ELEMENT</code></strong> &mdash; Datafield of logical values (0 = false, 1 = true) used to flag<br>non-functioning elements in an array probe (if not present, assumption<br>should be that all elements are performing correctly);</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-dead_element"><code>DEAD_ELEMENT</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+</div>
+
+<div class="field-summary-desc">Logical flags indicating non-functioning elements in a probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Datafield of logical values (0 = false, 1 = true) used to flag
 non-functioning elements in an array probe (if not present, assumption
 should be that all elements are performing correctly);</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-frame"><code>FRAME</code></strong> &mdash; Array defining the location of the elements of the probe</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-frame"><code>FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Defines the position and orientation of each probe element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Array defining the location of the elements of the probe</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,7]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-radius_of_curvature"><code>RADIUS_OF_CURVATURE</code></strong> &mdash; If absent, flat elements are assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-radius_of_curvature"><code>RADIUS_OF_CURVATURE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">The radius of curvature for elements that are not flat.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, flat elements are assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-shape"><code>SHAPE</code></strong> &mdash; The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-shape"><code>SHAPE</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+</div>
+
+<div class="field-summary-desc">Specifies the geometric shape of each probe element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-size"><code>SIZE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">Provides six parameters that specify the dimensions of each element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,6]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-size"><code>SIZE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_elements-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,6]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_elements-type"><code>TYPE</code></strong> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_ELEMENTS&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_ELEMENTS"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 </div>

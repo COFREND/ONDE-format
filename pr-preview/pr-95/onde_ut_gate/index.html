@@ -2015,78 +2015,150 @@
   style ONDE_UT_GATE stroke:#3f51b5,stroke-width:3px</code></pre>
 <h2 id="fields">Fields</h2>
 <div class="field-list">
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-detection"><code>DETECTION</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-detection"><code>DETECTION</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"FIRST_PEAK"|"LAST_PEAK"|"MAX_PEAK"|"FIRST_FLANK"|"LAST_FLANK"|"MAX_FLANK"</code></p>
 </div>
+
+<div class="field-summary-desc">Specifies the peak or flank detection mode for the gate.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;FIRST_PEAK&#34;|&#34;LAST_PEAK&#34;|&#34;MAX_PEAK&#34;|&#34;FIRST_FLANK&#34;|&#34;LAST_FLANK&#34;|&#34;MAX_FLANK&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-polarity"><code>POLARITY</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
+
+</div>
+
+<div class="field-summary-desc">Specifies the polarity used for gate detection.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;ABSOLUTE&#34;|&#34;POSITIVE&#34;|&#34;NEGATIVE&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-polarity"><code>POLARITY</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-start"><code>START</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"ABSOLUTE"|"POSITIVE"|"NEGATIVE"</code></p>
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-start"><code>START</code></strong> &mdash; For scalar data relying on Ascan data, defines the start time for the<br>gate.</div>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+<div class="field-summary-desc">Defines the start time for the ultrasonic gate.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>For scalar data relying on Ascan data, defines the start time for the
 gate. Mandatory for data related to Ascans.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-threshold"><code>THRESHOLD</code></strong> &mdash; Defines the threshold of the gate for data to be stored</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-threshold"><code>THRESHOLD</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Defines the threshold of the gate for data storage.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Defines the threshold of the gate for data to be stored</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-type"><code>TYPE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_GATE&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_GATE"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_gate-width"><code>WIDTH</code></strong> &mdash; For Cscans scalar data relying on Ascan data, defines the width of the<br>gate.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_gate-width"><code>WIDTH</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Defines the width of the ultrasonic gate.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>For Cscans scalar data relying on Ascan data, defines the width of the
 gate. Mandatory for data related to Ascans</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 </div>
