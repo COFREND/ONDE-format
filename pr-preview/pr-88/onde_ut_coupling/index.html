@@ -1963,52 +1963,95 @@
   style ONDE_UT_COUPLING stroke:#3f51b5,stroke-width:3px</code></pre>
 <h2 id="fields">Fields</h2>
 <div class="field-list">
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_coupling-incidence_angle"><code>INCIDENCE_ANGLE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_coupling-incidence_angle"><code>INCIDENCE_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The angle of incidence of the acoustic wave as it travels into the coupling medium.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_coupling-medium_density"><code>MEDIUM_DENSITY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
+
+</div>
+
+<div class="field-summary-desc">The density of the coupling medium.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_coupling-medium_velocity"><code>MEDIUM_VELOCITY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">The velocity of the acoustic waves propagating within the coupling medium.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_coupling-medium_density"><code>MEDIUM_DENSITY</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_coupling-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_coupling-medium_velocity"><code>MEDIUM_VELOCITY</code></strong> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_COUPLING&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[2]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_coupling-type"><code>TYPE</code></strong> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_COUPLING"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 </div>

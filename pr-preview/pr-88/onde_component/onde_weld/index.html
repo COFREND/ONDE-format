@@ -2017,319 +2017,610 @@
   style ONDE_WELD stroke:#3f51b5,stroke-width:3px</code></pre>
 <h2 id="fields">Fields</h2>
 <div class="field-list">
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-comment"><code>COMMENT</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; </div>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-comment"><code>COMMENT</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
 </div>
+
+<div class="field-summary-desc">Additional text comment regarding the component.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_weld-component_frame"><code>COMPONENT_FRAME</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; Definition of the specimen frame in the reference frame.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-component_frame"><code>COMPONENT_FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
+</div>
+
+<div class="field-summary-desc">Transformation defining the component's frame relative to the global reference.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Definition of the specimen frame in the reference frame. If not provided,
 default value is identity with the reference frame.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[7]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-density"><code>DENSITY</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; </div>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-density"><code>DENSITY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
 </div>
+
+<div class="field-summary-desc">Density of the component material.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-extrusion_dimension"><code>EXTRUSION_DIMENSION</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">The physical dimension used for the weld extrusion process.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-extrusion_type"><code>EXTRUSION_TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">Specifies the type of extrusion for the weld geometry.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;PLANE&#34;|&#34;CYLINDER&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-image"><code>IMAGE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
+</div>
+
+<div class="field-summary-desc">Image parameters or data associated with the component.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-label"><code>LABEL</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
+</div>
+
+<div class="field-summary-desc">A human-readable label or name for the component.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_weld-extrusion_dimension"><code>EXTRUSION_DIMENSION</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-extrusion_type"><code>EXTRUSION_TYPE</code></strong> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_COMPONENT&#34;, &#34;ONDE_WELD&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"PLANE"|"CYLINDER"</code></p>
-</div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-image"><code>IMAGE</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[3]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_weld-label"><code>LABEL</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-velocities"><code>VELOCITIES</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> - | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-type"><code>TYPE</code></strong> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+<div class="field-summary-desc">Longitudinal and shear wave velocities of the component.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[2]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_COMPONENT", "ONDE_WELD"]</code></p>
-</div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-velocities"><code>VELOCITIES</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; </div>
-
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[2]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
+<p>The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_weld-visualization_cad"><code>VISUALIZATION_CAD</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; Optional CAD used for visualisation purposes</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-visualization_cad"><code>VISUALIZATION_CAD</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
+</div>
+
+<div class="field-summary-desc">Optional CAD file used for visualization purposes.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Optional CAD used for visualisation purposes</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_weld-visualization_cad_frame"><code>VISUALIZATION_CAD_FRAME</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span> &mdash; Definition of the frame defining the visualisation CAD with offset and<br>quaternions in the specimen frame- Identity is used if absent</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-visualization_cad_frame"><code>VISUALIZATION_CAD_FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../index.html">ONDE_COMPONENT</a></span>
+
+</div>
+
+<div class="field-summary-desc">Transformation frame for the visualization CAD.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Definition of the frame defining the visualisation CAD with offset and
 quaternions in the specimen frame- Identity is used if absent</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[7]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_fill_angle"><code>WELD_FILL_ANGLE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_fill_angle"><code>WELD_FILL_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The angle of the fill pass for the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_fill_height"><code>WELD_FILL_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_fill_height"><code>WELD_FILL_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the fill pass for the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_haz_width"><code>WELD_HAZ_WIDTH</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_haz_width"><code>WELD_HAZ_WIDTH</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The width of the heat-affected zone (HAZ) of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_hot_pass_angle"><code>WELD_HOT_PASS_ANGLE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_hot_pass_angle"><code>WELD_HOT_PASS_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The angle of the hot pass layer in the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_hot_pass_height"><code>WELD_HOT_PASS_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_hot_pass_height"><code>WELD_HOT_PASS_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the hot pass layer in the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_land_height"><code>WELD_LAND_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_land_height"><code>WELD_LAND_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the root land of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_land_offset"><code>WELD_LAND_OFFSET</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_land_offset"><code>WELD_LAND_OFFSET</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The offset measurement for the root land of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_lower_cap_height"><code>WELD_LOWER_CAP_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_lower_cap_height"><code>WELD_LOWER_CAP_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the lower cap of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_lower_cap_width"><code>WELD_LOWER_CAP_WIDTH</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_lower_cap_width"><code>WELD_LOWER_CAP_WIDTH</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The width of the lower cap of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_root_angle"><code>WELD_ROOT_ANGLE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_root_angle"><code>WELD_ROOT_ANGLE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The angle of the root pass for the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_root_height"><code>WELD_ROOT_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_root_height"><code>WELD_ROOT_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the root pass for the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_symmetry"><code>WELD_SYMMETRY</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_symmetry"><code>WELD_SYMMETRY</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"SYMMETRIC"|"STRAIGHT_LEFT"|"STRAIGHT_RIGHT"</code></p>
 </div>
+
+<div class="field-summary-desc">Describes the symmetry configuration of the weld geometry.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;SYMMETRIC&#34;|&#34;STRAIGHT_LEFT&#34;|&#34;STRAIGHT_RIGHT&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_type"><code>WELD_TYPE</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_type"><code>WELD_TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"V"|"U"</code></p>
 </div>
+
+<div class="field-summary-desc">Specifies the shape type of the weld groove (e.g., V or U).</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;V&#34;|&#34;U&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_upper_cap_height"><code>WELD_UPPER_CAP_HEIGHT</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_upper_cap_height"><code>WELD_UPPER_CAP_HEIGHT</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The height of the upper cap of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_weld-weld_upper_cap_width"><code>WELD_UPPER_CAP_WIDTH</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-weld_upper_cap_width"><code>WELD_UPPER_CAP_WIDTH</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The width of the upper cap of the weld.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 </div>
 

@@ -2240,165 +2240,331 @@ following:</p>
 <div class="field-list">
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-amplitude_dimension"><code>AMPLITUDE_DIMENSION</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; If absent, treated as coordinate "Amplitude", units "Arbitrary", offset<br>0.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-amplitude_dimension"><code>AMPLITUDE_DIMENSION</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">Reference to the dimension defining the amplitude characteristics.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, treated as coordinate "Amplitude", units "Arbitrary", offset
 0.0, scale 1.0</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-cscan_grid"><code>CSCAN_GRID</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-cscan_grid"><code>CSCAN_GRID</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_acquisition_trajectory/onde_spatial_trajectory/onde_acquisition_grid/index.html">ONDE_ACQUISITION_GRID</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_acquisition_trajectory/onde_spatial_trajectory/onde_acquisition_grid/index.html">ONDE_ACQUISITION_GRID</a>&gt;</div>
+</div>
+
+<div class="field-summary-desc">A reference to a grid-type trajectory block used to position the C-scan data.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_acquisition_trajectory/onde_spatial_trajectory/onde_acquisition_grid/index.html">ONDE_ACQUISITION_GRID</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-data"><code>DATA</code></strong> &mdash; references to arrays containing the different values stored in the dataset</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-data"><code>DATA</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">References to arrays containing scalar raw data or data resulting from analysis of signals.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">A or D</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_CS&lt;m&gt;] |[N_CS&lt;m&gt;,N_Gate&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>references to arrays containing the different values stored in the dataset</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;data&gt; or H5T_INTEGER or H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_CS&lt;m&gt;] |[N_CS&lt;m&gt;,N_Gate&lt;m&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> A or D</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-datatype"><code>DATATYPE</code></strong> &mdash; string defining the stored data - the name can be either custom<br>(MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS,<br>TIME_OF_FLIGHT, DEPTH, AMAX</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-datatype"><code>DATATYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">A string defining the nature of the stored data, such as a custom property or a standardized name.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_CS&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>string defining the stored data - the name can be either custom
 (MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS,
 TIME_OF_FLIGHT, DEPTH, AMAX</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[N_CS&lt;m&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-date_and_time"><code>DATE_AND_TIME</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">The date and time of the data acquisition.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-gates"><code>GATES</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_ut_gate/index.html">ONDE_UT_GATE</a>&gt;</span>
+  <span class="req-badge req-no">Optional</span>
+
+</div>
+
+<div class="field-summary-desc">References to separate gate groups that define the time windows and thresholds used for data acquisition.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Gate&lt;m&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-date_and_time"><code>DATE_AND_TIME</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-index_dimensions"><code>INDEX_DIMENSIONS</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-gates"><code>GATES</code></strong> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_ut_gate/index.html">ONDE_UT_GATE</a>&gt;</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_ut_gate/index.html">ONDE_UT_GATE</a>&gt;</span> | <strong>Dimensions:</strong> <code>[N_Gate&lt;m&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
-</div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-index_dimensions"><code>INDEX_DIMENSIONS</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; One entry per dimension of ONDE_DATASET:DATA.</div>
+<div class="field-summary-desc">Array of references to the index dimensions of the dataset.</div>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</div>
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[n_data_dims]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
 treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_dimension/index.html">ONDE_DIMENSION</a>&gt;</span> | <strong>Dimensions:</strong> <code>[n_data_dims]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details inherited-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-label"><code>LABEL</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; A name for this dataset</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-label"><code>LABEL</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">A name or label representing this dataset.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>A name for this dataset</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-operator"><code>OPERATOR</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; </div>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-operator"><code>OPERATOR</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
 </div>
-</details>
-<details class="field-details inherited-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-setup"><code>SETUP</code></strong> <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span> &mdash; </div>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</div>
+<div class="field-summary-desc">The name or identifier of the operator conducting the acquisition.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details empty-details inherited-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-setup"><code>SETUP</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
+
+    <span class="inherited-badge" markdown="span">Inherited from <a href="../../index.html">ONDE_DATASET</a></span>
+
+</div>
+
+<div class="field-summary-desc">Reference to the setup configuration used for this dataset.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+</details>
+<details class="field-details">
+<summary>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_DATASET&#34;, &#34;ONDE_DATASET_UT&#34;, &#34;ONDE_DATASET_UT_CSCAN&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../../../onde_setup/index.html">ONDE_SETUP</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-type"><code>TYPE</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-underlying_data"><code>UNDERLYING_DATA</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;ONDE_UT_ASCAN_DATASET&gt; or H5T_STD_REF_OBJ&lt;ONDE_UT_TSCAN_DATASET&gt;</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[3]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_DATASET", "ONDE_DATASET_UT", "ONDE_DATASET_UT_CSCAN"]</code></p>
 </div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-underlying_data"><code>UNDERLYING_DATA</code></strong> &mdash; reference to the dataset containing the underlying data</div>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;ONDE_UT_ASCAN_DATASET&gt; or H5T_STD_REF_OBJ&lt;ONDE_UT_TSCAN_DATASET&gt;</div>
+<div class="field-summary-desc">A reference to the dataset containing the originating underlying raw data.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>reference to the dataset containing the underlying data</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;ONDE_UT_ASCAN_DATASET&gt; or H5T_STD_REF_OBJ&lt;ONDE_UT_TSCAN_DATASET&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_dataset_ut_cscan-underlying_data_reference"><code>UNDERLYING_DATA_REFERENCE</code></strong> &mdash; Correspondancy between the C-Scan scalar data and the scan originating.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_dataset_ut_cscan-underlying_data_reference"><code>UNDERLYING_DATA_REFERENCE</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+</div>
+
+<div class="field-summary-desc">A mapping that provides the correspondence between the C-scan scalar data and its originating scan.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_U&lt;m&gt;,N_V&lt;m&gt;,2] or [N_U&lt;m&gt;,N_V&lt;m&gt;,3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Correspondancy between the C-Scan scalar data and the scan originating.
 For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D
 Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
 (dataframe, plane, column)</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_U&lt;m&gt;,N_V&lt;m&gt;,2] or [N_U&lt;m&gt;,N_V&lt;m&gt;,3]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 </div>

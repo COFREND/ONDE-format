@@ -2056,72 +2056,153 @@ probes, a negative one for surrounded probes.</p>
 <div class="field-list">
 <details class="field-details accessory-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-axis_of_curvature"><code>AXIS_OF_CURVATURE</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; If absent, flat elements are assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-axis_of_curvature"><code>AXIS_OF_CURVATURE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
+
+</div>
+
+<div class="field-summary-desc">The vector defining the axis of curvature for non-flat elements.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, flat elements are assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,3]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-bandwidth"><code>BANDWIDTH</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-bandwidth"><code>BANDWIDTH</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">The frequency bandwidth of the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-coupling"><code>COUPLING</code></strong> &mdash; Reference to the coupling system (wedge, immersion, direct)</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-coupling"><code>COUPLING</code></strong>
+  <span class="field-type" markdown="span">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_coupling/index.html">ONDE_UT_COUPLING</a>&gt;</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_coupling/index.html">ONDE_UT_COUPLING</a>&gt;</div>
+</div>
+
+<div class="field-summary-desc">Reference to the coupling system used with the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Reference to the coupling system (wedge, immersion, direct)</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STD_REF_OBJ&lt;<a href="../onde_ut_coupling/index.html">ONDE_UT_COUPLING</a>&gt;</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details accessory-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-dead_element"><code>DEAD_ELEMENT</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; Datafield of logical values (0 = false, 1 = true) used to flag<br>non-functioning elements in an array probe (if not present, assumption<br>should be that all elements are performing correctly);</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-dead_element"><code>DEAD_ELEMENT</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
+
+</div>
+
+<div class="field-summary-desc">Logical flags indicating non-functioning elements in a probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Datafield of logical values (0 = false, 1 = true) used to flag
 non-functioning elements in an array probe (if not present, assumption
 should be that all elements are performing correctly);</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-focusing_surface"><code>FOCUSING_SURFACE</code></strong> &mdash; Defines the shape of the surface on which the elements are arranged —if<br>absent, FLAT is assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-focusing_surface"><code>FOCUSING_SURFACE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Shape of the surface on which the elements are arranged.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+
+    <tr><td>Allowed:</td><td><code>&#34;FLAT&#34;|&#34;CYLINDRICAL_INC&#34;|&#34;CYLINDRICAL_PERP&#34;|&#34;SPHERICAL&#34;|&#34;BIFOCAL&#34;|&#34;TRIFOCAL&#34;</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Defines the shape of the surface on which the elements are arranged —if
 absent, FLAT is assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> - | <strong>Required:</strong> No | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>"FLAT"|"CYLINDRICAL_INC"|"CYLINDRICAL_PERP"|"SPHERICAL"|"BIFOCAL"|"TRIFOCAL"</code></p>
 </div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-focusing_surface_parameters"><code>FOCUSING_SURFACE_PARAMETERS</code></strong> &mdash; Multi values: value in mm<br><br>- FLAT: no value<br>- CYLINDRICAL_INC, CYLINDRICAL_PER: Surface radius<br>- SPHERICAL: Surface radius<br>- BIFOCAL: Surface radius in the incidence plane, surface radius in the plane<br>  perpendicular to the incidence plane<br>- TRIFOCAL: Surface radius in the incidence plane (bottom), Surface radius in<br>  the incidence plane (top), surface radius in the plane perpendicular to the<br>  incidence plane.</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-focusing_surface_parameters"><code>FOCUSING_SURFACE_PARAMETERS</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Geometric parameters defining the focusing surface.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[3]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Multi values: value in mm</p>
@@ -2135,141 +2216,272 @@ absent, FLAT is assumed</p>
   the incidence plane (top), surface radius in the plane perpendicular to the
   incidence plane.</li>
 </ul>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[3]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
 </details>
 <details class="field-details accessory-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-frame"><code>FRAME</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; Array defining the location of the elements of the probe</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-frame"><code>FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
+
+</div>
+
+<div class="field-summary-desc">Defines the position and orientation of each probe element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>Array defining the location of the elements of the probe</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,7]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-frequency"><code>FREQUENCY</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-frequency"><code>FREQUENCY</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">The operating frequency of the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute</p>
-</div>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-index_point_frame"><code>INDEX_POINT_FRAME</code></strong> &mdash; If absent, identity is assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-index_point_frame"><code>INDEX_POINT_FRAME</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+</div>
+
+<div class="field-summary-desc">Frame of reference for the index point of the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[7]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, identity is assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[7]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-label"><code>LABEL</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-label"><code>LABEL</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">Human-readable label for the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-manufacturer"><code>MANUFACTURER</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-manufacturer"><code>MANUFACTURER</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The manufacturer of the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details accessory-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-radius_of_curvature"><code>RADIUS_OF_CURVATURE</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; If absent, flat elements are assumed</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-radius_of_curvature"><code>RADIUS_OF_CURVATURE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
+
+</div>
+
+<div class="field-summary-desc">The radius of curvature for elements that are not flat.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>If absent, flat elements are assumed</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> No | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-serial_number"><code>SERIAL_NUMBER</code></strong> &mdash; </div>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-serial_number"><code>SERIAL_NUMBER</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-no">Optional</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> No | <strong>Storage:</strong> attribute</p>
 </div>
+
+<div class="field-summary-desc">The serial number of the probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details accessory-field">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-shape"><code>SHAPE</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-shape"><code>SHAPE</code></strong>
+  <span class="field-type" markdown="span">H5T_INTEGER</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_INTEGER</div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
+
+</div>
+
+<div class="field-summary-desc">Specifies the geometric shape of each probe element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;]</code></td></tr>
+
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
 <p>The shape of each element will be defined as one of the following: rectangle (ELE_GEOM_REC), part of a ring (ELE_GEOM_RING_PART), part of an elliptical ring (ELE_GEOM_ELLIPSE_PART),</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_INTEGER</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
 </div>
 </details>
-<details class="field-details accessory-field">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-size"><code>SIZE</code></strong> <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span> &mdash; </div>
+<details class="field-details empty-details accessory-field">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-size"><code>SIZE</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_FLOAT</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_FLOAT</span> | <strong>Dimensions:</strong> <code>[N_Elem&lt;p&gt;,6]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> dataset</p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-type"><code>TYPE</code></strong> &mdash; </div>
+    <span class="accessory-badge" markdown="span">From accessory class <a href="../onde_ut_elements/index.html">ONDE_UT_ELEMENTS</a></span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
-</summary>
-<div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>1</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_PROBE"]</code></p>
 </div>
+
+<div class="field-summary-desc">Provides six parameters that specify the dimensions of each element.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Elem&lt;p&gt;,6]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 <details class="field-details">
 <summary>
-<div class="field-summary-top"><strong id="onde_ut_probe-type_tags"><code>TYPE_TAGS</code></strong> &mdash; </div>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-type"><code>TYPE</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
 
-<div class="field-summary-bottom">H5T_STRING</div>
+</div>
+
+<div class="field-summary-desc">Specifies the ONDE class and its inheritance hierarchy.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_PROBE&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
 </summary>
 <div class="field-content">
-<p>No detailed description provided.</p>
-<hr />
-<p><strong>Type:</strong> <span markdown="span">H5T_STRING</span> | <strong>Dimensions:</strong> <code>[*]</code> | <strong>Required:</strong> Yes | <strong>Storage:</strong> attribute | <strong>Allowed:</strong> <code>["ONDE_UT_ELEMENTS"]</code></p>
+<p>The <code>ONDE:TYPE</code> attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.</p>
 </div>
+</details>
+<details class="field-details empty-details">
+<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_ut_probe-type_tags"><code>TYPE_TAGS</code></strong>
+  <span class="field-type" markdown="span">H5T_STRING</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">Type tags for the UT probe.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[1]</code></td></tr>
+    <tr><td>Allowed:</td><td><code>[&#34;ONDE_UT_ELEMENTS&#34;]</code></td></tr>
+
+
+  </tbody>
+</table>
+</summary>
 </details>
 </div>
 
