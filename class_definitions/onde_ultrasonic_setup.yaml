@@ -179,7 +179,8 @@ fields:
     hdf5_type: H5T_INT
     short_description: 'The amount of bits used in ADC of A-scan'
     description: |-
-      This value represents the amount of bits used in the ADC during the digitizing of the A-scan in the acquistion.
+      This value represents the amount of bits used in the ADC 
+      during the digitizing of the A-scan in the acquistion.
     dimensions: '1'
  MAX_ASCAN_VALUE:
     full_name: ONDE_ULTRASONIC_SETUP:MAX_ASCAN_VALUE
@@ -188,7 +189,8 @@ fields:
     hdf5_type: H5T_INT
     short_description: 'The maximum possible A-scan value in the acquistion.'
     description: |-
-      This value represents the maximum possible raw A-scan value within the acquistion.
+      This value represents the maximum possible raw A-scan value 
+      within the acquistion.     
     dimensions: '1'
   MIN_ASCAN_VALUE:
     full_name: ONDE_ULTRASONIC_SETUP:MIN_ASCAN_VALUE
@@ -197,7 +199,8 @@ fields:
     hdf5_type: H5T_INT
     short_description: 'The minimum possible A-scan value in the acquistion.'
     description: |-
-      This value represents the minimum possible raw A-scan value within the acquistion.
+      This value represents the minimum possible raw A-scan value 
+      within the acquistion.     
     dimensions: '1'
   PRF:
     full_name: ONDE_ULTRASONIC_SETUP:PRF
