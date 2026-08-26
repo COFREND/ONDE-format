@@ -49,6 +49,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Identifies the file type as an ONDE UT file.'
     description: |-
       For detailed information, see
       https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
@@ -59,6 +60,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Specifies the version of the ONDE UT specification that this file conforms to.'
     description: ''
     dimensions: '1'
     allowed_values: '"0.9.1"'

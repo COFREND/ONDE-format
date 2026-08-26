@@ -8,6 +8,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Distance between the probes in a dual probe setup.
     description: For dual probes, inter-probes distance (L6) (See Figure 15)
     dimensions: '1'
   ROOF_ANGLE:
@@ -15,6 +16,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: The roof angle for a dual probe wedge.
     description: |-
       For dual probes and only for dual probes defines the roof angle (See
       Figure 15)
@@ -24,5 +26,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: The squint angle of the dual probe wedge.
     description: For dual probes, squint angle (A2) (See Figure 15)
     dimensions: '1'

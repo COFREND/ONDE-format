@@ -4,7 +4,7 @@
 The ONDE Data Model is defined by classes, which group together named fields. When implemented in the ONDE file, these classes translate into HDF5 groups. This section of the documentation describes:
 
 - the principles used to define the classes (including subclasses and accessory classes) and the fields in the data model,
-- the transcription of this data model in the reference csv file (see https://github.com/COFREND/ONDE-format/blob/main/ONDE_fields/ONDE_fields.csv),
+- the transcription of this data model in the reference csv file (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
 - the way in which this data model translates into an HDF5 implementation in the ONDE file.
 
 

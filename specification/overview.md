@@ -59,6 +59,8 @@
 - All quantities are defined with SI units. Units are therefore expressed in meters, kilograms,
   seconds. However, degrees are used instead of radians.
 
+- The formal Single Source of Truth for the data model is defined via YAML files, which are compiled to generate this documentation. A unified CSV export is also provided (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
+
 ## Tables legend
 
 In the following sections, the data structure is described by blocks presented in tables.

@@ -12,5 +12,6 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "Defines the acquisition rate for time encoded trajectories."
     description: For time encoded trajectories, defines the acquisition rate
     dimensions: '1'

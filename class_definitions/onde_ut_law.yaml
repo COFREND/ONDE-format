@@ -17,6 +17,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: 'A reference to the ultrasonic probe used in this focal law.'
     description: ''
     dimensions: '[N_C<k>]'
   ELEMENT:
@@ -24,6 +25,7 @@ fields:
     required: true
     storage: dataset
     hdf5_type: H5T_INTEGER
+    short_description: 'The index or identifier of the probe element used in this focal law.'
     description: ''
     dimensions: '[N_C<k>]'
   DELAY:
@@ -31,6 +33,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The relative delay applied to each probe element combination.'
     description: |-
       Specifies the relative delay (in ultrasonic time) between the different
       Probe Element Combinations in the focal law. The default value is zero
@@ -41,6 +44,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The weighting factor applied to each probe element combination.'
     description: |-
       Specifies the weighting between the different Probe Element Combinations
       in the focal law. The default is one for all Probe Element Combinations.
@@ -50,6 +54,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: 'The ultrasonic ray along which the data is to be represented.'
     description: |-
       Represents the ultrasonic ray along which the data is to be represented in
       a true visualisation. It contains at least two points in the Probe

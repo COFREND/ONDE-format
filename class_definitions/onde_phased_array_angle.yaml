@@ -12,6 +12,7 @@ description: |-
 fields:
   BSCAN_ANGLE:
     full_name: ONDE_PHASED_ARRAY_ANGLE:BSCAN_ANGLE
+    short_description: "The specified angle for the ultrasonic ray direction."
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
