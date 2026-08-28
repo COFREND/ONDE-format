@@ -29,7 +29,7 @@ fields:
     full_name: ONDE_GEOMETRIC_SETUP:PROBE_LIST
     required: true
     storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_PROBE>
     short_description: List of all probes used in the acquisition of the dataset.
     description: List all probes used in the acquisition of the dataset
     dimensions: '[N_Prob<M>]'
