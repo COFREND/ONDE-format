@@ -1,0 +1,15 @@
+onde_class: ONDE_PROBE_SELECT
+inherits: []
+description: |-
+    ### Probe Selection
+
+    Probe selection is used in ONDE_ULTRASONIC_SETUP to specify for each acquired A-scan in the DATA, which transducers/elements are active transmitters and which are active receivers. Phased array laws are a subclass (ONDE_UT_LAW). This base class is appropriate for discrete transducers and referencing a PROBE_INDEX from the base class selects a particular transducer as being transmitter or receiver for the particular A-scan. A phased array law can also specify an element within the probe, delay, weighting, etc.
+fields:
+  PROBE_INDEX:
+    full_name: ONDE_PROBE_SELECT:PROBE_INDEX
+    required: true
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    short_description: 'Index (into ONDE_GEOMETRIC_SETUP:PROBE_LIST) of the ultrasonic probe used in the A-scan corresponding to this ONDE_PROBE_SELECT.'
+    description: ''
+    dimensions: '[1]'
