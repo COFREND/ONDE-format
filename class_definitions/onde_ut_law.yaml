@@ -1,5 +1,6 @@
 onde_class: ONDE_UT_LAW
-inherits: ONDE_PROBE_SELECT
+inherits:
+- ONDE_PROBE_SELECT
 description: |-
     ### Law
 
