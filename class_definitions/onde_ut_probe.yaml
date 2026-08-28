@@ -1,5 +1,6 @@
 onde_class: ONDE_UT_PROBE
-inherits: ONDE_PROBE
+inherits:
+- ONDE_PROBE
 accessories:
 - ONDE_UT_ELEMENTS
 description: |-
