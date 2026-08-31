@@ -163,9 +163,11 @@ ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ASCAN_SAMPLE_RATE;This indicates the
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ASCAN_START;This indicates the starting time for data acquisition. If dimension is 1, the same start time is used for all A-Scans, else a different start time is specified for each A-Scan.;M;D;H5T_FLOAT;1 or [N_Ascan<m>] or [ N_Ascan<m>,N_U<m>, N_V<m>];;;;
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:SIGNAL;Digitization of the emission signal (can be used to store arbitrary signals). If missing impulse emission at time 0.0 is assumed. 2D Array with one row for time and one for amplitude.;O;D;H5T_FLOAT;[N_TSig<m>,2];;;;
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:GAIN;This indicates the total gain for each A-scan during reception. Multiplying factor that was applied at acquisition.;M;D;H5T_FLOAT;[ N_Ascan<m> ];;;;
-ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ADC_BIT_DEPTH;This value represents the amount of bits used in the ADC  during the digitizing of the A-scan in the acquistion.;M;A;H5T_INT;1;;;;
-ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:MAX_ASCAN_VALUE;This value represents the maximum possible raw A-scan value  within the acquistion.     ;M;A;H5T_INT;1;;;;
-ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:MIN_ASCAN_VALUE;This value represents the minimum possible raw A-scan value  within the acquistion.     ;M;A;H5T_INT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:ADC_BIT_DEPTH;This value represents the amount of bits used in the ADC  during the digitizing of the waveform in the acquistion.;M;A;H5T_INT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:MAX_AMPLITUDE_VALUE;This value represents the maximum possible raw amplitude value  within the acquistion.     ;M;A;H5T_INT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:MIN_AMPLITUDE_VALUE;This value represents the minimum possible raw amplitude value  within the acquistion.     ;M;A;H5T_INT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:APPLIED_HARDWARE_GAIN;This value represents the instrument hardware gain  within the acquistion.     ;O;A;H5T_INT;1;;;;
+ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:APPLIED_SOFTWARE_GAIN;This value represents the instrument applied software gain  within the acquistion.     ;O;A;H5T_INT;1;;;;
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:PRF;Pulse Repetition Frequency;O;D;H5T_FLOAT;[N_Ascan<m>] or [2];;;;
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:TCG_CURVE;TCG curve applied to the received signals. The amplitude correction is given for each time sample as a multiplying factor.;O;D;H5T_FLOAT;[N_Ascan<m>,N_TCG<m> ];;;;
 ONDE_ULTRASONIC_SETUP;ONDE_ULTRASONIC_SETUP:PHASED_ARRAY_SETUP;;O;A;H5T_STD_REF_OBJ<ONDE_PHASED_ARRAY_SETUP>;1;;;;
