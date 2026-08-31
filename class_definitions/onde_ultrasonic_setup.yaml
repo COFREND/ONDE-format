@@ -147,7 +147,7 @@ fields:
       is specified for each A-Scan. If omitted, interpret as 0.0 (aligned with the excitation trigger).
 
       See also ONDE_DATASET_UT_ASCAN:ACTUAL_ASCAN_START. In most cases ACTUAL_ASCAN_START will have the same information as PLANNED_ASCAN_START.
-     dimensions: "[ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions."
+    dimensions: "[ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions."
   SIGNAL:
     full_name: ONDE_ULTRASONIC_SETUP:SIGNAL
     required: false
