@@ -22,9 +22,11 @@ description: |-
     multiplying factor that was applied at acquisition.
     
     #### Digitizer Information
-    Each acquisition must have an associated  MIN_ASCAN_VALUE, MAX_ASCAN_VALUE, and ADC_BIT_DEPTH.
+    Each acquisition must have an associated  MIN_AMPLITUDE_VALUE, MAX_AMPLITUDE_VALUE, and ADC_BIT_DEPTH.
     The ADC_BIT_DEPTH is the number of bits used by the Analog-to-Digital Converter  to digitize the A-scan signal. 
-    MAX_ASCAN_VALUE and MIN_ASCAN_VALUE represent the highest and lowest raw A-scan values respectively. 
+    MAX_AMPLITUDE_VALUE and MIN_AMPLITUDE_VALUE represent the highest and lowest possible waveform values respectively.
+    APPLIED_HARDWARE_GAIN represents the hardware gain setting used during the acquisiton of the waveform. APPLIED_SOFTWARE_GAIN
+    represents the software gain setting used within the instrument during the waveform acquisiton.
     
     #### TCG curves
 
@@ -177,29 +179,49 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INT
-    short_description: 'The amount of bits used in ADC of A-scan'
+    short_description: 'The amount of bits used in ADC of waveform'
     description: |-
       This value represents the amount of bits used in the ADC 
-      during the digitizing of the A-scan in the acquistion.
+      during the digitizing of the waveform in the acquistion.
     dimensions: '1'
-  MAX_ASCAN_VALUE:
-    full_name: ONDE_ULTRASONIC_SETUP:MAX_ASCAN_VALUE
+  MAX_AMPLITUDE_VALUE:
+    full_name: ONDE_ULTRASONIC_SETUP:MAX_AMPLITUDE_VALUE
     required: true
     storage: attribute
     hdf5_type: H5T_INT
-    short_description: 'The maximum possible A-scan value in the acquistion.'
+    short_description: 'The maximum possible amplitude value in the acquistion.'
     description: |-
-      This value represents the maximum possible raw A-scan value 
+      This value represents the maximum possible raw amplitude value 
       within the acquistion.     
     dimensions: '1'
   MIN_ASCAN_VALUE:
-    full_name: ONDE_ULTRASONIC_SETUP:MIN_ASCAN_VALUE
+    full_name: ONDE_ULTRASONIC_SETUP:MIN_AMPLITUDE_VALUE
     required: true
     storage: attribute
     hdf5_type: H5T_INT
-    short_description: 'The minimum possible A-scan value in the acquistion.'
+    short_description: 'The minimum possible amplitude value in the acquistion.'
     description: |-
-      This value represents the minimum possible raw A-scan value 
+      This value represents the minimum possible raw amplitude value 
+      within the acquistion.     
+    dimensions: '1'  
+  APPLIED_HARDWARE_GAIN:
+    full_name: ONDE_ULTRASONIC_SETUP:APPLIED_HARDWARE_GAIN
+    required: false
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The instrument hardware gain used during the acquisition.'
+    description: |-
+      This value represents the instrument hardware gain 
+      within the acquistion.     
+    dimensions: '1'
+  APPLIED_SOFTWARE_GAIN:
+    full_name: ONDE_ULTRASONIC_SETUP:APPLIED_SOFTWARE_GAIN
+    required: false
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The instrument software gain setting used during the acquisition.'
+    description: |-
+      This value represents the instrument applied software gain 
       within the acquistion.     
     dimensions: '1'
   PRF:
