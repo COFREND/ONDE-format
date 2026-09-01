@@ -1,0 +1,12 @@
+onde_class: ONDE_COMPUTATION
+inherits: []
+description: |-
+
+    ### Computation
+
+    The ONDE_COMPUTATION class is used to describe the computation of a dataset
+    from other datasets. It is used to describe the computation of a dataset
+    from other datasets, for example the computation of a CScan from Ascan data.
+
+fields: {}
+  

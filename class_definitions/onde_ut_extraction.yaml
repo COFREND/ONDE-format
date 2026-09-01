@@ -1,0 +1,56 @@
+onde_class: ONDE_UT_EXTRACTION
+inherits: [ONDE_COMPUTATION]
+description: |-
+   
+   ### UT Extractions
+
+    The UT extractions are the entry points for the description of data that is
+    extracted from raw Ascan or TScan data, resulting in a CScan. 
+    
+    The extraction can be either a scalar value or an enumeration.
+    The extraction relates to list of *ONDE_UT_GATE*, called
+    GATE_LIST which can be of size 1 or 2 :
+    
+    - If the list is of size 1,  the gate defines the time window for 
+    the extraction.
+
+    - If the list is of size 2,  the extracted value is the difference
+     between the two extractions, each defined by a gate. 
+
+    The nature of the extraction is defined by the EXTRACTION_TYPE field, 
+    which can be either *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*.
+
+    - In the case of *DEPTH*, a *VELOCITY* field must be defined, which 
+    is the velocity of the wave in the material. 
+      The depth is then computed as *'DEPTH = VELOCITY * TIME_OF_FLIGHT / 2'*. 
+
+    - In the case of *ALARM*, the expected values in the dataset are 0 and 1. The 
+    alarm condition is the overshoot of the threshold defined in the gate. 
+    *ALARM* datatype is not compliant with two gates in the GATE_LIST field.
+
+
+
+fields:
+  START:
+    full_name: ONDE_UT_EXTRACTION:GATE_LIST
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    description: |-
+      References to the gates that are used for the extraction. The list can be of size 1 or 2.
+    dimensions: '[1] or [2]'
+  WIDTH:
+    full_name: ONDE_UT_EXTRACTION:DATATYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: |-
+      Defines the type of extraction. The allowed values are *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*.
+    dimensions: '"TIME_OF_FLIGHT"|"AMPLITUDE"|"DEPTH"|"ALARM"'
+  VELOCITY:
+    full_name: ONDE_UT_EXTRACTION:VELOCITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: Defines the velocity of the wave in the material, used to translate the time of flight into depth.
+    dimensions: '1'
