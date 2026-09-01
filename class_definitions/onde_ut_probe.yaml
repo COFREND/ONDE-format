@@ -39,7 +39,7 @@ fields:
     hdf5_type: H5T_STRING
     short_description: 'Type tags for the UT probe.'
     description: ''
-    dimensions: '[1]'
+    dimensions: '[*]'
     allowed_values: '["ONDE_UT_ELEMENTS"]'
   LABEL:
     full_name: ONDE:LABEL
