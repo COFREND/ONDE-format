@@ -20,6 +20,7 @@ allowed_classes:
   - ONDE_2DCAD
   - ONDE_3DCAD
   - ONDE_WELD
+  - ONDE_PROBE
   - ONDE_UT_PROBE
   - ONDE_UT_ELEMENTS
   - ONDE_MONO_UT_PROBE
