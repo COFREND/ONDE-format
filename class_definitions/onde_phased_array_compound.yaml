@@ -1,40 +1,29 @@
 onde_class: ONDE_PHASED_ARRAY_COMPOUND
 inherits:
 - ONDE_PHASED_ARRAY_SETUP
-description: '**Compound**
+description: |-
+    #### Compound
 
+    The compound type mixes Escan and Sscan behavior (see [Figure 27](onde_phased_array_compound.md)). COMPOUND_INITIAL_ANGLE, COMPOUND_FINAL_ANGLE and
+    COMPOUND_NUMBER_OF_ANGLES give the angle scope, while COMPOUND_NUMBER_OF_ELEMENTS gives the number of elements in the
+    electronic scanning.
 
-  The compound type mixes Escan and Sscan behavior (see [Figure 27](onde_phased_array_compound.md)).
-  COMPOUND_INITIAL_ANGLE, COMPOUND_FINAL_ANGLE and
+    ![Compound configuration](../images/media/compound_config.png "Figure 27")
 
-  COMPOUND_NUMBER_OF_ANGLES give the angle scope, while COMPOUND_NUMBER_OF_ELEMENTS
-  gives the number of elements in the
+    *[Figure 27](onde_phased_array_compound.md): Compound configuration*
 
-  electronic scanning.
+    ## Limitations
 
-
-  ![Compound configuration](../images/media/compound_config.png "Figure 27")
-
-
-  *[Figure 27](onde_phased_array_compound.md): Compound configuration*
-
-
-  ## Limitations
-
-
-  This block has no vocation to be exhaustive in terms of electronic configurations
-  (unlike the law block that permits any
-
-  description and is fully generic). However, it is intended to cover most of the
-  situations that are common in industrial
-
-  controls and represent a large share of the acquisition files produced in the industry.'
+    This block has no vocation to be exhaustive in terms of electronic configurations (unlike the law block that permits any
+    description and is fully generic). However, it is intended to cover most of the situations that are common in industrial
+    controls and represent a large share of the acquisition files produced in the industry.
 fields:
   INITIAL_ANGLE:
     full_name: ONDE_PHASED_ARRAY_COMPOUND:INITIAL_ANGLE
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The initial angle of the scope for the compound scan."
     description: ''
     dimensions: '1'
   FINAL_ANGLE:
@@ -42,6 +31,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The final angle of the scope for the compound scan."
     description: ''
     dimensions: '1'
   NUMBER_OF_ANGLES:
@@ -49,6 +39,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: "The total number of angles defined within the compound scan scope."
     description: ''
     dimensions: '1'
   NUMBER_OF_ELEMENTS:
@@ -56,5 +47,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: "The number of elements involved in the electronic scanning process."
     description: ''
     dimensions: '1'

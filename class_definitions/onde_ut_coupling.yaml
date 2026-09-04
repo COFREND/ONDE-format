@@ -8,6 +8,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: "The velocity of the acoustic waves propagating within the coupling medium."
     dimensions: '[2]'
   MEDIUM_DENSITY:
     full_name: ONDE_UT_COUPLING:MEDIUM_DENSITY
@@ -15,6 +16,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: "The density of the coupling medium."
     dimensions: '1'
   INCIDENCE_ANGLE:
     full_name: ONDE_UT_COUPLING:INCIDENCE_ANGLE
@@ -22,4 +24,5 @@ fields:
     storage: attribute
     hdf5_type: H5T_FLOAT
     description: ''
+    short_description: "The angle of incidence of the acoustic wave as it travels into the coupling medium."
     dimensions: '1'

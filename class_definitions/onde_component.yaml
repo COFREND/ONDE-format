@@ -1,91 +1,146 @@
 onde_class: ONDE_COMPONENT
 inherits: []
-description: "### Component\n\n**Velocities**\n\nThe two values of the VELOCITIES\
-  \ array indicate the inspected component longitudinal and shear wave velocity\n\
-  respectively. If both velocities (Longitudinal and Shear) are not available, the\
-  \ missing one should be replaced by a\nNaN).\n\nThis version of the format handles\
-  \ only isotropic materials.\n\n**Shape and dimensions**\n\nThe geometric shape of\
-  \ the inspected component is defined by the subclass of ONDE_COMPONENT. It can be\
-  \ \n one of the following: \"ONDE_PLANE\",\"ONDE_CYLINDER\",\n\"ONDE_2DCAD\", \"\
-  ONDE_3DCAD\", \"ONDE_WELD\". While the format is quite generic by handling CAD files,\
-  \ parametric description is \navailable for plane, cylindrical and weld specimens.\
-  \ Other parameterized shapes can be added in future versions.\n\nFor plane components,\
-  \ the dimensions are give by PLATE_DIMENSIONS, with a triplet for length, width\
-  \ and height.\n\nFor cylindrical components, the dimensions are given by CYLINDER_DIMENSIONS,\
-  \ with a triplet for outer diameter,\nthickness, and length.\n\n/* TODO : update\
-  \ with weld descriptions */\n\nFor 2D extruded components and welds, extrusion is\
-  \ provided by EXTRUSION_TYPE (plane or sylindrical) and EXTRUSION_DIMENSION for\n\
-  the length for plane extrusion, the diameter for cylindrical ones.\n\nThe CAD field\
-  \ can contain a STEP or STL file for 3D CADs, a dxf file for 2D CADs.\n\n```mermaid\n\
-  classDiagram\n  component <|-- plane\n  component <|-- cylinder\n  component <|--\
-  \ 2d_cad\n  component <|-- 3d_cad\n  component <|-- weld\n```\n\n**Visualisation\
-  \ CAD**\n\nVISUALISATION_CAD contains a DXF or STL file for the component visualization.\
-  \ When using a dxf file, the profile will be\nextruded linearly or cylindrically\
-  \ according to the component type.\n\n**Transformations**\n\nThe global coordinate\
-  \ system is distinct from the specimen coordinate system : for example, 2D and 3D\
-  \ CAD coordinates\nare defined in the specimen frame and repositioned in the global\
-  \ coordinate system with the transformation defined in\nCOMPONENT_FRAME ([see paragraph\
-  \ 1.6](index.md#definition-of-frames)).\n\n**Visualization CAD**\n\nWhen a dxf is\
-  \ provided for the Visualization CAD, the extrusion of the CAD is implied from the\
-  \ specimen shape : it is of\nlinear nature if the specimen is a plate or a 2D CAD\
-  \ with linear extrusion, it is cylindrical if the specimen is a\ncylinder or a 2D\
-  \ CAD with cylindrical extrusion. A typical use case for this feature is the ability\
-  \ to superimpose a\nweld profile to a plate or cylindrical specimen in order to\
-  \ facilitate the interpretation of the indications.\n\nThe CAD profiles that are\
-  \ used for visualization are expressed in the (X,Z) plane as specified in the specimen\
-  \ frame.\n[Figure 10](onde_component.md) illustrates the CAD frame positioning to\
-  \ the component frame for a planar component.\n\n![Convention for the positioning\
-  \ of the visualization CAD in a planar component](../images/media/viz_cad_planar.png\
-  \ \"Figure 10\")\n\n*[Figure 10](onde_component.md): Convention for the positioning\
-  \ of the visualization CAD in a planar component*\n\n[Figure 11](onde_component.md)\
-  \ illustrates the CAD frame positioning according to the component frame for a cylinder\
-  \ specimen. The outer\ndiameter corresponds to the distance between the top left\
-  \ hand corner of the dxf profile and the origin of the component\nframe.\n\n![Convention\
-  \ for the positioning of the visualization CAD in a cylindrical component](../images/media/viz_cad_cylindrical.png\
-  \ \"Figure 11\")\n\n*[Figure 11](onde_component.md): Convention for the positioning\
-  \ of the visualization CAD in a cylindrical component*"
+description: |-
+    ### Component
+
+    #### Velocities
+
+    The two values of the VELOCITIES array indicate the inspected component
+    longitudinal and shear wave velocity respectively. If both velocities
+    (Longitudinal and Shear) are not available, the missing one should be
+    replaced by a NaN).
+
+    This version of the format handles only isotropic materials.
+
+    #### Shape and dimensions
+
+    The geometric shape of the inspected component is defined by the subclass of
+    ONDE_COMPONENT. It can be one of the following:
+    "ONDE_PLANE","ONDE_CYLINDER", "ONDE_2DCAD", "ONDE_3DCAD", "ONDE_WELD". While
+    the format is quite generic by handling CAD files, parametric description is
+    available for plane, cylindrical and weld specimens. Other parameterized
+    shapes can be added in future versions.
+
+    For plane components, the dimensions are give by PLATE_DIMENSIONS, with a
+    triplet for length, width and height.
+
+    For cylindrical components, the dimensions are given by CYLINDER_DIMENSIONS,
+    with a triplet for outer diameter, thickness, and length.
+
+    /* TODO: update with weld descriptions */
+
+    For 2D extruded components and welds, extrusion is provided by
+    EXTRUSION_TYPE (plane or sylindrical) and EXTRUSION_DIMENSION for the length
+    for plane extrusion, the diameter for cylindrical ones.
+
+    The CAD field can contain a STEP or STL file for 3D CADs, a dxf file for 2D
+    CADs.
+
+    ```mermaid
+    classDiagram
+      component <|-- plane
+      component <|-- cylinder
+      component <|-- 2d_cad
+      component <|-- 3d_cad
+      component <|-- weld
+    ```
+
+    #### Visualisation CAD
+
+    VISUALISATION_CAD contains a DXF or STL file for the component
+    visualization. When using a dxf file, the profile will be extruded linearly
+    or cylindrically according to the component type.
+
+    #### Transformations
+
+    The global coordinate system is distinct from the specimen coordinate system:
+    for example, 2D and 3D CAD coordinates are defined in the specimen frame
+    and repositioned in the global coordinate system with the transformation
+    defined in COMPONENT_FRAME ([see paragraph 1.6](index.md#definition-of-frames)).
+
+    #### Visualization CAD
+
+    The CAD profiles that are used for visualization are expressed in the (X,Z)
+    plane as specified in the specimen frame. [Figure 10](onde_component.md)
+    illustrates the CAD frame positioning to the component frame for a planar
+    component.
+
+    ![Convention for the positioning of the visualization CAD in a planar component](../images/media/viz_cad_planar.png "Figure 10")
+
+    *[Figure 10](onde_component.md): Convention for the positioning of the visualization CAD in a planar component*
+
+    [Figure 11](onde_component.md) illustrates the CAD frame positioning
+    according to the component frame for a cylinder specimen. The outer diameter
+    corresponds to the distance between the top left hand corner of the dxf
+    profile and the origin of the component frame.
+
+    ![Convention for the positioning of the visualization CAD in a cylindrical component](../images/media/viz_cad_cylindrical.png "Figure 11")
+
+    *[Figure 11](onde_component.md): Convention for the positioning of the visualization CAD in a cylindrical component*
 fields:
   LABEL:
     full_name: ONDE:LABEL
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: A human-readable label or name for the component.
     description: ''
   VELOCITIES:
     full_name: ONDE_COMPONENT:VELOCITIES
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: ''
+    short_description: Longitudinal and shear wave velocities of the component.
+    description: 'The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.'
     dimensions: '[2]'
   DENSITY:
     full_name: ONDE_COMPONENT:DENSITY
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: Density of the component material.
     description: ''
     dimensions: '1'
   VISUALIZATION_CAD:
     full_name: ONDE_COMPONENT:VISUALIZATION_CAD
     required: false
     storage: attribute
-    hdf5_type: H5T_STRING
-    description: Optional CAD used for visualisation purposes
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    short_description: Optional CAD file used for visualization purposes.
+    description: |
+      Optional CAD used for visualisation purposes. Contains the CAD file itself. The recommended formats are:
+       * STEP with a CONTENT_TYPE of "model/step", "model/step+xml", "model/step+zip", or "model/step-xml+zip". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant. The step file should contain application protocols AP203, AP214, or AP242.
+       * IGES with a CONTENT_TYPE of "application/iges"
+       * STL with a CONTENT_TYPE of "model/stl", "model/x.stl-ascii", "model/x.stl-binary". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant.
+       * DXF with a CONTENT_TYPE of "image/vnd.dxf".
+      Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
+
+      When a dxf is provided for the Visualization CAD, the extrusion of the CAD
+      is implied from the specimen shape: it is of linear nature if the specimen
+      is a plate or a 2D CAD with linear extrusion, it is cylindrical if the
+      specimen is a cylinder or a 2D CAD with cylindrical extrusion. A typical use
+      case for this feature is the ability to superimpose a weld profile to a
+      plate or cylindrical specimen in order to facilitate the interpretation of
+      the indications.
     dimensions: '1'
   VISUALIZATION_CAD_FRAME:
     full_name: ONDE_COMPONENT:VISUALIZATION_CAD_FRAME
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: Definition of the frame defining the visualisation CAD with offset
-      and quaternions in the specimen frame- Identity is used if absent
+    short_description: Transformation frame for the visualization CAD.
+    description: |-
+      Definition of the frame defining the visualisation CAD with offset and
+      quaternions in the specimen frame- Identity is used if absent
     dimensions: '[7]'
   COMPONENT_FRAME:
     full_name: ONDE_COMPONENT:COMPONENT_FRAME
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: Definition of the specimen frame in the reference frame. If not provided,
+    short_description: Transformation defining the component's frame relative to the global reference.
+    description: |-
+      Definition of the specimen frame in the reference frame. If not provided,
       default value is identity with the reference frame.
     dimensions: '[7]'
   COMMENT:
@@ -93,12 +148,19 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: Additional text comment regarding the component.
     description: ''
     dimensions: '1'
   IMAGE:
     full_name: ONDE_COMPONENT:IMAGE
     required: false
     storage: attribute
-    hdf5_type: H5T_FLOAT
-    description: ''
-    dimensions: '[3]'
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    short_description: 'Photograph or other image of the component.'
+    description: |
+      Photograph or other image of the component.
+      Recommended formats are:
+       * PNG with a CONTENT_TYPE of "image/png"
+       * JPEG with a CONTENT_TYPE of "image/jpeg"      
+      Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
+    dimensions: '1'

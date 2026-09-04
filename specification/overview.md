@@ -1,4 +1,4 @@
-# Open NDE File Format specification - Version 0.9.0
+# Open NDE File Format specification - Version 0.9.1
 
 <img src="../images/media/COFREND_EPRI_banner.png" alt="drawing" width="400"/>
 
@@ -20,23 +20,27 @@
 
   The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
   simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
-  the acquisition system (AScans, TFM images, ...).
+  the acquisition system (AScans, TFM images…).
 
   At this stage, it was decided to stick to the data acquired and the information that is necessary to
   perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
-  itself (information related to the display, palette, etc...). This will be addressed in future stages (information
-  related to analysis, reporting, ...).
+  itself (information related to the display, palette, etc…). This will be addressed in future stages (information
+  related to analysis, reporting…).
 
-- The Working Group has analysed several existing contributions as a working basis to define an open and standardized
-  file format for ultrasonic testing. Formats coming from organisations (ECUF, MFMC, DICONDE, ANDE) and commercial products (
-  EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been studied.\
-  It was decided that the format would be based on the HDF5 framework, chosen for its well-established software
-  ecosystem and its efficiency. The format proposal makes technical choices akin to those of the MFMC and ECUF format,
-  and extends their possibilities in order to accommodate for a larger range of specimen geometries and types of data
-  that are commonly encountered and were absent of the MFMC and ECUF specifications. In order to facilitate the migration
-  from MFMC to ONDE, a compatibility with MFMC 2.0 specification has been added to the present specification.
+- The Working Group has analysed several existing contributions as a working
+  basis to define an open and standardized file format for ultrasonic
+  testing. Formats coming from organisations (ECUF, MFMC, DICONDE, ANDE) and
+  commercial products ( EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been
+  studied.  It was decided that the format would be based on the HDF5 framework,
+  chosen for its well-established software ecosystem and its efficiency. The
+  format proposal makes technical choices akin to those of the MFMC and ECUF
+  format, and extends their possibilities in order to accommodate for a larger
+  range of specimen geometries and types of data that are commonly encountered
+  and were absent of the MFMC and ECUF specifications. In order to facilitate
+  the migration from MFMC to ONDE, a compatibility with MFMC 2.0 specification
+  has been added to the present specification.
 
-- The format aims at finding the best compromise between two approaches : a very generic one with
+- The format aims at finding the best compromise between two approaches: a very generic one with
   essentially raw geometric descriptions and a NDT oriented one with a representation of the objects familiar to the
   engineers. Considering that the transformation from NDT objects to the generic representation was straightforward, it
   was decided to systematically keep the generic representation and to allow to complement this representation with
@@ -54,6 +58,8 @@
 
 - All quantities are defined with SI units. Units are therefore expressed in meters, kilograms,
   seconds. However, degrees are used instead of radians.
+
+- The formal Single Source of Truth for the data model is defined via YAML files, which are compiled to generate this documentation. A unified CSV export is also provided (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
 
 ## Tables legend
 
@@ -115,8 +121,9 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
 | N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  | 
 | N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
+| N_bytes       | Number of bytes |
 
-Note : if N_U and N_V are defined (grid-like acquisition), N_DF\<m\> = N_U\<m\> x N_V\<m\>
+Note: N_DF\<m\> = N_U\<m\> x N_V\<m\>
 
 ## Data Model
 
@@ -173,17 +180,17 @@ classDiagram
 The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional for a given group.
 The diagram in Figure 1 explains the relationships between the different blocks in the data model in an UML style.
 
-Three blocks type contain the data : namely, Ascan, Tscan and CScan (peak-like) blocks. Ascans can be used either to
+Three blocks type contain the data: namely, Ascan, Tscan and CScan (peak-like) blocks. Ascans can be used either to
 describe summed signals or elementary channels data. For Cscan block, it is possible to keep the track to the raw data (
 either Tscan or Ascan) from which the Cscan data originates. For Tscan blocks, it is possible to keep the track to the
-elementary channels. A link to the setup can be specified : it is attached to the raw data if it is available, to the
+elementary channels. A link to the setup can be specified: it is attached to the raw data if it is available, to the
 post-processed data (Cscan or Tscan) otherwise.
 
 The setup description is organized in two blocks defining the ultrasonic setup and the geometric setup. In the
 ultrasonic setup we find the description of the electronic settings, with blocks describing the emitter and receive laws
 and the phased array setup for acquisition with multielement transducers.
 
-The geometric setup contains the dynamic description of the scene : inspected component, probes and acquisition
+The geometric setup contains the dynamic description of the scene: inspected component, probes and acquisition
 trajectories. It is possible to define different trajectories for different probes or to have probes sharing the same
 trajectory, offsets retrieving the set of different probe positions from the trajectory.
 
@@ -195,18 +202,20 @@ The mechanisms used in the ONDE specification to map the data model specificatio
 
 ### Entry points for navigating files in the UT implementation
 
-The blocks defined in the general structure are implemented as HDF5 groups, the name of which is free but which have a
-mandatory 'ONDE:TYPE' attribute that defines their nature. The entry points are the xxx_DATASET_yyy groups (namely groups that have as a ONDE:TYPE attribute
- ONDE_DATASET_UT_ASCAN, ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN) 
+The blocks defined in the general structure are implemented as HDF5 groups, the
+name of which is free but which have a mandatory 'ONDE:TYPE' attribute that
+defines their nature. The entry points are the xxx_DATASET_yyy groups (namely
+groups that have as a ONDE:TYPE attribute ONDE_DATASET_UT_ASCAN,
+ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN)
 
-When discovering the content of a given file, the following procedure must therefore be applied :
+When discovering the content of a given file, the following procedure must therefore be applied:
 
 - Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
   reader, and that the type is that of a UT ONDE file ('ONDE_UT')
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
   which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.
 - From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
-  setup information, ...
+  setup information…
 
 ## Definition of frames
 
@@ -214,7 +223,7 @@ When discovering the content of a given file, the following procedure must there
 
 Figure 2 displays the different frames and convention involved in the positioning systems. The PCF (Probe Coordinate
 Frame) is the frame that is related to a specific probe or set of probes. It can be arbitrarily chosen to be centered
-along the piezoelectric cell, the index point, the carrier system, the Probe Center Separation for TOFD systems, etc...
+along the piezoelectric cell, the index point, the carrier system, the Probe Center Separation for TOFD systems, etc.
 Through a rigid-body offset, it is related to the Trajectory Frame (TF), which for a given position is defined in
 relation to the Reference Frame. The list of these positions are defined in an Acquisition Trajectory block.
 
@@ -232,7 +241,7 @@ ambiguity (as opposed to Euler angles which require defining an ordering of the 
 The Wikipedia pages related to quaternion and rotation matrices provide formulae for the transition from the quaternion
 shape to rotation matrices and the reverse operation: <https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion>.
 
-Throughout the document, a frame is provided for the following objects :
+Throughout the document, a frame is provided for the following objects:
 
 - The specimen frame,
 - The trajectory frames (a frame for each position in the trajectory)
@@ -249,7 +258,7 @@ The diagram displayed in Figure 3 defines the hierarchy between these frames:
 
 ### 2D Frames
 
-In order to refer to frames on unfolded 2D surfaces, we introduce the following transformation : the transformation
+In order to refer to frames on unfolded 2D surfaces, we introduce the following transformation: the transformation
 between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (∆a,∆b,α) triplet.
 
 ![Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames](../images/media/2d_frames_transformation.png "Figure 4")

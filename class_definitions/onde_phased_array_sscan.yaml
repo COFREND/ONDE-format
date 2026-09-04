@@ -1,26 +1,24 @@
 onde_class: ONDE_PHASED_ARRAY_SSCAN
 inherits:
 - ONDE_PHASED_ARRAY_SETUP
-description: '**SScan**
+description: |-
+    #### SScan
 
+    In this configuration (see [Figure 25](onde_phased_array_sscan.md)), the
+    probe is configured to emit/receive at a set of angles. The angles are
+    linearly varying, therefore the first and last angles and the number of
+    shots define the set of angles.
 
-  In this configuration (see [Figure 25](onde_phased_array_sscan.md)), the probe is
-  configured to emit/receive at a set of angles. The angles are
+    ![SScan configuration](../images/media/sscan_config.png "Figure 25")
 
-  linearly varying, therefore the first and last angles and the number of shots define
-  the set of angles.
-
-
-  ![SScan configuration](../images/media/sscan_config.png "Figure 25")
-
-
-  *[Figure 25](onde_phased_array_sscan.md): SScan configuration*'
+    *[Figure 25](onde_phased_array_sscan.md): SScan configuration*
 fields:
   STARTING_ANGLE:
     full_name: ONDE_PHASED_ARRAY_SSCAN:STARTING_ANGLE
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The first emission or reception angle in the linearly varying set for the SScan."
     description: ''
     dimensions: '1'
   FINISHING_ANGLE:
@@ -28,6 +26,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The final emission or reception angle in the linearly varying set for the SScan."
     description: ''
     dimensions: '1'
   NUMBER_OF_ANGLES:
@@ -35,5 +34,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: "The total number of shots or linearly varying angles defining the set for the SScan."
     description: ''
     dimensions: '1'

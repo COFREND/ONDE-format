@@ -1,28 +1,25 @@
 onde_class: ONDE_PHASED_ARRAY_ESCAN
 inherits:
 - ONDE_PHASED_ARRAY_SETUP
-description: '**EScan**
+description: |-
+    #### EScan
 
+    In this configuration consecutive subsets of elements are used in order to
+    form a beam at a specific angle, thus forming a sweeping set of ultrasonic
+    beams. [Figure 26](onde_phased_array_escan.md) illustrates an Escan for 4
+    consecutive elements with a step of 3 elements on a 32 element linear
+    transducer.
 
-  In this configuration consecutive subsets of elements are used in order to form
-  a beam at a specific angle, thus forming
+    ![EScan configuration](../images/media/escan_config.png "Figure 26")
 
-  a sweeping set of ultrasonic beams. [Figure 26](onde_phased_array_escan.md) illustrates
-  an Escan for 4 consecutive elements with a step of 3 elements
-
-  on a 32 element linear transducer.
-
-
-  ![EScan configuration](../images/media/escan_config.png "Figure 26")
-
-
-  *[Figure 26](onde_phased_array_escan.md): EScan configuration*'
+    *[Figure 26](onde_phased_array_escan.md): EScan configuration*
 fields:
   NUMBER_OF_ELEMENTS:
     full_name: ONDE_PHASED_ARRAY_ESCAN:NUMBER_OF_ELEMENTS
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The number of consecutive elements used to form a beam.'
     description: ''
     dimensions: '1'
   STEP:
@@ -30,6 +27,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The number of elements by which the subset is shifted for each successive beam.'
     description: ''
     dimensions: '1'
   ANGLE:
@@ -37,5 +35,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The specific angle at which the beam is formed during the scan.'
     description: ''
     dimensions: '1'

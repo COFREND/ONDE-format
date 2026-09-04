@@ -1,19 +1,23 @@
 onde_class: ONDE_ACQUISITION_TRAJECTORY
 inherits: []
-description: '### Acquisition trajectory
+description: |-
+    ### Acquisition trajectory
 
+    The acquisition trajectory can be either explicitly described or defined as
+    a series of acquisitions with no spatial locations (which corresponds to a
+    time trigger). In the former case, the ONDE_ACQUISITION_TRAJECTORY class is
+    subtyped in the ONDE_SPATIAL_TRAJECTORY class, which describes the spatial
+    trajectory of the acquisition frame. In the latter case, the
+    ONDE_ACQUISITION_TRAJECTORY class is subtyped in the ONDE_TIME_TRAJECTORY
+    class, which describes the temporal trajectory of the acquisition frame.
 
-  **Frame used for trajectory definition**
+    #### Frame used for trajectory definition
 
+    The trajectory is given in the global reference frame.
 
-  The trajectory is given in the global reference frame.
+    #### Generic description
 
-
-  **Generic description**
-
-
-  A generic description of the trajectory is given in the TRAJECTORY field. It describes
-  successive positions under the
-
-  shape of frames, each giving a position and an orientation.'
+    A generic description of the trajectory is given in the TRAJECTORY field. It
+    describes successive positions under the shape of frames, each giving a
+    position and an orientation.
 fields: {}

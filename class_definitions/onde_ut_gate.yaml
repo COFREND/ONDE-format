@@ -1,28 +1,68 @@
 onde_class: ONDE_UT_GATE
 inherits: []
-description: ''
+description: |-
+   
+   ### UT Gates
+
+    The gates are referenced in the ONDE_UT_EXTRACTION group.  
+    The gate model accomodates the description of static gates and gates 
+    resulting from synchronization. The gates
+    used for the acquisition are
+    defined through the following parameters:
+
+    - GATE_START and GATE_WIDTH define the time
+    window
+    - GATE_THRESHOLD defines the threshold that was used to trigger the
+    storage of the data 
+    - GATE_DETECTION defines the type of triggering event
+    that was used to define the gate
+    - GATE_POLARITY defines the mode that was
+    used for the detection (absolute, positive or negative).
+    - GATE_SYNCHRONIZATION_SOURCE defines the source of the synchronization for the gate. 
+    It is a reference to another gate. If absent, the gate is defined as a static gate. 
+    
+    The following
+    figure defines the modes that can be used for detection. The numbers on the
+    figure correspond to the different triggering events. The correspondence
+    between these figures and the values allowed for GATE_DETECTION is the
+    following:
+
+    1. FIRST_FLANK
+    2. FIRST_PEAK
+    3. MAX_FLANK
+    4. MAX_PEAK
+    5. LAST_PEAK
+    6. LAST_FLANK
+
+    ![Detection modes for UT gates](../images/media/gate_detection.png)
+
 fields:
   START:
     full_name: ONDE_UT_GATE:START
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: For scalar data relying on Ascan data, defines the start time for
-      the gate. Mandatory for data related to Ascans.
+    short_description: "Defines the start time for the ultrasonic gate."
+    description: |-
+      For scalar data relying on Ascan data, defines the start time for the
+      gate. Mandatory for data related to Ascans.
     dimensions: '1'
   WIDTH:
     full_name: ONDE_UT_GATE:WIDTH
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: For Cscans scalar data relying on Ascan data, defines the width of
-      the gate. Mandatory for data related to Ascans
+    short_description: "Defines the width of the ultrasonic gate."
+    description: |-
+      For Cscans scalar data relying on Ascan data, defines the width of the
+      gate. Mandatory for data related to Ascans
     dimensions: '1'
   THRESHOLD:
     full_name: ONDE_UT_GATE:THRESHOLD
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "Defines the threshold of the gate for data storage."
     description: Defines the threshold of the gate for data to be stored
     dimensions: '1'
   DETECTION:
@@ -30,6 +70,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "Specifies the peak or flank detection mode for the gate."
     description: ''
     dimensions: '1'
     allowed_values: '"FIRST_PEAK"|"LAST_PEAK"|"MAX_PEAK"|"FIRST_FLANK"|"LAST_FLANK"|"MAX_FLANK"'
@@ -38,6 +79,16 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "Specifies the polarity used for gate detection."
     description: ''
     dimensions: '1'
     allowed_values: '"ABSOLUTE"|"POSITIVE"|"NEGATIVE"'
+  SYNCHRONIZATION_SOURCE:
+    full_name: ONDE_UT_GATE:SYNCHRONIZATION_SOURCE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    description: |-
+      Reference to the gate that is used as a synchronization source for this gate.
+      If absent, the gate is defined as a static gate.
+    dimensions: '1'

@@ -1,13 +1,34 @@
 onde_class: ONDE_SPATIAL_TRAJECTORY
 inherits:
 - ONDE_ACQUISITION_TRAJECTORY
-description: ''
+description: |-
+    ### Spatial trajectory
+
+    The spatial trajectory is a list of positions and orientations of the
+    acquisition frame. It is given in the global reference frame.  ONDE format
+    gives the possibility to describe a generic trajectory, as well as a grid
+    trajectory (1D or 2D) for which the acquisition grid is defined. When the
+    grid trajectory is defined, the Spatial trajectory is subtyped in the
+    ONDE_GRID_TRAJECTORY class, which inherits from the ONDE_SPATIAL_TRAJECTORY
+    class. The array describing the list of positions and orientations is stored
+    in the TRAJECTORY field. It is a 3D array of size [N_U<m>, N_V<m>, 7], where
+    N_U and N_V are the number of positions along the U and V directions,
+    respectively. The last dimension of size 7 corresponds to the position
+    (x, y, z) and the orientation (quaternion q0, q1, q2, q3) of the acquisition
+    frame at each position.
+
+    #### Notes
+
+    N_V will be set to 1 for 1D trajectories (whether 1D spatial trajectories or
+    time trajectories).
 fields:
   TRAJECTORY:
     full_name: ONDE_SPATIAL_TRAJECTORY:TRAJECTORY
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
-    description: List of positions and quaternions giving the positions and orientations
-      of the trajectory frame at the different positions
-    dimensions: '[N_Pos<m>,7]'
+    short_description: A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.
+    description: |-
+      List of positions and quaternions giving the positions and orientations of
+      the trajectory frame at the different positions
+    dimensions: '[N_U<m>,N_V<m>,7]'

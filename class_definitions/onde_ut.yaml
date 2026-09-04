@@ -1,7 +1,7 @@
 modality: ONDE_UT
 description: |
   ### ONDE UT File
-  
+
   This class specifies the UT file type and provides a place for including top level fields. It explicitly references all of the classes that are allowed in this file type.
 allowed_classes:
   - ONDE_DATASET
@@ -20,6 +20,7 @@ allowed_classes:
   - ONDE_2DCAD
   - ONDE_3DCAD
   - ONDE_WELD
+  - ONDE_PROBE
   - ONDE_UT_PROBE
   - ONDE_UT_ELEMENTS
   - ONDE_MONO_UT_PROBE
@@ -49,7 +50,10 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
+    short_description: 'Identifies the file type as an ONDE UT file.'
+    description: |-
+      For detailed information, see
+      https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
     dimensions: '1'
     allowed_values: '"ONDE_UT"'
   VERSION:
@@ -57,6 +61,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Specifies the version of the ONDE UT specification that this file conforms to.'
     description: ''
     dimensions: '1'
-    allowed_values: '"0.9.0"'
+    allowed_values: '"0.9.1"'

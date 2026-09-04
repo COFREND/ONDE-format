@@ -5,13 +5,12 @@ description: |
 
   ### Generic remarks on datasets
 
-  The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. For DATE_AND_TIME the
-  ISO 8601 extended format: 'yyyy-mm-dd HH:MM:SS' (e.g. '2019-01-16 17:05:06') must be used.
+  The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. 
 
   ### Notes on groups
 
     The following links provide explanatory notes for the ONDE groups that are described in the [YAML schemas](https://github.com/COFREND/ONDE-format/tree/main/class_definitions).
-    
+
   [Ascan datasets](onde_dataset_ut_ascan.md)
 
   [Tscan datasets](onde_dataset_ut_tscan.md)
@@ -39,6 +38,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: A name or label representing this dataset.
     description: A name for this dataset
     dimensions: '1'
   SETUP:
@@ -46,6 +46,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_SETUP>
+    short_description: Reference to the setup configuration used for this dataset.
     description: ''
     dimensions: '1'
   OPERATOR:
@@ -53,37 +54,48 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: The name or identifier of the operator conducting the acquisition.
     description: ''
     dimensions: '1'
   DATE_AND_TIME:
     full_name: ONDE_DATASET:DATE_AND_TIME
-    required: false
+    required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: ''
+    description: |-
+      The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.g. '2019-01-16T17:05:06') must be used with a capital T separating the date and the time. Optionally, a decimal point ('.') and a fractional portion of a second may be appended. In addition, time zone information is usually appended:
+      * "Z", indicating a timestamp in UTC
+      * "±hh:mm", indicating a timezone with the specified offset from UTC
+      * (no timezone information), indicating an unknown timezone; software will usually interpret this as local time or UTC. 
     dimensions: '1'
   DATA:
     full_name: ONDE_DATASET:DATA
     required: false
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
-    description: Data can be either an array or a reference to an array. Omitting
-      this field is possible, in the event when Tscan or Cscan data is recorded but
-      the underlying Ascan data is not. The dimensions of the dataset are application
-      dependent, subclasses can override and specify the dimensions.
+    short_description: The core data array or a reference to the array.
+    description: |-
+      Data can be either an array or a reference to an array. Omitting this
+      field is possible, in the event when Tscan or Cscan data is recorded but
+      the underlying Ascan data is not. The dimensions of the dataset are
+      application dependent, subclasses can override and specify the dimensions.
   AMPLITUDE_DIMENSION:
     full_name: ONDE_DATASET:AMPLITUDE_DIMENSION
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
-    description: If absent, treated as coordinate "Amplitude", units "Arbitrary",
-      offset 0.0, scale 1.0
+    short_description: Reference to the dimension defining the amplitude characteristics.
+    description: |-
+      If absent, treated as coordinate "Amplitude", units "Arbitrary", offset
+      0.0, scale 1.0
     dimensions: '1'
   INDEX_DIMENSIONS:
     full_name: ONDE_DATASET:INDEX_DIMENSIONS
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_DIMENSION>
-    description: One entry per dimension of ONDE_DATASET:DATA. Any that are absent
-      are treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
+    short_description: Array of references to the index dimensions of the dataset.
+    description: |-
+      One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
+      treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
     dimensions: '[n_data_dims]'

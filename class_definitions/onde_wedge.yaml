@@ -1,51 +1,80 @@
 onde_class: ONDE_WEDGE
 inherits:
 - ONDE_UT_COUPLING
-description: "**Wedge angles conventions**\n\nFor contact probes, wedge angles are\
-  \ defined according to this order of application (see [Figure 15](onde_wedge.md)):\n\
-  \n1. rotation of the incidence angle around the Y axis of the probe in the direct\
-  \ direction\n\n2. rotation of the skew angle around the new X axis of the probe\
-  \ in the direct direction\n\n3. rotation of the disorientation angle around the\
-  \ new Z axis in the direct direction\n\nFor dual probes, wedge angles are defined\
-  \ according to this order of application (see [Figure 15](onde_wedge.md)):\n\n1.\
-  \ rotation of the incidence angle around the Y axis of each probe in the direct\
-  \ direction\n\n2. rotation of the roof angle around the new X axis of each probe\
-  \ in the direct direction\n\n3. rotation of the disorientation angle around the\
-  \ new Z axis of each probe in the direct direction\n\n4. rotation of the squint\
-  \ angle around the new Z axis of each probe\n    - in the direct direction for the\
-  \ right probe\n    - in the indirect direction for the left probe.\n\n![Definition\
-  \ of wedge parameters for contact and dual probes](../images/media/wedge_parameters_contact_dual.png\
-  \ \"Figure 15\")\n\n*[Figure 15](onde_wedge.md): Definition of wedge parameters\
-  \ for contact and dual probes*\n\nThe definition of the index point for contact\
-  \ probes with planar and cylindrical wedges along the major and minor axis\nare\
-  \ given in [Figure 16](onde_wedge.md), [Figure 17](onde_wedge.md), [Figure 18](onde_wedge.md)\
-  \ respectively.\n\n![Definition of wedge parameters for contact planar probe](../images/media/wedge_parameters_contact_planar.png\
-  \ \"Figure 16\")\n\n*[Figure 16](onde_wedge.md): Definition of wedge parameters\
-  \ for contact planar probe*\n\n![Definition of wedge parameters for CYLINDRICAL_MAJOR\
-  \ contact probe](../images/media/wedge_parameters_cylindrical_major.png \"Figure\
-  \ 17\")\n\n*[Figure 17](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MAJOR\
-  \ contact probe*\n\n![Definition of wedge parameters for CYLINDRICAL_MINOR contact\
-  \ probe](../images/media/wedge_parameters_cylindrical_minor.png \"Figure 18\")\n\
-  \n*[Figure 18](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MINOR\
-  \ contact probe*\n\nThe definition of the index point for dual probes with planar\
-  \ and cylindrical wedges along the major and minor axis are\ngiven in [Figure 19](onde_wedge.md),\
-  \ [Figure 20](onde_wedge.md) and [Figure 21](onde_wedge.md) respectively.\n\n![Definition\
-  \ of wedge parameters for a dual planar probe](../images/media/wedge_parameters_dual_planar.png\
-  \ \"Figure 19\")\n\n*[Figure 19](onde_wedge.md): Definition of wedge parameters\
-  \ for a dual planar probe*\n\n![Definition of wedge parameters for CYLINDRICAL_MAJOR\
-  \ dual probe](../images/media/wedge_parameters_dual_cyl_major.png \"Figure 20\"\
-  )\n\n*[Figure 20](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MAJOR\
-  \ dual probe*\n\n![Definition of wedge parameters for CYLINDRICAL_MINOR dual probe](../images/media/wedge_parameters_dual_cyl_minor.png\
-  \ \"Figure 21\")\n\n*[Figure 21](onde_wedge.md): Definition of wedge parameters\
-  \ for CYLINDRICAL_MINOR dual probe*\n\n**Velocities**\n\nAs for specimens, if both\
-  \ velocities (Longitudinal and shear) are not available, the missing one should\
-  \ be replaced by a\nNaN)."
+description: |-
+    #### Wedge angles conventions
+
+    For contact probes, wedge angles are defined according to this order of
+    application (see [Figure 15](onde_wedge.md)):
+
+    1. rotation of the incidence angle around the Y axis of the probe in the direct direction
+
+    2. rotation of the skew angle around the new X axis of the probe in the direct direction
+
+    3. rotation of the disorientation angle around the new Z axis in the direct direction
+
+    For dual probes, wedge angles are defined according to this order of
+    application (see [Figure 15](onde_wedge.md)):
+
+    1. rotation of the incidence angle around the Y axis of each probe in the direct direction
+
+    2. rotation of the roof angle around the new X axis of each probe in the direct direction
+
+    3. rotation of the disorientation angle around the new Z axis of each probe in the direct direction
+
+    4. rotation of the squint angle around the new Z axis of each probe
+        - in the direct direction for the right probe
+        - in the indirect direction for the left probe.
+
+    ![Definition of wedge parameters for contact and dual probes](../images/media/wedge_parameters_contact_dual.png "Figure 15")
+
+    *[Figure 15](onde_wedge.md): Definition of wedge parameters for contact and dual probes*
+
+    The definition of the index point for contact probes with planar and
+    cylindrical wedges along the major and minor axis are given in
+    [Figure 16](onde_wedge.md), [Figure 17](onde_wedge.md), [Figure 18](onde_wedge.md)
+    respectively.
+
+    ![Definition of wedge parameters for contact planar probe](../images/media/wedge_parameters_contact_planar.png "Figure 16")
+
+    *[Figure 16](onde_wedge.md): Definition of wedge parameters for contact planar probe*
+
+    ![Definition of wedge parameters for CYLINDRICAL_MAJOR contact probe](../images/media/wedge_parameters_cylindrical_major.png "Figure 17")
+
+    *[Figure 17](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MAJOR contact probe*
+
+    ![Definition of wedge parameters for CYLINDRICAL_MINOR contact probe](../images/media/wedge_parameters_cylindrical_minor.png "Figure 18")
+
+    *[Figure 18](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MINOR contact probe*
+
+    The definition of the index point for dual probes with planar and
+    cylindrical wedges along the major and minor axis are given in
+    [Figure 19](onde_wedge.md), [Figure 20](onde_wedge.md) and
+    [Figure 21](onde_wedge.md) respectively.
+
+    ![Definition of wedge parameters for a dual planar probe](../images/media/wedge_parameters_dual_planar.png "Figure 19")
+
+    *[Figure 19](onde_wedge.md): Definition of wedge parameters for a dual planar probe*
+
+    ![Definition of wedge parameters for CYLINDRICAL_MAJOR dual probe](../images/media/wedge_parameters_dual_cyl_major.png "Figure 20")
+
+    *[Figure 20](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MAJOR dual probe*
+
+    ![Definition of wedge parameters for CYLINDRICAL_MINOR dual probe](../images/media/wedge_parameters_dual_cyl_minor.png "Figure 21")
+
+    *[Figure 21](onde_wedge.md): Definition of wedge parameters for CYLINDRICAL_MINOR dual probe*
+
+    #### Velocities
+
+    As for specimens, if both velocities (Longitudinal and shear) are not
+    available, the missing one should be replaced by a NaN).
 fields:
   LABEL:
     full_name: ONDE:LABEL
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Label or identifier for the wedge.'
     description: ''
     dimensions: '1'
   MANUFACTURER:
@@ -53,6 +82,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Manufacturer of the wedge.'
     description: ''
     dimensions: '1'
   SERIAL_NUMBER:
@@ -60,6 +90,7 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: 'Serial number of the wedge.'
     description: ''
     dimensions: '1'
   CONTACT_SURFACE:
@@ -67,7 +98,9 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,
+    short_description: 'Type of the wedge contact surface.'
+    description: |-
+      Type of the wedge contact surface - PLANAR, SPHERICAL, CYLINDRICAL_MAJOR,
       CYLINDRICAL_MINOR - If missing PLANAR assumed
     allowed_values: '"PLANAR"|"SPHERICAL"|"CYLINDRICAL_MAJOR"|"CYLINDRICAL_MINOR"'
   CURVATURE_RADIUS:
@@ -75,14 +108,21 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: 'Wedge curvature radius - Concave : positive - Convex : negative
-      - 0 in the case of a planar wedge - If missing 0 assumed.'
+    short_description: 'Radius of curvature for the wedge contact surface.'
+    description: |-
+      Wedge curvature radius (0 assumed if missing)
+
+      - Concave: positive
+      - Convex: negative
+      - Planar wedge: 0
+
     dimensions: '1'
   CONTACT_AREA:
     full_name: ONDE_WEDGE:CONTACT_AREA
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Dimensions defining the equivalent contact area of the wedge.'
     description: Equivalent to L1, L2 and L3 (See Figure 15)
     dimensions: '[3]'
   HEIGHT:
@@ -90,14 +130,17 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: For a wedge, distance of the ultrasonic beam between the probe center
-      and the index point (See Figure 15)
+    short_description: 'Distance of the ultrasonic beam between the probe center and the index point.'
+    description: |-
+      For a wedge, distance of the ultrasonic beam between the probe center and
+      the index point (See Figure 15)
     dimensions: '1'
   SKEW_ANGLE:
     full_name: ONDE_WEDGE:SKEW_ANGLE
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Skew angle of the wedge.'
     description: wedge /skew angle (B) (See Figure 15)
     dimensions: '1'
   DISORIENTATION_ANGLE:
@@ -105,5 +148,6 @@ fields:
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Disorientation angle of the wedge.'
     description: wedge /disorientation angle (D) (See Figure 15)
     dimensions: '1'
