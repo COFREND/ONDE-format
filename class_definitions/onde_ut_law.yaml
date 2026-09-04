@@ -1,5 +1,6 @@
 onde_class: ONDE_UT_LAW
-inherits: []
+inherits:
+- ONDE_PROBE_SELECT
 description: |-
     ### Law
 
@@ -12,12 +13,12 @@ description: |-
     contains at least two points in the Probe Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
     positions in Probe Coordinate Frame and time of flight are stored.
 fields:
-  PROBE:
-    full_name: ONDE_UT_LAW:PROBE
+  PROBE_INDEX:
+    full_name: ONDE_PROBE_SELECT:PROBE_INDEX
     required: true
     storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
-    short_description: 'A reference to the ultrasonic probe used in this focal law.'
+    hdf5_type: H5T_INTEGER
+    short_description: 'Index (into ONDE_ULTRASONIC_SETUP:PROBE_LIST) of the ultrasonic probes used in the A-scan corresponding to this ONDE_UT_LAW.'
     description: ''
     dimensions: '[N_C<k>]'
   ELEMENT:
