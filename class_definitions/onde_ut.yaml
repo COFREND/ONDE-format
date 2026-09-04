@@ -55,7 +55,7 @@ fields:
       For detailed information, see
       https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
     dimensions: '1'
-    allowed_values: '"ONDE_UT"'
+    allowed_values: '["ONDE_DATASET"]'
   VERSION:
     full_name: ONDE:VERSION
     required: true
