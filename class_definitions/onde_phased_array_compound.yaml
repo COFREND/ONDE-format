@@ -23,6 +23,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The initial angle of the scope for the compound scan."
     description: ''
     dimensions: '1'
   FINAL_ANGLE:
@@ -30,6 +31,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: "The final angle of the scope for the compound scan."
     description: ''
     dimensions: '1'
   NUMBER_OF_ANGLES:
@@ -37,6 +39,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: "The total number of angles defined within the compound scan scope."
     description: ''
     dimensions: '1'
   NUMBER_OF_ELEMENTS:
@@ -44,5 +47,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: "The number of elements involved in the electronic scanning process."
     description: ''
     dimensions: '1'

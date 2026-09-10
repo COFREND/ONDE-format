@@ -16,6 +16,7 @@ fields:
     required: false
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
+    short_description: "Contains the time signal data array or a reference to it."
     description: |-
       Data can be either an array or a reference to an array. Omitting this
       field is possible, in the event when Tscan or Cscan data is recorded but

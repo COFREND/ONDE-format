@@ -27,6 +27,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
+    short_description: A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.
     description: |-
       List of positions and quaternions giving the positions and orientations of
       the trajectory frame at the different positions

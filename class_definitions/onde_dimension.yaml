@@ -4,6 +4,7 @@ description: ''
 fields:
   COORDINATE:
     full_name: ONDE_DIMENSION:COORDINATE
+    short_description: 'Name of the stored data or indexed coordinates.'
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
@@ -18,6 +19,7 @@ fields:
     dimensions: '1'
   UNITS:
     full_name: ONDE_DIMENSION:UNITS
+    short_description: 'Units for the stored data or indexed coordinates, preferably spelled-out MKS base units.'
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
@@ -33,6 +35,7 @@ fields:
     dimensions: '1'
   OFFSET:
     full_name: ONDE_DIMENSION:OFFSET
+    short_description: 'Offset value to be added to the scaled stored data or zero-based indices.'
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
@@ -44,6 +47,7 @@ fields:
     dimensions: '1'
   SCALE:
     full_name: ONDE_DIMENSION:SCALE
+    short_description: 'Scaling factor applied to the stored data or integer indices.'
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT

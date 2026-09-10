@@ -27,6 +27,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting phased array probe used in this setup."
     description: ''
     dimensions: '1'
   RECEIVING_PROBE:
@@ -34,6 +35,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving phased array probe used in this setup."
     description: ''
     dimensions: '1'
   SEQUENCE_ANGLE_MODE:
@@ -41,5 +43,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
+    short_description: "Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T)."
     description: ''
     allowed_values: '"L"|"T"'
