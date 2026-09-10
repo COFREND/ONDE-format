@@ -50,12 +50,12 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    short_description: 'Identifies the file type as an ONDE UT file.'
+    short_description: 'Specifies that the file should be searched for HDF5 groups containing one or more datasets to be loaded (ONDE_DATASET) and that the file contains UT datasets (ONDE_UT)'
     description: |-
       For detailed information, see
-      https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md
-    dimensions: '1'
-    allowed_values: '"ONDE_UT"'
+      the [data model specification](../data_model.html)
+    dimensions: '[*]'
+    allowed_values: '["ONDE_DATASET","ONDE_UT"]'
   VERSION:
     full_name: ONDE:VERSION
     required: true
