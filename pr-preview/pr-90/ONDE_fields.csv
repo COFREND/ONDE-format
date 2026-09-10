@@ -1,5 +1,5 @@
 ﻿Class;Name;Comments;M or O;D or A;Class;Dims;Size or content;Min;Max;Accessory Class
-ONDE_UT;ONDE:FILETYPE;For detailed information, see https://github.com/COFREND/ONDE-format/blob/main/UT_specification/UT_file_format.md;M;A;H5T_STRING;1;["ONDE_DATASET"];;;
+ONDE_UT;ONDE:FILETYPE;For detailed information, see the [data model specification](../specification/data_model.md);M;A;H5T_STRING;[*];["ONDE_DATASET","ONDE_UT"];;;
 ONDE_UT;ONDE:VERSION;;M;A;H5T_STRING;1;"0.9.1";;;
 ONDE_DATASET;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[1];["ONDE_DATASET"];;;
 ONDE_DATASET;ONDE:LABEL;A name for this dataset;O;A;H5T_STRING;1;;;;

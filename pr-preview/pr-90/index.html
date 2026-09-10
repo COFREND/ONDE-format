@@ -2468,7 +2468,7 @@ ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN)</p>
 <p>When discovering the content of a given file, the following procedure must therefore be applied:</p>
 <ul>
 <li>Read the 'ONDE:FILETYPE' and 'ONDE:VERSION' attributes at root level and verify the compatibility of the version number with the
-  reader, and that the filetype attribute (which is a list/array) contains as one of its elements the string 'ONDE_DATASET' indicating that the file is an ONDE file which contains datasets.</li>
+  reader, and that the filetype attribute (which is a list/array) contains as one of its elements the string 'ONDE_DATASET' indicating that the file is an ONDE file which contains datasets. Optionally, check to see if the file contains modalities supported by the reader via the presence of corresponding tags in the filetype attribute, e.g. 'ONDE_UT'.</li>
 <li>Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
   which groups have a 'ONDE:TYPE' attribute whose value is a list starting with 'ONDE_DATASET'. This will identify all ONDE datasets stored in the file. The 'ONDE:TYPE' field is a list that defines the class derivation of the object being represented. Interpret the object based on the rightmost (most derived) class listed that you understand.</li>
 <li>From there interpret the contents of the HDF5 group according to references defined in the specification to retrieve the data arrays, the related datasets, the
