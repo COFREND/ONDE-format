@@ -1,0 +1,27 @@
+onde_class: ONDE_ET_SENSOR_GROUP_RANDOM
+inherits:
+  - ONDE_ET_SENSOR_GROUP
+description: ''
+
+fields:
+  SENSORS_POSITION:
+    full_name: ONDE_ET_SENSOR_GROUP_RANDOM:SENSORS_POSITION
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'RANDOM means 3D, thus quaternions should be used'
+    dimensions: '[SENSOR_NUMBER<p>,7]'
+  COVERAGE:
+    full_name: ONDE_ET_SENSOR_GROUP_RANDOM:COVERAGE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: ''
+    dimensions: '[SENSOR_NUMBER<p>,6]'
+  MANUFACTURING_LIFT_OFF:
+    full_name: ONDE_ET_SENSOR_GROUP_PLANE:MANUFACTURING_LIFT_OFF
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: "Lift off induced by the manufacturing process (in meters)"
+    dimensions: '[SENSOR_NUMBER<p>,7]'

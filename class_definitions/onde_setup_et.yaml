@@ -1,0 +1,13 @@
+onde_class: ONDE_SETUP_ET
+inherits:
+- ONDE_SETUP
+description: ''
+fields:
+  ET_SETUP:
+    full_name: ONDE_SETUP_ET:ACQUISITION_GROUP
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ET_ACQUISITION_GROUP>
+    short_description: 'List of all groups used in the sequence'
+    description:
+    dimensions: '[N_Acquisition_Group]'
