@@ -1,5 +1,6 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_FILTER
-inherits: [ONDE_PROCESS]
+inherits: 
+  - ONDE_COMPUTATION_ELEMENTARY
 description: '##Signal standardisation
 
 a class to inform eddy current standardisation of signal
