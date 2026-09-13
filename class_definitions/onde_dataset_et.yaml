@@ -1,0 +1,12 @@
+onde_class: ONDE_DATASET_ET
+inherits:
+- ONDE_DATASET
+description: ''
+fields:
+  COMPUTATION:
+    full_name: ONDE_DATASET_ET:ONDE_COMPUTATION
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_PROCESS>
+    description: 'A link to the last process applied to data'
+    dimensions: '[N_Process<m>]'
