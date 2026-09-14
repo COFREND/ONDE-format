@@ -1,0 +1,33 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY_FILTER
+inherits: 
+  - ONDE_COMPUTATION_ELEMENTARY
+description: '##Signal standardisation
+
+a class to inform eddy current standardisation of signal
+
+'
+
+
+fields:
+  TYPE:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_FILTER:TYPE
+    required: true
+    storage: dataset
+    hdf5_type: STRING
+    description: 'Type of filtering'
+    dimensions: '[N_SENSOR<p>]'
+    allowed_values: 'HIGH|LOW|THROUGH|CUT'
+  HICUT:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_FILTER:HICUT
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'A number, in Hz which decribe Hi cut frequency (@-6dB by default) '
+    dimensions: '[N_SENSOR<p>]'
+  LOWCUT:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_FILTER:LOWCUT
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'A number, in Hz which describe Hi cut frequency (@-6dB by default)'
+    dimensions: '[N_SENSOR<p>]'

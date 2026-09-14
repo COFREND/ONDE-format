@@ -1,0 +1,33 @@
+onde_class: ONDE_PROCESS_STANDARDISATION
+inherits: 
+  - ONDE_COMPUTATION_ELEMENTARY
+description: '
+##Signal standardisation
+
+a class to inform eddy current standardisation of signal
+
+$S_{out}= A e^{i \phi} S_{in} + offset$
+'
+
+fields:
+  AMPLITUDE:
+    full_name:  ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION:AMPLITUDE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'A human readable description of the process.'
+    dimensions: '[N_SENSOR<p>]'
+  PHASE:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION:PHASE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_PROCESS>
+    description: 'A link to the previous process applied to data'
+    dimensions: '[N_SENSOR<p>]'
+  OFFSET:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION:OFFSET
+    required: true
+    storage: dataset
+    hdf5_type: H5T_COMPLEX or H5T_COMPOUND
+    description: 'A link to the previous process applied to data'
+    dimensions: '[N_SENSOR<p>]'
