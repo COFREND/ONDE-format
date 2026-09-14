@@ -1,7 +1,7 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER
 inherits: 
 -ONDE_COMPUTATION_ELEMENTARY
-description: |
+description: '
 ##Signal filtering with medians
 
 a class to inform eddy current filtering with median filter
@@ -11,7 +11,7 @@ Hi pass :
 $$
 
 $$
-
+'
 fields:
   TYPE:
     full_name: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER:TYPE
