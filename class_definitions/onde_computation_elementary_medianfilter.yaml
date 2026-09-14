@@ -1,7 +1,8 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER
 inherits: 
 -ONDE_COMPUTATION_ELEMENTARY
-description: '##Signal filtering with medians
+description: |
+##Signal filtering with medians
 
 a class to inform eddy current filtering with median filter
 Low pass :
@@ -10,9 +11,6 @@ Hi pass :
 $$
 
 $$
-
-'
-
 
 fields:
   TYPE:
