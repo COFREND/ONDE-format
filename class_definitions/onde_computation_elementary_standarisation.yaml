@@ -1,6 +1,6 @@
 onde_class: ONDE_PROCESS_STANDARDISATION
 inherits: 
--ONDE_COMPUTATION_ELEMENTARY
+  - ONDE_COMPUTATION_ELEMENTARY
 description: '
 ##Signal standardisation
 
