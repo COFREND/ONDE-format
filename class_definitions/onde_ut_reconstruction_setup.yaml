@@ -1,0 +1,69 @@
+onde_class: ONDE_UT_RECONSTRUCTION_SETUP
+inherits: []
+description: |-
+
+    #### Zone dimension and position
+
+    The zone physical dimension is given by the ZONE_DIMENSION field, (DX,DY,DZ)
+    being the physical dimensions of the zone, a zero or a NaN for one of the
+    dimension implies a 2D zone.
+
+    ZONE_SIZE is a triplet which gives the number of pixels of the zone for each
+    dimension (NX,NY,NZ).
+
+    The zone position is given by ZONE_FRAME and is expressed relatively to the
+    trajectory of the probe which is given in the associated GEOMETRIC_SETUP
+    probe list. The index of the probe in this list is given by the
+    REFERENCE_PROBE_INDEX attribute (defaults to 0).
+
+    ![Example of TFM zone positioning](../images/media/tfm_zone_positioning.png "Figure 5")
+
+    *[Figure 5](onde_dataset_ut_tscan.md): Example of TFM zone positioning*
+
+    In the example displayed in [Figure 5](onde_dataset_ut_tscan.md), the
+    trajectory frame is located at the index point and the zone is positioned
+    accordingly.
+
+
+ZONE_FRAME:
+    full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_FRAME
+    short_description: Defines the coordinate frame associated with the center of the image zone.
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: frame associated with the center of the image zone
+    dimensions: '[7]'
+ZONE_DIMENSION:
+    full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_DIMENSION
+    short_description: Specifies the physical dimensions of the reconstruction zone.
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: physical dimension of the zone
+    dimensions: '[3]'
+ZONE_SIZE:
+    full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_SIZE
+    short_description: Defines the number of pixels along each axis of the reconstruction zone.
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: number of pixels of the zone
+    dimensions: '[3]'
+RECONSTRUCTION_MODE:
+    full_name: ONDE_UT_RECONSTRUCTION_SETUP:RECONSTRUCTION_MODE
+    short_description: Specifies the mode or algorithm used for the reconstruction.
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: ''
+    dimensions: '1'
+REFERENCE_PROBE_INDEX:
+    full_name: ONDE_UT_RECONSTRUCTION_SETUP:REFERENCE_PROBE_INDEX
+    short_description: Indicates the index of the reference probe used for trajectory alignment.
+    required: false
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    description: |-
+      Points the the index of the reference probe in the Geometric setup probe
+      list. Defaults to 0.
+    dimensions: '1'
