@@ -41,6 +41,14 @@ fields:
     short_description: A name or label representing this dataset.
     description: A name for this dataset
     dimensions: '1'
+  UUID:
+    full_name: ONDE:UUID
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: |
+      The UUID field is a mandatory universally unique identifier. These are stored as strings, limited to no more than 63 printable ASCII characters. UUIDs should be compatible with DICOM for interoperabiltity. See [Creating a Privately Defined Unique Identifier](https://dicom.nema.org/medical/dicom/current/output/chtml/part05/chapter_B.html) and [UUID Derived UID](https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_B.2.html). The recommended process is to create a 128 bit UUID for each dataset by hashing information including equipment model and serial number and time, and if possible end user information as well. This UUID should be printed as a decimal number, with leading zeros eliminated, and given a prefix of "2.25.".
+    dimensions: '1'
   SETUP:
     full_name: ONDE_DATASET:SETUP
     required: true
