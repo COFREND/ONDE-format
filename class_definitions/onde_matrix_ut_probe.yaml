@@ -8,6 +8,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'Total number of elements in the matrix ultrasonic probe.'
     description: ''
     dimensions: '1'
   NUMBER_OF_ELEMENTS_DIM_MINOR:
@@ -15,6 +16,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The number of elements along the minor dimension of the matrix probe.'
     description: ''
     dimensions: '1'
   ELEMENT_DIM_MAJOR:
@@ -22,6 +24,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Size of a single element along the major dimension.'
     description: ''
     dimensions: '1'
   ELEMENT_DIM_MINOR:
@@ -29,6 +32,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'Size of a single element along the minor dimension.'
     description: ''
     dimensions: '1'
   ELEMENT_PITCH_DIM_MAJOR:
@@ -36,6 +40,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The pitch (center-to-center distance) between elements along the major dimension.'
     description: ''
     dimensions: '1'
   ELEMENT_PITCH_DIM_MINOR:
@@ -43,6 +48,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The pitch (center-to-center distance) between elements along the minor dimension.'
     description: ''
     dimensions: '1'
   ELEMENT_NUMBERING:
@@ -50,6 +56,7 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_INTEGER
+    short_description: 'Defines the element numbering relating the implicitly defined numbering and the order in the element tables.'
     description: |-
       Defines the element numbering relating the numbering implicitly defined by
       the probe description and the order defined in the element tables

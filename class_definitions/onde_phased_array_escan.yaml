@@ -19,6 +19,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The number of consecutive elements used to form a beam.'
     description: ''
     dimensions: '1'
   STEP:
@@ -26,6 +27,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
+    short_description: 'The number of elements by which the subset is shifted for each successive beam.'
     description: ''
     dimensions: '1'
   ANGLE:
@@ -33,5 +35,6 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
+    short_description: 'The specific angle at which the beam is formed during the scan.'
     description: ''
     dimensions: '1'
