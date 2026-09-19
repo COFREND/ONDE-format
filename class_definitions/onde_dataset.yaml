@@ -74,7 +74,7 @@ fields:
     full_name: ONDE_DATASET:DATA
     required: false
     storage: A or D
-    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_COMPLEX or H5T_COMPOUND
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_FLOAT
     short_description: Eddy current data for one channel (one probe/One sensor/one frequency/)
     description: |-
       Data can be either an array or a reference to an array. Omitting this

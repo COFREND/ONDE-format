@@ -1,11 +1,11 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_FILTER
-inherits: 
+inherits:
   - ONDE_COMPUTATION_ELEMENTARY
-description: '##Signal standardisation
+description: |-
 
-a class to inform eddy current standardisation of signal
+    ##Signal standardisation
 
-'
+    A class to inform eddy current standardisation of signal.
 
 
 fields:

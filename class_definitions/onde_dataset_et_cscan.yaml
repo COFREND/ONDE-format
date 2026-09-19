@@ -47,7 +47,7 @@ fields:
       The field contains either an array containing the CScan data (2D hdf5 dataset) or a reference to this array (hdf5 reference stored as an attribute).
       Dimensions of this array are [N_U<m>, N_V<m>, N_A<m>], N_A<m> being the number of scans at each point. 
       In the case of monoelement scans, the third dimension is therefore of size 1.
-    dimensions: '1 or [N_U<m>,N_V<m>,N_A<m>]'
+    dimensions: '[N_U<m>,N_V<m>,N_A<m>]'
   UNDERLYING_DATA:
     full_name: ONDE_DATASET_ET_CSCAN:UNDERLYING_DATA
     required: false

@@ -1,9 +1,11 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_INIT
 inherits:
   - ONDE_COMPUTATION_ELEMENTARY
-description: '##Elementary computation initiation
+description: |-
 
-a class to strat the computation process. Links data with elementary computation processes'
+    ##Elementary computation initiation
+
+    A class to strat the computation process. Links data with elementary computation processes
 
 
 fields:

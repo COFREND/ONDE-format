@@ -1,13 +1,13 @@
 onde_class: ONDE_PROCESS_STANDARDISATION
-inherits: 
+inherits:
   - ONDE_COMPUTATION_ELEMENTARY
-description: '
-##Signal standardisation
+description: |-
+    ##Signal standardisation
+    
+    A class to inform eddy current standardisation of signal
+    
+    $S_{out}= A e^{i \phi} S_{in} + offset$
 
-a class to inform eddy current standardisation of signal
-
-$S_{out}= A e^{i \phi} S_{in} + offset$
-'
 
 fields:
   AMPLITUDE:

@@ -10,3 +10,15 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_PROCESS>
     description: 'A link to the last process applied to data'
     dimensions: '[N_Process<m>]'
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: false
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_COMPLEX
+    short_description: Eddy current data for one channel (one probe/One sensor/one frequency/)
+    description: |-
+      Data can be either an array or a reference to an array. Omitting this
+      field is possible, in the event when Tscan or Cscan data is recorded but
+      the underlying Ascan data is not. The dimensions of the dataset are
+      application dependent, subclasses can override and specify the dimensions.
+    dimensions: '[N_SENSOR<p>]'

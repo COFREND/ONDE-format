@@ -1,17 +1,18 @@
 onde_class: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER
-inherits: 
+inherits:
   - ONDE_COMPUTATION_ELEMENTARY
-description: '
-##Signal filtering with medians
+description: |-
+    ##Signal filtering with medians
+    A class to inform eddy current filtering with median filter
+    
+    For $2p+1$ points :
+  
+    Low pass :
+    $Out = Median([In_{n-p}; In_{n+p}]$
+    
+    Hi pass : 
+    $Out = In_n-Median([In_{n-p}; In_{n+p}]$
 
-a class to inform eddy current filtering with median filter
-Low pass :
-$$
-Hi pass : 
-$$
-
-$$
-'
 fields:
   TYPE:
     full_name: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER:TYPE
@@ -27,11 +28,4 @@ fields:
     storage: dataset
     hdf5_type: H5T_INTEGER
     description: 'The number of points on which median is calculated. If not present, supposed to be infinite (all the points)'
-    dimensions: '[N_SENSOR<p>]'
-  LOWCUT:
-    full_name: ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER:LOWCUT
-    required: false
-    storage: dataset
-    hdf5_type: H5T_COMPLEX or H5T_COMPOUND
-    description: 'A number, in Hz which describe Hi cut frequency (@-6dB by default)'
     dimensions: '[N_SENSOR<p>]'
