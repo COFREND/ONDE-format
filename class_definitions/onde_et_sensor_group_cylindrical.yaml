@@ -1,0 +1,20 @@
+onde_class: ONDE_ET_SENSOR_GROUP_CYLINDRICAL
+inherits:
+  - ONDE_ET_SENSOR_GROUP
+description: ''
+fields:
+  SENSORS_POSITION:
+    full_name: ONDE:SENSORS_POSITION
+    required: true
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: 'Position of sensitive area in the probe referential. Coordinate are cylindrical with Theta is an angle
+     in degree and z is in meter.'
+    dimensions: '[SENSOR_NUMBER<p>, 2]'
+  MANUFACTURING_LIFT_OFF:
+    full_name: ONDE_ET_SENSOR_GROUP_CYLINDRICAL:MANUFACTURING_LIFT_OFF
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Lift off induced by the manufacturing process (in meters). Supposed to be radial.
+    dimensions: '[SENSOR_NUMBER<p>]'

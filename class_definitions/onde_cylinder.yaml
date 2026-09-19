@@ -21,3 +21,4 @@ fields:
     short_description: 'Specifies the dimensions of the cylinder. It is a triplet containing the outer diameter, thickness, and length.'
     description: ''
     dimensions: '[3]'
+

@@ -1,0 +1,23 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY
+inherits:
+  - ONDE_COMPUTATION
+description: |-
+
+    ##Elementary computation
+    A class to describe and inform elementary data signal process
+
+fields:
+  LABEL:
+    full_name: ONDE_COMPUTATION_ELEMENTARY:LABEL
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'A human readable description of the process.'
+    dimensions: '[3]'
+  PROCESS:
+    full_name: ONDE_COMPUTATION_ELEMENTARY:COMPUTATION
+    required: false
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_COMPUTATION_ELEMENTARY>
+    description: 'A link to the previous process applied to data'
+    dimensions: '[N_Process<m>]'

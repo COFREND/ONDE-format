@@ -1,0 +1,78 @@
+onde_class: ONDE_DATASET_ET_CSCAN
+inherits:
+- ONDE_DATASET_ET
+description: |+
+   ### CScan datasets
+  
+   The choice of the working group is to represent the eddy current as a set of cscan. The data 
+   themseleves are stored as a complex format. Complex format can be stored as native type of HDFS5, or using the 
+   existing mecanism (compound) to create herited types.
+  
+   DATA contains a vector of references to datasets containing scalar raw data. The size of the data can be either
+   N_DF\\<m\\> x N_Ascan\\<m\\> arrays (for data resulting from analysis of signals or N_DF\\<m\\> arrays for encoder 
+   data or data resulting from Tscan or monoelement scans.
+  
+   **Data description**
+  
+   The DATATYPE field contains a name defining the nature of the data- the name can be either custom 
+   (MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX.
+   
+   **Data numbering**
+   
+   To be efficient for relatively small amounts of data, as opposed to other blocks, the Cscan block allows for the 
+   handling of several data inside the block. The DATA, DATA_TYPE vectors must have the same length and be ordered
+   coherently.
+   
+   **Data positioning**
+   
+   The Cscan data must be positioned through a trajectory block which is of grid type and is referenced by the 
+   CSCAN_GRID attribute.
+   
+   **Underlying raw data**   
+   
+   UNDERLYING_DATA is used to point to the dataset that corresponds to the originating raw data. 
+   LINKED_DATASET_REFERENCE gives the correspondence between the scalar data and the originating scan. For a A-Scan, the
+   correspondence to the scan is expressed in terms of (dataframe, law). For a 2D Tscan, it will be (dataframe, column),
+   for a 3D Tscan, it will be (dataframe, plane, column).
+
+
+fields:
+  DATA:
+    full_name: ONDE_DATASET:DATA
+    required: true
+    storage: A or D
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_COMPLEX or H5T_COMPOUND
+    short_description: Reference to an array containing the Cscan data or array containing the CScan data.
+    description: |-
+      The field contains either an array containing the CScan data (2D hdf5 dataset) or a reference to this array (hdf5 reference stored as an attribute).
+      Dimensions of this array are [N_U<m>, N_V<m>, N_A<m>], N_A<m> being the number of scans at each point. 
+      In the case of monoelement scans, the third dimension is therefore of size 1.
+    dimensions: '[N_U<m>,N_V<m>,N_A<m>]'
+  UNDERLYING_DATA:
+    full_name: ONDE_DATASET_ET_CSCAN:UNDERLYING_DATA
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ET_RAW>
+    short_description: A reference to the dataset containing the originating underlying raw data.
+    description: reference to the dataset containing the underlying data
+    dimensions: '1'
+  UNDERLYING_DATA_REFERENCE:
+    full_name: ONDE_DATASET_ET_CSCAN:UNDERLYING_DATA_REFERENCE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_INTEGER
+    short_description: A mapping that provides the correspondence between the C-scan scalar data and its originating scan.
+    description: |-
+      Correspondancy between the C-Scan scalar data and the scan originating.
+      For a A-Scan, the scan is expressed in terms of (dataframe, law). For a 2D
+      Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
+      (dataframe, plane, column)
+    dimensions: '[N_U<m>,N_V<m>,2] or [N_U<m>,N_V<m>,3]'
+  CSCAN_GRID:
+    full_name: ONDE_DATASET_ET_CSCAN:CSCAN_GRID
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_GRID>
+    short_description: A reference to a grid-type trajectory block used to position the C-scan data.
+    description: ''
+    dimensions: '1'
