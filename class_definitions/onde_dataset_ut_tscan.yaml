@@ -54,6 +54,7 @@ description: |-
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
+    short_description: Contains the reconstructed T-scan data values.
     required: true
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_INTEGER
@@ -61,6 +62,7 @@ fields:
     dimensions: 1 or [N_U<m>,N_V<m>,N_ROW<m>,N_COL<m>] or [N_U<m>,N_V<m>,NROW<m>,NCOL<m>,N_PLANE<m>]
   ZONE_FRAME:
     full_name: ONDE_DATASET_UT_TSCAN:ZONE_FRAME
+    short_description: Defines the coordinate frame associated with the center of the image zone.
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
@@ -68,6 +70,7 @@ fields:
     dimensions: '[7]'
   ZONE_DIMENSION:
     full_name: ONDE_DATASET_UT_TSCAN:ZONE_DIMENSION
+    short_description: Specifies the physical dimensions of the reconstruction zone.
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
@@ -75,6 +78,7 @@ fields:
     dimensions: '[3]'
   ZONE_SIZE:
     full_name: ONDE_DATASET_UT_TSCAN:ZONE_SIZE
+    short_description: Defines the number of pixels along each axis of the reconstruction zone.
     required: true
     storage: attribute
     hdf5_type: H5T_INTEGER
@@ -82,6 +86,7 @@ fields:
     dimensions: '[3]'
   RECONSTRUCTION_MODE:
     full_name: ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_MODE
+    short_description: Specifies the mode or algorithm used for the reconstruction.
     required: false
     storage: attribute
     hdf5_type: H5T_STRING
@@ -89,6 +94,7 @@ fields:
     dimensions: '1'
   REFERENCE_PROBE_INDEX:
     full_name: ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX
+    short_description: Indicates the index of the reference probe used for trajectory alignment.
     required: false
     storage: attribute
     hdf5_type: H5T_INTEGER
@@ -98,6 +104,7 @@ fields:
     dimensions: '1'
   SOURCE_ASCAN_DATASET:
     full_name: ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET
+    short_description: Points to the elementary channel A-scans dataset used for this reconstruction.
     required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET>

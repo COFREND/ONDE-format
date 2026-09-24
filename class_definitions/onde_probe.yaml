@@ -1,0 +1,32 @@
+onde_class: ONDE_PROBE
+inherits: []
+description: |-
+    ### Probe
+
+    The ONDE_PROBE represents an abstract NDE sensor or actuator, such as an ultrasonic transducer, an eddy current coil, a camera, or an x-ray source or detector. The probe is something that might be moved, on its own or together with other probes, by a motion or scanning system.  
+
+fields:
+  LABEL:
+    full_name: ONDE:LABEL
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: 'Human-readable label for the probe.'
+    description: ''
+    dimensions: '1'
+  MANUFACTURER:
+    full_name: ONDE_PROBE:MANUFACTURER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: 'The manufacturer of the probe.'
+    description: ''
+    dimensions: '1'
+  SERIAL_NUMBER:
+    full_name: ONDE_PROBE:SERIAL_NUMBER
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: 'The serial number of the probe.'
+    description: ''
+    dimensions: '1'
