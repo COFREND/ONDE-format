@@ -2760,7 +2760,18 @@ Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
 </table>
 </summary>
 <div class="field-content">
-<p>The UUID field is a mandatory universally unique identifier. These are stored as strings, limited to no more than 63 printable ASCII characters. UUIDs should be compatible with DICOM for interoperabiltity. See <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/chapter_B.html">Creating a Privately Defined Unique Identifier</a> and <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_B.2.html">UUID Derived UID</a>. The recommended process is to create a 128 bit UUID for each dataset by hashing information including equipment model and serial number and time, and if possible end user information as well. This UUID should be printed as a decimal number, with leading zeros eliminated, and given a prefix of "2.25.".</p>
+<p>The UUID field is a mandatory universally unique identifier. These are stored as strings, limited to no more than 63 printable ASCII characters. UUIDs should be compatible with DICOM for interoperabiltity. See <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/chapter_B.html">Creating a Privately Defined Unique Identifier</a> and <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_B.2.html">UUID Derived UID</a>. The recommended process is to create a 128 bit UUID for each dataset by hashing information including equipment model and serial number and time, and if possible end user information as well.</p>
+<p>Suggested detailed procedure based on PyONDE implementation:
+  1. Assemble information that will, in combination, be unique to the dataset:
+    a. The vendor name
+    b. Equipment serial number (or an alternative unique identifier extracted from, for example, the ethernet device hardware address)
+    c. A timestamp formatted as per the DATE_AND_TIME_FIELD
+    d. A user specified suffix that can, for example, contain numbers distinguishing multiple datasets that might have the same timestamp because they were collected simultaneously.
+  2. Convert each of those pieces of information into strings and concatenate them with separating spaces into a single string.
+  3. Encode the string as UTF-8 and then hash it with SHA-256.
+  4. Extract the low order 128 bits of the SHA-256 hash to give the UUID.
+Regardless of how it is generated, the UUID should be printed as a decimal number, with leading zeros eliminated, and given a prefix of "2.25.".</p>
+<p>The PyONDE example implementation can be found in <a href="https://github.com/isuthermography/PyONDE/blob/main/PyONDE/__init__.py">PyONDE/<strong>init</strong>.py</a>.</p>
 </div>
 </details>
 </div>
