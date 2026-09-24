@@ -30,7 +30,7 @@ description: |-
     #### Laws
 
     Each A-scan in a dataframe must be associated with both a transmitter and a
-    receiver through the RECEIVE and TRANSMIT datafields. In the case of phased array setups, this association defines the focal laws. The RECEIVE and TRANSMIT datafields contain HDF5 references to the ONDE_PROBE_SELECT or ONDE_UT_LAW (one per A-scan in the dataframe) which either select the transmit and receive transducers for the A-scan, or provide the detailed description
+    receiver through the RECEIVE_TRANSDUCER_OR_LAW and TRANSMIT_TRANSDUCER_OR_LAW datafields. In the case of phased array setups, this association defines the focal laws. The RECEIVE_TRANSDUCER_OR_LAW and TRANSMIT_TRANSDUCER_OR_LAW datafields contain HDF5 references to the ONDE_PROBE_SELECT or ONDE_UT_LAW (one per A-scan in the dataframe) which either select the transmit and receive transducers for the A-scan, or provide the detailed description
     of the focal laws. The same structure is used for both transmit and receive
     focal laws. PRF indicates the pulse repetition frequency for each Tx/Rx
     combination.
@@ -192,26 +192,26 @@ fields:
     short_description: 'Reference to the associated phased array setup.'
     description: ''
     dimensions: '1'
-  TRANSMIT:
-    full_name: ONDE_ULTRASONIC_SETUP:TRANSMIT
+  TRANSMIT_TRANSDUCER_OR_LAW:
+    full_name: ONDE_ULTRASONIC_SETUP:TRANSMIT_TRANSDUCER_OR_LAW
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_PROBE_SELECT>
     short_description: 'HDF5 reference to the transmit selection/focal law group.'
     description: |-
       Each A-scan in a dataframe must be associated with both a transmitter and a
-      receiver through the datafields. For phased array setups, these provide the detailed description of each focal laws (the
+      receiver through the datafields. Non-phased-array setups use the ONDE_PROBE_SELECT to select a transducer. Phased-array setups use instead the ONDE_UT_LAW subclass which provides the detailed description of each focal law (the
       same structure is used for both transmit and receive focal
       laws). Mandatory.
     dimensions: '[N_Ascan<m>] or [N_U<m>, N_V<m>, N_Ascan<m>]'
-  RECEIVE:
-    full_name: ONDE_ULTRASONIC_SETUP:RECEIVE
+  RECEIVE_TRANSDUCER_OR_LAW:
+    full_name: ONDE_ULTRASONIC_SETUP:RECEIVE_TRANSDUCER_OR_LAW
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_PROBE_SELECT>
     short_description: 'HDF5 reference to the receive selection/focal law group.'
     description: |-
       Each A-scan in a dataframe must be associated with both a transmitter and a
-      receiver through the datafields. For phased array setups, these provide the detailed description of each focal laws (the
+      receiver through the datafields. Non-phased-array setups use the ONDE_PROBE_SELECT to select a transducer. Phased-array setups use instead the ONDE_UT_LAW subclass which provides the detailed description of each focal law (the
       same structure is used for both transmit and receive focal laws). Mandatory.
     dimensions: '[N_Ascan<m>] or [N_U<m>, N_V<m>, N_Ascan<m>]'
