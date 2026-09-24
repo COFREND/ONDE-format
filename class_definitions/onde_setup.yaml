@@ -12,4 +12,4 @@ fields:
     short_description: "Reference to the geometric setup configuration."
     hdf5_type: H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>
     description: ''
-    dimensions: '[1]'
+    dimensions: '1'

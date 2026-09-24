@@ -2,30 +2,20 @@ onde_class: ONDE_DATASET_UT_CSCAN
 inherits:
 - ONDE_DATASET_UT
 description: |+
-    ### CScan datasets and gates
+    ### CScan datasets
 
-    #### CScan data and peaks
-
-    While this Cscan dataset is mostly meant for the storage of peak-like data
-    (amplitude, time of flight, etc…) it is more generic and can accommodate
-    different values. DATA contains a vector of references to datasets containing scalar raw
-    data. The size of the data can be either N_DF<m> × N_Ascan<m> arrays
-    (for data resulting from analysis of signals) or N_DF<m> arrays (for encoder
-    data or data resulting from Tscan or monoelement scans).
-
-    #### Data description
-
-    The DATATYPE field contains a name defining the nature of the data —the name
-    can be either custom (MY_MATERIAL_PROPERTY for instance) or a standardized
-    name: THICKNESS, TIME_OF_FLIGHT, DEPTH, AMAX.
-
-    #### Data numbering
-
-    To be efficient for relatively small amounts of data, as opposed to other
-    blocks, the Cscan block allows for the handling of several data inside the
-    block. The DATA, DATA_TYPE vectors must have the same length and be ordered
-    coherently.
-
+    CScan datasets are the entry points for the description of data that is
+    stored as scalar values. The data can come either from Ascan or Tscan data
+    through an extraction process. The extraction process is described in the 
+    ONDE_UT_EXTRACTION block. 
+    The size of the data can be either N_U<m> x N_V<m> x N_Ascan<m> arrays
+    (for data resulting from multiple scans at each point) or N_U<m> x N_V<m> 
+    arrays (for data resulting from monoelement scans). The data is
+     always stored in a 3-dimensional dataset of dimensions [N_U<m>, N_V<m>, N_Ascan<m>].
+     In the monoelement case, the third dimension is of size 1. 
+    The data is positioned through a trajectory block which is of grid type
+     and is referenced by the CSCAN_GRID attribute.
+     
     #### Data positioning
 
     The Cscan data must be positioned through a trajectory block which is of
@@ -40,50 +30,27 @@ description: |+
     2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
     (dataframe, plane, column).
 
-    #### Gates
+    #### Gates and extractions
 
-    The gates are stored as a separate group of type ONDE_UT_GATE. The gates are
-    referenced in the ONDE_DATASET_UT_CSCAN group via the
-    ONDE_DATASET_UT_CSCAN:GATES field.  The gates used for the acquisition are
-    defined through five parameters. GATE_START and GATE_WIDTH define the time
-    window and GATE_THRESHOLD defines the threshold that was used to trigger the
-    storage of the data. GATE_DETECTION defines the type of triggering event
-    that was used to define the gate. GATE_POLARITY defines the mode that was
-    used for the detection (absolute, positive or negative). The following
-    figure defines the modes that can be used for detection. The numbers on the
-    figure correspond to the different triggering events. The correspondence
-    between these figures and the values allowed for GATE_DETECTION is the
-    following:
+    The gates are stored as a separate group of type ONDE_UT_GATE. 
+    The extraction process explaining how the Cscan data is obtained from the underlying data is described in the
+    ONDE_UT_EXTRACTION block. The extraction can be either a scalar value or an enumeration. The extraction relates to list of *ONDE_UT_GATE*, called
+    GATE_LIST which can be of size 1 or 2 : 1. If the list is of size 1,  the gate defines the time window for 
+    the extraction. 2. If the list is of size 2,  the extracted value is the difference between the two extractions, each defined by a gate. The nature of  
+    the extraction  can be either *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*. 
 
-    1. FIRST_FLANK
-    2. FIRST_PEAK
-    3. MAX_FLANK
-    4. MAX_PEAK
-    5. LAST_PEAK
-    6. LAST_FLANK
-
-    ![Detection modes for UT gates](../images/media/gate_detection.png)
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
     required: true
     storage: A or D
     hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
-    short_description: References to arrays containing scalar raw data or data resulting from analysis of signals.
-    description: references to arrays containing the different values stored in the
-      dataset
-    dimensions: '[N_CS<m>] |[N_CS<m>,N_Gate<m>]'
-  DATATYPE:
-    full_name: ONDE_DATASET_UT_CSCAN:DATATYPE
-    required: true
-    storage: dataset
-    hdf5_type: H5T_STRING
-    short_description: A string defining the nature of the stored data, such as a custom property or a standardized name.
+    short_description: Reference to an array containing the Cscan data or array containing the CScan data.
     description: |-
-      string defining the stored data - the name can be either custom
-      (MY_MATERIAL_PROPERTY for instance) or a standardized name: THICKNESS,
-      TIME_OF_FLIGHT, DEPTH, AMAX
-    dimensions: '[N_CS<m>]'
+      The field contains either an array containing the CScan data (3D hdf5 dataset) or a reference to this array (hdf5 reference stored as an attribute).
+      Dimensions of this array are [N_U<m>, N_V<m>, N_A<m>], N_A<m> being the number of scans at each point. 
+      In the case of monoelement scans, the third dimension is therefore of size 1.
+    dimensions: '1 or [N_U<m>,N_V<m>,N_A<m>]'
   UNDERLYING_DATA:
     full_name: ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA
     required: false
@@ -112,11 +79,12 @@ fields:
     short_description: A reference to a grid-type trajectory block used to position the C-scan data.
     description: ''
     dimensions: '1'
-  GATES:
-    full_name: ONDE_DATASET_UT_CSCAN:GATES
+  EXTRACTION:
+    full_name: ONDE_DATASET_UT_CSCAN:ONDE_UT_EXTRACTION
     required: false
-    storage: dataset
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
-    short_description: References to separate gate groups that define the time windows and thresholds used for data acquisition.
-    description: ''
-    dimensions: '[N_Gate<m>]'
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_EXTRACTION>
+    description: |- 
+      The referenced object describes the extraction process that was used 
+      to obtain the Cscan data from the underlying data.
+    dimensions: '1'

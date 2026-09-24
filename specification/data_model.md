@@ -19,6 +19,8 @@ Classes define fields that can be:
 - a link to an object of another class, 
 - a multidimensional array of the previous types
 
+The linkage between ONDE objects can be represented in the form of a graph of interconnections. This graph is directed and acyclic, meaning that the linkage from one object to another has a direction, and that loops of linkages are not allowed.
+
 ## HDF5 implementation
 
 ### File type
@@ -93,7 +95,7 @@ Each field is defined with the following properties:
 - `storage` – Specifies whether it is stored as a `dataset` or `attribute`
 - `hdf5_type` – The HDF5 class type, including `H5T_INTEGER` and `H5T_FLOAT`
 - `description` / `short_description` – Human-readable explanations of the field
-- `dimensions` – Can be actual values or symbols to indicate variable sizes
+- `dimensions` – Can be actual values or symbols to indicate variable sizes. The value '1' indicates that the field is stored as a scalar (incompatible with dataset storage). Brackets indicate array storage. For example, '[]' specifies a zero-dimensional (scalar) array containing a single element. In contrast, '[1]' specifies a one-dimensional array containing a single element, and '[2,3]' specifies a two-dimensional array containing six elements. Particular dimensions specified in the description of the NDE modalities are also used in order to define the allowed cardinalities : for instance, for UT testing, [N_Elem<p>] specifies that the dataset is one-dimensional with a number of values corresponding to the number of elements in the transducer. Wildcards are also allowed: '[*]' specifies a one-dimensional array containing an unspecified number of elements. The `dimensions` field also sometimes contains several alternatives.
 - `allowed_values` – A list of permissible string values, if applicable
 - `min_value` / `max_value` – Minimum and maximum values for numeric quantities, if relevant
 
