@@ -8,7 +8,7 @@ description: |-
 
     The acquisition gate is implicitly defined by:
 
-    - the value of Ascan_Astart
+    - the value of Ascan_Astart (planned value specified here; actual value recorded in ONDE_DATASET_UT_ASCAN:ACTUAL_ASCAN_START)
     - the sampling frequency
     - the dimension of data N_Time<m>
 
@@ -135,17 +135,19 @@ fields:
       This indicates the sampling frequency of A-scan data points. It is assumed
       that a uniform sampling rate is used throughout A-scan data collection.
     dimensions: '1'
-  ASCAN_START:
-    full_name: ONDE_ULTRASONIC_SETUP:ASCAN_START
-    required: true
+  PLANNED_ASCAN_START:
+    full_name: ONDE_ULTRASONIC_SETUP:PLANNED_ASCAN_START
+    required: false
     storage: dataset
     hdf5_type: H5T_FLOAT
-    short_description: 'The starting time for data acquisition.'
+    short_description: 'The planned starting time for data acquisition.'
     description: |-
-      This indicates the starting time for data acquisition. If dimension is 1,
+      This indicates the planned starting time for data acquisition. If dimension is 1,
       the same start time is used for all A-Scans, else a different start time
-      is specified for each A-Scan.
-    dimensions: 1 or [N_Ascan<m>] or [ N_Ascan<m>,N_U<m>, N_V<m>]
+      is specified for each A-Scan. If omitted, interpret as 0.0 (aligned with the excitation trigger).
+
+      See also ONDE_DATASET_UT_ASCAN:ACTUAL_ASCAN_START. In most cases ACTUAL_ASCAN_START will have the same information as PLANNED_ASCAN_START.
+    dimensions: "[ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions."
   SIGNAL:
     full_name: ONDE_ULTRASONIC_SETUP:SIGNAL
     required: false

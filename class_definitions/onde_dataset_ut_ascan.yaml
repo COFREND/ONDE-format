@@ -22,3 +22,22 @@ fields:
       field is possible, in the event when Tscan or Cscan data is recorded but
       the underlying Ascan data is not.
     dimensions: 1 or [N_U<m>,N_V<m>,N_Ascan<m>,Ntime<m>]
+
+  ACTUAL_ASCAN_START:
+    full_name: ONDE_DATASET_UT_ASCAN:ACTUAL_ASCAN_START
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: |-
+      This indicates the actual starting time for data acquisition. If dimension is 1,
+      the same start time is used for all A-Scans, else a different start time
+      is specified for each A-Scan. If omitted, interpret as 0.0 (aligned with the excitation trigger).
+
+      See also ONDE_ULTRASONIC_SETUP:PLANNED_ASCAN_START. For use cases #1 and #3, below, ACTUAL_ASCAN_START and PLANNED_ASCAN_START will usually have exactly the same information. For use case #2, it may be impossible to predict the triggering times so they may have different information or PLANNED_ASCAN_START may be omitted altogether.
+
+      ACTUAL_ASCAN_START is intended for three different use cases:
+       1. Phased array capture where different elements capture starting at different times, and
+       2. Capture triggered by hardware gates where each scan point can have a different start time.
+       3. Capture with multiple receivers that have different gain settings for different portions of the waveform.
+      Note that ACTUAL_ASCAN_START does not affect the interpretation of the last of the ONDE_DATASET:INDEX_DIMENSIONS, which also describes the time dimension of the data. When there are multiple different values for ACTUAL_ASCAN_START, the ONDE_DIMENSION:COORDINATE for that last dimension should be clear about the interpretation based on the ONDE_DIMENSION:OFFSET (which is limited to scalar values), e.g. "Time after channel acquistion start"
+    dimensions: "[ N_U<m>, N_V<m>, N_Ascan<m>] but any or all of these dimensions can be dropped to 1, in which case the given values are broadcast along those dimensions."

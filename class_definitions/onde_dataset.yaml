@@ -99,3 +99,13 @@ fields:
       One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
       treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
     dimensions: '[n_data_dims]'
+  ACTUAL_ACQUISITION_TRAJECTORY:
+    full_name: ONDE_DATASET:ACTUAL_ACQUISITION_TRAJECTORY
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>
+    short_description: References to the block describing the actual trajectory.
+    description: |-
+      References to the block describing the actual trajectory, references have the
+      same order as ONDE_GEOMETRIC_SETUP:PROBE_LIST. The actual trajectory may be the same as the planned trajectory if the hardware does not provide more precise information.
+    dimensions: '[N_Prob<M>]'

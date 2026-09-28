@@ -33,14 +33,14 @@ fields:
     short_description: List of all probes used in the acquisition of the dataset.
     description: List all probes used in the acquisition of the dataset
     dimensions: '[N_Prob<M>]'
-  ACQUISITION_TRAJECTORY:
-    full_name: ONDE_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY
+  PLANNED_ACQUISITION_TRAJECTORY:
+    full_name: ONDE_GEOMETRIC_SETUP:PLANNED_ACQUISITION_TRAJECTORY
     required: true
     storage: dataset
     hdf5_type: H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>
-    short_description: References to the block describing the trajectory.
+    short_description: References to the block describing the planned trajectory.
     description: |-
-      References to the block describing the trajectory, references have the
+      References to the block describing the planned trajectory, references have the
       same order as PROBE_LIST
     dimensions: '[N_Prob<M>]'
   PROBE_COORDINATE_FRAME:
