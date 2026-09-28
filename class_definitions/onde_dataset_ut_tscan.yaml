@@ -25,32 +25,15 @@ description: |-
     array depends on the zone dimension (3D array for 2D zones 4D array for 3D
     zones).
 
-    #### Zone dimension and position
-
-    The zone physical dimension is given by the ZONE_DIMENSION field, (DX,DY,DZ)
-    being the physical dimensions of the zone, a zero or a NaN for one of the
-    dimension implies a 2D zone.
-
-    ZONE_SIZE is a triplet which gives the number of pixels of the zone for each
-    dimension (NX,NY,NZ).
-
-    The zone position is given by ZONE_FRAME and is expressed relatively to the
-    trajectory of the probe which is given in the associated GEOMETRIC_SETUP
-    probe list. The index of the probe in this list is given by the
-    REFERENCE_PROBE_INDEX attribute (defaults to 0).
-
-    ![Example of TFM zone positioning](../images/media/tfm_zone_positioning.png "Figure 5")
-
-    *[Figure 5](onde_dataset_ut_tscan.md): Example of TFM zone positioning*
-
-    In the example displayed in [Figure 5](onde_dataset_ut_tscan.md), the
-    trajectory frame is located at the index point and the zone is positioned
-    accordingly.
-
     #### Pixel ordering
 
     The pixels are stored in the (X,Y,Z) order (X being the outer loop, Z the
     inner loop in the array).
+
+    #### Reconstruction zone description
+    
+    The reconstruction zone is described by the attributes of the RECONSTRUCTION_SETUP block.
+
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
@@ -60,48 +43,7 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_INTEGER
     description: can be either an array or a reference to an array
     dimensions: 1 or [N_U<m>,N_V<m>,N_ROW<m>,N_COL<m>] or [N_U<m>,N_V<m>,NROW<m>,NCOL<m>,N_PLANE<m>]
-  ZONE_FRAME:
-    full_name: ONDE_DATASET_UT_TSCAN:ZONE_FRAME
-    short_description: Defines the coordinate frame associated with the center of the image zone.
-    required: true
-    storage: attribute
-    hdf5_type: H5T_FLOAT
-    description: frame associated with the center of the image zone
-    dimensions: '[7]'
-  ZONE_DIMENSION:
-    full_name: ONDE_DATASET_UT_TSCAN:ZONE_DIMENSION
-    short_description: Specifies the physical dimensions of the reconstruction zone.
-    required: true
-    storage: attribute
-    hdf5_type: H5T_FLOAT
-    description: physical dimension of the zone
-    dimensions: '[3]'
-  ZONE_SIZE:
-    full_name: ONDE_DATASET_UT_TSCAN:ZONE_SIZE
-    short_description: Defines the number of pixels along each axis of the reconstruction zone.
-    required: true
-    storage: attribute
-    hdf5_type: H5T_INTEGER
-    description: number of pixels of the zone
-    dimensions: '[3]'
-  RECONSTRUCTION_MODE:
-    full_name: ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_MODE
-    short_description: Specifies the mode or algorithm used for the reconstruction.
-    required: false
-    storage: attribute
-    hdf5_type: H5T_STRING
-    description: ''
-    dimensions: '1'
-  REFERENCE_PROBE_INDEX:
-    full_name: ONDE_DATASET_UT_TSCAN:REFERENCE_PROBE_INDEX
-    short_description: Indicates the index of the reference probe used for trajectory alignment.
-    required: false
-    storage: attribute
-    hdf5_type: H5T_INTEGER
-    description: |-
-      Points the the index of the reference probe in the Geometric setup probe
-      list. Defaults to 0.
-    dimensions: '1'
+  
   SOURCE_ASCAN_DATASET:
     full_name: ONDE_DATASET_UT_TSCAN:SOURCE_ASCAN_DATASET
     short_description: Points to the elementary channel A-scans dataset used for this reconstruction.
@@ -112,3 +54,15 @@ fields:
       reference to the elementary channels ascans that were used for the
       reconstruction
     dimensions: '1'
+
+  RECONSTRUCTION_SETUP:
+    full_name: ONDE_DATASET_UT_TSCAN:RECONSTRUCTION_SETUP
+    short_description: Contains the reconstruction setup parameters. 
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_RECONSTRUCTION_SETUP>
+    description: |-
+      reference to the reconstruction setup block that describes the
+      reconstruction zone and the reconstruction parameters
+    dimensions: '1'
+
