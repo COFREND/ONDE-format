@@ -1,6 +1,6 @@
 onde_class: ONDE_BINARYFILE_EMBEDDED
 inherits:
-- ONDE_BINARYFILE 
+  - ONDE_BINARYFILE
 description: |
   ## The ONDE_BINARYFILE_EMBEDDED is a container for arbitrary file content that is embedded within the ONDE file and that has a specified MIME type
 fields:
@@ -16,7 +16,7 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: The MIME type of the file provided. May be "application/octet-string" for unknown binary data.
+    description: The MIME type of the file provided. May be "application/octet-stream" for unknown binary data.
   NAME:
     full_name: ONDE_BINARYFILE_EMBEDDED:NAME
     required: false
