@@ -47,6 +47,11 @@ ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:COMPONENT;Reference to the inspected c
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:PROBE_LIST;List all probes used in the acquisition of the dataset;M;D;H5T_STD_REF_OBJ<ONDE_PROBE>;[N_Prob<M>];;;;
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:ACQUISITION_TRAJECTORY;References to the block describing the trajectory, references have the same order as PROBE_LIST;M;D;H5T_STD_REF_OBJ<ONDE_ACQUISITION_TRAJECTORY>;[N_Prob<M>];;;;
 ONDE_GEOMETRIC_SETUP;ONDE_GEOMETRIC_SETUP:PROBE_COORDINATE_FRAME;Offset and direction of the probe w.r.t the trajectory frame- identity is assumed if not provided;O;D;H5T_FLOAT;[N_Prob<M>,7];;;;
+ONDE_BINARYFILE;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[1];["ONDE_BINARYFILE"];;;
+ONDE_BINARYFILE_EMBEDDED;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[2];["ONDE_BINARYFILE", "ONDE_BINARYFILE_EMBEDDED"];;;
+ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:CONTENT;The bytes of the binary file;M;D;H5T_NATIVE_OPAQUE;[N_bytes];;;;
+ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:CONTENT_TYPE;The MIME type of the file provided. May be "application/octet-string" for unknown binary data.;M;A;H5T_STRING;;;;;
+ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:NAME;An optional file name identifying the contained information.;O;A;H5T_STRING;;;;;
 ONDE_COMPONENT;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[1];["ONDE_COMPONENT"];;;
 ONDE_COMPONENT;ONDE:LABEL;;O;A;H5T_STRING;;;;;
 ONDE_COMPONENT;ONDE_COMPONENT:VELOCITIES;The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.;M;A;H5T_FLOAT;[2];;;;
@@ -199,11 +204,7 @@ ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:FINAL_ANGLE;;M;A;H5T_FLOAT
 ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ANGLES;;M;A;H5T_INTEGER;1;;;;
 ONDE_PHASED_ARRAY_COMPOUND;ONDE_PHASED_ARRAY_COMPOUND:NUMBER_OF_ELEMENTS;;M;A;H5T_INTEGER;1;;;;
 ONDE_PHASED_ARRAY_FMC;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP", "ONDE_PHASED_ARRAY_FMC"];;;
-ONDE_BINARYFILE_EMBEDDED;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[2];["ONDE_BINARYFILE", "ONDE_BINARYFILE_EMBEDDED"];;;
-ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:CONTENT;The bytes of the binary file;M;D;H5T_NATIVE_OPAQUE;[N_bytes];;;;
-ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:CONTENT_TYPE;The MIME type of the file provided. May be "application/octet-string" for unknown binary data.;M;A;H5T_STRING;;;;;
-ONDE_BINARYFILE_EMBEDDED;ONDE_BINARYFILE_EMBEDDED:NAME;An optional file name identifying the contained information.;O;A;H5T_STRING;;;;;
-ONDE_BINARYFILE;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[1];["ONDE_BINARYFILE"];;;
+ONDE_PHASED_ARRAY_CUSTOM;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[2];["ONDE_PHASED_ARRAY_SETUP", "ONDE_PHASED_ARRAY_CUSTOM"];;;
 ONDE_COMPUTATION;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[1];["ONDE_COMPUTATION"];;;
 ONDE_UT_EXTRACTION;ONDE:TYPE;The `ONDE:TYPE` attribute dictates the semantic meaning of the HDF5 group. It contains a 1D array of strings that traces the class inheritance from the root class down to this specific class.;M;A;H5T_STRING;[2];["ONDE_COMPUTATION", "ONDE_UT_EXTRACTION"];;;
 ONDE_UT_EXTRACTION;ONDE_UT_EXTRACTION:GATE_LIST;References to the gates that are used for the extraction. The list can be of size 1 or 2.;M;A;H5T_STD_REF_OBJ<ONDE_UT_GATE>;[1] or [2];;;;
