@@ -1,0 +1,10 @@
+onde_class: ONDE_DIRECT
+inherits:
+- ONDE_UT_COUPLING
+description: |
+  This class is a subclass of ONDE_UT_COUPLING and describes the case of a direct contact
+  between the piezoelectric element and the inspected component. Unlike immersion and wedge coupling,
+  there is no coupling medium between the probe and the test piece.  
+  The ultrasonic waves are transmitted directly from the probe to the tested component.
+
+

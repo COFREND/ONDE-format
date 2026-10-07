@@ -135,6 +135,14 @@ fields:
       For a wedge, distance of the ultrasonic beam between the probe center and
       the index point (See Figure 15)
     dimensions: '1'
+  INCIDENCE_ANGLE:
+    full_name: ONDE_WEDGE:INCIDENCE_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The angle of incidence of the acoustic wave as it enters the specimen."
+    dimensions: '1'
   SKEW_ANGLE:
     full_name: ONDE_WEDGE:SKEW_ANGLE
     required: false
@@ -151,3 +159,20 @@ fields:
     short_description: 'Disorientation angle of the wedge.'
     description: wedge /disorientation angle (D) (See Figure 15)
     dimensions: '1'
+  WEDGE_VELOCITY:
+    full_name: ONDE_WEDGE:WEDGE_VELOCITY
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The velocity of the acoustic waves propagating within the coupling medium."
+    dimensions: '[2]'
+  WEDGE_DENSITY:
+    full_name: ONDE_WEDGE:WEDGE_DENSITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The density of the wedge."
+    dimensions: '1'
+  
