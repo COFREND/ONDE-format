@@ -1,0 +1,8 @@
+onde_class: ONDE_PHASED_ARRAY_CUSTOM
+inherits:
+- ONDE_PHASED_ARRAY_SETUP
+description: |-
+    #### Custom
+
+    This class designates a custom configuration for the phased array setup.
+    It allows for user-defined parameters and settings that may not be covered by standard configurations.
