@@ -7,7 +7,12 @@ fields:
     full_name: ONDE_3DCAD:CAD
     required: true
     storage: attribute
-    hdf5_type: H5T_STRING
-    short_description: "A 3D CAD representation of the component."
-    description: ''
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    short_description: 'Contains a 3D CAD file representation of the component.'
+    description: |
+      Contains a 3D CAD file representation of the component. The recommended formats are:
+       * STEP with a CONTENT_TYPE of "model/step", "model/step+xml", "model/step+zip", or "model/step-xml+zip". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant. The step file should contain application protocols AP203, AP214, or AP242.
+       * IGES with a CONTENT_TYPE of "application/iges"
+       * STL with a CONTENT_TYPE of "model/stl", "model/x.stl-ascii", "model/x.stl-binary". Exactly which of the preceding CONTENT_TYPEs is specified should not be treated as significant.
+      Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
     dimensions: '1'

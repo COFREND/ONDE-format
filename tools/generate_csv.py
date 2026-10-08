@@ -51,7 +51,7 @@ def generate_csv(output_csv='build/ONDE_fields.csv'):
         # Obtain inheritance list with base class first
         chain = get_inheritance_chain_dict(cls_name)
         allowed_str = '["' + '", "'.join(chain) + '"]'
-        dim_str = f'[{len(chain)}]' if len(chain) > 1 else '1'
+        dim_str = f'[{len(chain)}]' 
         
         type_field = {
             'full_name': 'ONDE:TYPE',
@@ -69,8 +69,8 @@ def generate_csv(output_csv='build/ONDE_fields.csv'):
         new_fields.update(fields)
         c_data['fields'] = new_fields
             
-    # Sort to ensure consistent output based on modality allowed_classes
-    ordered_classes = modalities_data[0].get('allowed_classes', []) if modalities_data else []
+    # Sort to ensure consistent output based on modality expected_classes
+    ordered_classes = modalities_data[0].get('expected_classes', []) if modalities_data else []
     
     def get_sort_key(x):
         c_name = x.get('onde_class', '')

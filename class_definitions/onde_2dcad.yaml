@@ -45,7 +45,8 @@ fields:
     full_name: ONDE_2DCAD:CAD
     required: true
     storage: attribute
-    hdf5_type: H5T_STRING
-    short_description: 'Contains the 2D CAD representation of the component, formatted as a DXF file.'
-    description: ''
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_BINARYFILE>
+    short_description: 'Contains the 2D CAD file representation of the component.'
+    description: |
+      Contains the 2D CAD file representation of the component. The recommended format is DXF with a CONTENT_TYPE of "image/vnd.dxf". Applications should warn or otherwise get consent from the end-user before embedding a non-recommended format.
     dimensions: '1'
