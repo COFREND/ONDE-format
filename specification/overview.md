@@ -269,6 +269,10 @@ between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (â
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
 
+# Acknowledgements
+
+For its contribution to the ONDE specification, the CEA wishes to acknowledge the support of the BPI-France agency in the framework of the DATA4INDUSTRY-X project.
+
 # Appendix A -- conversion from quaternions to matrices
 
 when dealing with 3D orientations, to define the quaternion corresponding to the orientation of one reference frame
