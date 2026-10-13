@@ -14,6 +14,22 @@ description: |-
 
     *[Figure 26](onde_phased_array_escan.md): EScan configuration*
 fields:
+  EMITTER_PROBE:
+    full_name: ONDE_PHASED_ARRAY_ESCAN:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting probe used in this setup."
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_PHASED_ARRAY_ESCAN:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving probe used in this setup."
+    description: ''
+    dimensions: '1'
   NUMBER_OF_ELEMENTS:
     full_name: ONDE_PHASED_ARRAY_ESCAN:NUMBER_OF_ELEMENTS
     required: true
@@ -30,6 +46,14 @@ fields:
     short_description: 'The number of elements by which the subset is shifted for each successive beam.'
     description: ''
     dimensions: '1'
+  SEQUENCE_ANGLE_MODE:
+    full_name: ONDE_PHASED_ARRAY_ESCAN:SEQUENCE_ANGLE_MODE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: "Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T)."
+    description: ''
+    allowed_values: '"L"|"T"'
   ANGLE:
     full_name: ONDE_PHASED_ARRAY_ESCAN:ANGLE
     required: true

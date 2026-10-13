@@ -1,0 +1,24 @@
+onde_class: ONDE_MONOELEMENT_SETUP
+inherits:
+- ONDE_ULTRASONIC_SETUP
+description: |-
+
+    This class represents a configuration using monoelement probes.
+
+fields:
+  EMITTER_PROBE:
+    full_name: ONDE_MONOELEMENT_SETUP:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting probe used in this setup."
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_MONOELEMENT_SETUP:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving probe used in this setup."
+    description: ''
+    dimensions: '1'
