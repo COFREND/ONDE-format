@@ -52,7 +52,7 @@ ZONE_SIZE:
 RECONSTRUCTION_MODE:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:RECONSTRUCTION_MODE
     short_description: Specifies the mode or algorithm used for the reconstruction.
-    required: false
+    required: true
     storage: attribute
     hdf5_type: H5T_STRING
     description: ''
