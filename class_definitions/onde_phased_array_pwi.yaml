@@ -3,6 +3,30 @@ inherits:
 - ONDE_PHASED_ARRAY_SETUP
 description: ''
 fields:
+  EMITTER_PROBE:
+    full_name: ONDE_PHASED_ARRAY_PWI:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting probe used in this setup."
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_PHASED_ARRAY_PWI:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving probe used in this setup."
+    description: ''
+    dimensions: '1'
+  SEQUENCE_ANGLE_MODE:
+    full_name: ONDE_PHASED_ARRAY_PWI:SEQUENCE_ANGLE_MODE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: "Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T)."
+    description: ''
+    allowed_values: '"L"|"T"'
   STARTING_ANGLE:
     full_name: ONDE_PHASED_ARRAY_PWI:STARTING_ANGLE
     required: true

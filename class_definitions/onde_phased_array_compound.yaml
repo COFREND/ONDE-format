@@ -18,6 +18,30 @@ description: |-
     description and is fully generic). However, it is intended to cover most of the situations that are common in industrial
     controls and represent a large share of the acquisition files produced in the industry.
 fields:
+  EMITTER_PROBE:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting probe used in this setup."
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving probe used in this setup."
+    description: ''
+    dimensions: '1'
+  SEQUENCE_ANGLE_MODE:
+    full_name: ONDE_PHASED_ARRAY_COMPOUND:SEQUENCE_ANGLE_MODE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: "Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T)."
+    description: ''
+    allowed_values: '"L"|"T"'
   INITIAL_ANGLE:
     full_name: ONDE_PHASED_ARRAY_COMPOUND:INITIAL_ANGLE
     required: true
