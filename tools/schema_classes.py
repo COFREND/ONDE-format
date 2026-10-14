@@ -23,5 +23,5 @@ class OndeClass(BaseModel):
 class OndeModality(BaseModel):
     modality: str
     description: str = ""
-    allowed_classes: List[str] = []
+    expected_classes: List[str] = []
     fields: Dict[str, OndeField] = {}

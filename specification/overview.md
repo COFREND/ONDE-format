@@ -210,11 +210,11 @@ ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN)
 
 When discovering the content of a given file, the following procedure must therefore be applied:
 
-- Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
-  reader, and that the type is that of a UT ONDE file ('ONDE_UT')
+- Read the 'ONDE:FILETYPE' and 'ONDE:VERSION' attributes at root level and verify the compatibility of the version number with the
+  reader, and that the filetype attribute (which is a list/array) contains as one of its elements the string 'ONDE_DATASET' indicating that the file is an ONDE file which contains datasets. Optionally, check to see if the file contains modalities supported by the reader via the presence of corresponding tags in the filetype attribute, e.g. 'ONDE_UT'.
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.
-- From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
+  which groups have a 'ONDE:TYPE' attribute whose value is a list starting with 'ONDE_DATASET'. This will identify all ONDE datasets stored in the file. The 'ONDE:TYPE' field is a list that defines the class derivation of the object being represented. Interpret the object based on the rightmost (most derived) class listed that you understand.
+- From there interpret the contents of the HDF5 group according to references defined in the specification to retrieve the data arrays, the related datasets, the
   setup informationâ€¦
 
 ## Definition of frames
@@ -268,6 +268,10 @@ between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (â
 [^1]: P. Wilcox, MFMC Specification document 2.0.0b.
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
+
+# Acknowledgements
+
+For its contribution to the ONDE specification, the CEA wishes to acknowledge the support of the BPI-France agency in the framework of the DATA4INDUSTRY-X project.
 
 # Appendix A -- conversion from quaternions to matrices
 
