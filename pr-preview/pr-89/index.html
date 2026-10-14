@@ -1878,6 +1878,8 @@
       
         
       
+        
+      
     
     
     
@@ -1934,6 +1936,34 @@
   
   
     <li class="md-nav__item">
+      <a href="onde_ut_coupling/onde_direct/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DIRECT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="onde_ut_coupling/onde_immersion/index.html" class="md-nav__link">
         
   
@@ -1980,7 +2010,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2002,14 +2032,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2161,6 +2191,33 @@
     
   
     ONDE_UT_LAW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="onde_ut_reconstruction_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_RECONSTRUCTION_SETUP
   
 
     
@@ -2467,11 +2524,11 @@ groups that have as a ONDE:TYPE attribute ONDE_DATASET_UT_ASCAN,
 ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN)</p>
 <p>When discovering the content of a given file, the following procedure must therefore be applied:</p>
 <ul>
-<li>Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
-  reader, and that the type is that of a UT ONDE file ('ONDE_UT')</li>
+<li>Read the 'ONDE:FILETYPE' and 'ONDE:VERSION' attributes at root level and verify the compatibility of the version number with the
+  reader, and that the filetype attribute (which is a list/array) contains as one of its elements the string 'ONDE_DATASET' indicating that the file is an ONDE file which contains datasets. Optionally, check to see if the file contains modalities supported by the reader via the presence of corresponding tags in the filetype attribute, e.g. 'ONDE_UT'.</li>
 <li>Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.</li>
-<li>From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
+  which groups have a 'ONDE:TYPE' attribute whose value is a list starting with 'ONDE_DATASET'. This will identify all ONDE datasets stored in the file. The 'ONDE:TYPE' field is a list that defines the class derivation of the object being represented. Interpret the object based on the rightmost (most derived) class listed that you understand.</li>
+<li>From there interpret the contents of the HDF5 group according to references defined in the specification to retrieve the data arrays, the related datasets, the
   setup information…</li>
 </ul>
 <h2 id="definition-of-frames">Definition of frames</h2>
@@ -2507,6 +2564,8 @@ shape to rotation matrices and the reverse operation: <a href="https://en.wikipe
 between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (∆a,∆b,α) triplet.</p>
 <p><img alt="Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames" src="images/media/2d_frames_transformation.png" title="Figure 4" /></p>
 <p><em>Figure 4: Definition of the (∆a,∆b,α) triplet defining transformation between two 2D frames</em></p>
+<h1 id="acknowledgements">Acknowledgements</h1>
+<p>For its contribution to the ONDE specification, the CEA wishes to acknowledge the support of the BPI-France agency in the framework of the DATA4INDUSTRY-X project.</p>
 <h1 id="appendix-a-conversion-from-quaternions-to-matrices">Appendix A -- conversion from quaternions to matrices</h1>
 <p>when dealing with 3D orientations, to define the quaternion corresponding to the orientation of one reference frame
 relative to another, we need the following formula to calculate the components of a quaternion, q, from the elements of

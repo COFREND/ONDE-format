@@ -1872,6 +1872,8 @@
       
         
       
+        
+      
     
     
     
@@ -1928,6 +1930,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../onde_ut_coupling/onde_direct/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DIRECT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../onde_ut_coupling/onde_immersion/index.html" class="md-nav__link">
         
   
@@ -1974,7 +2004,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1996,14 +2026,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2155,6 +2185,33 @@
     
   
     ONDE_UT_LAW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../onde_ut_reconstruction_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_RECONSTRUCTION_SETUP
   
 
     
@@ -2500,7 +2557,7 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
 
 </div>
 
-<div class="field-summary-desc">The UUID field is a mandatory universally unique identifier.</div>
+<div class="field-summary-desc">The UUID field is a mandatory  universally unique identifier.</div>
 
 <table class="field-meta-table">
 <tbody>
@@ -2513,18 +2570,10 @@ treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0</p>
 </table>
 </summary>
 <div class="field-content">
-<p>The UUID field is a mandatory universally unique identifier. These are stored as strings, limited to no more than 63 printable ASCII characters. UUIDs should be compatible with DICOM for interoperabiltity. See <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/chapter_B.html">Creating a Privately Defined Unique Identifier</a> and <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part05/sect_B.2.html">UUID Derived UID</a>. The recommended process is to create a 128 bit UUID for each dataset by hashing information including equipment model and serial number and time, and if possible end user information as well.</p>
-<p>Suggested detailed procedure based on PyONDE implementation:
-  1. Assemble information that will, in combination, be unique to the dataset:
-    a. The vendor name
-    b. Equipment serial number (or an alternative unique identifier extracted from, for example, the ethernet device hardware address)
-    c. A timestamp formatted as per the DATE_AND_TIME_FIELD
-    d. A user specified suffix that can, for example, contain numbers distinguishing multiple datasets that might have the same timestamp because they were collected simultaneously.
-  2. Convert each of those pieces of information into strings and concatenate them with separating spaces into a single string.
-  3. Encode the string as UTF-8 and then hash it with SHA-256.
-  4. Extract the low order 128 bits of the SHA-256 hash to give the UUID.
-Regardless of how it is generated, the UUID should be printed as a decimal number, with leading zeros eliminated, and given a prefix of "2.25.".</p>
-<p>The PyONDE example implementation can be found in <a href="https://github.com/isuthermography/PyONDE/blob/main/PyONDE/__init__.py">PyONDE/<strong>init</strong>.py</a>.</p>
+<p>The UUID field is a mandatory  universally unique identifier. This field is intended to uniquely identify this dataset among all others that have ever been created or ever will be created, even those with exactly the same content. This field is stored as a string.</p>
+<p>For compatibility with future improvements to the specification, readers should treat the strings as opaque sequences of characters. Readers should  be able to accommodate strings of up to 512 characters and  consisting of the following ASCII characters: 0-9, a-z, A-Z, and the following 19 symbols: ";/?:@&amp;=+$,-_.!~*'()" (not including the double quote).</p>
+<p>This version of the ONDE specification defines a single format for the UUID based on ISO/IEC 9834-8/ITU X.667. The UUID should consist of the string "urn:uuid:" followed by the hexadecimal representation of a 128 bit unique identifier. The hexadecimal representation should use only lower case letters, and there should be dashes ("-") after the 8th, 12th, 16th, and  20th hexadecimal digits. For example, "urn:uuid:01234567-89ab-cdef-0123-456789abcdef".</p>
+<p>The recommended procedure for generating the 128 bit identifier is to follow <a href="https://www.itu.int/rec/T-REC-X.667-201210-I/en">ISO/IEC 9834-8/ITU X.667</a>, however any procedure (such as applying a cryptographic hash to unique information such as equipment serial number combined with time) that can guarantee an infintesmial probability of multiple datasets being given the same UUID is sufficient.</p>
 </div>
 </details>
 </div>
