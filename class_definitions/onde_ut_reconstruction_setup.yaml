@@ -24,8 +24,8 @@ description: |-
     trajectory frame is located at the index point and the zone is positioned
     accordingly.
 
-
-ZONE_FRAME:
+fields:
+  ZONE_FRAME:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_FRAME
     short_description: Defines the coordinate frame associated with the center of the image zone.
     required: true
@@ -33,7 +33,7 @@ ZONE_FRAME:
     hdf5_type: H5T_FLOAT
     description: frame associated with the center of the image zone
     dimensions: '[7]'
-ZONE_DIMENSION:
+  ZONE_DIMENSION:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_DIMENSION
     short_description: Specifies the physical dimensions of the reconstruction zone.
     required: true
@@ -41,7 +41,7 @@ ZONE_DIMENSION:
     hdf5_type: H5T_FLOAT
     description: physical dimension of the zone
     dimensions: '[3]'
-ZONE_SIZE:
+  ZONE_SIZE:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:ZONE_SIZE
     short_description: Defines the number of pixels along each axis of the reconstruction zone.
     required: true
@@ -49,7 +49,7 @@ ZONE_SIZE:
     hdf5_type: H5T_INTEGER
     description: number of pixels of the zone
     dimensions: '[3]'
-RECONSTRUCTION_MODE:
+  RECONSTRUCTION_MODE:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:RECONSTRUCTION_MODE
     short_description: Specifies the mode or algorithm used for the reconstruction.
     required: true
@@ -57,7 +57,7 @@ RECONSTRUCTION_MODE:
     hdf5_type: H5T_STRING
     description: ''
     dimensions: '1'
-REFERENCE_PROBE_INDEX:
+  REFERENCE_PROBE_INDEX:
     full_name: ONDE_UT_RECONSTRUCTION_SETUP:REFERENCE_PROBE_INDEX
     short_description: Indicates the index of the reference probe used for trajectory alignment.
     required: false

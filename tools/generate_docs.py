@@ -717,6 +717,8 @@ details.field-details[open] > summary {
     if os.path.isfile(data_model_src):
         with open(data_model_src, 'r', encoding='utf-8') as f:
             dm_content = f.read()
+        # overview.md is published as the site index
+        dm_content = dm_content.replace('(overview.md)', '(index.md)')
         with open(os.path.join(docs_dir, 'data_model.md'), 'w', encoding='utf-8') as f:
             f.write(dm_content)
             
