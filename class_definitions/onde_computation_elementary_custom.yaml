@@ -1,18 +1,16 @@
-onde_class: ONDE_COMPUTATION_ELEMENTARY_FILTER
+onde_class: ONDE_COMPUTATION_ELEMENTARY_CUSTOM
 inherits: [ONDE_PROCESS]
-description: '##Signal standardisation
+description: '##Vendor specific computation algorithm
 
-a class to inform eddy current standardisation of signal
+a class to inform eddy current specific signal processing
 
 '
 
 
-fields:
-  TYPE:
-    full_name: ONDE_COMPUTATION_ELEMENTARY_FILTER:TYPE
+ LABEL:
+    full_name: ONDE_CUTSOM_PROCESS:LABEL
     required: true
-    storage: dataset
-    hdf5_type: STRING
-    description: 'Type of filtering'
-    dimensions: '[N_SENSOR<p>]'
-    allowed_values: 'HIGH|LOW|THROUGH|CUT'
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'A human readable description of the process.'
+    dimensions: '[3]'
