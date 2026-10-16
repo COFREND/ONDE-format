@@ -7,7 +7,8 @@ a class to inform eddy current specific signal processing
 '
 
 
- LABEL:
+ FIELDS:
+  TYPE:
     full_name: ONDE_CUTSOM_PROCESS:LABEL
     required: true
     storage: attribute
