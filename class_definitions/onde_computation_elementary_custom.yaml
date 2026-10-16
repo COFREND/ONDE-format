@@ -1,1 +1,18 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY_FILTER
+inherits: [ONDE_PROCESS]
+description: '##Signal standardisation
 
+a class to inform eddy current standardisation of signal
+
+'
+
+
+fields:
+  TYPE:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_FILTER:TYPE
+    required: true
+    storage: dataset
+    hdf5_type: STRING
+    description: 'Type of filtering'
+    dimensions: '[N_SENSOR<p>]'
+    allowed_values: 'HIGH|LOW|THROUGH|CUT'
