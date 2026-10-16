@@ -2044,6 +2044,8 @@
       
         
       
+        
+      
     
     
     
@@ -2100,6 +2102,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../onde_ut_coupling/onde_direct/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DIRECT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../onde_ut_coupling/onde_immersion/index.html" class="md-nav__link">
         
   
@@ -2146,7 +2176,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2168,14 +2198,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2327,6 +2357,33 @@
     
   
     ONDE_UT_LAW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../onde_ut_reconstruction_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_RECONSTRUCTION_SETUP
   
 
     
@@ -2534,9 +2591,8 @@
 <p>GAIN indicates the total gain for each A-scan during reception. It is a
 multiplying factor that was applied at acquisition.</p>
 <h4 id="digitizer-information">Digitizer Information</h4>
-<p>Each acquisition must have an associated  MIN_AMPLITUDE_VALUE, MAX_AMPLITUDE_VALUE, and ADC_BIT_DEPTH.
+<p>Each acquisition may have an associated ADC_BIT_DEPTH.
 The ADC_BIT_DEPTH is the number of bits used by the Analog-to-Digital Converter  to digitize the A-scan signal. 
-MAX_AMPLITUDE_VALUE and MIN_AMPLITUDE_VALUE represent the highest and lowest possible waveform values respectively.
 APPLIED_HARDWARE_GAIN represents the hardware gain setting used during the acquisiton of the waveform. APPLIED_SOFTWARE_GAIN
 represents the software gain setting used within the instrument during the waveform acquisiton.</p>
 <h4 id="tcg-curves">TCG curves</h4>
@@ -2590,7 +2646,7 @@ zero-padding the data block.</p>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_ultrasonic_setup-adc_bit_depth"><code>ADC_BIT_DEPTH</code></strong>
   <span class="field-type" markdown="span">H5T_INT</span>
-  <span class="req-badge req-yes">Required</span>
+  <span class="req-badge req-no">Optional</span>
 
 </div>
 
@@ -2841,58 +2897,6 @@ reception. Multiplying factor that was applied at acquisition.</p>
 </table>
 </summary>
 </details>
-<details class="field-details">
-<summary>
-<div class="field-summary-header">
-  <strong class="field-name" id="onde_ultrasonic_setup-max_amplitude_value"><code>MAX_AMPLITUDE_VALUE</code></strong>
-  <span class="field-type" markdown="span">H5T_INT</span>
-  <span class="req-badge req-yes">Required</span>
-
-</div>
-
-<div class="field-summary-desc">The maximum possible amplitude value in the acquistion.</div>
-
-<table class="field-meta-table">
-<tbody>
-    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
-
-
-
-  </tbody>
-</table>
-</summary>
-<div class="field-content">
-<p>This value represents the maximum possible raw amplitude value 
-within the acquistion.     </p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-header">
-  <strong class="field-name" id="onde_ultrasonic_setup-min_ascan_value"><code>MIN_ASCAN_VALUE</code></strong>
-  <span class="field-type" markdown="span">H5T_INT</span>
-  <span class="req-badge req-yes">Required</span>
-
-</div>
-
-<div class="field-summary-desc">The minimum possible amplitude value in the acquistion.</div>
-
-<table class="field-meta-table">
-<tbody>
-    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
-
-
-
-  </tbody>
-</table>
-</summary>
-<div class="field-content">
-<p>This value represents the minimum possible raw amplitude value 
-within the acquistion.     </p>
-</div>
-</details>
 <details class="field-details empty-details">
 <summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
 <div class="field-summary-header">
@@ -3036,7 +3040,7 @@ with one row for time and one for amplitude.</p>
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>[N_Ascan&lt;m&gt;,N_TCG&lt;m&gt; ]</code></td></tr>
+    <tr><td>Dimensions:</td><td><code>[N_Ascan&lt;m&gt;,N_Time&lt;m&gt; ]</code></td></tr>
 
 
 
