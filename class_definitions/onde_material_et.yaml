@@ -1,0 +1,28 @@
+onde_class: ONDE_MATERIAL_ET
+inherits:
+  - ONDE_MATERIAL
+description: |-
+    ### Description of ET parameters of a material
+
+    For ET a simple homogeneous and linear description is proposed.
+    The material has two parameters Conductivity et Permeability.
+
+
+
+fields:
+  CONDUCTIVITY:
+    full_name: ONDE_MATERIAL_ET:CONDUCTIVITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    short_description: The value of the array indicate the specimen conductivity. Units are siemens (remember SI units)
+    description: ''
+    dimensions: '1'
+  PERMEABILITY:
+    full_name: ONDE_MATERIAL_ET:PERMEABILITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    short_description: This indicates the magnetic permeability of the specimen.
+    description: ''
+    dimensions: '1'
