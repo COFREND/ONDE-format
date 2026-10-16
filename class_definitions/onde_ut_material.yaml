@@ -1,0 +1,28 @@
+onde_class: ONDE_MATERIAL_UT
+inherits:
+  - ONDE_MATERIAL
+description: |-
+    ### Description of UT parameters of a material
+
+    For UT a simple homogeneous and linear description is proposed.
+    The material has two parameters Velocities and density.
+
+
+
+fields:
+  VELOCITIES:
+    full_name: ONDE_MATERIAL_UT:VELOCITIES
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    short_description: Longitudinal and shear wave velocities of the component.
+    description: 'The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.'
+    dimensions: '[2]'
+  DENSITY:
+    full_name: ONDE_MATERIAL_UT:DENSITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    short_description: Density of the component material.
+    description: ''
+    dimensions: '1'
