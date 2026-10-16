@@ -1930,6 +1930,8 @@
       
         
       
+        
+      
     
     
     
@@ -1986,6 +1988,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../onde_ut_coupling/onde_direct/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_DIRECT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../onde_ut_coupling/onde_immersion/index.html" class="md-nav__link">
         
   
@@ -2032,7 +2062,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -2054,14 +2084,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15_3" id="__nav_15_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2225,6 +2255,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../onde_ut_reconstruction_setup/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ONDE_UT_RECONSTRUCTION_SETUP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2311,6 +2368,36 @@
 </table>
 </summary>
 </details>
+<details class="field-details">
+<summary>
+<div class="field-summary-header">
+  <strong class="field-name" id="onde_weld-component_dimensions"><code>COMPONENT_DIMENSIONS</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">The physical dimensions of the welded component</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[2]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+<div class="field-content">
+<p>The physical dimensions of the welded component, represented as a 2D array. 
+For a plane extrusion, the dimensions are given as (width, length), the length being the dimension along the weld axis. 
+For a cylindrical extrusion, either circumferential or axial, the dimensions of the component are given as (outer diameter, length).
+By convention, the welds are located at the exact center of the component.
+The thickness of the component is not specified in this field, as it is assumed to be the same as the weld thickness.
+It is obtained by adding the heights of the weld passes (fill, hot pass, land, root) together.</p>
+</div>
+</details>
 <details class="field-details inherited-field">
 <summary>
 <div class="field-summary-header">
@@ -2363,30 +2450,8 @@ default value is identity with the reference frame.</p>
 </table>
 </summary>
 </details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
-<div class="field-summary-header">
-  <strong class="field-name" id="onde_weld-extrusion_dimension"><code>EXTRUSION_DIMENSION</code></strong>
-  <span class="field-type" markdown="span">H5T_FLOAT</span>
-  <span class="req-badge req-yes">Required</span>
-
-</div>
-
-<div class="field-summary-desc">The physical dimension used for the weld extrusion process.</div>
-
-<table class="field-meta-table">
-<tbody>
-    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
-
-
-
-  </tbody>
-</table>
-</summary>
-</details>
-<details class="field-details empty-details">
-<summary onclick="event.preventDefault();" style="cursor: default;" tabindex="-1">
+<details class="field-details">
+<summary>
 <div class="field-summary-header">
   <strong class="field-name" id="onde_weld-extrusion_type"><code>EXTRUSION_TYPE</code></strong>
   <span class="field-type" markdown="span">H5T_STRING</span>
@@ -2400,12 +2465,16 @@ default value is identity with the reference frame.</p>
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
     <tr><td>Dimensions:</td><td><code>1</code></td></tr>
-    <tr><td>Allowed:</td><td><code>&#34;PLANE&#34;|&#34;CYLINDER&#34;</code></td></tr>
+    <tr><td>Allowed:</td><td><code>&#34;PLANE&#34;|&#34;CIRCUMFERENTIAL_CYLINDRICAL&#34;|&#34;AXIAL_CYLINDRICAL&#34;</code></td></tr>
 
 
   </tbody>
 </table>
 </summary>
+<div class="field-content">
+<p>'This field specifies the type of extrusion for the weld geometry, which can be either a plane or a cylindrical shape.
+The extrusion type determines how the weld is represented in 3D space and affects the interpretation of the component dimensions.'</p>
+</div>
 </details>
 <details class="field-details inherited-field">
 <summary>
