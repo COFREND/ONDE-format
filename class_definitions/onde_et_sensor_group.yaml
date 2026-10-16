@@ -117,25 +117,21 @@ fields:
     required: false
     storage: dataset
     hdf5_type: H5T_INTEGER
-    description: ;
+    description: A value of central frequency of used probe ;
     dimensions: '[N_SENSOR<p>]'
   FREQUENCY_RANGE:
     full_name: ONDE_ET_SENSOR_GROUP:FREQUENCY_RANGE
     required: false
     storage: dataset
     hdf5_type: H5T_INTEGER
-    description: Datafield of logical values (0 = false, 1 = true) used to flag non-functioning
-      elements in an array probe (if not present, assumption should be that all elements
-      are performing correctly);
+    description: Datafield of values describing the range of frequencies usable cithe the probe;
     dimensions: '[N_SENSOR<p>]'
   SENSOR_POLARITY:
     full_name: ONDE_ET_SENSOR_GROUP:SENSOR_POLARITY
     required: false
-    storage: dataset
+    storage: attribute
     hdf5_type: H5T_INTEGER
-    description: Datafield of logical values (0 = false, 1 = true) used to flag non-functioning
-      elements in an array probe (if not present, assumption should be that all elements
-      are performing correctly);
+    description: A string assesing polarity of probe;
     dimensions: '[N_SENSOR<p>]'
   PROBE:
     full_name: ONDE_ET_SENSOR_GROUP:PROBE
