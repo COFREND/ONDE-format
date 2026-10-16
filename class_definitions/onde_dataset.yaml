@@ -99,3 +99,53 @@ fields:
       One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
       treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
     dimensions: '[n_data_dims]'
+  MIN:
+    full_name: ONDE_DATASET:MIN
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The minimum possible value for the ONDE_DATASET.'
+    description: |-
+      This value represents the minimum possible value for the dataset used 
+      within the acquistion.     
+    dimensions: '1'
+  MAX:
+    full_name: ONDE_DATASET:MAX
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'The maximum possible value for the ONDE_DATASET.'
+    description: |-
+      This value represents the maximum possible value for the dataset used 
+      within the acquistion.     
+    dimensions: '1'
+  UNIT_MIN:
+    full_name: ONDE_DATASET:UNIT_MIN
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'Minimum Possible value for the dataset in the corresponding unit.'
+    description: |-
+      This value represents the minimum possible value for the dataset in the corresponding unit 
+      within the acquistion.     
+    dimensions: '1'
+UNIT_MAX:
+    full_name: ONDE_DATASET:UNIT_MIN
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INT
+    short_description: 'Maximum Possible value for the dataset in the corresponding unit.'
+    description: |-
+      This value represents the maximum possible value for the dataset in the corresponding unit 
+      within the acquistion.     
+    dimensions: '1'
+UNIT_TYPE:
+    full_name: ONDE_DATASET:UNIT_TYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: 'The units of the dataset collected in the acquisition.'
+    description: |-
+      This represents the units used within the dataset  value for the dataset in the corresponding unit 
+      within the acquistion. UNIT_TYPE could contain strings such as "Percent", "Seconds", etc.     
+    dimensions: '1'

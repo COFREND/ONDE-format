@@ -22,7 +22,7 @@ description: |-
     multiplying factor that was applied at acquisition.
     
     #### Digitizer Information
-    Each acquisition must have an associated  MIN_AMPLITUDE_VALUE, MAX_AMPLITUDE_VALUE, and ADC_BIT_DEPTH.
+    Each acquisition may have an associated ADC_BIT_DEPTH.
     The ADC_BIT_DEPTH is the number of bits used by the Analog-to-Digital Converter  to digitize the A-scan signal. 
     MAX_AMPLITUDE_VALUE and MIN_AMPLITUDE_VALUE represent the highest and lowest possible waveform values respectively.
     APPLIED_HARDWARE_GAIN represents the hardware gain setting used during the acquisiton of the waveform. APPLIED_SOFTWARE_GAIN
@@ -176,7 +176,7 @@ fields:
     dimensions: '[ N_Ascan<m> ]'
   ADC_BIT_DEPTH:
     full_name: ONDE_ULTRASONIC_SETUP:ADC_BIT_DEPTH
-    required: true
+    required: false
     storage: attribute
     hdf5_type: H5T_INT
     short_description: 'The amount of bits used in ADC of waveform'
@@ -184,26 +184,6 @@ fields:
       This value represents the amount of bits used in the ADC 
       during the digitizing of the waveform in the acquistion.
     dimensions: '1'
-  MAX_AMPLITUDE_VALUE:
-    full_name: ONDE_ULTRASONIC_SETUP:MAX_AMPLITUDE_VALUE
-    required: true
-    storage: attribute
-    hdf5_type: H5T_INT
-    short_description: 'The maximum possible amplitude value in the acquistion.'
-    description: |-
-      This value represents the maximum possible raw amplitude value 
-      within the acquistion.     
-    dimensions: '1'
-  MIN_ASCAN_VALUE:
-    full_name: ONDE_ULTRASONIC_SETUP:MIN_AMPLITUDE_VALUE
-    required: true
-    storage: attribute
-    hdf5_type: H5T_INT
-    short_description: 'The minimum possible amplitude value in the acquistion.'
-    description: |-
-      This value represents the minimum possible raw amplitude value 
-      within the acquistion.     
-    dimensions: '1'  
   APPLIED_HARDWARE_GAIN:
     full_name: ONDE_ULTRASONIC_SETUP:APPLIED_HARDWARE_GAIN
     required: false
