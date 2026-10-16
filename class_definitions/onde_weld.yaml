@@ -8,18 +8,26 @@ fields:
     required: true
     storage: attribute
     hdf5_type: H5T_STRING
-    description: ''
+    description: |
+      'This field specifies the type of extrusion for the weld geometry, which can be either a plane or a cylindrical shape.
+      The extrusion type determines how the weld is represented in 3D space and affects the interpretation of the component dimensions.'
     short_description: 'Specifies the type of extrusion for the weld geometry.'
     dimensions: '1'
-    allowed_values: '"PLANE"|"CYLINDER"'
-  EXTRUSION_DIMENSION:
-    full_name: ONDE_WELD:EXTRUSION_DIMENSION
+    allowed_values: '"PLANE"|"CIRCUMFERENTIAL_CYLINDRICAL"|"AXIAL_CYLINDRICAL"'
+  COMPONENT_DIMENSIONS:
+    full_name: ONDE_WELD:COMPONENT_DIMENSIONS
     required: true
     storage: attribute
     hdf5_type: H5T_FLOAT
-    description: ''
-    short_description: 'The physical dimension used for the weld extrusion process.'
-    dimensions: '1'
+    description: |
+      The physical dimensions of the welded component, represented as a 2D array. 
+      For a plane extrusion, the dimensions are given as (width, length), the length being the dimension along the weld axis. 
+      For a cylindrical extrusion, either circumferential or axial, the dimensions of the component are given as (outer diameter, length).
+      By convention, the welds are located at the exact center of the component.
+      The thickness of the component is not specified in this field, as it is assumed to be the same as the weld thickness.
+      It is obtained by adding the heights of the weld passes (fill, hot pass, land, root) together.
+    short_description: 'The physical dimensions of the welded component'
+    dimensions: '[2]'
   WELD_TYPE:
     full_name: ONDE_WELD:WELD_TYPE
     required: true
