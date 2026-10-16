@@ -1,5 +1,5 @@
 onde_class: ONDE_ULTRASONIC_SETUP
-inherits: []
+inherits: [ ]
 description: |-
 
     ### Ultrasonic setup
@@ -24,7 +24,6 @@ description: |-
     #### Digitizer Information
     Each acquisition may have an associated ADC_BIT_DEPTH.
     The ADC_BIT_DEPTH is the number of bits used by the Analog-to-Digital Converter  to digitize the A-scan signal. 
-    MAX_AMPLITUDE_VALUE and MIN_AMPLITUDE_VALUE represent the highest and lowest possible waveform values respectively.
     APPLIED_HARDWARE_GAIN represents the hardware gain setting used during the acquisiton of the waveform. APPLIED_SOFTWARE_GAIN
     represents the software gain setting used within the instrument during the waveform acquisiton.
     
@@ -221,7 +220,7 @@ fields:
     description: |-
       TCG curve applied to the received signals. The amplitude correction is
       given for each time sample as a multiplying factor.
-    dimensions: '[N_Ascan<m>,N_TCG<m> ]'
+    dimensions: '[N_Ascan<m>,N_Time<m> ]'
   PHASED_ARRAY_SETUP:
     full_name: ONDE_ULTRASONIC_SETUP:PHASED_ARRAY_SETUP
     required: false
