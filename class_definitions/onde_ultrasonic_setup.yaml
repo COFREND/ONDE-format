@@ -187,7 +187,7 @@ fields:
     dimensions: '[N_Ascan<m>,N_TCG<m> ]'
   PHASED_ARRAY_SETUP:
     full_name: ONDE_ULTRASONIC_SETUP:PHASED_ARRAY_SETUP
-    required: false
+    required: true
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_PHASED_ARRAY_SETUP>
     short_description: 'Reference to the associated phased array setup.'
