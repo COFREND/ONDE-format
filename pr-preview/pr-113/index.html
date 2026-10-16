@@ -1158,14 +1158,14 @@
   
   
     <li class="md-nav__item">
-      <a href="onde_computation/onde_computation_elementary/onde_process_standardisation/index.html" class="md-nav__link">
+      <a href="onde_computation/onde_computation_elementary/onde_computation_elementary_standardisation/index.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ONDE_PROCESS_STANDARDISATION
+    ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION
   
 
     
@@ -3050,6 +3050,7 @@ concept.</p>
   ONDE_COMPUTATION_ELEMENTARY_INIT o-- ONDE_DATASET : DATA
   ONDE_COMPUTATION_ELEMENTARY &lt;|-- ONDE_COMPUTATION_ELEMENTARY_INTERPOLATE
   ONDE_COMPUTATION_ELEMENTARY &lt;|-- ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER
+  ONDE_COMPUTATION_ELEMENTARY &lt;|-- ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION
   ONDE_COMPONENT &lt;|-- ONDE_CYLINDER
   ONDE_DATASET o-- ONDE_SETUP : SETUP
   ONDE_DATASET o-- ONDE_DIMENSION : AMPLITUDE_DIMENSION
@@ -3089,7 +3090,6 @@ concept.</p>
   ONDE_PHASED_ARRAY_SETUP o-- ONDE_UT_PROBE : RECEIVING_PROBE
   ONDE_PHASED_ARRAY_SETUP &lt;|-- ONDE_PHASED_ARRAY_SSCAN
   ONDE_COMPONENT &lt;|-- ONDE_PLANE
-  ONDE_COMPUTATION_ELEMENTARY &lt;|-- ONDE_PROCESS_STANDARDISATION
   ONDE_SETUP o-- ONDE_GEOMETRIC_SETUP : GEOMETRIC_SETUP
   ONDE_SETUP &lt;|-- ONDE_SETUP_ET
   ONDE_SETUP_ET o-- ONDE_ET_ACQUISITION_GROUP : ET_SETUP
@@ -3122,6 +3122,7 @@ concept.</p>
   click ONDE_COMPUTATION_ELEMENTARY_INIT href "onde_computation/onde_computation_elementary/onde_computation_elementary_init/index.html"
   click ONDE_COMPUTATION_ELEMENTARY_INTERPOLATE href "onde_computation/onde_computation_elementary/onde_computation_elementary_interpolate/index.html"
   click ONDE_COMPUTATION_ELEMENTARY_MEDIANFILTER href "onde_computation/onde_computation_elementary/onde_computation_elementary_medianfilter/index.html"
+  click ONDE_COMPUTATION_ELEMENTARY_STANDARDISATION href "onde_computation/onde_computation_elementary/onde_computation_elementary_standardisation/index.html"
   click ONDE_CYLINDER href "onde_component/onde_cylinder/index.html"
   click ONDE_DATASET href "onde_dataset/index.html"
   click ONDE_DATASET_ET href "onde_dataset/onde_dataset_et/index.html"
@@ -3155,7 +3156,6 @@ concept.</p>
   click ONDE_PHASED_ARRAY_SSCAN href "onde_phased_array_setup/onde_phased_array_sscan/index.html"
   click ONDE_PLANE href "onde_component/onde_plane/index.html"
   click ONDE_PROBE href "onde_probe/index.html"
-  click ONDE_PROCESS_STANDARDISATION href "onde_computation/onde_computation_elementary/onde_process_standardisation/index.html"
   click ONDE_SETUP href "onde_setup/index.html"
   click ONDE_SETUP_ET href "onde_setup/onde_setup_et/index.html"
   click ONDE_SETUP_UT href "onde_setup/onde_setup_ut/index.html"
