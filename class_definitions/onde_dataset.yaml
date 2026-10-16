@@ -1,37 +1,39 @@
 onde_class: ONDE_DATASET
 inherits: []
 description: |
+
   ## Explanatory notes
 
   ### Generic remarks on datasets
 
-  The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. 
+  The DATE_AND_TIME and OPERATOR fields allow to give indication on the context of the acquisition. For DATE_AND_TIME the
+  ISO 8601 extended format: 'yyyy-mm-dd HH:MM:SS' (e.g. '2019-01-16 17:05:06') must be used.
 
   ### Notes on groups
 
     The following links provide explanatory notes for the ONDE groups that are described in the [YAML schemas](https://github.com/COFREND/ONDE-format/tree/main/class_definitions).
-
-  [Ascan datasets](onde_dataset_ut_ascan.md)
-
-  [Tscan datasets](onde_dataset_ut_tscan.md)
-
-  [Cscan datasets](onde_dataset_ut_cscan.md)
+  
+  
+  [Cscan datasets](onde_dataset_et_cscan.md)
+  
+  
+  [Raw datasets](onde_dataset_et_raw.md)
+  
 
   [Setup](onde_setup.md)
+  
 
   [Geometric setup](onde_geometric_setup.md)
+  
 
   [Components](onde_component.md)
+  
 
-  [Probes](onde_ut_probe.md)
+  [Probes](onde_probe.md)
+  
 
   [Trajectory](onde_acquisition_trajectory.md)
 
-  [Ultrasonic setup](onde_ultrasonic_setup.md)
-
-  [Electronic Law](onde_ut_law.md)
-
-  [Phased array setup](onde_phased_array_setup.md)
 fields:
   LABEL:
     full_name: ONDE:LABEL
@@ -66,14 +68,14 @@ fields:
       The ISO 8601 extended format: 'yyyy-mm-ddTHH:MM:SS' (e.g. '2019-01-16T17:05:06') must be used with a capital T separating the date and the time. Optionally, a decimal point ('.') and a fractional portion of a second may be appended. In addition, time zone information is usually appended:
       * "Z", indicating a timestamp in UTC
       * "±hh:mm", indicating a timezone with the specified offset from UTC
-      * (no timezone information), indicating an unknown timezone; software will usually interpret this as local time or UTC. 
+      * (no timezone information), indicating an unknown timezone; software will usually interpret this as local time or UTC.
     dimensions: '1'
   DATA:
     full_name: ONDE_DATASET:DATA
     required: false
     storage: A or D
-    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_INTEGER or H5T_FLOAT
-    short_description: The core data array or a reference to the array.
+    hdf5_type: H5T_STD_REF_OBJ<data> or H5T_FLOAT
+    short_description: Eddy current data for one channel (one probe/One sensor/one frequency/)
     description: |-
       Data can be either an array or a reference to an array. Omitting this
       field is possible, in the event when Tscan or Cscan data is recorded but

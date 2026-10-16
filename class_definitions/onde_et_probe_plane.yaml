@@ -1,0 +1,28 @@
+onde_class: ONDE_ET_PROBE_PLANE
+inherits:
+- ONDE_ET_PROBE
+accessories: []
+description: '### Probes for inspecting planar surfaces'
+
+fields:
+  BOX_LENGTH:
+    full_name: ONDE_ET_PROBE_PLANE:BOX_LENGTH
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Dimension of the encapsulating box in the sweeping direction
+    dimensions: '1'
+  BOX_WIDTH:
+    full_name: ONDE_ET_PROBE_PLANE:BOX_WIDTH
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Dimension of the encapsulating box perpendicular to the sweeping direction
+    dimensions: '1'
+  BOX_HEIGHT:
+    full_name: ONDE_ET_PROBE_PLANE:BOX_HEIGHT
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: Dimension of the encapsulating box perpendicular to the surface
+    dimensions: '1'
