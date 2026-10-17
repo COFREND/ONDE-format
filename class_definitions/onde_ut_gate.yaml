@@ -4,7 +4,8 @@ description: |-
    
    ### UT Gates
 
-    The gates are referenced in the ONDE_UT_EXTRACTION group.  
+    The gates are referenced in the ONDE_UT_EXTRACTION group and in Ascan
+    datasets (GATE attribute of ONDE_DATASET_UT_ASCAN).
     The gate model accomodates the description of static gates and gates 
     resulting from synchronization. The gates
     used for the acquisition are
@@ -19,8 +20,12 @@ description: |-
     - GATE_POLARITY defines the mode that was
     used for the detection (absolute, positive or negative).
     - GATE_SYNCHRONIZATION_SOURCE defines the source of the synchronization for the gate. 
-    It is a reference to another gate. If absent, the gate is defined as a static gate. 
-    
+    It is a reference to another gate. If absent, the gate is defined as a static gate.
+    For a synchronized gate, GATE_START is relative to the time of the event
+    detected by the source gate, and can therefore be negative to start the
+    gate before this event. A source gate can itself be synchronized on another
+    gate.
+
     The following
     figure defines the modes that can be used for detection. The numbers on the
     figure correspond to the different triggering events. The correspondence
@@ -44,8 +49,10 @@ fields:
     hdf5_type: H5T_FLOAT
     short_description: "Defines the start time for the ultrasonic gate."
     description: |-
-      For scalar data relying on Ascan data, defines the start time for the
-      gate. Mandatory for data related to Ascans.
+      For scalar data relying on Ascan data and for gated Ascans, defines the
+      start time for the gate. Mandatory for data related to Ascans. For a
+      synchronized gate, the start time is relative to the event detected by
+      the source gate and can be negative.
     dimensions: '1'
   WIDTH:
     full_name: ONDE_UT_GATE:WIDTH
@@ -54,8 +61,8 @@ fields:
     hdf5_type: H5T_FLOAT
     short_description: "Defines the width of the ultrasonic gate."
     description: |-
-      For Cscans scalar data relying on Ascan data, defines the width of the
-      gate. Mandatory for data related to Ascans
+      For Cscans scalar data relying on Ascan data and for gated Ascans,
+      defines the width of the gate. Mandatory for data related to Ascans.
     dimensions: '1'
   THRESHOLD:
     full_name: ONDE_UT_GATE:THRESHOLD

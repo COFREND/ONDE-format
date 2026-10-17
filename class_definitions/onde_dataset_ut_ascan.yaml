@@ -1,15 +1,31 @@
 onde_class: ONDE_DATASET_UT_ASCAN
 inherits:
-- ONDE_DATASET_UT
+  - ONDE_DATASET_UT
 description: |-
-    ### Ascan datasets
-
-    Ascan datasets are the entry points for the description of data that is
-    stored as time signals.
-
-    To allow continuity with existing HDF5 formats, the DATA field can be either
-    a HDF5 dataset or a reference to a dataset located in another part of the
-    HDF5 structure.
+  ### Ascan datasets
+  
+  Ascan datasets are the entry points for the description of data that is
+  stored as time signals.
+  
+  To allow continuity with existing HDF5 formats, the DATA field can be either
+  a HDF5 dataset or a reference to a dataset located in another part of the
+  HDF5 structure.
+  
+  #### Gated Ascans
+  
+  An Ascan dataset can reference an ONDE_UT_GATE through the GATE attribute.
+  The gate defines the time window in which the Ascans of the dataset were
+  recorded or from which they were extracted.
+  
+  When the gate is synchronized on another gate (SYNCHRONIZATION_SOURCE
+  attribute of ONDE_UT_GATE), the start of the time window is relative to the
+  event detected by the source gate and may therefore differ from one Ascan to
+  another. For example, an Ascan dataset starting 10 µs before the first peak
+  detected in a wider acquisition window references a gate with a START of
+  -10 µs, synchronized on a gate covering the wider window with a DETECTION of
+  FIRST_PEAK. The actual start time of each Ascan is not stored: it is
+  obtained by applying the detection of the source gate to the Ascans from
+  which the dataset originates.
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
@@ -22,3 +38,15 @@ fields:
       field is possible, in the event when Tscan or Cscan data is recorded but
       the underlying Ascan data is not.
     dimensions: 1 or [N_U<m>,N_V<m>,N_Ascan<m>,Ntime<m>]
+  GATE:
+    full_name: ONDE_DATASET_UT_ASCAN:GATE
+    required: false
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_GATE>
+    short_description: "Reference to the gate defining the time window of the Ascans."
+    description: |-
+      Reference to the gate that defines the time window in which the Ascans
+      were recorded or from which they were extracted. If the gate is
+      synchronized on another gate, the start time of each Ascan depends on the
+      event detected by the source gate.
+    dimensions: '1'
