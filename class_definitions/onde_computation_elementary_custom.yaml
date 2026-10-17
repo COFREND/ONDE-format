@@ -1,0 +1,17 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY_CUSTOM
+inherits: [ONDE_PROCESS]
+description: '##Vendor specific computation algorithm
+
+a class to inform eddy current specific signal processing
+
+'
+
+
+ FIELDS:
+  TYPE:
+    full_name: ONDE_CUTSOM_PROCESS:LABEL
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'A human readable description of the process.'
+    dimensions: '[3]'

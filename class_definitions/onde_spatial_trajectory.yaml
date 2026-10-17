@@ -32,3 +32,4 @@ fields:
       List of positions and quaternions giving the positions and orientations of
       the trajectory frame at the different positions
     dimensions: '[N_U<m>,N_V<m>,7]'
+

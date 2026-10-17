@@ -84,22 +84,22 @@ fields:
     storage: attribute
     hdf5_type: H5T_STRING
     short_description: A human-readable label or name for the component.
-    description: ''
-  VELOCITIES:
-    full_name: ONDE_COMPONENT:VELOCITIES
-    required: true
-    storage: attribute
-    hdf5_type: H5T_FLOAT
-    short_description: Longitudinal and shear wave velocities of the component.
-    description: 'The two values indicate the longitudinal and shear wave velocities respectively. Missing values should be replaced by NaN.'
-    dimensions: '[2]'
-  DENSITY:
-    full_name: ONDE_COMPONENT:DENSITY
+    description:
+  CONDUCTIVITY:
+    full_name: ONDE_COMPONENT:CONDUCTIVITY
     required: false
     storage: attribute
     hdf5_type: H5T_FLOAT
-    short_description: Density of the component material.
-    description: ''
+    short_description: The value of the array indicate the specimen conductivity. Units are siemens (remember SI units)
+    description:
+    dimensions: '1'
+  PERMEABILITY:
+    full_name: ONDE_COMPONENT:PERMEABILITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    short_description: This indicates the magnetic permeability of the specimen.
+    description :
     dimensions: '1'
   VISUALIZATION_CAD:
     full_name: ONDE_COMPONENT:VISUALIZATION_CAD

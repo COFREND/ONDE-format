@@ -1,0 +1,21 @@
+onde_class: ONDE_ET_PROBE_TUBE
+inherits:
+- ONDE_ET_PROBE
+accessories: []
+description: '### Probes for tubes'
+
+fields:
+  DIAMETER:
+    full_name: ONDE_ET_PROBE_TUBE:DIAMETER
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: If absent, identity is assumed
+    dimensions: '1'
+  LENGTH:
+    full_name: ONDE_ET_PROBE_TUBE:DIAMETER
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    description: If absent, identity is assumed
+    dimensions: '1'
