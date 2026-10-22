@@ -10,6 +10,30 @@ description: |-
 
     *[Figure 24](onde_phased_array_angle.md): Inspection using a single angle*
 fields:
+  EMITTER_PROBE:
+    full_name: ONDE_PHASED_ARRAY_ANGLE:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the emitting probe used in this setup."
+    description: ''
+    dimensions: '1'
+  RECEIVING_PROBE:
+    full_name: ONDE_PHASED_ARRAY_ANGLE:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
+    short_description: "Reference to the receiving probe used in this setup."
+    description: ''
+    dimensions: '1'
+  SEQUENCE_ANGLE_MODE:
+    full_name: ONDE_PHASED_ARRAY_ANGLE:SEQUENCE_ANGLE_MODE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    short_description: "Specifies the wave propagation mode used for the setup sequence, such as longitudinal (L) or transverse (T)."
+    description: ''
+    allowed_values: '"L"|"T"'
   BSCAN_ANGLE:
     full_name: ONDE_PHASED_ARRAY_ANGLE:BSCAN_ANGLE
     short_description: "The specified angle for the ultrasonic ray direction."
