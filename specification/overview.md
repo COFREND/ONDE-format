@@ -1,4 +1,4 @@
-# Open NDE File Format specification - Version 0.9.1
+# Open NDE File Format specification - Version 0.9.2
 
 <img src="../images/media/COFREND_EPRI_banner.png" alt="drawing" width="400"/>
 
@@ -6,32 +6,34 @@
 
 ## Preamble
 
-  The ONDE (**Open Non Destructive Evaluation**) format results from a joint intiative by COFREND and EPRI to define a specification of open and efficient NDE
-  format in order to facilitate interoperability between softwares and to ensure ability to read the data in the long term. 
-  This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can
-  be a good candidate for a wide standardization effort.
+The ONDE (**Open Non Destructive Evaluation**) format results from a joint intiative by COFREND and EPRI to define a
+specification of open and efficient NDE
+format in order to facilitate interoperability between softwares and to ensure ability to read the data in the long
+term.
+This document is therefore a technical proposal to facilitate the establishment of a neutral and open format that can
+be a good candidate for a wide standardization effort.
 
-  The objective that was assigned to this file format is to store ultrasonic raw data to be
-  able to:
+The objective that was assigned to this file format is to store ultrasonic raw data to be
+able to:
 
-  * (re)analyse it, including ultrasonic metadata required for report generation, or
-  * (re)use it for further data processing, or
-  * achieve interoperability between acquisition systems and analysis software.
+* (re)analyse it, including ultrasonic metadata required for report generation, or
+* (re)use it for further data processing, or
+* achieve interoperability between acquisition systems and analysis software.
 
-  The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
-  simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
-  the acquisition system (AScans, TFM images…).
+The objective is neither to be able to (re)produce an acquisition setup nor to (re)create a
+simulation configuration from the ultrasonic data file alone. We define as raw data the data which is produced by
+the acquisition system (AScans, TFM images…).
 
-  At this stage, it was decided to stick to the data acquired and the information that is necessary to
-  perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
-  itself (information related to the display, palette, etc…). This will be addressed in future stages (information
-  related to analysis, reporting…).
+At this stage, it was decided to stick to the data acquired and the information that is necessary to
+perform an analysis. With a few exceptions, we did not add the information that is related to the analysis procedure
+itself (information related to the display, palette, etc…). This will be addressed in future stages (information
+related to analysis, reporting…).
 
 - The Working Group has analysed several existing contributions as a working
   basis to define an open and standardized file format for ultrasonic
   testing. Formats coming from organisations (ECUF, MFMC, DICONDE, ANDE) and
-  commercial products ( EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been
-  studied.  It was decided that the format would be based on the HDF5 framework,
+  commercial products (EVIDENT, TPAC, EDDYFI, SONATEST, CIVA) have been
+  studied. It was decided that the format would be based on the HDF5 framework,
   chosen for its well-established software ecosystem and its efficiency. The
   format proposal makes technical choices akin to those of the MFMC and ECUF
   format, and extends their possibilities in order to accommodate for a larger
@@ -49,17 +51,21 @@
   trajectory and the setup of the electronic laws.
 
 - From an HDF5 structure perspective, architecture (flat or hierarchical) is not imposed. The relations between HDF5
-  groups are translated into HDF5 references. The location of the HDF5 groups in the file is left open to the discretion of the implementor.
-  The names of the groups is not imposed, the semantics of the group being defined by the mandatory ONDE:TYPE attribute. 
-  Only ONDE:FILETYPE and ONDE:VERSION at hdf5 root level have a location that is  imposed in the file. 
-  In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (
-  arrays of signals or array of images which typically represents the vast majority of the file weight) can be anywhere
+  groups are translated into HDF5 references. The location of the HDF5 groups in the file is left open to the discretion
+  of the implementor.
+  The names of the groups is not imposed, the semantics of the group being defined by the mandatory ONDE:TYPE attribute.
+  Only ONDE:FILETYPE and ONDE:VERSION at hdf5 root level have a location that is imposed in the file.
+  In order to allow the proposed file format to coexist with other hdf5 file formats, the raw data (arrays of signals or
+  array of images which typically represents the vast majority of the file weight) can be anywhere
   in the file structure.
 
 - All quantities are defined with SI units. Units are therefore expressed in meters, kilograms,
   seconds. However, degrees are used instead of radians.
 
-- The formal Single Source of Truth for the data model is defined via YAML files, which are compiled to generate this documentation. A unified CSV export is also provided (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
+- The formal Single Source of Truth for the data model is defined via YAML files, which are compiled to generate this
+  documentation. A unified CSV export is also provided (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is
+  provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick
+  import or validation purposes.
 
 ## Tables legend
 
@@ -101,27 +107,24 @@ Definitions (derived from MFMC 2.0.0b specification)
 - Image zone -- 2D or 3D regular cartesian grid used to define the reconstruction points creating the images during a
   TFM or PWI-like acquisition;
 
-| **Variable**  | **Description**                                                          |
-|---------------|--------------------------------------------------------------------------|
-| N_Probes      | Number of probes                                                         |
-| N_Dataset     | Number of datasets                                                       |
-| N_Elem\<p\>   | Number of elements of p-th probe                                         |
-| N_DF\<m\>     | Number of dataframes in m-th dataset                                     |
-| N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                         |
-| N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                          |
-| N_CS\<m\>     | Number of scalar values stored in the m-th CSscan dataset                |
-| N_Gate\<m\>   | Number of gates in the m-th CScan dataset                                |
-| N_Prob\<m\>   | Number of probes used in m-th dataset                                    |
-| N_Law\<m\>    | Number of focal laws associated with each dataframe in the m-th dataset  |
-| N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law              |
-| N_Points\<k\> | Number of points used to describe the k-th focal law propagation_line    |
-| N_TSig\<m\>   | Number of time-points in the emission signal in the m-th dataset         |
-| N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th dataset      |
-| N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th dataset         |
-| N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset    |
-| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset  | 
-| N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset  |
-| N_bytes       | Number of bytes |
+| **Variable**  | **Description**                                                         |
+|---------------|-------------------------------------------------------------------------|
+| N_Probes      | Number of probes                                                        |
+| N_Dataset     | Number of datasets                                                      |
+| N_Elem\<p\>   | Number of elements of p-th probe                                        |
+| N_DF\<m\>     | Number of dataframes in m-th dataset                                    |
+| N_Time\<m\>   | Number of time-points per A-Scan in m-th dataset                        |
+| N_Ascan\<m\>  | Number of A-Scans per dataframe in m-th dataset                         |
+| N_Prob\<m\>   | Number of probes used in m-th dataset                                   |
+| N_Comb\<k\>   | Number of probe/element combinations used in k-th focal law             |
+| N_Points\<k\> | Number of points used to describe the k-th focal law propagation_line   |
+| N_TSig\<m\>   | Number of time-points in the emission signal in the m-th dataset        |
+| N_COL\<m\>    | Number of columns in the image zone for a Tscan in the m-th dataset     |
+| N_ROW\<m\>    | Number of rows in the image zone for a Tscan in the m-th dataset        |
+| N_PLANE\<m\>  | Number of planes in the image zone for a 3D Tscan in the m-th dataset   |
+| N_U\<m\>      | Number of acquisition positions in the U direction for the m-th dataset | 
+| N_V\<m\>      | Number of acquisition positions in the V direction for the m-th dataset |
+| N_bytes       | Number of bytes                                                         |
 
 Note: N_DF\<m\> = N_U\<m\> x N_V\<m\>
 
@@ -132,57 +135,69 @@ concept.
 
 ```mermaid
 classDiagram
-  ut_dataset <|-- ascan_dataset
-  ut_dataset <|-- tscan_dataset
-  ut_dataset <|-- cscan_dataset
-  ascan_dataset "1" o--  setup 
-  tscan_dataset "0..1" o-- setup : exclusive or with ascan_dataset link
-  cscan_dataset "0..1" o-- setup : exclusive or with tscan_dataset or ascan_dataset_link
-  cscan_dataset "0..1" o-- tscan_dataset : optional link to raw data
-  cscan_dataset "0..1" o-- ascan_dataset : optional link to raw data
-  tscan_dataset "0..1" o-- ascan_dataset : optional link to elementary channels
-  setup "1" o-- geometric_setup
-  setup "0..1" o-- ultrasonic_setup
-  setup "0..1" o-- phased_array_setup : direct link to phased array setup is permitted for Tscan datasets
-  ultrasonic_setup "0..n" o-- transmit_law
-  ultrasonic_setup "0..n" o-- receive_law
-  ultrasonic_setup "0..1" o-- phased_array_setup
-  geometric_setup "1..n" o-- ut_probe
-  geometric_setup "1..n" o-- acquisition_trajectory
-  geometric_setup  "0..1" o-- component
-  component <|-- plane
-  component <|-- cylinder
-  component <|-- 2d_cad
-  component <|-- 3d_cad
-  component <|-- weld
-  ut_probe "0..1" o-- ut_elements
-  ut_probe <|-- mono_ut_probe
-  ut_probe <|-- linear_ut_probe
-  ut_probe <|-- matrix_ut_probe
-  ut_probe "1" o-- coupling
-  coupling <|-- wedge
-  coupling <|-- immersion
-  wedge <|-- single_wedge
-  wedge <|-- dual_wedge
-  acquisition_trajectory <|-- time_trajectory
-  acquisition_trajectory <|-- spatial_trajectory
-  acqusition_trajectory "0..1" o-- acquisition_grid
-  phased_array_setup <|-- angle
-  phased_array_setup <|-- sscan
-  phased_array_setup <|-- escan
-  phased_array_setup <|-- compound
-  phased_array_setup <|-- fmc
-  phased_array_setup <|-- pwi
+    dataset <|-- ut_dataset
+    ut_dataset <|-- ascan_dataset
+    ut_dataset <|-- tscan_dataset
+    ut_dataset <|-- cscan_dataset
+    dataset "1" o-- setup
+    cscan_dataset "0..1" o-- tscan_dataset: optional link to raw data
+    cscan_dataset "0..1" o-- ascan_dataset: optional link to raw data
+    cscan_dataset "1" o-- acquisition_grid
+    cscan_dataset "0..1" o-- ut_extraction
+    tscan_dataset "1" o-- ascan_dataset: elementary channels
+    tscan_dataset "1" o-- ut_reconstruction_setup
+    computation <|-- ut_extraction
+    ut_extraction "1..2" o-- ut_gate
+    setup <|-- setup_ut
+    setup "1" o-- geometric_setup
+    setup_ut "0..1" o-- ultrasonic_setup
+    ultrasonic_setup "1..n" o-- transmit_law
+    ultrasonic_setup "0..n" o-- receive_law
+    ultrasonic_setup "0..1" o-- phased_array_setup
+    transmit_law --> ut_probe
+    receive_law --> ut_probe
+    phased_array_setup --> ut_probe: emitter and receiving probes
+    geometric_setup "1..n" o-- probe
+    geometric_setup "1..n" o-- acquisition_trajectory
+    geometric_setup "0..1" o-- component
+    component <|-- plane
+    component <|-- cylinder
+    component <|-- 2d_cad
+    component <|-- 3d_cad
+    component <|-- weld
+    probe <|-- ut_probe
+    ut_probe "0..1" *-- ut_elements: accessory
+    ut_probe <|-- mono_ut_probe
+    ut_probe <|-- linear_ut_probe
+    ut_probe <|-- matrix_ut_probe
+    ut_probe "1" o-- coupling
+    coupling <|-- direct
+    coupling <|-- wedge
+    coupling <|-- immersion
+    wedge <|-- single_wedge
+    wedge <|-- dual_wedge
+    acquisition_trajectory <|-- time_trajectory
+    acquisition_trajectory <|-- spatial_trajectory
+    spatial_trajectory <|-- acquisition_grid
+    acquisition_grid --> component: reference specimen
+    phased_array_setup <|-- angle
+    phased_array_setup <|-- sscan
+    phased_array_setup <|-- escan
+    phased_array_setup <|-- compound
+    phased_array_setup <|-- fmc
+    phased_array_setup <|-- pwi
 
 ```
+
 *Figure 1: Relationships between the different blocks in the data model*
 
-The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional for a given group.
+The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional
+for a given group.
 The diagram in Figure 1 explains the relationships between the different blocks in the data model in an UML style.
 
 Three blocks type contain the data: namely, Ascan, Tscan and CScan (peak-like) blocks. Ascans can be used either to
-describe summed signals or elementary channels data. For Cscan block, it is possible to keep the track to the raw data (
-either Tscan or Ascan) from which the Cscan data originates. For Tscan blocks, it is possible to keep the track to the
+describe summed signals or elementary channels data. For Cscan block, it is possible to keep the track to the raw data
+(either Tscan or Ascan) from which the Cscan data originates. For Tscan blocks, it is possible to keep the track to the
 elementary channels. A link to the setup can be specified: it is attached to the raw data if it is available, to the
 post-processed data (Cscan or Tscan) otherwise.
 
@@ -198,7 +213,8 @@ trajectory, offsets retrieving the set of different probe positions from the tra
 
 ### Relationship between the HDF5 implementation and the data model
 
-The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are described above.
+The mechanisms used in the ONDE specification to map the data model specification to the HDF5 implementation are
+described above.
 
 ### Entry points for navigating files in the UT implementation
 
@@ -210,11 +226,18 @@ ONDE_DATASET_UT_TSCAN or ONDE_DATASET_UT_CSCAN)
 
 When discovering the content of a given file, the following procedure must therefore be applied:
 
-- Read the 'ONDE_FILETYPE' and 'ONDE_VERSION' attributes at root level and verify the compatibility of the version number with the
-  reader, and that the type is that of a UT ONDE file ('ONDE_UT')
+- Read the 'ONDE:FILETYPE' and 'ONDE:VERSION' attributes at root level and verify the compatibility of the version
+  number with the
+  reader, and that the filetype attribute (which is a list/array) contains as one of its elements the string
+  'ONDE_DATASET' indicating that the file is an ONDE file which contains datasets. Optionally, check to see if the file
+  contains modalities supported by the reader via the presence of corresponding tags in the filetype attribute, e.g.
+  'ONDE_UT'.
 - Read all groups in the file and identify the groups corresponding to the datasets blocks by checking
-  which groups have a 'TYPE' attribute whose value is 'ONDE_DATASET_UT_ASCAN', 'ONDE_DATASET_UT_TSCAN', 'ONDE_DATASET_UT_CSCAN'.
-- From there follow the HDF5 references defined in the specification to retrieve the data arrays, the related datasets, the
+  which groups have a 'ONDE:TYPE' attribute whose value is a list starting with 'ONDE_DATASET'. This will identify all
+  ONDE datasets stored in the file. The 'ONDE:TYPE' field is a list that defines the class derivation of the object
+  being represented. Interpret the object based on the rightmost (most derived) class listed that you understand.
+- From there interpret the contents of the HDF5 group according to references defined in the specification to retrieve
+  the data arrays, the related datasets, the
   setup information…
 
 ## Definition of frames
@@ -269,6 +292,11 @@ between frame (O,u,v) and (O',u',v') is expressed in the (O,a,b) frame by the (�
 [^2]: M. Dennis, ECUF Common Ultrasonic Datafile Format, 2018 EPRI Technical Report
 [^3]: S. Holland, Data Models for NDE 4.0 and NDE Digital Twin, Chapter for NDE 4.0 textbook
 
+# Acknowledgements
+
+For its contribution to the ONDE specification, the CEA wishes to acknowledge the support of the BPI-France agency in
+the framework of the DATA4INDUSTRY-X project.
+
 # Appendix A -- conversion from quaternions to matrices
 
 when dealing with 3D orientations, to define the quaternion corresponding to the orientation of one reference frame
@@ -277,11 +305,11 @@ a rotation matrix, R:
 
 $q_{1} = \ \frac{1}{2}\sqrt{1 + r_{1,1} + r_{2,2} + r_{3,3}}$
 
-$q_{2} = \ \frac{1}{2}sign(r_{3,2} - r_{2,3)}$$\sqrt{1 + r_{1,1} - r_{2,2} - r_{3,3}}$
+$q_{2} = \ \frac{1}{2}sign (r_{3,2} - r_{2,3)}$$\sqrt{1 + r_{1,1} - r_{2,2} - r_{3,3}}$
 
-$q_{3} = \ \frac{1}{2}sign(r_{1,3} - r_{3,1)}$$\sqrt{1 - r_{1,1} + r_{2,2} - r_{3,3}}$
+$q_{3} = \ \frac{1}{2}sign (r_{1,3} - r_{3,1)}$$\sqrt{1 - r_{1,1} + r_{2,2} - r_{3,3}}$
 
-$q_{4} = \ \frac{1}{2}sign(r_{2,1} - r_{1,2)}$$\sqrt{1 - r_{1,1} - r_{2,2} + r_{3,3}}$
+$q_{4} = \ \frac{1}{2}sign (r_{2,1} - r_{1,2)}$$\sqrt{1 - r_{1,1} - r_{2,2} + r_{3,3}}$
 
 Where
 

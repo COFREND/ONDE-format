@@ -1,5 +1,5 @@
 onde_class: ONDE_ULTRASONIC_SETUP
-inherits: []
+inherits: [ ]
 description: |-
 
     ### Ultrasonic setup
@@ -168,4 +168,4 @@ fields:
     description: |-
       TCG curve applied to the received signals. The amplitude correction is
       given for each time sample as a multiplying factor.
-    dimensions: '[N_Ascan<m>,N_TCG<m> ]'
+    dimensions: '[N_Ascan<m>,N_Time<m> ]'
