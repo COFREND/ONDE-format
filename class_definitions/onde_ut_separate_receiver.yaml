@@ -1,0 +1,23 @@
+onde_class: ONDE_UT_SEPARATE_RECEIVER
+inherits: []
+description: |-
+    This is an accessory class that represents the idea of pulse echo testing where there is only a single transducer, here labeled the transceiver
+
+fields:
+  EMITTER_PROBE:
+    full_name: ONDE_UT_SEPARATE_RECEIVER:EMITTER_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    short_description: "Index of the transmit (emitter) transducer within the PROBE_LIST of the ONDE_GEOMETRIC_SETUP."
+    description: ''
+    dimensions: '1'
+    
+  RECEIVING_PROBE:
+    full_name: ONDE_UT_SEPARATE_RECEIVER:RECEIVING_PROBE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    short_description: "Index of the receiving transducer within the PROBE_LIST of the ONDE_GEOMETRIC_SETUP."
+    description: ''
+    dimensions: '1'

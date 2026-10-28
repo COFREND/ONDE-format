@@ -13,3 +13,12 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_GEOMETRIC_SETUP>
     description: ''
     dimensions: '1'
+
+  SCENARIO:
+    full_name: ONDE_SETUP:SCENARIO
+    required: true
+    storage: attribute
+    short_description: "Reference to the measurement scenario for this dataset"
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_SCENARIO>
+    description: ''
+    dimensions: '1'

@@ -173,7 +173,7 @@ fields:
     storage: dataset
     hdf5_type: H5T_FLOAT
     short_description: 'The Pulse Repetition Frequency (PRF) for the signals.'
-    description: Pulse Repetition Frequency
+    description: PRF indicates the pulse repetition frequency for each Tx/Rx combination.
     dimensions: '[N_Ascan<m>] or [2]'
   TCG_CURVE:
     full_name: ONDE_ULTRASONIC_SETUP:TCG_CURVE
@@ -185,14 +185,6 @@ fields:
       TCG curve applied to the received signals. The amplitude correction is
       given for each time sample as a multiplying factor.
     dimensions: '[N_Ascan<m>,N_Time<m> ]'
-  PHASED_ARRAY_SETUP:
-    full_name: ONDE_ULTRASONIC_SETUP:PHASED_ARRAY_SETUP
-    required: false
-    storage: attribute
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_PHASED_ARRAY_SETUP>
-    short_description: 'Reference to the associated phased array setup.'
-    description: ''
-    dimensions: '1'
   TRANSMIT_LAW:
     full_name: ONDE_ULTRASONIC_SETUP:TRANSMIT_LAW
     required: true
