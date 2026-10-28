@@ -2,9 +2,9 @@ onde_class: ONDE_MONOELEMENT_SETUP
 inherits: [ONDE_ULTRASONIC_SETUP]
 accessories:
 - ONDE_UT_PULSEECHO
-- ONDE_UT_SEPARATE_RECIEVER
+- ONDE_UT_SEPARATE_RECEIVER
 description: |-
 
     This class represents a configuration using monoelement (non-phased-array) probes.
 
-fields:
+fields: {}

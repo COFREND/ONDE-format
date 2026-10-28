@@ -2,7 +2,7 @@ onde_class: ONDE_PHASED_ARRAY_SETUP
 inherits: [ONDE_SCENARIO]
 accessories:
 - ONDE_UT_PULSEECHO
-- ONDE_UT_SEPARATE_RECIEVER
+- ONDE_UT_SEPARATE_RECEIVER
 description: |-
     ### Ultrasonic phased array scenario base class
 
@@ -19,7 +19,7 @@ description: |-
 
     #### Type of inspection
 
-    This group has no vocation to be exhaustive in terms of electronic configurations (unlike the TRANSMIT_RECIEVER_OR_LAW block that
+    This group has no vocation to be exhaustive in terms of electronic configurations (unlike the TRANSMIT_RECEIVER_OR_LAW block that
     permits any description and is fully generic). However, subclasses are expected to describe the scenario of the various possible phased array tests. In this version of
     the specification, standardized scenarios encompass only the most basic setups.  The propagation mode used for the settings is given
     in SEQUENCE_ANGLE_MODE.
@@ -42,7 +42,7 @@ fields:
     short_description: 'Phased array accessory classes'
     description: ''
     dimensions: '[*]'
-    allowed_values: '["ONDE_UT_PULSEECHO", "ONDE_UT_SEPARATE_RECIEVER"]'
+    allowed_values: '["ONDE_UT_PULSEECHO", "ONDE_UT_SEPARATE_RECEIVER"]'
 
   SEQUENCE_ANGLE_MODE:
     full_name: ONDE_PHASED_ARRAY_SETUP:SEQUENCE_ANGLE_MODE
