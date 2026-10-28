@@ -1,7 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Dict, List, Optional
 
 class OndeField(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     full_name: str
     required: bool = False
     storage: Optional[str] = None
@@ -14,6 +16,8 @@ class OndeField(BaseModel):
     max_value: Optional[str] = None
 
 class OndeClass(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     onde_class: str
     inherits: List[str] = []
     accessories: List[str] = []
@@ -21,7 +25,9 @@ class OndeClass(BaseModel):
     fields: Dict[str, OndeField] = {}
 
 class OndeModality(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     modality: str
     description: str = ""
-    allowed_classes: List[str] = []
+    expected_classes: List[str] = []
     fields: Dict[str, OndeField] = {}
