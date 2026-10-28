@@ -1,0 +1,10 @@
+onde_class: ONDE_SCENARIO_UT_MONOELEMENT
+inherits: [ONDE_SCENARIO]
+accessories:
+- ONDE_UT_PULSEECHO
+- ONDE_UT_SEPARATE_RECEIVER
+description: |-
+
+    This class represents a configuration using monoelement (non-phased-array) probes.
+
+fields: {}

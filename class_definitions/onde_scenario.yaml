@@ -1,0 +1,8 @@
+onde_class: ONDE_SCENARIO
+inherits: []
+description: |
+  The ONDE_SCENARIO is a base class for conceptual descriptions of a particular inspection scenario, ie. the idea behind a measurement and the relevant parameters of that idea.
+
+  The scenario describes what is being accomplished; the more basic information in the setup classes describes how the acquisition equipment is configured to achieve the measurement. That said, there is not necessarily an obvious and clear dividing line between what should be in the two locations. In general, if a acquisition system parameter is relevant in more than one acquisition scenario, it should probably be documented in the setup classes, rather than part of the scenario.
+
+  The idea of this class is that are subclasses for common NDE scenarios and accessory classes for common information elements. Custom subclasses can also be defined for situations not anticipated by the standard scenarios. One should only subclass a standard scenario if the standard scenario provides a reasonable and accurate interpretation of the data, because readers that do not understand the subclass may present the data in the context of the parent. So subclasses of standard scenarios are primarily useful for providing additional information that might be missing in the standard, not for documenting non-standard modifications to the scenarios.
