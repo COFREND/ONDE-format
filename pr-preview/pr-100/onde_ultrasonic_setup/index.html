@@ -2644,6 +2644,32 @@ zero-padding the data block.</p>
 <details class="field-details">
 <summary>
 <div class="field-summary-header">
+  <strong class="field-name" id="onde_ultrasonic_setup-acquisition_gain"><code>ACQUISITION_GAIN</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
+  <span class="req-badge req-yes">Required</span>
+
+</div>
+
+<div class="field-summary-desc">The instrument hardware gain used during the acquisition.</div>
+
+<table class="field-meta-table">
+<tbody>
+    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
+    <tr><td>Dimensions:</td><td><code>[ N_Ascan&lt;m&gt; ]</code></td></tr>
+
+
+
+  </tbody>
+</table>
+</summary>
+<div class="field-content">
+<p>This value represents the instrument hardware gain 
+within the acquistion. This is the total gain for each A-scan.     </p>
+</div>
+</details>
+<details class="field-details">
+<summary>
+<div class="field-summary-header">
   <strong class="field-name" id="onde_ultrasonic_setup-adc_bit_depth"><code>ADC_BIT_DEPTH</code></strong>
   <span class="field-type" markdown="span">H5T_INT</span>
   <span class="req-badge req-no">Optional</span>
@@ -2670,44 +2696,18 @@ during the digitizing of the waveform in the acquistion.</p>
 <details class="field-details">
 <summary>
 <div class="field-summary-header">
-  <strong class="field-name" id="onde_ultrasonic_setup-applied_hardware_gain"><code>APPLIED_HARDWARE_GAIN</code></strong>
-  <span class="field-type" markdown="span">H5T_INT</span>
+  <strong class="field-name" id="onde_ultrasonic_setup-analysis_gain"><code>ANALYSIS_GAIN</code></strong>
+  <span class="field-type" markdown="span">H5T_FLOAT</span>
   <span class="req-badge req-no">Optional</span>
 
 </div>
 
-<div class="field-summary-desc">The instrument hardware gain used during the acquisition.</div>
+<div class="field-summary-desc">The software gain setting used during data analysis and after acquisition.</div>
 
 <table class="field-meta-table">
 <tbody>
     <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
-
-
-
-  </tbody>
-</table>
-</summary>
-<div class="field-content">
-<p>This value represents the instrument hardware gain 
-within the acquistion.     </p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-header">
-  <strong class="field-name" id="onde_ultrasonic_setup-applied_software_gain"><code>APPLIED_SOFTWARE_GAIN</code></strong>
-  <span class="field-type" markdown="span">H5T_INT</span>
-  <span class="req-badge req-no">Optional</span>
-
-</div>
-
-<div class="field-summary-desc">The instrument software gain setting used during the acquisition.</div>
-
-<table class="field-meta-table">
-<tbody>
-    <tr><td>Storage:</td><td><span markdown="span">attribute</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>1</code></td></tr>
+    <tr><td>Dimensions:</td><td><code>[ N_Ascan&lt;m&gt; ]</code></td></tr>
 
 
 
@@ -2716,7 +2716,7 @@ within the acquistion.     </p>
 </summary>
 <div class="field-content">
 <p>This value represents the instrument applied software gain 
-within the acquistion.     </p>
+within the acquistion. This is the software gain for each A-scan    </p>
 </div>
 </details>
 <details class="field-details">
@@ -2847,32 +2847,6 @@ detailed explanation</p>
 <div class="field-content">
 <p>Defines the type of filtering applied to the signals: NO_FILTER,
 LOW_PASS, HIGH_PASS, BAND_PASS, OTHER</p>
-</div>
-</details>
-<details class="field-details">
-<summary>
-<div class="field-summary-header">
-  <strong class="field-name" id="onde_ultrasonic_setup-gain"><code>GAIN</code></strong>
-  <span class="field-type" markdown="span">H5T_FLOAT</span>
-  <span class="req-badge req-yes">Required</span>
-
-</div>
-
-<div class="field-summary-desc">The total gain applied for each A-scan during reception.</div>
-
-<table class="field-meta-table">
-<tbody>
-    <tr><td>Storage:</td><td><span markdown="span">dataset</span></td></tr>
-    <tr><td>Dimensions:</td><td><code>[ N_Ascan&lt;m&gt; ]</code></td></tr>
-
-
-
-  </tbody>
-</table>
-</summary>
-<div class="field-content">
-<p>This indicates the total gain for each A-scan during
-reception. Multiplying factor that was applied at acquisition.</p>
 </div>
 </details>
 <details class="field-details empty-details">
