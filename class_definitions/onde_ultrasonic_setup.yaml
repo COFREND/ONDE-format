@@ -163,16 +163,6 @@ fields:
       signals). If missing impulse emission at time 0.0 is assumed. 2D Array
       with one row for time and one for amplitude.
     dimensions: '[N_TSig<m>,2]'
-  GAIN:
-    full_name: ONDE_ULTRASONIC_SETUP:GAIN
-    required: true
-    storage: dataset
-    hdf5_type: H5T_FLOAT
-    short_description: 'The total gain applied for each A-scan during reception.'
-    description: |-
-      This indicates the total gain for each A-scan during
-      reception. Multiplying factor that was applied at acquisition.
-    dimensions: '[ N_Ascan<m> ]'
   ADC_BIT_DEPTH:
     full_name: ONDE_ULTRASONIC_SETUP:ADC_BIT_DEPTH
     required: false
@@ -183,26 +173,26 @@ fields:
       This value represents the amount of bits used in the ADC 
       during the digitizing of the waveform in the acquistion.
     dimensions: '1'
-  APPLIED_HARDWARE_GAIN:
-    full_name: ONDE_ULTRASONIC_SETUP:APPLIED_HARDWARE_GAIN
-    required: false
+  ACQUISITION_GAIN:
+    full_name: ONDE_ULTRASONIC_SETUP:ACQUISITION_GAIN
+    required: true
     storage: attribute
-    hdf5_type: H5T_INT
+    hdf5_type: H5T_FLOAT
     short_description: 'The instrument hardware gain used during the acquisition.'
     description: |-
       This value represents the instrument hardware gain 
-      within the acquistion.     
-    dimensions: '1'
-  APPLIED_SOFTWARE_GAIN:
-    full_name: ONDE_ULTRASONIC_SETUP:APPLIED_SOFTWARE_GAIN
+      within the acquistion. This is the total gain for each A-scan.     
+    dimensions: '[ N_Ascan<m> ]'
+  ANALYSIS_GAIN:
+    full_name: ONDE_ULTRASONIC_SETUP:ANALYSIS_GAIN
     required: false
     storage: attribute
-    hdf5_type: H5T_INT
-    short_description: 'The instrument software gain setting used during the acquisition.'
+    hdf5_type: H5T_FLOAT
+    short_description: 'The software gain setting used during data analysis and after acquisition.'
     description: |-
       This value represents the instrument applied software gain 
-      within the acquistion.     
-    dimensions: '1'
+      within the acquistion. This is the software gain for each A-scan    
+    dimensions: '[ N_Ascan<m> ]'
   PRF:
     full_name: ONDE_ULTRASONIC_SETUP:PRF
     required: false
