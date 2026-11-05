@@ -134,33 +134,4 @@ fields:
       This value represents the maximum possible raw or digitized value for the
       dataset used within the acquisition.
     dimensions: '1'
-  UNIT_MIN:
-    full_name: ONDE_DATASET:UNIT_MIN
-    required: true
-    storage: attribute
-    hdf5_type: H5T_FLOAT
-    short_description: 'Minimum possible value for the dataset in the corresponding unit.'
-    description: |-
-      This value represents the minimum possible value for the dataset scaled to
-      the corresponding physical or engineering unit.
-    dimensions: '1'
-  UNIT_MAX:
-    full_name: ONDE_DATASET:UNIT_MAX
-    required: true
-    storage: attribute
-    hdf5_type: H5T_FLOAT
-    short_description: 'Maximum possible value for the dataset in the corresponding unit.'
-    description: |-
-      This value represents the maximum possible value for the dataset scaled to
-      the corresponding physical or engineering unit.
-    dimensions: '1'
-  UNIT_TYPE:
-    full_name: ONDE_DATASET:UNIT_TYPE
-    required: true
-    storage: attribute
-    hdf5_type: H5T_STRING
-    short_description: 'The units of the dataset collected in the acquisition.'
-    description: |-
-      Specifies the engineering or physical unit applied to the dataset
-      (e.g., "Percent", "Seconds", "Volts", "dB").
-    dimensions: '1'
+  
