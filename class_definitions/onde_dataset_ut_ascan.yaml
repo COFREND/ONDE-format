@@ -10,6 +10,8 @@ description: |-
     To allow continuity with existing HDF5 formats, the DATA field can be either
     a HDF5 dataset or a reference to a dataset located in another part of the
     HDF5 structure.
+
+    It is required that the valid portion of data (specified by DATA_VALID) for a single A-scan be limited to a single contiguous block.
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
