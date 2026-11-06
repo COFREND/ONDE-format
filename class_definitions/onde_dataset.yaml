@@ -114,3 +114,24 @@ fields:
       One entry per dimension of ONDE_DATASET:DATA. Any that are absent are
       treated as coordinate "Time", units "seconds", offset 0.0, scale 1.0
     dimensions: '[n_data_dims]'
+  MIN:
+    full_name: ONDE_DATASET:MIN
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    short_description: 'The minimum possible value for the ONDE_DATASET.'
+    description: |-
+      This value represents the minimum possible raw or digitized value for the
+      dataset used within the acquisition.
+    dimensions: '1'
+  MAX:
+    full_name: ONDE_DATASET:MAX
+    required: true
+    storage: attribute
+    hdf5_type: H5T_INTEGER
+    short_description: 'The maximum possible value for the ONDE_DATASET.'
+    description: |-
+      This value represents the maximum possible raw or digitized value for the
+      dataset used within the acquisition.
+    dimensions: '1'
+  
