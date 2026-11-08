@@ -94,6 +94,20 @@ fields:
       field is possible, in the event when Tscan or Cscan data is recorded but
       the underlying Ascan data is not. The dimensions of the dataset are
       application dependent, subclasses can override and specify the dimensions.
+  DATA_VALID:
+    full_name: ONDE_DATASET:DATA_VALID
+    required: false
+    storage: D
+    hdf5_type: H5T_ENUM that maps 0 to FALSE and 1 to TRUE on a 1 byte integer
+    short_description: Data validity mask that indicates that the corresponding data element is valid if the mask is TRUE.
+    description: |-
+      This field is used to identify portions of the data array that do not correspond to valid data. For example, if acquisition failed for a particular A-scan, fill the corresponding entry(s) in the DATA_VALID array with FALSE.
+
+      The DATA_VALID array should have the same number of dimensions as the DATA array, but some of these dimensions can be singleton (length 1) indicating broadcast along that dimension. For example, the final DATA dimension in an A-scan dataset corresponds to time. If the last dimension of the DATA_VALID array is length 1, then each A-scan is either all valid or all invalid. If the last dimension length instead matches the corresponding DATA dimension length, then that would allow each sample of the A-scan to be marked independently as valid or invalid. (Note that the ONDE_DATASET_UT_ASCAN specifies that there can be only one contiguous valid portion of each A-scan. For example, 000111000 would be acceptable, but not 011001100)
+
+      In general, unless otherwise specified, invalid portions of the DATA field should be filled with zeros for integer data types or with not-a-number (NaN) for floating-point data types. If a large number of invalid entries are anticipated then consider using HDF5 compression for the DATA field (and perhaps also the DATA_VALID field) to avoid wasting storage space.
+
+      If DATA_VALID is not specified, then it is assumed that all DATA entries are valid.
   AMPLITUDE_DIMENSION:
     full_name: ONDE_DATASET:AMPLITUDE_DIMENSION
     required: false
