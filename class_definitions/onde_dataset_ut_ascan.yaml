@@ -23,9 +23,7 @@ description: |-
   another. For example, an Ascan dataset starting 10 µs before the first peak
   detected in a wider acquisition window references a gate with a START of
   -10 µs, synchronized on a gate covering the wider window with a DETECTION of
-  FIRST_PEAK. The actual start time of each Ascan is not stored: it is
-  obtained by applying the detection of the source gate to the Ascans from
-  which the dataset originates.
+  FIRST_PEAK. The actual start time of each Ascan is stored in the ACTUAL_ASCAN_START field.
 fields:
   DATA:
     full_name: ONDE_DATASET:DATA
