@@ -28,6 +28,11 @@ def generate_csv(output_csv='build/ONDE_fields.csv'):
             else:
                 classes_data.append(data)
             
+    # Accessory classes are the ones listed in the accessories of another class
+    accessory_classes = set()
+    for c_data in classes_data:
+        accessory_classes.update(c_data.get('accessories') or [])
+
     # Inject TYPE fields dynamically based on inheritance for classes
     def get_inheritance_chain_dict(c_name, visited=None):
         """returns inheritance list with base class first"""
@@ -136,6 +141,9 @@ def generate_csv(output_csv='build/ONDE_fields.csv'):
                 if ref_target:
                     hdf5_type = f"{hdf5_type}<{ref_target}>"
                     
+                # An accessory class is flagged on its ONDE:TYPE row
+                is_accessory = cls_name in accessory_classes and field.get('full_name') == 'ONDE:TYPE'
+
                 row = [
                     cls_name,
                     field.get('full_name', ''),
@@ -147,7 +155,7 @@ def generate_csv(output_csv='build/ONDE_fields.csv'):
                     field.get('allowed_values', ''),
                     field.get('min_value', ''),
                     field.get('max_value', ''),
-                    ''
+                    'True' if is_accessory else ''
                 ]
                 
                 # Format without strict CSV quoting to preserve intended json-like arrays and pipe-separations
