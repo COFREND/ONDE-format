@@ -41,6 +41,21 @@ fields:
     short_description: A name or label representing this dataset.
     description: A name for this dataset
     dimensions: '1'
+  UUID:
+    full_name: ONDE:UUID
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    description: |
+      The UUID field is a mandatory  universally unique identifier. This field is intended to uniquely identify this dataset among all others that have ever been created or ever will be created, even those with exactly the same content. This field is stored as a string.
+
+      For compatibility with future improvements to the specification, readers should treat the strings as opaque sequences of characters. Readers should  be able to accommodate strings of up to 512 characters and  consisting of the following ASCII characters: 0-9, a-z, A-Z, and the following 19 symbols: ";/?:@&=+$,-_.!~*'()" (not including the double quote).
+
+      This version of the ONDE specification defines a single format for the UUID based on ISO/IEC 9834-8/ITU X.667. The UUID should consist of the string "urn:uuid:" followed by the hexadecimal representation of a 128 bit unique identifier. The hexadecimal representation should use only lower case letters, and there should be dashes ("-") after the 8th, 12th, 16th, and  20th hexadecimal digits. For example, "urn:uuid:01234567-89ab-cdef-0123-456789abcdef".
+
+      The recommended procedure for generating the 128 bit identifier is to follow [ISO/IEC 9834-8/ITU X.667](https://www.itu.int/rec/T-REC-X.667-201210-I/en), however any procedure (such as applying a cryptographic hash to unique information such as equipment serial number combined with time) that can guarantee an infintesmial probability of multiple datasets being given the same UUID is sufficient.
+      
+    dimensions: '1'
   SETUP:
     full_name: ONDE_DATASET:SETUP
     required: true

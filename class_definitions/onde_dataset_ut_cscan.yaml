@@ -1,43 +1,43 @@
 onde_class: ONDE_DATASET_UT_CSCAN
 inherits:
-- ONDE_DATASET_UT
+  - ONDE_DATASET_UT
 description: |+
-    ### CScan datasets
-
-    CScan datasets are the entry points for the description of data that is
-    stored as scalar values. The data can come either from Ascan or Tscan data
-    through an extraction process. The extraction process is described in the 
-    ONDE_UT_EXTRACTION block. 
-    The size of the data can be either N_U<m> x N_V<m> x N_Ascan<m> arrays
-    (for data resulting from multiple scans at each point) or N_U<m> x N_V<m> 
-    arrays (for data resulting from monoelement scans). The data is
-     always stored in a 3-dimensional dataset of dimensions [N_U<m>, N_V<m>, N_Ascan<m>].
-     In the monoelement case, the third dimension is of size 1. 
-    The data is positioned through a trajectory block which is of grid type
-     and is referenced by the CSCAN_GRID attribute.
-     
-    #### Data positioning
-
-    The Cscan data must be positioned through a trajectory block which is of
-    grid type and is referenced by the CSCAN_GRID attribute.
-
-    #### Underlying raw data
-
-    UNDERLYING_DATA is used to point to the dataset that corresponds to the
-    originating raw data. LINKED_DATASET_REFERENCE gives the correspondence
-    between the scalar data and the originating scan. For a A-Scan, the
-    correspondence to the scan is expressed in terms of (dataframe, law). For a
-    2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
-    (dataframe, plane, column).
-
-    #### Gates and extractions
-
-    The gates are stored as a separate group of type ONDE_UT_GATE. 
-    The extraction process explaining how the Cscan data is obtained from the underlying data is described in the
-    ONDE_UT_EXTRACTION block. The extraction can be either a scalar value or an enumeration. The extraction relates to list of *ONDE_UT_GATE*, called
-    GATE_LIST which can be of size 1 or 2 : 1. If the list is of size 1,  the gate defines the time window for 
-    the extraction. 2. If the list is of size 2,  the extracted value is the difference between the two extractions, each defined by a gate. The nature of  
-    the extraction  can be either *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*. 
+  ### CScan datasets
+  
+  CScan datasets are the entry points for the description of data that is
+  stored as scalar values. The data can come either from Ascan or Tscan data
+  through an extraction process. The extraction process is described in the 
+  ONDE_UT_EXTRACTION block. 
+  The size of the data can be either N_U<m> x N_V<m> x N_Ascan<m> arrays
+  (for data resulting from multiple scans at each point) or N_U<m> x N_V<m> 
+  arrays (for data resulting from monoelement scans). The data is
+   always stored in a 3-dimensional dataset of dimensions [N_U<m>, N_V<m>, N_Ascan<m>].
+   In the monoelement case, the third dimension is of size 1. 
+  The data is positioned through a trajectory block which is of grid type
+   and is referenced by the CSCAN_GRID attribute.
+  
+  #### Data positioning
+  
+  The Cscan data must be positioned through a trajectory block which is of
+  grid type and is referenced by the CSCAN_GRID attribute.
+  
+  #### Underlying raw data
+  
+  UNDERLYING_DATA is used to point to the dataset that corresponds to the
+  originating raw data. LINKED_DATASET_REFERENCE gives the correspondence
+  between the scalar data and the originating scan. For a A-Scan, the
+  correspondence to the scan is expressed in terms of (dataframe, law). For a
+  2D Tscan, it will be (dataframe, column), for a 3D Tscan, it will be
+  (dataframe, plane, column).
+  
+  #### Gates and extractions
+  
+  The gates are stored as a separate group of type ONDE_UT_GATE. 
+  The extraction process explaining how the Cscan data is obtained from the underlying data is described in the
+  ONDE_UT_EXTRACTION block. The extraction can be either a scalar value or an enumeration. The extraction relates to list of *ONDE_UT_GATE*, called
+  GATE_LIST which can be of size 1 or 2 : 1. If the list is of size 1,  the gate defines the time window for 
+  the extraction. 2. If the list is of size 2,  the extracted value is the difference between the two extractions, each defined by a gate. The nature of  
+  the extraction  can be either *TIME_OF_FLIGHT*, *AMPLITUDE*, *DEPTH* or *ALARM*. 
 
 fields:
   DATA:
@@ -48,14 +48,14 @@ fields:
     short_description: Reference to an array containing the Cscan data or array containing the CScan data.
     description: |-
       The field contains either an array containing the CScan data (3D hdf5 dataset) or a reference to this array (hdf5 reference stored as an attribute).
-      Dimensions of this array are [N_U<m>, N_V<m>, N_A<m>], N_A<m> being the number of scans at each point. 
+      Dimensions of this array are [N_U<m>, N_V<m>, N_Ascan<m>]
       In the case of monoelement scans, the third dimension is therefore of size 1.
-    dimensions: '1 or [N_U<m>,N_V<m>,N_A<m>]'
+    dimensions: '1 or [N_U<m>,N_V<m>,N_Ascan<m>]'
   UNDERLYING_DATA:
     full_name: ONDE_DATASET_UT_CSCAN:UNDERLYING_DATA
     required: false
     storage: attribute
-    hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_ASCAN_DATASET> or H5T_STD_REF_OBJ<ONDE_UT_TSCAN_DATASET>
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_DATASET_UT_ASCAN> or H5T_STD_REF_OBJ<ONDE_DATASET_UT_TSCAN>
     short_description: A reference to the dataset containing the originating underlying raw data.
     description: reference to the dataset containing the underlying data
     dimensions: '1'
@@ -80,11 +80,11 @@ fields:
     description: ''
     dimensions: '1'
   EXTRACTION:
-    full_name: ONDE_DATASET_UT_CSCAN:ONDE_UT_EXTRACTION
+    full_name: ONDE_DATASET_UT_CSCAN:EXTRACTION
     required: false
     storage: attribute
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_EXTRACTION>
-    description: |- 
+    description: |-
       The referenced object describes the extraction process that was used 
       to obtain the Cscan data from the underlying data.
     dimensions: '1'

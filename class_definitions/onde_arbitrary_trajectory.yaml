@@ -1,0 +1,41 @@
+onde_class: ONDE_ARBITRARY_TRAJECTORY
+inherits:
+- ONDE_SPATIAL_TRAJECTORY
+description: |-
+  ### Arbitrary trajectory
+  
+  The arbitrary spatial trajectory is a list of positions and orientations of the
+  acquisition frame. It is given in the global reference frame.  ONDE format
+  gives the possibility to describe a generic trajectory, as well as a grid
+  trajectory (1D or 2D) for which the acquisition grid is defined. When the
+  grid trajectory is defined, the Spatial trajectory is subtyped in the
+  ONDE_ACQUISITION_GRID class, which inherits from the ONDE_SPATIAL_TRAJECTORY
+  class. The array describing the list of positions and orientations is stored
+  in the TRAJECTORY field. It is a 3D array of size [N_U<m>,7], where
+  N_U is the number of positions. The last dimension of size 7 corresponds to the position
+  (x,y,z) and the orientation (quaternion q0,q1,q2,q3) of the acquisition
+  frame at each position.
+  
+  #### Notes
+  
+fields:
+  INTENDED_TRAJECTORY:
+    full_name: ONDE_ARBITRARY_TRAJECTORY:INTENDED_TRAJECTORY
+    required: false
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    short_description: A 3D array detailing the positions and orientations of the acquisition frame across the trajectory. Each point is defined by 3D coordinates and a quaternion.
+    description: |-
+      List of positions and quaternions giving the positions and orientations of
+      the trajectory frame at the different positions
+    dimensions: '[N_U<m>,7]'
+  ACTUAL_TRAJECTORY:
+    full_name: ONDE_ARBITRARY_TRAJECTORY:ACTUAL_TRAJECTORY
+    required: true
+    storage: dataset
+    hdf5_type: H5T_FLOAT
+    short_description: A 3D array detailing the actual measured positions and orientations of the acquisition frame across the trajectory. 
+    description: |-
+      List of positions and quaternions giving the actual measured positions and orientations of
+      the trajectory frame at the different positions. This field is mandatory and can be used to store the actual measured trajectory, which may differ from the intended trajectory due to various factors such as mechanical inaccuracies or environmental influences.
+    dimensions: '[N_U<m>,7]'

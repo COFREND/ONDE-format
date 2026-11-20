@@ -157,12 +157,12 @@ MODALITY_TEMPLATE = """\
 </div>
 {% endif %}
 
-{% if mod.allowed_classes %}
+{% if mod.expected_classes %}
 ## Classes of Relevance
 
 The following classes are allowed in this modality in order:
 
-{% for c_name, c_link in allowed_classes_links -%}
+{% for c_name, c_link in expected_classes_links -%}
 {% if c_link %}- [{{ c_name }}]({{ c_link }}){% else %}- {{ c_name }}{% endif %}
 {% endfor %}
 {% endif %}
@@ -717,6 +717,8 @@ details.field-details[open] > summary {
     if os.path.isfile(data_model_src):
         with open(data_model_src, 'r', encoding='utf-8') as f:
             dm_content = f.read()
+        # overview.md is published as the site index
+        dm_content = dm_content.replace('(overview.md)', '(index.md)')
         with open(os.path.join(docs_dir, 'data_model.md'), 'w', encoding='utf-8') as f:
             f.write(dm_content)
             
@@ -798,16 +800,16 @@ details.field-details[open] > summary {
                     }
                     fields_meta.append((fname, meta))
                     
-                allowed_classes_links = []
-                for c_name in mod_obj.allowed_classes:
+                expected_classes_links = []
+                for c_name in mod_obj.expected_classes:
                     to_chain = get_inheritance_chain(c_name)
                     link = "../" + "/".join(c.lower() for c in to_chain) + "/index.md" if to_chain else ""
-                    allowed_classes_links.append((c_name, link))
+                    expected_classes_links.append((c_name, link))
                     
                 md_content = Template(MODALITY_TEMPLATE).render(
                     mod=mod_obj,
                     fields_meta=fields_meta,
-                    allowed_classes_links=allowed_classes_links
+                    expected_classes_links=expected_classes_links
                 )
                 f.write(md_content)
             nav_lines.append(f"    - {mod_name}: implementations/{mod_filename}")

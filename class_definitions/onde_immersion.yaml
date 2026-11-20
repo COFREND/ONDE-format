@@ -1,7 +1,12 @@
 onde_class: ONDE_IMMERSION
 inherits:
 - ONDE_UT_COUPLING
-description: ''
+description: |
+  This class describes the case of an immersion control. It describes the orientation of the ultrasonic wave
+  and the properties of the coupling medium between the probe and the inspected component. 
+  The immersion coupling medium can be a liquid, gel, or any other 
+  material that facilitates the transmission of ultrasonic waves from the probe to the test piece.
+
 fields:
   WATER_PATH:
     full_name: ONDE_IMMERSION:WATER_PATH
@@ -10,4 +15,28 @@ fields:
     hdf5_type: H5T_FLOAT
     short_description: "The designated path length through the water couplant during immersion."
     description: ''
+    dimensions: '1'
+  INCIDENCE_ANGLE:
+    full_name: ONDE_IMMERSION:INCIDENCE_ANGLE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The angle of incidence of the acoustic wave as it enters the specimen."
+    dimensions: '1'
+  MEDIUM_VELOCITY:
+    full_name: ONDE_IMMERSION:MEDIUM_VELOCITY
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The velocity of the acoustic waves propagating within the coupling medium."
+    dimensions: '[2]'
+  MEDIUM_DENSITY:
+    full_name: ONDE_IMMERSION:MEDIUM_DENSITY
+    required: false
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: ''
+    short_description: "The density of the coupling medium."
     dimensions: '1'

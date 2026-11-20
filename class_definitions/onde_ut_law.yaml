@@ -1,16 +1,16 @@
 onde_class: ONDE_UT_LAW
-inherits: []
+inherits: [ ]
 description: |-
-    ### Law
-
-    For multielements, these groups describe the settings of a given transmit or receive law. PROBE and ELEMENT give the
-    probe and element number to which the DELAY and WEIGHTING apply.
-
-    The format also allows to store an information about the corresponding ultrasonic path.
-
-    PROPAGATION_LINE represents the ultrasonic ray along which the data is to be represented in a true visualisation. It
-    contains at least two points in the Probe Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
-    positions in Probe Coordinate Frame and time of flight are stored.
+  ### Law
+  
+  For multielements, these groups describe the settings of a given transmit or receive law. PROBE and ELEMENT give the
+  probe and element number to which the DELAY and WEIGHTING apply.
+  
+  The format also allows to store an information about the corresponding ultrasonic path.
+  
+  PROPAGATION_LINE represents the ultrasonic ray along which the data is to be represented in a true visualisation. It
+  contains at least two points in the Probe Coordinates Frame corresponding to the start and end of the ray. (x,y,z)
+  positions in Probe Coordinate Frame and time of flight are stored.
 fields:
   PROBE:
     full_name: ONDE_UT_LAW:PROBE
@@ -19,7 +19,7 @@ fields:
     hdf5_type: H5T_STD_REF_OBJ<ONDE_UT_PROBE>
     short_description: 'A reference to the ultrasonic probe used in this focal law.'
     description: ''
-    dimensions: '[N_C<k>]'
+    dimensions: '[N_Comb<k>]'
   ELEMENT:
     full_name: ONDE_UT_LAW:ELEMENT
     required: true
@@ -27,7 +27,7 @@ fields:
     hdf5_type: H5T_INTEGER
     short_description: 'The index or identifier of the probe element used in this focal law.'
     description: ''
-    dimensions: '[N_C<k>]'
+    dimensions: '[N_Comb<k>]'
   DELAY:
     full_name: ONDE_UT_LAW:DELAY
     required: false
@@ -38,7 +38,7 @@ fields:
       Specifies the relative delay (in ultrasonic time) between the different
       Probe Element Combinations in the focal law. The default value is zero
       delay for all Probe Element Combinations.
-    dimensions: '[N_C<k>]'
+    dimensions: '[N_Comb<k>]'
   WEIGHTING:
     full_name: ONDE_UT_LAW:WEIGHTING
     required: false
@@ -48,7 +48,7 @@ fields:
     description: |-
       Specifies the weighting between the different Probe Element Combinations
       in the focal law. The default is one for all Probe Element Combinations.
-    dimensions: '[N_C<k>]'
+    dimensions: '[N_Comb<k>]'
   PROPAGATION_LINE:
     full_name: ONDE_UT_LAW:PROPAGATION_LINE
     required: false
