@@ -4,17 +4,23 @@ on:
   push:
     branches:
       - main
+      - next_minor
+      - next_major
+    tags:
+      - 'v*'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # every published branch and tag is built
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,10 +34,49 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          python tools/generate_docs.py
+          python tools/generate_site.py
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Site Artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/docs/site
+          name: versioned-site
+          path: build/site
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    concurrency:
+      group: docs-deploy
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Remove Previous Site
+        run: |
+          git rm -r -q --ignore-unmatch -- . ':(exclude)pr-preview'
+
+      - name: Download Site Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: versioned-site
+          path: .
+
+      - name: Commit and Push
+        run: |
+          # upload-artifact drops hidden files
+          touch .nojekyll
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "deploy: ${{ github.sha }}" || echo "No changes to commit"
+          # a PR preview may have been published in the meantime
+          git push || (git pull --rebase && git push)

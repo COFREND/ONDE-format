@@ -27,7 +27,7 @@ jobs:
         
       - name: Generate ONDE Documentation and CSV
         run: |
-          python tools/generate_docs.py
+          python tools/generate_site.py --pr-preview ${{ github.event.number }}
           python tools/generate_csv.py
           
       - name: Capture PR Metadata

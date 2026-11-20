@@ -10,7 +10,8 @@ In order to achieve these objectives, it is based on the HDF5 library.
 The present repository contains the Single Source of Truth (SSOT) for the data model in the `class_definitions/` directory. The specification is defined through a series of YAML files. Each YAML file contains both the machine-readable metadata defining the HDF5 structure as well as the human-readable Markdown narrative explaining the concepts.
 
 The human-readable version resulting from this SSOT is available here : [https://cofrend.github.io/ONDE-format/](https://cofrend.github.io/ONDE-format/).
-This version of the specification is the latest one available.
+This link opens the latest released version of the specification.
+Earlier releases and the development versions (`next_minor` and `next_major`) can be selected from the version drop-down in the header of each page.
 
 At this stage, only ultrasound testing is considered.
 It will be completed in the future by an extension to Eddy Current testing and by python tools allowing to check the compliance of a file to the specification.
@@ -31,6 +32,10 @@ The documentation is built using MkDocs. You can render it locally using the pro
 
 The generated documentation site will be available in the `build/docs/site/` directory.
 
+The published site, which contains every release and the development versions, is assembled by `python tools/generate_site.py`.
+It builds each release tag and the `next_minor` and `next_major` branches from the `origin` remote into `build/site/`.
+Serve it with `python -m http.server -d build/site`, because the version selector needs HTTP.
+
 ## CSV Export for Automated Tooling
 
 While the Single Source of Truth for the specification is defined using the individual YAML files in the `class_definitions/` directory, navigating multiple YAML files can become cumbersome for quick import or validation purposes in automated tooling.
@@ -43,6 +48,8 @@ python tools/generate_csv.py
 ```
 
 The generated CSV file will be available at `build/ONDE_fields.csv` locally.
+
+The CSV file of a specific version is available at `https://COFREND.github.io/ONDE-format/<version>/ONDE_fields.csv`, for example `v0.9.2` or `next_minor`. The link above always gives the latest release.
 
 ## Instructions for contributors
 
