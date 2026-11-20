@@ -66,11 +66,11 @@ classDiagram
 <div class="field-summary-header" markdown="span">
   <strong class="field-name" id="{{ cls.onde_class | lower }}-{{ name | lower | replace(' ', '-') }}"><code>{{ name }}</code></strong>
   <span class="field-type" markdown="span">{{ f.html_type }}</span>
-  {% if f.req_str == 'Yes' %}<span class="req-badge req-yes">Required</span>{% else %}<span class="req-badge req-no">Optional</span>{% endif %}
+  {% if f.req_str == 'Yes' %}<span class="req-badge req-yes">Required</span>{% elif f.req_str == 'With accessory' %}<span class="req-badge req-cond">Required with accessory</span>{% else %}<span class="req-badge req-no">Optional</span>{% endif %}
   {% if f.is_inherited %}
     <span class="inherited-badge" markdown="span">Inherited from [{{ f.source }}]({{ f.source | lower }}.md)</span>
   {% elif f.is_accessory %}
-    <span class="accessory-badge" markdown="span">From accessory class [{{ f.source }}]({{ f.source | lower }}.md)</span>
+    <span class="accessory-badge" markdown="span">From {{ 'optional' if f.accessory_optional else 'required' }} accessory class [{{ f.source }}]({{ f.source | lower }}.md)</span>
   {% endif %}
 </div>
 {% if f.short_desc %}
@@ -377,6 +377,11 @@ details.field-details > summary .field-summary-header .req-yes {
     color: #d32f2f;
     border: 1px solid rgba(220, 53, 69, 0.2);
 }
+details.field-details > summary .field-summary-header .req-cond {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #bf360c;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
 details.field-details > summary .field-summary-header .req-no {
     background-color: rgba(108, 117, 125, 0.1);
     color: #6c757d;
@@ -573,7 +578,7 @@ details.field-details[open] > summary {
         mermaid_graph = "\n".join(mermaid_lines)
         
         # Prepare template variables
-        def get_all_fields(c_name, visited=None, branch_type=None):
+        def get_all_fields(c_name, visited=None, branch_type=None, acc_required=None):
             if visited is None: visited = set()
             if c_name in visited or c_name not in parsed_classes: return {}
             visited.add(c_name)
@@ -582,15 +587,17 @@ details.field-details[open] > summary {
             all_f = {}
             
             for parent in getattr(c_obj, 'inherits', []):
-                for k, v in get_all_fields(parent, visited, branch_type or 'inherited').items():
+                for k, v in get_all_fields(parent, visited, branch_type or 'inherited', acc_required).items():
                     all_f[k] = v
                     
-            for acc in getattr(c_obj, 'accessories', []):
-                for k, v in get_all_fields(acc, visited, 'accessory').items():
+            for acc, acc_obj in getattr(c_obj, 'accessories', {}).items():
+                # An accessory of an optional accessory class is itself optional
+                required = acc_obj.required and acc_required is not False
+                for k, v in get_all_fields(acc, visited, 'accessory', required).items():
                     all_f[k] = v
                     
             for k, v in c_obj.fields.items():
-                all_f[k] = {'field': v, 'source': c_name, 'branch_type': branch_type}
+                all_f[k] = {'field': v, 'source': c_name, 'branch_type': branch_type, 'acc_required': acc_required}
                 
             return all_f
 
@@ -603,6 +610,14 @@ details.field-details[open] > summary {
             
             is_inherited = (source != cls_name and b_type == 'inherited')
             is_accessory = (source != cls_name and b_type == 'accessory')
+            accessory_optional = is_accessory and not f_data['acc_required']
+
+            # A required field of an optional accessory class is only required when that class is used
+            if f.required and accessory_optional:
+                req_str = 'With accessory'
+            else:
+                req_str = 'Yes' if f.required else 'No'
+
             # Build short desc
             short_desc = f.short_description or ""
             if not short_desc:
@@ -628,7 +643,7 @@ details.field-details[open] > summary {
             
             meta = {
                 'full_name': f.full_name,
-                'req_str': 'Yes' if f.required else 'No',
+                'req_str': req_str,
                 'storage': f.storage or '',
                 'html_type': html_type,
                 'dimensions': dims,
@@ -639,6 +654,7 @@ details.field-details[open] > summary {
                 'description': f.description,
                 'is_inherited': is_inherited,
                 'is_accessory': is_accessory,
+                'accessory_optional': accessory_optional,
                 'source': source
             }
             fields_meta.append((fname, meta))

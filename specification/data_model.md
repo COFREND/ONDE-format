@@ -85,6 +85,7 @@ The specification of the format is defined by a Single Source of Truth located i
 For each class, the YAML schema defines:
 
 - **inherits**: The parent class this class inherits from, if any.
+- **accessories**: The accessory classes that this class can aggregate, if any. Each one has a `required` boolean indicating whether the accessory class is mandatory (`true`) or optional (`false`) for this class.
 - **allowed_classes**: If this is a root class, the permissible subclasses that can be instantiated.
 - **fields**: The individual data fields (attributes or datasets) belonging to this class.
 
@@ -158,14 +159,13 @@ The HDF5 file will contain an HDF5 group with the attribute `ONDE_TYPE` containi
 
 ### Representation of an accessory class in the YAML schemas
 
-An accessory class is defined like any other class, but it includes an `is_accessory: true` boolean. 
-Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes.
+An accessory class is defined like any other class.
+Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes. This referencing class lists the accessory class under `accessories`, with a `required` boolean indicating whether the accessory class is mandatory (`true`) or optional (`false`) for the referencing class.
 
 Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `MY_STRING`. The YAML will look like this:
 
 ```yaml
 name: ONDE_MY_ACCESSORY_CLASS
-is_accessory: true
 description: A custom accessory class.
 fields:
   MY_STRING:
@@ -176,7 +176,15 @@ fields:
     dimensions: '1'
 ```
 
-When this accessory is aggregated in an `ONDE_MYCLASS` group, the HDF5 group will contain an `ONDE:TYPE_TAGS` attribute listing `["ONDE_MY_ACCESSORY_CLASS"]`, and the fields of the accessory class will be present alongside the fields of the base class.
+If this accessory class is optional for `ONDE_MYCLASS`, the YAML of `ONDE_MYCLASS` will contain:
+
+```yaml
+accessories:
+  ONDE_MY_ACCESSORY_CLASS:
+    required: false
+```
+
+When this accessory is aggregated in an `ONDE_MYCLASS` group, the HDF5 group will contain an `ONDE:TYPE_TAGS` attribute listing `["ONDE_MY_ACCESSORY_CLASS"]`, and the fields of the accessory class will be present alongside the fields of the base class. The mandatory fields of an optional accessory class are only mandatory when the accessory class is listed in `ONDE:TYPE_TAGS`.
 
 ### Legacy CSV Specification
 
