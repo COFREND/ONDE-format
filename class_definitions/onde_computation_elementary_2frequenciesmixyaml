@@ -1,0 +1,40 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY_2FREQUENCIESMIX
+inherits:
+  - ONDE_COMPUTATION_ELEMENTARY
+description: |-
+
+    ##Frequencies Mix
+    A class to describe and inform the combination of 2 frequency
+    The eddyCurrentMix describes how two data streams are combined. This process is typically used to remove a known 
+    perturbation from a signal built from the effects of multiple sources. In this representation, $S_1$ typically 
+    carries the useful signal along with the perturbation while $S_2$ mostly carries the perturbation alone.
+
+    The mixing formula is applied independently per channel:
+    
+    $S_{mix} = S_1 + (k_1 + i k_3) \Re{S_2} + (k_2+i k_4) \Im(S_2)$
+    
+    where 
+
+     $S$ denotes Signal,
+  
+     $\Re$ the real part, and 
+  
+     $\Im$ the imaginary part.
+  
+    That formula covers 4 and 2 coefficients mixing. In the latter case, $k_3$ and $k_2$ are 0.
+
+fields:
+  COEFFICIENTS:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_2FREQUENCIESMIX:COEFFICIENTS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_FLOAT
+    description: 'A vector that contains $k_1$, $k_2$, $k_3$ and $k_4$ in that order for each channels.'
+    dimensions: '[N_Process<m>, 4]'
+  COMPUTATION2:
+    full_name: ONDE_COMPUTATION_ELEMENTARY_2FREQUENCIESMIX:PROCESS2
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STD_REF_OBJ<ONDE_COMPUTATION_ELEMENTARY>
+    description: 'A link to the second previous computation applied to data'
+    dimensions: '[N_Process<m>]'

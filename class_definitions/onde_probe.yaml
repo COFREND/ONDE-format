@@ -1,10 +1,13 @@
 onde_class: ONDE_PROBE
 inherits: []
-description: |-
+description: "
     ### Probe
-
-    The ONDE_PROBE represents an abstract NDE sensor or actuator, such as an ultrasonic transducer, an eddy current coil, a camera, or an x-ray source or detector. The probe is something that might be moved, on its own or together with other probes, by a motion or scanning system.  
-
+    
+    
+    The ONDE_PROBE represents an abstract NDE sensor or actuator, such as an ultrasonic transducer, an eddy current coil
+    , a camera, or an x-ray source or detector. The probe is something that might be moved, on its own or together with 
+    other probes, by a motion or scanning system.  
+"
 fields:
   LABEL:
     full_name: ONDE:LABEL

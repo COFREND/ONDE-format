@@ -1,0 +1,30 @@
+onde_class: ONDE_COMPUTATION_ELEMENTARY_INTERPOLATE
+inherits:
+  - ONDE_COMPUTATION_ELEMENTARY
+description: |-
+
+    ##Signal interpolation
+
+    Interpolation is an operation that consists of replacing a curve or a function with another, simpler curve (or function) that nevertheless coincides with the original at a finite number of points (or values) specified in advance [Wikipedia, Interpolation numérique].
+
+    In the context of digitized signals, interpolation is used to increase the number of points by adding them in between experimental points.
+
+    Many algorithm are possible. We propose a few here.
+
+    ### Linear
+
+    Linear interpolation means that points between $[X_n, X_{n+1}]$ are calculated by fitting a straight line between the 2 data points.
+
+    ### Cubic spline
+
+    A cubic spline means that the interpolating curve is a polynome of degree 3. To ensure a smooth curve, continuity up to the 2nd derivatives are used as conditions to calculate the polynomes coeficients.
+
+fields:
+  TYPE:
+    full_name:  ONDE_COMPUTATION_ELEMENTARY_INTERPOLATE:TYPE
+    required: true
+    storage: dataset
+    hdf5_type: H5T_STRING
+    description: 'Definition of interpolation type that has been used.'
+    dimensions: '[1]'
+    allowed_values: "[LINEAR|CUBIC_SPLINE]"
