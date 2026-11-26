@@ -75,7 +75,7 @@ Hereafter, when pointing to ECUF and MFMC, we refer to MFMC specification docume
 
 **Variables used in structure definition:**
 
-Definitions (derived from MFMC 2.0.0b specification)
+Definitions for UT specification (derived from MFMC 2.0.0b specification)
 
 - Ultrasonic Element -- an ultrasonic transduction device that can be excited through an electric signal externally
   driven and/or that can reversely convert ultrasound into a signal
@@ -127,6 +127,34 @@ Definitions (derived from MFMC 2.0.0b specification)
 | N_bytes       | Number of bytes                                                         |
 
 Note: N_DF\<m\> = N_U\<m\> x N_V\<m\>
+
+Definitions for et specification
+
+- ET data point : a demodulated complex number (operating point) obtained at one frequency.
+-	Probe : A physical object which support sensor groups
+-	Sensor group : collection of sensors (topology) which gives coherent data 
+-	Dataset : a collection of coherent data obtained at a particular probe position consisting of at least one of the following:
+     - Demodulated data obtained using different emitters and receivers combination for each excitation frequency; 
+     - Encoder data and/or temporal data and/or rotation synchronization
+
+As in the UT format, Encoder data (or equivalent) are stored in the trajectory block.
+-	CSCAN Sequence – a collection of dataframes in which all acquisition parameters except the probe position are fixed from one dataframe to another;
+
+| **Variable**             | **Description**                                                         |
+|--------------------------|-------------------------------------------------------------------------|
+| N_Probes                 | Number of probes                                                        |
+| N_Prob<M>                | Number of probes used in the m-th dataset                               |
+| N_Dataset                | Number of datasets                                                      |
+| N_SENSOR_GROUP\<p\>      | Number of sensor groups of p-th probe                                   |
+| N_SENSOR\<p\>            | Number of sensors in the p-th sensor group                              |
+| N_DF\<m\>                | Number of points in m-th dataset                                        |
+| N_Time\<m\>              | Number of time-points per  in m-th dataset                              |
+| N_Acquisition_Group\<M\> | Number of Acquisition group for the m-th                                |
+| N_U\<m\>                 | Number of acquisition positions in the U direction for the m-th dataset | 
+| N_V\<m\>                 | Number of acquisition positions in the V direction for the m-th dataset |
+| N_Pos\<m\>               | Number of acquisition positions in the V direction for the m-th dataset |
+
+
 
 ## Data Model
 
@@ -189,7 +217,7 @@ classDiagram
 
 ```
 
-*Figure 1: Relationships between the different blocks in the data model*
+*Figure 1: Relationships between the different blocks in the ut data model*
 
 The ONDE format introduces an inheritance mechanism in order to specify the attributes that are mandatory and optional
 for a given group.
