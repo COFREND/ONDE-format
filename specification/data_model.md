@@ -86,7 +86,6 @@ For each class, the YAML schema defines:
 
 - **inherits**: The parent class this class inherits from, if any.
 - **accessories**: The accessory classes that this class can aggregate, if any. Each one has a `required` boolean indicating whether the accessory class is mandatory (`true`) or optional (`false`) for this class.
-- **allowed_classes**: If this is a root class, the permissible subclasses that can be instantiated.
 - **fields**: The individual data fields (attributes or datasets) belonging to this class.
 
 Each field is defined with the following properties:
@@ -166,6 +165,7 @@ Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `M
 
 ```yaml
 onde_class: ONDE_MY_ACCESSORY_CLASS
+inherits: [] #Optional, could have been removed
 description: A custom accessory class.
 fields:
   MY_STRING:
@@ -179,9 +179,20 @@ fields:
 If this accessory class is optional for `ONDE_MYCLASS`, the YAML of `ONDE_MYCLASS` will contain:
 
 ```yaml
+# onde_myclass.yaml : la classe qui l'utilise
+onde_class: ONDE_MYCLASS
 accessories:
   ONDE_MY_ACCESSORY_CLASS:
     required: false
+fields:
+  TYPE_TAGS:
+    full_name: ONDE:TYPE_TAGS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '[*]'
+    allowed_values: '["ONDE_MY_ACCESSORY_CLASS"]'
+  # ... autres champs
 ```
 
 When this accessory is aggregated in an `ONDE_MYCLASS` group, the HDF5 group will contain an `ONDE:TYPE_TAGS` attribute listing `["ONDE_MY_ACCESSORY_CLASS"]`, and the fields of the accessory class will be present alongside the fields of the base class. The mandatory fields of an optional accessory class are only mandatory when the accessory class is listed in `ONDE:TYPE_TAGS`.
