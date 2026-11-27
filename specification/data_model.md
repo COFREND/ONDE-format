@@ -109,7 +109,7 @@ Let `ONDE_MYCLASS` be a class with an optional field `COORDINATES` (an XYZ tripl
 The YAML file (`onde_myclass.yaml`) will look like this:
 
 ```yaml
-name: ONDE_MYCLASS
+onde_class: ONDE_MYCLASS
 description: A custom ONDE class.
 fields:
   COORDINATES:
@@ -141,7 +141,7 @@ Let `ONDE_MYSUBCLASS` be a subclass of `ONDE_MYCLASS`, adding an extra attribute
 The YAML file (`onde_mysubclass.yaml`) will look like this:
 
 ```yaml
-name: ONDE_MYSUBCLASS
+onde_class: ONDE_MYSUBCLASS
 inherits:
   - ONDE_MYCLASS
 description: A subclass extending ONDE_MYCLASS.
@@ -164,7 +164,7 @@ Another class will refer to this accessory class to aggregate its content throug
 Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `MY_STRING`. The YAML will look like this:
 
 ```yaml
-name: ONDE_MY_ACCESSORY_CLASS
+onde_class: ONDE_MY_ACCESSORY_CLASS
 is_accessory: true
 description: A custom accessory class.
 fields:
