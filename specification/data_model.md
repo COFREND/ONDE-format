@@ -181,7 +181,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_INTEGER
     dimensions: '1'
-    min_value: 1
+    min_value: '1'
   TABLE:
     full_name: ONDE_MYCLASS:TABLE
     required: true
