@@ -1,6 +1,5 @@
 onde_class: ONDE_MATERIAL_UT
-inherits:
-  - ONDE_MATERIAL
+inherits: []
 description: |-
     ### Description of UT parameters of a material
 
