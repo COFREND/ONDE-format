@@ -2806,7 +2806,6 @@ Z:FIELD_Z_2: …
 <ul>
 <li><strong>inherits</strong>: The parent class this class inherits from, if any.</li>
 <li><strong>accessories</strong>: The accessory classes that this class can aggregate, if any. Each one has a <code>required</code> boolean indicating whether the accessory class is mandatory (<code>true</code>) or optional (<code>false</code>) for this class.</li>
-<li><strong>allowed_classes</strong>: If this is a root class, the permissible subclasses that can be instantiated.</li>
 <li><strong>fields</strong>: The individual data fields (attributes or datasets) belonging to this class.</li>
 </ul>
 <p>Each field is defined with the following properties:</p>
@@ -2870,6 +2869,7 @@ The YAML file (<code>onde_mysubclass.yaml</code>) will look like this:</p>
 Another class will refer to this accessory class to aggregate its content through an <code>ONDE:TYPE_TAGS</code> attribute that contains a list of accessory classes. This referencing class lists the accessory class under <code>accessories</code>, with a <code>required</code> boolean indicating whether the accessory class is mandatory (<code>true</code>) or optional (<code>false</code>) for the referencing class.</p>
 <p>Let <code>ONDE_MY_ACCESSORY_CLASS</code> be an accessory class having a string attribute <code>MY_STRING</code>. The YAML will look like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">onde_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MY_ACCESSORY_CLASS</span>
+<span class="nt">inherits</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"> </span><span class="c1">#Optional, could have been removed</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A custom accessory class.</span>
 <span class="nt">fields</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">MY_STRING</span><span class="p">:</span>
@@ -2880,9 +2880,20 @@ Another class will refer to this accessory class to aggregate its content throug
 <span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'1'</span>
 </code></pre></div>
 <p>If this accessory class is optional for <code>ONDE_MYCLASS</code>, the YAML of <code>ONDE_MYCLASS</code> will contain:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">accessories</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># onde_myclass.yaml : la classe qui l'utilise</span>
+<span class="nt">onde_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
+<span class="nt">accessories</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ONDE_MY_ACCESSORY_CLASS</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">TYPE_TAGS</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE:TYPE_TAGS</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_STRING</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'[*]'</span>
+<span class="w">    </span><span class="nt">allowed_values</span><span class="p">:</span><span class="w"> </span><span class="s">'["ONDE_MY_ACCESSORY_CLASS"]'</span>
+<span class="w">  </span><span class="c1"># ... autres champs</span>
 </code></pre></div>
 <p>When this accessory is aggregated in an <code>ONDE_MYCLASS</code> group, the HDF5 group will contain an <code>ONDE:TYPE_TAGS</code> attribute listing <code>["ONDE_MY_ACCESSORY_CLASS"]</code>, and the fields of the accessory class will be present alongside the fields of the base class. The mandatory fields of an optional accessory class are only mandatory when the accessory class is listed in <code>ONDE:TYPE_TAGS</code>.</p>
 <h3 id="legacy-csv-specification">Legacy CSV Specification</h3>
