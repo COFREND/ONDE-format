@@ -2825,7 +2825,7 @@ Z:FIELD_Z_2: …
 <p><em>Example</em></p>
 <p>Let <code>ONDE_MYCLASS</code> be a class with an optional field <code>COORDINATES</code> (an XYZ triplet), a mandatory field <code>DIMENSION</code>, and a mandatory dataset <code>TABLE</code> (of size <code>[DIMENSION, 3]</code>).
 The YAML file (<code>onde_myclass.yaml</code>) will look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
+<div class="highlight"><pre><span></span><code><span class="nt">onde_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A custom ONDE class.</span>
 <span class="nt">fields</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">COORDINATES</span><span class="p">:</span>
@@ -2852,7 +2852,7 @@ The YAML file (<code>onde_myclass.yaml</code>) will look like this:</p>
 <p>Class inheritance is defined using the <code>inherits</code> array. The <code>ONDE:TYPE</code> attribute in the generated HDF5 file will automatically contain the class hierarchy starting from the base class.</p>
 <p>Let <code>ONDE_MYSUBCLASS</code> be a subclass of <code>ONDE_MYCLASS</code>, adding an extra attribute <code>MY_VALUE</code>.
 The YAML file (<code>onde_mysubclass.yaml</code>) will look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYSUBCLASS</span>
+<div class="highlight"><pre><span></span><code><span class="nt">onde_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYSUBCLASS</span>
 <span class="nt">inherits</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A subclass extending ONDE_MYCLASS.</span>
@@ -2869,7 +2869,7 @@ The YAML file (<code>onde_mysubclass.yaml</code>) will look like this:</p>
 <p>An accessory class is defined like any other class.
 Another class will refer to this accessory class to aggregate its content through an <code>ONDE:TYPE_TAGS</code> attribute that contains a list of accessory classes. This referencing class lists the accessory class under <code>accessories</code>, with a <code>required</code> boolean indicating whether the accessory class is mandatory (<code>true</code>) or optional (<code>false</code>) for the referencing class.</p>
 <p>Let <code>ONDE_MY_ACCESSORY_CLASS</code> be an accessory class having a string attribute <code>MY_STRING</code>. The YAML will look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MY_ACCESSORY_CLASS</span>
+<div class="highlight"><pre><span></span><code><span class="nt">onde_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MY_ACCESSORY_CLASS</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A custom accessory class.</span>
 <span class="nt">fields</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">MY_STRING</span><span class="p">:</span>
