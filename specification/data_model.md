@@ -7,8 +7,6 @@ The ONDE Data Model is defined by classes, which group together named fields. Wh
 - the transcription of this data model in the reference csv file (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
 - the way in which this data model translates into an HDF5 implementation in the ONDE file.
 
-
-
 ## Classes and subclasses
 
 The ONDE Data model defines the notions of classes, subclasses. 
@@ -25,7 +23,66 @@ The linkage between ONDE objects can be represented in the form of a graph of in
 
 ### File type
 The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
-The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute. The file is identified as an ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The `ONDE:FILETYPE` attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in [the ONDE overview](overview.md); and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The `ONDE:VERSION` attribute is a string that identifies the version number of the present specification.
+The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute which are described by a "ONDE_MODALITY". The file is identified as an ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The `ONDE:FILETYPE` attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in [the ONDE overview](overview.md); and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The `ONDE:VERSION` attribute is a string that identifies the version number of the present specification.
+
+### Representation of a modality in the YAML schemas
+
+A modality describes an NDE technique supported by the ONDE format (for instance ultrasonic testing, `ONDE_UT`).
+A modality is not a class: it is not instantiated as an HDF5 group and has no `ONDE:TYPE` attribute. It plays two roles:
+
+- it defines the **top-level fields** of an ONDE file of this modality, i.e. the attributes and datasets located in the
+  HDF5 root group (such as `ONDE:FILETYPE` and `ONDE:VERSION`, see [File type](#file-type));
+- it lists the **classes of relevance** for this modality, i.e. the classes whose instances may be found in a file of this
+  modality.
+
+The name of the modality is also the tag that identifies it in the `ONDE:FILETYPE` attribute of the root group: a file
+containing UT datasets includes `"ONDE_UT"` in this attribute.
+
+A modality is described by a YAML file containing the following keys:
+
+- **modality**: The name of the modality (with the 'ONDE_' prefix). Its presence identifies the file as a modality
+  definition rather than a class definition.
+- **description**: A human-readable description of the modality (Markdown).
+- **expected_classes**: The list of the classes of relevance for this modality. The order of this list is used to order
+  the classes in the generated documentation and in the legacy CSV file.
+- **fields**: The top-level fields of the file. They are defined with the same properties as the fields of a class (see
+  [General notes on the YAML schemas](#general-notes-on-the-yaml-schemas)). Their `full_name` is the name of the attribute or
+  dataset in the HDF5 root group.
+
+*Example*
+
+Let `ONDE_MYMODALITY` be a modality whose files contain instances of `ONDE_MYCLASS` and `ONDE_MYSUBCLASS`.
+The YAML file (`onde_mymodality.yaml`) will look like this:
+
+```yaml
+modality: ONDE_MYMODALITY
+description: Files of the ONDE_MYMODALITY modality.
+expected_classes:
+  - ONDE_MYCLASS
+  - ONDE_MYSUBCLASS
+fields:
+  FILETYPE:
+    full_name: ONDE:FILETYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '[*]'
+    allowed_values: '["ONDE_DATASET","ONDE_MYMODALITY"]'
+  VERSION:
+    full_name: ONDE:VERSION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '1'
+    allowed_values: '"1.0.0"'
+```
+
+The root group of an HDF5 file of this modality will contain an attribute `ONDE:FILETYPE` including
+`"ONDE_DATASET"` and `"ONDE_MYMODALITY"`, and an attribute `ONDE:VERSION`.
+
+The symbolic dimensions specific to a modality (for instance `N_Elem<p>` for UT) are defined in the
+[ONDE overview](overview.md), and can be used in the `dimensions` property of the fields of the classes of relevance.
+
 
 ### HDF5 implementation of classes
 In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.
