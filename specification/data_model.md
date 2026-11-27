@@ -149,7 +149,7 @@ Each field is defined with the following properties:
 
 - `full_name` – The physical name of the field (dataset or attribute) in the HDF5 group
 - `required` – A boolean indicating whether the field is mandatory (`true`) or optional (`false`)
-- `storage` – Specifies whether it is stored as a `dataset` or `attribute`
+- `storage` – Specifies whether it is stored as a `dataset` or `attribute`. Accepted values are : `dataset`, `attribute`, or " A or D" (which leaves the choice to the writer to store the value in a HDF5 attribute or a HDF5 dataset)
 - `hdf5_type` – The HDF5 class type, including `H5T_INTEGER` and `H5T_FLOAT`
 - `description` / `short_description` – Human-readable explanations of the field
 - `dimensions` – Can be actual values or symbols to indicate variable sizes. The value '1' indicates that the field is stored as a scalar (incompatible with dataset storage). Brackets indicate array storage. For example, '[]' specifies a zero-dimensional (scalar) array containing a single element. In contrast, '[1]' specifies a one-dimensional array containing a single element, and '[2,3]' specifies a two-dimensional array containing six elements. Particular dimensions specified in the description of the NDE modalities are also used in order to define the allowed cardinalities : for instance, for UT testing, [N_Elem<p>] specifies that the dataset is one-dimensional with a number of values corresponding to the number of elements in the transducer. Wildcards are also allowed: '[*]' specifies a one-dimensional array containing an unspecified number of elements. The `dimensions` field also sometimes contains several alternatives.
