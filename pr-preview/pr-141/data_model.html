@@ -2979,12 +2979,14 @@ This will parse the YAML files in the <code>class_definitions/</code> directory 
 <ul>
 <li><em>Class</em> – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)</li>
 <li><em>Name</em> – the physical name of the field (dataset or attribute in the HDF5 group)</li>
-<li><em>M/O</em> – Mandatory or Optional</li>
-<li><em>D/A</em> – Dataset or Attribute</li>
-<li><em>Type</em> – The HDF5 class type including H5T_INTEGER and H5T_FLOAT which are generic</li>
-<li><em>Content</em> – Required content if relevant (essential for TYPE, potential useful for string enumerations to give list of allowed possibilities)</li>
-<li><em>Dimensions</em> – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class</li>
-<li><em>Min, Max</em> – Minimum and maximum values of numeric quantities if relevant.</li>
+<li><em>Comments</em> – Human readable comments</li>
+<li><em>M or O</em> – Mandatory or Optional</li>
+<li><em>D or A</em> – Dataset or Attribute</li>
+<li><em>Type</em> – The HDF5 class type including H5T_INTEGER, H5T_FLOAT, H5T_COMPLEX, H5T_COPOUND or choice of these which are generic HDF5 types</li>
+<li><em>Dims</em> – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class</li>
+<li><em>Size or content</em></li>
+<li><em>Min</em> – Minimum values of numeric quantities if relevant.</li>
+<li><em>Max</em> – Maximum values of numeric quantities if relevant.</li>
 <li><em>Accessory Class</em> - Specifies wether a class is an accessory class</li>
 </ul>
 <p>The csv separator that is used in the file is a semicolon.</p>
@@ -2999,10 +3001,10 @@ The csv table will look like this:</p>
 <tr>
 <th>Class</th>
 <th>Name</th>
+<th>Comment</th>
 <th>M/O</th>
 <th>D/A</th>
 <th>Type</th>
-<th>Content</th>
 <th>Dimensions</th>
 <th>Min</th>
 <th>Max</th>
@@ -3013,10 +3015,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE:TYPE</td>
+<td>["ONDE_MYCLASS"]</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>["ONDE_MYCLASS"]</td>
 <td>[1]</td>
 <td></td>
 <td></td>
@@ -3025,10 +3027,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:COORDINATES</td>
+<td></td>
 <td>O</td>
 <td>A</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>[3]</td>
 <td></td>
 <td></td>
@@ -3037,10 +3039,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:DIMENSION</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_INTEGER</td>
-<td></td>
 <td>1</td>
 <td>1</td>
 <td></td>
@@ -3049,10 +3051,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:TABLE</td>
+<td></td>
 <td>M</td>
 <td>D</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>[ONDE_MYCLASS:DIMENSION,3]</td>
 <td></td>
 <td></td>
@@ -3069,10 +3071,10 @@ The csv table will look like this:</p>
 <tr>
 <th>Class</th>
 <th>Name</th>
+<th>Comment</th>
 <th>M/O</th>
 <th>D/A</th>
 <th>Type</th>
-<th>Content</th>
 <th>Dimensions</th>
 <th>Min</th>
 <th>Max</th>
@@ -3083,10 +3085,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE:TYPE</td>
+<td>["ONDE_MYCLASS"]</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>["ONDE_MYCLASS"]</td>
 <td>[1]</td>
 <td></td>
 <td></td>
@@ -3095,6 +3097,7 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:COORDINATES</td>
+<td></td>
 <td>O</td>
 <td>A</td>
 <td>H5T_FLOAT</td>
@@ -3102,11 +3105,11 @@ The csv table will look like this:</p>
 <td>[3]</td>
 <td></td>
 <td></td>
-<td></td>
 </tr>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:DIMENSION</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_INTEGER</td>
@@ -3114,15 +3117,14 @@ The csv table will look like this:</p>
 <td>1</td>
 <td>1</td>
 <td></td>
-<td></td>
 </tr>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:TABLE</td>
+<td></td>
 <td>M</td>
 <td>D</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>[ONDE_MYCLASS:DIMENSION,3]</td>
 <td></td>
 <td></td>
@@ -3131,6 +3133,7 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYSUBCLASS</td>
 <td>ONDE:TYPE</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
@@ -3138,16 +3141,15 @@ The csv table will look like this:</p>
 <td>[2]</td>
 <td></td>
 <td></td>
-<td></td>
 </tr>
 <tr>
+<td>ONDE_MYSUBCLASS</td>
 <td>ONDE_MYSUBCLASS:MY_VALUE</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>1</td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -3165,10 +3167,10 @@ The csv table will look like this:</p>
 <tr>
 <th>Class</th>
 <th>Name</th>
+<th>Comment</th>
 <th>M/O</th>
 <th>D/A</th>
 <th>Type</th>
-<th>Content</th>
 <th>Dimensions</th>
 <th>Min</th>
 <th>Max</th>
@@ -3179,10 +3181,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE:TYPE</td>
+<td>["ONDE_MYCLASS"]</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>["ONDE_MYCLASS"]</td>
 <td>[1]</td>
 <td></td>
 <td></td>
@@ -3191,10 +3193,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE:TYPE_TAGS</td>
+<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
 <td>[1]</td>
 <td></td>
 <td></td>
@@ -3203,10 +3205,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:COORDINATES</td>
+<td></td>
 <td>O</td>
 <td>A</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>[3]</td>
 <td></td>
 <td></td>
@@ -3215,10 +3217,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:DIMENSION</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_INTEGER</td>
-<td></td>
 <td>1</td>
 <td>1</td>
 <td></td>
@@ -3227,10 +3229,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MYCLASS</td>
 <td>ONDE_MYCLASS:TABLE</td>
+<td></td>
 <td>M</td>
 <td>D</td>
 <td>H5T_FLOAT</td>
-<td></td>
 <td>[ONDE_MYCLASS:DIMENSION,3]</td>
 <td></td>
 <td></td>
@@ -3239,10 +3241,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MY_ACCESSORY_CLASS</td>
 <td>ONDE:TYPE</td>
+<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>["ONDE_MY_ACCESSORY_CLASS"]</td>
 <td>[1]</td>
 <td></td>
 <td></td>
@@ -3251,10 +3253,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MY_ACCESSORY_CLASS</td>
 <td>ONDE:ACCESSORY_CLASS</td>
+<td>"ONDE_MY_ACCESSORY_CLASS"</td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td>"ONDE_MY_ACCESSORY_CLASS"</td>
 <td>1</td>
 <td></td>
 <td></td>
@@ -3263,10 +3265,10 @@ The csv table will look like this:</p>
 <tr>
 <td>ONDE_MY_ACCESSORY_CLASS</td>
 <td>ONDE_MY_ACCESSORY_CLASS:MY_STRING</td>
+<td></td>
 <td>M</td>
 <td>A</td>
 <td>H5T_STRING</td>
-<td></td>
 <td>1</td>
 <td></td>
 <td></td>
