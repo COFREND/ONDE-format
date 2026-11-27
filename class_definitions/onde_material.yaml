@@ -1,0 +1,5 @@
+onde_class: ONDE_MATERIAL
+inherits: []
+description: |
+  ## The ONDE_MATERIAL is an abstract base class for material description for arbitrary modality.
+fields: {}
