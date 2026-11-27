@@ -269,12 +269,14 @@ The generated csv file is organized with the following columns:
 
 - *Class* – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)
 - *Name* – the physical name of the field (dataset or attribute in the HDF5 group)
-- *M/O* – Mandatory or Optional
-- *D/A* – Dataset or Attribute
-- *Type* – The HDF5 class type including H5T_INTEGER and H5T_FLOAT which are generic
-- *Content* – Required content if relevant (essential for TYPE, potential useful for string enumerations to give list of allowed possibilities)
-- *Dimensions* – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class
-- *Min, Max* – Minimum and maximum values of numeric quantities if relevant.
+- *Comments* – Human readable comments
+- *M or O* – Mandatory or Optional
+- *D or A* – Dataset or Attribute
+- *Type* – The HDF5 class type including H5T_INTEGER, H5T_FLOAT, H5T_COMPLEX, H5T_COPOUND or choice of these which are generic HDF5 types
+- *Dims* – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class
+- *Size or content*
+- *Min* – Minimum values of numeric quantities if relevant.
+- *Max* – Maximum values of numeric quantities if relevant.
 - *Accessory Class* - Specifies wether a class is an accessory class
 
 The csv separator that is used in the file is a semicolon.
@@ -290,12 +292,12 @@ The following example indicates how a simple class is represented in the csv tab
 Let `ONDE_MYCLASS` be a class with optional field `COORDINATES` (an XYZ triplet), a field `DIMENSION` and a field `TABLE` (of size `[DIMENSION, 3]`).
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT|[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER|1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
 
 #### Representation of a subclass in the csv table
 
@@ -304,14 +306,14 @@ In the csv file, the class hierarchy is described in the Class column. The class
 Let `ONDE_MYSUBCLASS` be a subclass of `ONDE_MYCLASS`, adding the extra attribute `MY_VALUE`.
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
-|ONDE_MYSUBCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]|||||
-|ONDE_MYSUBCLASS:MY_VALUE|M|A|H5T_FLOAT||1||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT||[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER||1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MYSUBCLASS|ONDE:TYPE||M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]|||||
+|ONDE_MYSUBCLASS|ONDE_MYSUBCLASS:MY_VALUE||M|A|H5T_FLOAT|1||||
 
 The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing `["ONDE_MYCLASS","ONDE_MYSUBCLASS"]`), and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MYSUBCLASS:MY_VALUE` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
 
@@ -323,15 +325,15 @@ Another class will refer to this accessory class to aggregate its content throug
 Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `MY_STRING` aggregated in `ONDE_MYCLASS`.
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE:TYPE_TAGS|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
-|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]|||True|
-|ONDE_MY_ACCESSORY_CLASS|ONDE:ACCESSORY_CLASS|M|A|H5T_STRING|"ONDE_MY_ACCESSORY_CLASS"|1|||||
-|ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING|M|A|H5T_STRING||1||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE:TYPE_TAGS|["ONDE_MY_ACCESSORY_CLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT|[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER|1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|["ONDE_MY_ACCESSORY_CLASS"]|M|A|H5T_STRING|[1]|||True|
+|ONDE_MY_ACCESSORY_CLASS|ONDE:ACCESSORY_CLASS|"ONDE_MY_ACCESSORY_CLASS"|M|A|H5T_STRING|1|||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING||M|A|H5T_STRING|1||||
 
 The HDF5 file will contain an HDF group with attribute `ONDE_TYPE` (containing `['ONDE_MYCLASS']`) and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MY_ACCESSORY_CLASS:MY_STRING` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
