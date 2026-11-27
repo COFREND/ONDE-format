@@ -330,6 +330,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#representation-of-a-modality-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a modality in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hdf5-implementation-of-classes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2557,6 +2568,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#representation-of-a-modality-in-the-yaml-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representation of a modality in the YAML schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hdf5-implementation-of-classes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2764,7 +2786,57 @@
 <h2 id="hdf5-implementation">HDF5 implementation</h2>
 <h3 id="file-type">File type</h3>
 <p>The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
-The HDF5 root group must contain an attribute called <code>ONDE:FILETYPE</code> and a <code>ONDE:VERSION</code> attribute. The file is identified as an ONDE file because of the <code>ONDE:FILETYPE</code> attribute which is given at the root of the structure. The <code>ONDE:FILETYPE</code> attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in <a href="index.html">the ONDE overview</a>; and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The <code>ONDE:VERSION</code> attribute is a string that identifies the version number of the present specification.</p>
+The HDF5 root group must contain an attribute called <code>ONDE:FILETYPE</code> and a <code>ONDE:VERSION</code> attribute which are described by a "ONDE_MODALITY". The file is identified as an ONDE file because of the <code>ONDE:FILETYPE</code> attribute which is given at the root of the structure. The <code>ONDE:FILETYPE</code> attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in <a href="index.html">the ONDE overview</a>; and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The <code>ONDE:VERSION</code> attribute is a string that identifies the version number of the present specification.</p>
+<h3 id="representation-of-a-modality-in-the-yaml-schemas">Representation of a modality in the YAML schemas</h3>
+<p>A modality describes an NDE technique supported by the ONDE format (for instance ultrasonic testing, <code>ONDE_UT</code>).
+A modality is not a class: it is not instantiated as an HDF5 group and has no <code>ONDE:TYPE</code> attribute. It plays two roles:</p>
+<ul>
+<li>it defines the <strong>top-level fields</strong> of an ONDE file of this modality, i.e. the attributes and datasets located in the
+  HDF5 root group (such as <code>ONDE:FILETYPE</code> and <code>ONDE:VERSION</code>, see <a href="#file-type">File type</a>);</li>
+<li>it lists the <strong>classes of relevance</strong> for this modality, i.e. the classes whose instances may be found in a file of this
+  modality.</li>
+</ul>
+<p>The name of the modality is also the tag that identifies it in the <code>ONDE:FILETYPE</code> attribute of the root group: a file
+containing UT datasets includes <code>"ONDE_UT"</code> in this attribute.</p>
+<p>A modality is described by a YAML file containing the following keys:</p>
+<ul>
+<li><strong>modality</strong>: The name of the modality (with the 'ONDE_' prefix). Its presence identifies the file as a modality
+  definition rather than a class definition.</li>
+<li><strong>description</strong>: A human-readable description of the modality (Markdown).</li>
+<li><strong>expected_classes</strong>: The list of the classes of relevance for this modality. The order of this list is used to order
+  the classes in the generated documentation and in the legacy CSV file.</li>
+<li><strong>fields</strong>: The top-level fields of the file. They are defined with the same properties as the fields of a class (see
+  <a href="#general-notes-on-the-yaml-schemas">General notes on the YAML schemas</a>). Their <code>full_name</code> is the name of the attribute or
+  dataset in the HDF5 root group.</li>
+</ul>
+<p><em>Example</em></p>
+<p>Let <code>ONDE_MYMODALITY</code> be a modality whose files contain instances of <code>ONDE_MYCLASS</code> and <code>ONDE_MYSUBCLASS</code>.
+The YAML file (<code>onde_mymodality.yaml</code>) will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">modality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYMODALITY</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Files of the ONDE_MYMODALITY modality.</span>
+<span class="nt">expected_classes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYCLASS</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE_MYSUBCLASS</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">FILETYPE</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE:FILETYPE</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_STRING</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'[*]'</span>
+<span class="w">    </span><span class="nt">allowed_values</span><span class="p">:</span><span class="w"> </span><span class="s">'["ONDE_DATASET","ONDE_MYMODALITY"]'</span>
+<span class="w">  </span><span class="nt">VERSION</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">full_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ONDE:VERSION</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<span class="w">    </span><span class="nt">hdf5_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">H5T_STRING</span>
+<span class="w">    </span><span class="nt">dimensions</span><span class="p">:</span><span class="w"> </span><span class="s">'1'</span>
+<span class="w">    </span><span class="nt">allowed_values</span><span class="p">:</span><span class="w"> </span><span class="s">'"1.0.0"'</span>
+</code></pre></div>
+<p>The root group of an HDF5 file of this modality will contain an attribute <code>ONDE:FILETYPE</code> including
+<code>"ONDE_DATASET"</code> and <code>"ONDE_MYMODALITY"</code>, and an attribute <code>ONDE:VERSION</code>.</p>
+<p>The symbolic dimensions specific to a modality (for instance <code>N_Elem&lt;p&gt;</code> for UT) are defined in the
+<a href="index.html">ONDE overview</a>, and can be used in the <code>dimensions</code> property of the fields of the classes of relevance.</p>
 <h3 id="hdf5-implementation-of-classes">HDF5 implementation of classes</h3>
 <p>In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named <code>ONDE:TYPE</code> and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.</p>
 <p>The strings contained in the TYPE attribute describe the hierarchy of classes to which the object belongs, starting with the base class.</p>
