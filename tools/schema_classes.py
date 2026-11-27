@@ -15,12 +15,17 @@ class OndeField(BaseModel):
     min_value: Optional[str] = None
     max_value: Optional[str] = None
 
+class OndeAccessory(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    required: bool
+
 class OndeClass(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     onde_class: str
     inherits: List[str] = []
-    accessories: List[str] = []
+    accessories: Dict[str, OndeAccessory] = {}
     description: str = ""
     fields: Dict[str, OndeField] = {}
 

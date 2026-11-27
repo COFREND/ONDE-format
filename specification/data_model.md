@@ -7,8 +7,6 @@ The ONDE Data Model is defined by classes, which group together named fields. Wh
 - the transcription of this data model in the reference csv file (see [ONDE_fields.csv](ONDE_fields.csv)). This CSV file is provided for simplified use in automated tooling where the individual YAML files may become too cumbersome for quick import or validation purposes.
 - the way in which this data model translates into an HDF5 implementation in the ONDE file.
 
-
-
 ## Classes and subclasses
 
 The ONDE Data model defines the notions of classes, subclasses. 
@@ -25,7 +23,66 @@ The linkage between ONDE objects can be represented in the form of a graph of in
 
 ### File type
 The extension of the HDF5 file is ".onde" (for Open Non Destructive Evaluation format).
-The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute. The file is identified as an ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The `ONDE:FILETYPE` attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in [the ONDE overview](overview.md); and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The `ONDE:VERSION` attribute is a string that identifies the version number of the present specification.
+The HDF5 root group must contain an attribute called `ONDE:FILETYPE` and a `ONDE:VERSION` attribute which are described by a "ONDE_MODALITY". The file is identified as an ONDE file because of the `ONDE:FILETYPE` attribute which is given at the root of the structure. The `ONDE:FILETYPE` attribute is a list of strings that is treated as a set of tags indicating how the file should be interpreted or processed (order of multiple tags is not significant). In this version of the specification, only two tags are defined: 'ONDE_DATASET', which indicates that this file should be searched for HDF5 groups representing instances of the ONDE_DATASET class or subclasses as discussed in [the ONDE overview](overview.md); and 'ONDE_UT', which indicates that the file contains one or more UT datasets (instances of ONDE_DATASET_UT or subclasses thereof). The `ONDE:VERSION` attribute is a string that identifies the version number of the present specification.
+
+### Representation of a modality in the YAML schemas
+
+A modality describes an NDE technique supported by the ONDE format (for instance ultrasonic testing, `ONDE_UT`).
+A modality is not a class: it is not instantiated as an HDF5 group and has no `ONDE:TYPE` attribute. It plays two roles:
+
+- it defines the **top-level fields** of an ONDE file of this modality, i.e. the attributes and datasets located in the
+  HDF5 root group (such as `ONDE:FILETYPE` and `ONDE:VERSION`, see [File type](#file-type));
+- it lists the **classes of relevance** for this modality, i.e. the classes whose instances may be found in a file of this
+  modality.
+
+The name of the modality is also the tag that identifies it in the `ONDE:FILETYPE` attribute of the root group: a file
+containing UT datasets includes `"ONDE_UT"` in this attribute.
+
+A modality is described by a YAML file containing the following keys:
+
+- **modality**: The name of the modality (with the 'ONDE_' prefix). Its presence identifies the file as a modality
+  definition rather than a class definition.
+- **description**: A human-readable description of the modality (Markdown).
+- **expected_classes**: The list of the classes of relevance for this modality. The order of this list is used to order
+  the classes in the generated documentation and in the legacy CSV file.
+- **fields**: The top-level fields of the file. They are defined with the same properties as the fields of a class (see
+  [General notes on the YAML schemas](#general-notes-on-the-yaml-schemas)). Their `full_name` is the name of the attribute or
+  dataset in the HDF5 root group.
+
+*Example*
+
+Let `ONDE_MYMODALITY` be a modality whose files contain instances of `ONDE_MYCLASS` and `ONDE_MYSUBCLASS`.
+The YAML file (`onde_mymodality.yaml`) will look like this:
+
+```yaml
+modality: ONDE_MYMODALITY
+description: Files of the ONDE_MYMODALITY modality.
+expected_classes:
+  - ONDE_MYCLASS
+  - ONDE_MYSUBCLASS
+fields:
+  FILETYPE:
+    full_name: ONDE:FILETYPE
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '[*]'
+    allowed_values: '["ONDE_DATASET","ONDE_MYMODALITY"]'
+  VERSION:
+    full_name: ONDE:VERSION
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '1'
+    allowed_values: '"1.0.0"'
+```
+
+The root group of an HDF5 file of this modality will contain an attribute `ONDE:FILETYPE` including
+`"ONDE_DATASET"` and `"ONDE_MYMODALITY"`, and an attribute `ONDE:VERSION`.
+
+The symbolic dimensions specific to a modality (for instance `N_Elem<p>` for UT) are defined in the
+[ONDE overview](overview.md), and can be used in the `dimensions` property of the fields of the classes of relevance.
+
 
 ### HDF5 implementation of classes
 In ONDE, an object corresponding to a class in the data model translates into an HDF5 group. The class of the object is given by a particular HDF5 attribute of the HDF5 group. This attribute is named `ONDE:TYPE` and contains a 1D array of strings. The HDF5 name of the group is left free for the implementation decision.
@@ -85,15 +142,15 @@ The specification of the format is defined by a Single Source of Truth located i
 For each class, the YAML schema defines:
 
 - **inherits**: The parent class this class inherits from, if any.
-- **allowed_classes**: If this is a root class, the permissible subclasses that can be instantiated.
+- **accessories**: The accessory classes that this class can aggregate, if any. Each one has a `required` boolean indicating whether the accessory class is mandatory (`true`) or optional (`false`) for this class.
 - **fields**: The individual data fields (attributes or datasets) belonging to this class.
 
 Each field is defined with the following properties:
 
 - `full_name` – The physical name of the field (dataset or attribute) in the HDF5 group
 - `required` – A boolean indicating whether the field is mandatory (`true`) or optional (`false`)
-- `storage` – Specifies whether it is stored as a `dataset` or `attribute`
-- `hdf5_type` – The HDF5 class type, including `H5T_INTEGER` and `H5T_FLOAT`
+- `storage` – Specifies whether it is stored as a `dataset` or `attribute`. Accepted values are : `dataset`, `attribute`, or " A or D" (which leaves the choice to the writer to store the value in a HDF5 attribute or a HDF5 dataset)
+- `hdf5_type` – The HDF5 class type. The value can be a single value or a choice of type seperated by `òr` key woord `H5T_INTEGER`, `H5T_FLOAT`, `H5T_COMPLEX` or `H5T_COMPOUND`. The intention, in particular for dataset, is to leave the choice to optimize the use of the data afterwards.
 - `description` / `short_description` – Human-readable explanations of the field
 - `dimensions` – Can be actual values or symbols to indicate variable sizes. The value '1' indicates that the field is stored as a scalar (incompatible with dataset storage). Brackets indicate array storage. For example, '[]' specifies a zero-dimensional (scalar) array containing a single element. In contrast, '[1]' specifies a one-dimensional array containing a single element, and '[2,3]' specifies a two-dimensional array containing six elements. Particular dimensions specified in the description of the NDE modalities are also used in order to define the allowed cardinalities : for instance, for UT testing, [N_Elem<p>] specifies that the dataset is one-dimensional with a number of values corresponding to the number of elements in the transducer. Wildcards are also allowed: '[*]' specifies a one-dimensional array containing an unspecified number of elements. The `dimensions` field also sometimes contains several alternatives.
 - `allowed_values` – A list of permissible string values, if applicable
@@ -109,7 +166,7 @@ Let `ONDE_MYCLASS` be a class with an optional field `COORDINATES` (an XYZ tripl
 The YAML file (`onde_myclass.yaml`) will look like this:
 
 ```yaml
-name: ONDE_MYCLASS
+onde_class: ONDE_MYCLASS
 description: A custom ONDE class.
 fields:
   COORDINATES:
@@ -124,7 +181,7 @@ fields:
     storage: attribute
     hdf5_type: H5T_INTEGER
     dimensions: '1'
-    min_value: 1
+    min_value: '1'
   TABLE:
     full_name: ONDE_MYCLASS:TABLE
     required: true
@@ -141,7 +198,7 @@ Let `ONDE_MYSUBCLASS` be a subclass of `ONDE_MYCLASS`, adding an extra attribute
 The YAML file (`onde_mysubclass.yaml`) will look like this:
 
 ```yaml
-name: ONDE_MYSUBCLASS
+onde_class: ONDE_MYSUBCLASS
 inherits:
   - ONDE_MYCLASS
 description: A subclass extending ONDE_MYCLASS.
@@ -158,14 +215,14 @@ The HDF5 file will contain an HDF5 group with the attribute `ONDE_TYPE` containi
 
 ### Representation of an accessory class in the YAML schemas
 
-An accessory class is defined like any other class, but it includes an `is_accessory: true` boolean. 
-Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes.
+An accessory class is defined like any other class.
+Another class will refer to this accessory class to aggregate its content through an `ONDE:TYPE_TAGS` attribute that contains a list of accessory classes. This referencing class lists the accessory class under `accessories`, with a `required` boolean indicating whether the accessory class is mandatory (`true`) or optional (`false`) for the referencing class.
 
 Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `MY_STRING`. The YAML will look like this:
 
 ```yaml
-name: ONDE_MY_ACCESSORY_CLASS
-is_accessory: true
+onde_class: ONDE_MY_ACCESSORY_CLASS
+inherits: [] #Optional, could have been removed
 description: A custom accessory class.
 fields:
   MY_STRING:
@@ -176,7 +233,26 @@ fields:
     dimensions: '1'
 ```
 
-When this accessory is aggregated in an `ONDE_MYCLASS` group, the HDF5 group will contain an `ONDE:TYPE_TAGS` attribute listing `["ONDE_MY_ACCESSORY_CLASS"]`, and the fields of the accessory class will be present alongside the fields of the base class.
+If this accessory class is optional for `ONDE_MYCLASS`, the YAML of `ONDE_MYCLASS` will contain:
+
+```yaml
+# onde_myclass.yaml : la classe qui l'utilise
+onde_class: ONDE_MYCLASS
+accessories:
+  ONDE_MY_ACCESSORY_CLASS:
+    required: false
+fields:
+  TYPE_TAGS:
+    full_name: ONDE:TYPE_TAGS
+    required: true
+    storage: attribute
+    hdf5_type: H5T_STRING
+    dimensions: '[*]'
+    allowed_values: '["ONDE_MY_ACCESSORY_CLASS"]'
+  # ... autres champs
+```
+
+When this accessory is aggregated in an `ONDE_MYCLASS` group, the HDF5 group will contain an `ONDE:TYPE_TAGS` attribute listing `["ONDE_MY_ACCESSORY_CLASS"]`, and the fields of the accessory class will be present alongside the fields of the base class. The mandatory fields of an optional accessory class are only mandatory when the accessory class is listed in `ONDE:TYPE_TAGS`.
 
 ### Legacy CSV Specification
 
@@ -193,12 +269,14 @@ The generated csv file is organized with the following columns:
 
 - *Class* – The name of the class (typically same as value of TYPE string); used to indicate inheritance (see later example)
 - *Name* – the physical name of the field (dataset or attribute in the HDF5 group)
-- *M/O* – Mandatory or Optional
-- *D/A* – Dataset or Attribute
-- *Type* – The HDF5 class type including H5T_INTEGER and H5T_FLOAT which are generic
-- *Content* – Required content if relevant (essential for TYPE, potential useful for string enumerations to give list of allowed possibilities)
-- *Dimensions* – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class
-- *Min, Max* – Minimum and maximum values of numeric quantities if relevant.
+- *Comments* – Human readable comments
+- *M or O* – Mandatory or Optional
+- *D or A* – Dataset or Attribute
+- *Type* – The HDF5 class type including H5T_INTEGER, H5T_FLOAT, H5T_COMPLEX, H5T_COPOUND or choice of these which are generic HDF5 types
+- *Dims* – Can be either actual values or symbols to indicate variable sizes and relationships between dimensions of different members of class
+- *Size or content*
+- *Min* – Minimum values of numeric quantities if relevant.
+- *Max* – Maximum values of numeric quantities if relevant.
 - *Accessory Class* - Specifies wether a class is an accessory class
 
 The csv separator that is used in the file is a semicolon.
@@ -214,12 +292,12 @@ The following example indicates how a simple class is represented in the csv tab
 Let `ONDE_MYCLASS` be a class with optional field `COORDINATES` (an XYZ triplet), a field `DIMENSION` and a field `TABLE` (of size `[DIMENSION, 3]`).
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT|[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER|1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
 
 #### Representation of a subclass in the csv table
 
@@ -228,14 +306,14 @@ In the csv file, the class hierarchy is described in the Class column. The class
 Let `ONDE_MYSUBCLASS` be a subclass of `ONDE_MYCLASS`, adding the extra attribute `MY_VALUE`.
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
-|ONDE_MYSUBCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]|||||
-|ONDE_MYSUBCLASS:MY_VALUE|M|A|H5T_FLOAT||1||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT||[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER||1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MYSUBCLASS|ONDE:TYPE||M|A|H5T_STRING|["ONDE_MYCLASS","ONDE_MYSUBCLASS"]|[2]|||||
+|ONDE_MYSUBCLASS|ONDE_MYSUBCLASS:MY_VALUE||M|A|H5T_FLOAT|1||||
 
 The HDF5 file will contain an HDF5 group with attribute `ONDE_TYPE` (containing `["ONDE_MYCLASS","ONDE_MYSUBCLASS"]`), and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MYSUBCLASS:MY_VALUE` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
 
@@ -247,15 +325,15 @@ Another class will refer to this accessory class to aggregate its content throug
 Let `ONDE_MY_ACCESSORY_CLASS` be an accessory class having a string attribute `MY_STRING` aggregated in `ONDE_MYCLASS`.
 The csv table will look like this:
 
-|Class|Name|M/O|D/A|Type|Content|Dimensions|Min|Max|Accessory Class|
+|Class|Name|Comment|M/O|D/A|Type|Dimensions|Min|Max|Accessory Class|
 |---|---|---|---|---|---|---|---|---|---|
-|ONDE_MYCLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MYCLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE:TYPE_TAGS|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]|||||
-|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES|O|A|H5T_FLOAT||[3]||||
-|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION|M|A|H5T_INTEGER||1|1|||
-|ONDE_MYCLASS|ONDE_MYCLASS:TABLE|M|D|H5T_FLOAT||[ONDE_MYCLASS:DIMENSION,3]||||
-|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|M|A|H5T_STRING|["ONDE_MY_ACCESSORY_CLASS"]|[1]|||True|
-|ONDE_MY_ACCESSORY_CLASS|ONDE:ACCESSORY_CLASS|M|A|H5T_STRING|"ONDE_MY_ACCESSORY_CLASS"|1|||||
-|ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING|M|A|H5T_STRING||1||||
+|ONDE_MYCLASS|ONDE:TYPE|["ONDE_MYCLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE:TYPE_TAGS|["ONDE_MY_ACCESSORY_CLASS"]|M|A|H5T_STRING|[1]|||||
+|ONDE_MYCLASS|ONDE_MYCLASS:COORDINATES||O|A|H5T_FLOAT|[3]||||
+|ONDE_MYCLASS|ONDE_MYCLASS:DIMENSION||M|A|H5T_INTEGER|1|1|||
+|ONDE_MYCLASS|ONDE_MYCLASS:TABLE||M|D|H5T_FLOAT|[ONDE_MYCLASS:DIMENSION,3]||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE:TYPE|["ONDE_MY_ACCESSORY_CLASS"]|M|A|H5T_STRING|[1]|||True|
+|ONDE_MY_ACCESSORY_CLASS|ONDE:ACCESSORY_CLASS|"ONDE_MY_ACCESSORY_CLASS"|M|A|H5T_STRING|1|||||
+|ONDE_MY_ACCESSORY_CLASS|ONDE_MY_ACCESSORY_CLASS:MY_STRING||M|A|H5T_STRING|1||||
 
 The HDF5 file will contain an HDF group with attribute `ONDE_TYPE` (containing `['ONDE_MYCLASS']`) and with attributes `ONDE_MYCLASS:COORDINATES`, `ONDE_MYCLASS:DIMENSION`, `ONDE_MY_ACCESSORY_CLASS:MY_STRING` and with an HDF5 dataset named `ONDE_MYCLASS:TABLE`.
